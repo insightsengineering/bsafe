@@ -1,2 +1,3 @@
 # bsafe
-TBD
+
+Short description of the package
