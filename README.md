@@ -1,3 +1,2 @@
-# bsafe
 
-Short description of the package
+# bsafe statistical computations package

@@ -1,1 +1,0 @@
-bsafe::shiny_app()
