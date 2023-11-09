@@ -573,9 +573,7 @@ model_summary_display <- function(map_object, select_analysis, param_approx, ess
     stats_mat_prop$ESS <- round(RBesT::ess(param_approx, method = ess_method))
     stats_mat_prop %>%
       dplyr::rename(Mean = mean, SD = sd, Median = X50., "95% CrI" = conf_int) %>%
-      dplyr::select(Mean, SD, Median, "95% CrI", ESS) %>%
-      knitr::kable("html") %>%
-      kableExtra::kable_styling("striped")
+      dplyr::select(Mean, SD, Median, "95% CrI", ESS)
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     
     # Rbest gives the model alreday out for exp(theta_pred), but we need
@@ -608,9 +606,7 @@ model_summary_display <- function(map_object, select_analysis, param_approx, ess
     
     
     stats_mat_prop %>%
-      dplyr::select(Mean, SD, Median, "95% CrI", ESS) %>%
-      knitr::kable("html") %>%
-      kableExtra::kable_styling("striped")
+      dplyr::select(Mean, SD, Median, "95% CrI", ESS)
   }
 }
 # Display input data in the historical data tab
