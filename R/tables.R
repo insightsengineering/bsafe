@@ -1,6 +1,6 @@
 #' @title Posterior Summary Statistics for Safety Topics of Interest
 #'
-#' @description Creates a kable table of posterior summary statistics for each
+#' @description Creates a table of posterior summary statistics for each
 #' safety topic of interest. Creates the arrays fot thr pdf.
 #'
 #' @param input_data dataframe from data_table_prep() including the new trial
@@ -10,7 +10,7 @@
 #' @param cb_list_trt expects List with treatment Arm indicators
 #' @param explore for exploring prior data conflict, expected by posterior_dist()
 #'
-#' @return kable table of posterior summary statistics for each event type for rates and proportions
+#' @return a table of posterior summary statistics for each event type for rates and proportions
 #' @export
 ae_summary_table <-
   function(input_data,
@@ -453,9 +453,7 @@ summary_stats_robust_map_prior_display <- function(map_object, select_analysis, 
       rownames(sum_stats) <- c("MAP Prior: log(hazard)", "Robust MAP Prior")
       sum_stats
       sum_stats %>%
-        dplyr::rename("95% CrI" = conf_int) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename("95% CrI" = conf_int)
     } else {
       sum_stats
     }
@@ -535,13 +533,11 @@ summary_stats_robust_map_prior_display <- function(map_object, select_analysis, 
 
     if (download == FALSE) {
       sum_stats
-      sum_stats %>%
+      sum_stats
         # dplyr::rename("95% CrI" = Conf_int) %>%
         # dplyr::rename("95% exp(CrI)" = ExpConf_int) %>%
         # dplyr::rename("exp(SD)" = ExpSD) %>%
-        # dplyr::rename("exp(Median)" = ExpMedian) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        # dplyr::rename("exp(Median)" = ExpMedian) %>%        
     } else {
       sum_stats
     }
@@ -573,9 +569,7 @@ model_summary_display <- function(map_object, select_analysis, param_approx, ess
     stats_mat_prop$ESS <- round(RBesT::ess(param_approx, method = ess_method))
     stats_mat_prop %>%
       dplyr::rename(Mean = mean, SD = sd, Median = X50., "95% CrI" = conf_int) %>%
-      dplyr::select(Mean, SD, Median, "95% CrI", ESS) %>%
-      knitr::kable("html") %>%
-      kableExtra::kable_styling("striped")
+      dplyr::select(Mean, SD, Median, "95% CrI", ESS)
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     
     # Rbest gives the model alreday out for exp(theta_pred), but we need
@@ -608,9 +602,7 @@ model_summary_display <- function(map_object, select_analysis, param_approx, ess
     
     
     stats_mat_prop %>%
-      dplyr::select(Mean, SD, Median, "95% CrI", ESS) %>%
-      knitr::kable("html") %>%
-      kableExtra::kable_styling("striped")
+      dplyr::select(Mean, SD, Median, "95% CrI", ESS)
   }
 }
 # Display input data in the historical data tab
@@ -628,9 +620,7 @@ input_data_display <- function(data, select_analysis, saf_topic) {
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     colnames(tab) <- c("STUDY ID", "Number of Patients in Arm", paste0("Number of Patients with ", saf_topic, " in Arm"), "Total Exposure Time", "Historical")
   }
-  tab %>%
-    knitr::kable("html") %>%
-    kableExtra::kable_styling("striped")
+  tab
 }
 # Summary statistics for prior, likelihood, and posterior
 #' Title
@@ -727,13 +717,10 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
     rownames(sum_stats) <- c("Robust MAP Prior", "Likelihood", "Posterior")
 
     if (download == FALSE) {
-      # Likelihood does not have an effective sample size - blank cell
-      options(knitr.kable.NA = "")
+      # Likelihood does not have an effective sample size - blank cell      
 
       sum_stats %>%
-        dplyr::rename("95% CrI" = conf_int) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename("95% CrI" = conf_int)
     } else {
       sum_stats
     }
@@ -797,14 +784,10 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
 
     rownames(sum_stats) <- c("Robust MAP Prior", "Likelihood", "Posterior")
 
-    if (download == FALSE) {
-      # Likelihood does not have an effective sample size - blank cell
-      options(knitr.kable.NA = "")
+    if (download == FALSE) {      
 
       sum_stats %>%
-        dplyr::rename("95% CrI" = conf_int) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename("95% CrI" = conf_int)
     } else {
       sum_stats
     }
@@ -848,7 +831,5 @@ preset_stat_table <- function(mix, saf_topic, select_analysis) {
 
   colnames(inf_mat) <- ""
 
-  inf_mat %>%
-    knitr::kable("html") %>%
-    kableExtra::kable_styling("striped")
+  inf_mat
 }
