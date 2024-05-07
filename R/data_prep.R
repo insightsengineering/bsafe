@@ -4,7 +4,7 @@
 #' @export
 trt_data_wrangler <- function(input_data) {
   choices_trt <- input_data %>%
-    dplyr::distinct(input_data[,"ARM"])
+    dplyr::distinct(input_data[, "ARM"])
   colnames(choices_trt) <- "Arms"
   return(choices_trt)
 }
@@ -30,10 +30,9 @@ ae_events_wrangler <- function(input_data, selected_trt) {
 #'
 #' @export
 sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_trial_analysis) {
-
-  if(select_analysis == "Incidence proportion"){
-    x     <- seq(0.0001, 1, length = 500)
-  }else if(select_analysis == "Exposure-adjusted AE rate"){
+  if (select_analysis == "Incidence proportion") {
+    x <- seq(0.0001, 1, length = 500)
+  } else if (select_analysis == "Exposure-adjusted AE rate") {
     a <- RBesT::qmix(param_approx, 0.02)
     b <- RBesT::qmix(param_approx, 0.98)
     x <- seq(a, b, length = 500)
@@ -41,12 +40,12 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
   }
 
   if (select_dist == "MAP Prior") {
-    #LS
+    # LS
     # MAP prior
     mixture_mat <- data.frame(param_approx[, 1:ncol(param_approx)])
     str_vec <- vector(length = ncol(mixture_mat))
 
-    if(select_analysis == "Incidence proportion"){
+    if (select_analysis == "Incidence proportion") {
       for (j in 1:ncol(mixture_mat)) {
         if (j != ncol(mixture_mat)) {
           str_vec[j] <- paste0(mixture_mat[1, j], "*", "dbeta(x, shape1 = ", mixture_mat[2, j], ", shape2 = ", mixture_mat[3, j], ")", " + ")
@@ -65,8 +64,7 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
         Density = rep("MAP Prior", each = 500),
         Value = Prior
       )
-
-    }else if(select_analysis == "Exposure-adjusted AE rate"){
+    } else if (select_analysis == "Exposure-adjusted AE rate") {
       for (j in 1:ncol(mixture_mat)) {
         if (j != ncol(mixture_mat)) {
           str_vec[j] <-
@@ -104,9 +102,7 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
         Density = rep("MAP Prior", each = 500),
         Value = Prior
       )
-
     }
-
   } else if (select_dist == "Robust MAP Prior") {
     df <- new_trial_analysis %>% dplyr::filter(Density == "Robust MAP Prior")
   } else if (select_dist == "Posterior") {
@@ -130,34 +126,34 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
 #' @export
 mix_distribution_all <- function(select_analysis, current_trial_data, select_dist, param_approx, robust_map_object, post_dist) {
   # assign overall variables
-  if(select_analysis == "Incidence proportion"){
+  if (select_analysis == "Incidence proportion") {
     new_n <- current_trial_data[["new_v1"]]
     new_r <- current_trial_data[["new_v2"]]
-  }else if(select_analysis == "Exposure-adjusted AE rate"){
+  } else if (select_analysis == "Exposure-adjusted AE rate") {
     new_n_with_ae <- current_trial_data[["new_v1"]]
-    new_tot_exp   <- current_trial_data[["new_v2"]]
+    new_tot_exp <- current_trial_data[["new_v2"]]
   }
 
   if (select_dist == "MAP Prior") {
     param_approx
   } else if (select_dist == "Robust MAP Prior") {
-    if(select_analysis == "Incidence proportion"){
+    if (select_analysis == "Incidence proportion") {
       robust_map_object
-    }else if(select_analysis == "Exposure-adjusted AE rate"){
+    } else if (select_analysis == "Exposure-adjusted AE rate") {
       robust_map_object
     }
   } else if (select_dist == "Posterior") {
-    if(select_analysis == "Incidence proportion"){
+    if (select_analysis == "Incidence proportion") {
       post_dist
-    }else if(select_analysis == "Exposure-adjusted AE rate"){
+    } else if (select_analysis == "Exposure-adjusted AE rate") {
       post_dist
     }
   } else if (select_dist == "Likelihood") {
-    if(select_analysis == "Incidence proportion"){
+    if (select_analysis == "Incidence proportion") {
       RBesT::mixbeta(inf = c(1, new_r + 1, new_n - new_r + 1))
-    }else if(select_analysis == "Exposure-adjusted AE rate"){
-      theta <- new_n_with_ae/new_tot_exp
-      like_sample <- rnorm(1000,mean = log(theta), sd = 1/new_n_with_ae)
+    } else if (select_analysis == "Exposure-adjusted AE rate") {
+      theta <- new_n_with_ae / new_tot_exp
+      like_sample <- rnorm(1000, mean = log(theta), sd = 1 / new_n_with_ae)
       RBesT::automixfit(like_sample, Nc = seq(3, 3))
 
       # RBesT::mixnorm(inf = c(1, log(new_n_with_ae/new_tot_exp), sqrt(1/new_n_with_ae)))
@@ -182,19 +178,18 @@ new_trial_compare <-
            new_v1,
            new_v2,
            post_dist) {
-
     # assign overall variables
-    if(select_analysis == "Incidence proportion"){
-      x     <- seq(0.0001, 1, length = 500)
+    if (select_analysis == "Incidence proportion") {
+      x <- seq(0.0001, 1, length = 500)
       new_n <- new_v1
       new_r <- new_v2
-    }else if(select_analysis == "Exposure-adjusted AE rate"){
+    } else if (select_analysis == "Exposure-adjusted AE rate") {
       a <- RBesT::qmix(robust_map_prior, 0.02)
       b <- RBesT::qmix(robust_map_prior, 0.98)
       x <- seq(a, b, length = 500)
       rm(a, b)
       new_n_with_ae <- new_v1
-      new_tot_exp   <- new_v2
+      new_tot_exp <- new_v2
     }
 
     # Robust MAP prior
@@ -273,13 +268,11 @@ new_trial_compare <-
           shape2 = new_n - new_r + 1
         )
     } else if (select_analysis == "Exposure-adjusted AE rate") {
-
       # Distribution of log lambda
-      #http://www.math.wm.edu/~leemis/chart/UDR/PDFs/GammaLoggamma.pdf
+      # http://www.math.wm.edu/~leemis/chart/UDR/PDFs/GammaLoggamma.pdf
 
-      theta <- new_n_with_ae/new_tot_exp
-      Likelihood <- dnorm(x,mean = log(theta), sd = 1/new_n_with_ae)
-
+      theta <- new_n_with_ae / new_tot_exp
+      Likelihood <- dnorm(x, mean = log(theta), sd = 1 / new_n_with_ae)
     }
     # Update prior distribution - compute the conditional distribution given the data and the prior
     # Compute the posterior distribution
@@ -316,7 +309,7 @@ new_trial_compare <-
             )
         }
       }
-    } else if(select_analysis == "Exposure-adjusted AE rate"){
+    } else if (select_analysis == "Exposure-adjusted AE rate") {
       for (j in 1:ncol(post_mat)) {
         if (j != ncol(post_mat)) {
           post_str_vec[j] <-
@@ -343,7 +336,6 @@ new_trial_compare <-
             )
         }
       }
-
     }
 
     Posterior <-
@@ -359,7 +351,7 @@ new_trial_compare <-
     )
     df$Density <-
       factor(df$Density,
-             levels = c("Robust MAP Prior", "Likelihood", "Posterior")
+        levels = c("Robust MAP Prior", "Likelihood", "Posterior")
       )
     return(df)
   }
@@ -376,7 +368,6 @@ new_trial_compare <-
 robust_compare <- function(select_analysis,
                            robust_map_prior,
                            param_approx) {
-
   rob_mixture_mat <-
     data.frame(robust_map_prior[, 1:ncol(robust_map_prior)])
   rob_str_vec <- vector(length = ncol(rob_mixture_mat))
@@ -546,41 +537,40 @@ data_table_prep <-
            current_trial = FALSE) {
     # Rename columns
     dat <- input_data
-    dat <- dat[order(dat$STUDYID),]
+    dat <- dat[order(dat$STUDYID), ]
 
     # Filter for the selected background treatment and safety topic
     # Return total exposure as well for exposure-adjusted analysis
     if (select_analysis == "Incidence proportion") {
       dat <- dat %>%
         dplyr::filter(ARM %in% select_btrt &
-                        SAF_TOPIC == saf_topic) %>%
+          SAF_TOPIC == saf_topic) %>%
         dplyr::select(STUDYID, N, N_WITH_AE, HIST) %>%
         na.omit()
     } else if (select_analysis == "Exposure-adjusted AE rate") {
       dat <- dat %>%
         dplyr::filter(ARM %in% select_btrt &
-                        SAF_TOPIC == saf_topic) %>%
+          SAF_TOPIC == saf_topic) %>%
         dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP, HIST) %>%
         na.omit()
     }
 
-    #test this
+    # test this
 
-    if(bool_pooled == TRUE){
-
-      if(select_analysis == "Incidence proportion"){
-
-        dat <- dat %>% dplyr::group_by(STUDYID, HIST) %>% dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), .groups = "drop")
+    if (bool_pooled == TRUE) {
+      if (select_analysis == "Incidence proportion") {
+        dat <- dat %>%
+          dplyr::group_by(STUDYID, HIST) %>%
+          dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), .groups = "drop")
         dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, HIST)
       }
 
-      if(select_analysis == "Exposure-adjusted AE rate"){
-
-        dat <- dat %>% dplyr::group_by(STUDYID, HIST) %>% dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), TOT_EXP = sum(TOT_EXP), .groups = "drop")
+      if (select_analysis == "Exposure-adjusted AE rate") {
+        dat <- dat %>%
+          dplyr::group_by(STUDYID, HIST) %>%
+          dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), TOT_EXP = sum(TOT_EXP), .groups = "drop")
         dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP, HIST)
-
       }
-
     }
 
     return(dat)

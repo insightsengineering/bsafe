@@ -32,13 +32,11 @@ posterior_dist <- function(select_analysis,
                            adj_tau,
                            seed = NULL,
                            testing = FALSE) {
-
   if (select_analysis == "Incidence proportion") {
     RBesT::postmix(robust_map_prior, n = new_v1, r = new_v2)
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    RBesT::postmix(robust_map_prior, m = round(new_v1/new_v2), se = 1/new_v1)
+    RBesT::postmix(robust_map_prior, m = round(new_v1 / new_v2), se = 1 / new_v1)
   }
-
 }
 #' @title Robustify Mixture Priors
 #'
@@ -119,28 +117,26 @@ map_prior_func <-
            adj_tau,
            seed = NULL,
            testing = FALSE) {
-
     input_data <- input_data %>% dplyr::filter(HIST == 1)
 
-    if(testing == FALSE){
+    if (testing == FALSE) {
       # for exact method look stan/jags up, but if no rounding etc n_mcmc = (n_iter-n_warm)*n_chain/n_thin
-      n_iter   <- 6000
-      n_burn   <- 2000
+      n_iter <- 6000
+      n_burn <- 2000
       n_chains <- 4
-      n_thin   <- 4
-    }else{
-      n_iter   <- 400
-      n_burn   <- 100
+      n_thin <- 4
+    } else {
+      n_iter <- 400
+      n_burn <- 100
       n_chains <- 2
-      n_thin   <- 2
+      n_thin <- 2
     }
 
-    if(is.null(seed)){
+    if (is.null(seed)) {
       seed <- as.numeric(Sys.time())
     }
 
     if (select_analysis == "Incidence proportion") {
-
       set.seed(seed)
       RBesT::gMAP(
         cbind(N_WITH_AE, N - N_WITH_AE) ~ 1 | STUDYID,
@@ -157,15 +153,16 @@ map_prior_func <-
     } else if (select_analysis == "Exposure-adjusted AE rate") {
       set.seed(seed)
       RBesT::gMAP(N_WITH_AE ~ 1 + offset(log(TOT_EXP)) | STUDYID,
-                data = input_data,
-                tau.dist = tau_dist,
-                tau.prior = adj_tau, ## assuming moderate heterogeniety
-                beta.prior = 1,
-                iter = getOption("RBesT.MC.iter", n_iter),
-                warmup = getOption("RBesT.MC.warmup", n_burn),
-                thin = getOption("RBesT.MC.thin", n_thin),
-                chains = getOption("RBesT.MC.chains", n_chains),
-                family = "poisson")
+        data = input_data,
+        tau.dist = tau_dist,
+        tau.prior = adj_tau, ## assuming moderate heterogeniety
+        beta.prior = 1,
+        iter = getOption("RBesT.MC.iter", n_iter),
+        warmup = getOption("RBesT.MC.warmup", n_burn),
+        thin = getOption("RBesT.MC.thin", n_thin),
+        chains = getOption("RBesT.MC.chains", n_chains),
+        family = "poisson"
+      )
     }
   }
 #' @title Tau Adjustment for Amount of Historical Borrowing

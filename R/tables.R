@@ -23,7 +23,7 @@ ae_summary_table <-
       stop("Same amount of compared groups necessary.")
     }
 
-    #setting up overall variables
+    # setting up overall variables
 
     n_group <- length(cb_list_ctrl)
     tau <- tau_adjust(
@@ -37,7 +37,7 @@ ae_summary_table <-
     # sample size for posterior comparison
     sample_size <- 1000
 
-    if(is.null(seed)){
+    if (is.null(seed)) {
       seed <- as.numeric(Sys.time())
     }
 
@@ -93,7 +93,6 @@ ae_summary_table <-
     ID_ctr_list <- list(grp1 = NULL, grp2 = NULL, grp3 = NULL, grp4 = NULL)
     ID_trt_list <- list(grp1 = NULL, grp2 = NULL, grp3 = NULL, grp4 = NULL)
     for (group in 1:n_group) {
-
       trt_arm <- input_data %>% dplyr::filter(ARM == cb_list_trt[[group]])
       ID_trt_list[[group]] <- unique(trt_arm$STUDYID)
       ctr_arm <- input_data %>% dplyr::filter(ARM == cb_list_ctrl[[group]])
@@ -178,7 +177,7 @@ ae_summary_table <-
           ctr_approx <- parametric_approx("Incidence proportion", ctr_map_prior)
         } else {
           # ctr_map_prior <- weak_inf_bin
-          ctr_approx    <- weak_inf_bin
+          ctr_approx <- weak_inf_bin
         }
 
         ctr_rob_prior <-
@@ -244,29 +243,29 @@ ae_summary_table <-
           hist_borrow = "Large"
         )
 
-        hist_trt_trials   <- trt_trials %>% dplyr::filter(HIST == 1)
+        hist_trt_trials <- trt_trials %>% dplyr::filter(HIST == 1)
         trt_current_trial <- trt_trials %>% dplyr::filter(HIST == 0)
 
         # For a reasonable posterioe historical information should be available,
         # as well as new data.
         trt_post_check <- nrow(trt_current_trial) > 0 && nrow(hist_trt_trials) > 0
 
-        if(trt_post_check == TRUE){
-
+        if (trt_post_check == TRUE) {
           ### Arm A #Exponential
 
           er_trt_prior <-
             RBesT::gMAP(N_WITH_AE ~ 1 + offset(log(TOT_EXP)) | STUDYID,
-                        data = hist_trt_trials,
-                        tau.dist = "LogNormal",
-                        tau.prior = tau_er, ## assuming moderate heterogeniety
-                        beta.prior = 1,
-                        family = "poisson")
+              data = hist_trt_trials,
+              tau.dist = "LogNormal",
+              tau.prior = tau_er, ## assuming moderate heterogeniety
+              beta.prior = 1,
+              family = "poisson"
+            )
 
           er_trt_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_trt_prior)
-          robust_mean_er   <- summary(er_trt_prior_fit)["mean"]
+          robust_mean_er <- summary(er_trt_prior_fit)["mean"]
 
-          #found error
+          # found error
           trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = robust_weight, mean = robust_mean_er)
 
           trt_new_nwae <- sum(trt_current_trial$N_WITH_AE)
@@ -282,7 +281,7 @@ ae_summary_table <-
             )
 
           array_er[topic, "naive", "Arm A", group] <- sum(trt_trials$N_WITH_AE) / sum(trt_trials$TOT_EXP)
-          desc_stats        <- summary(trt_post)
+          desc_stats <- summary(trt_post)
           # stats_mat_post_a  <- data.frame(desc_stats$theta.pred)
           array_er[topic, "post_mean", "Arm A", group] <- desc_stats["mean"]
           array_er[topic, "post_median", "Arm A", group] <- RBesT::qmix(trt_post, 0.5)
@@ -297,22 +296,22 @@ ae_summary_table <-
         }
 
         ## Arm B # Exponential
-        hist_ctr_trials   <- ctr_trials %>% dplyr::filter(HIST == 1)
+        hist_ctr_trials <- ctr_trials %>% dplyr::filter(HIST == 1)
         ctr_current_trial <- ctr_trials %>% dplyr::filter(HIST == 0)
         ctr_post_check <- nrow(ctr_current_trial) > 0 && nrow(hist_ctr_trials) > 0
 
-        if(ctr_post_check == TRUE){
-
+        if (ctr_post_check == TRUE) {
           er_ctr_prior <-
             RBesT::gMAP(N_WITH_AE ~ 1 + offset(log(TOT_EXP)) | STUDYID,
-                        data = ctr_trials,
-                        tau.dist = "LogNormal",
-                        tau.prior = tau_er, ## assuming moderate heterogeniety
-                        beta.prior = 1,
-                        family = "poisson")
+              data = ctr_trials,
+              tau.dist = "LogNormal",
+              tau.prior = tau_er, ## assuming moderate heterogeniety
+              beta.prior = 1,
+              family = "poisson"
+            )
 
           er_ctr_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_ctr_prior)
-          robust_mean_er   <- summary(er_ctr_prior_fit)["mean"]
+          robust_mean_er <- summary(er_ctr_prior_fit)["mean"]
 
           ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = robust_weight, mean = robust_mean_er)
 
@@ -329,12 +328,12 @@ ae_summary_table <-
             )
 
           array_er[topic, "naive", "Arm B", group] <- sum(ctr_trials$N_WITH_AE) / sum(ctr_trials$TOT_EXP)
-          desc_stats        <- summary(ctr_post)
+          desc_stats <- summary(ctr_post)
           array_er[topic, "post_mean", "Arm B", group] <- desc_stats["mean"]
           array_er[topic, "post_median", "Arm B", group] <- RBesT::qmix(ctr_post, 0.5)
           array_er[topic, "cri_l", "Arm B", group] <- RBesT::qmix(ctr_post, lb)
           array_er[topic, "cri_u", "Arm B", group] <- RBesT::qmix(ctr_post, ub)
-        }else{
+        } else {
           array_er[topic, "naive", "Arm B", group] <- NA
           array_er[topic, "post_mean", "Arm B", group] <- NA
           array_er[topic, "post_median", "Arm B", group] <- NA
@@ -345,8 +344,7 @@ ae_summary_table <-
 
         comp_check <- ctr_post_check == TRUE && trt_post_check == TRUE
 
-        if( comp_check == TRUE) {
-
+        if (comp_check == TRUE) {
           # propotion posterior samples
           trt_pr_post_samp <- RBesT::rmix(trt_post, sample_size)
           ctr_pr_post_samp <- RBesT::rmix(ctr_post, sample_size)
@@ -367,9 +365,7 @@ ae_summary_table <-
           array_er_comp[topic, "cri_l", "Risk Ratio", group] <- quantile(er_ratio_samp, lb)
           array_er_comp[topic, "cri_u", "Risk Ratio", group] <- quantile(er_ratio_samp, ub)
           array_er_comp[topic, "A>B%", "Risk Ratio", group] <- sum(er_diffe_samp > 0) / sample_size
-
         } else {
-
           array_er_comp[topic, "naive", "Risk Diff", group] <- NA
           array_er_comp[topic, "post_mean", "Risk Diff", group] <- NA
           array_er_comp[topic, "post_median", "Risk Diff", group] <- NA
@@ -458,64 +454,77 @@ summary_stats_robust_map_prior_display <- function(map_object, select_analysis, 
       sum_stats
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    
     # Rbest gives the model alreday out for exp(theta_pred), but we need
     # theta_pred for further analysis
     theta_fit <- as.data.frame(map_object$fit)
     theta_pred <- theta_fit$theta_pred
     theta_resp <- theta_fit$theta_resp_pred
-    
-    stats_mat_prop <- array(data = NA, dim = c(4,5), dimnames = list(c("MAP Prior: log(hazard)", "robust MAP Prior: log(hazard)",
-                                                                       "MAP Prior: hazard", "robust MAP Prior: hazard"), 
-                                                                     c("Mean", "SD", "Median", "95% CrI", "ESS")))
+
+    stats_mat_prop <- array(data = NA, dim = c(4, 5), dimnames = list(
+      c(
+        "MAP Prior: log(hazard)", "robust MAP Prior: log(hazard)",
+        "MAP Prior: hazard", "robust MAP Prior: hazard"
+      ),
+      c("Mean", "SD", "Median", "95% CrI", "ESS")
+    ))
     stats_mat_prop <- as.data.frame(stats_mat_prop)
-    
-    stats_mat_prop["MAP Prior: log(hazard)","Mean"]    <- round(mean(theta_pred),2)
-    stats_mat_prop["MAP Prior: log(hazard)","SD"]      <- round(sd(theta_pred),2)
-    stats_mat_prop["MAP Prior: log(hazard)","Median"]  <- round(median(theta_pred),2)
-    stats_mat_prop["MAP Prior: log(hazard)","95% CrI"] <- paste0("[", 
-                                                    round(quantile(theta_pred, 0.25),2), " , ",
-                                                    round(quantile(theta_pred, 0.75),2), "]")
-    stats_mat_prop["MAP Prior: log(hazard)","ESS"]     <-  round(RBesT::ess(param_approx, method = ess_method, sigma = 1))
-    
-    
-    stats_mat_prop["MAP Prior: hazard","Mean"]    <- round(mean(theta_resp),2)
-    stats_mat_prop["MAP Prior: hazard","SD"]      <- round(sd(theta_resp),2)
-    stats_mat_prop["MAP Prior: hazard","Median"]  <- round(median(theta_resp),2)
-    stats_mat_prop["MAP Prior: hazard","95% CrI"] <- paste0("[", 
-                                                         round(quantile(theta_resp, 0.25),2), " , ",
-                                                         round(quantile(theta_resp, 0.75),2), "]")
-    stats_mat_prop["MAP Prior: hazard","ESS"]     <- c("Not applicable.")
-    
-     
+
+    stats_mat_prop["MAP Prior: log(hazard)", "Mean"] <- round(mean(theta_pred), 2)
+    stats_mat_prop["MAP Prior: log(hazard)", "SD"] <- round(sd(theta_pred), 2)
+    stats_mat_prop["MAP Prior: log(hazard)", "Median"] <- round(median(theta_pred), 2)
+    stats_mat_prop["MAP Prior: log(hazard)", "95% CrI"] <- paste0(
+      "[",
+      round(quantile(theta_pred, 0.25), 2), " , ",
+      round(quantile(theta_pred, 0.75), 2), "]"
+    )
+    stats_mat_prop["MAP Prior: log(hazard)", "ESS"] <- round(RBesT::ess(param_approx, method = ess_method, sigma = 1))
+
+
+    stats_mat_prop["MAP Prior: hazard", "Mean"] <- round(mean(theta_resp), 2)
+    stats_mat_prop["MAP Prior: hazard", "SD"] <- round(sd(theta_resp), 2)
+    stats_mat_prop["MAP Prior: hazard", "Median"] <- round(median(theta_resp), 2)
+    stats_mat_prop["MAP Prior: hazard", "95% CrI"] <- paste0(
+      "[",
+      round(quantile(theta_resp, 0.25), 2), " , ",
+      round(quantile(theta_resp, 0.75), 2), "]"
+    )
+    stats_mat_prop["MAP Prior: hazard", "ESS"] <- c("Not applicable.")
+
+
     rob_Prior_mean <- round(mean(RBesT::rmix(robust_map_object, 1000)), digits = 2)
     rob_Prior_sd <- round(sd(RBesT::rmix(robust_map_object, 1000)), digits = 2)
     rob_Prior_median <- round(RBesT::qmix(robust_map_object, 0.5), digits = 2)
     rob_Prior_95ci <- paste0(
-      "[", formatC(RBesT::qmix(robust_map_object, 0.025), 
-                   digits = 2, format = "f"), " , ", 
-      formatC(RBesT::qmix(robust_map_object, 0.975), 
-              digits = 2, format = "f"), "]")
+      "[", formatC(RBesT::qmix(robust_map_object, 0.025),
+        digits = 2, format = "f"
+      ), " , ",
+      formatC(RBesT::qmix(robust_map_object, 0.975),
+        digits = 2, format = "f"
+      ), "]"
+    )
     rob_Prior_ess <- round(RBesT::ess(robust_map_object, method = ess_method, sigma = 1))
 
 
-    stats_mat_prop["robust MAP Prior: log(hazard)","Mean"]    <- rob_Prior_mean
-    stats_mat_prop["robust MAP Prior: log(hazard)","SD"]      <- rob_Prior_sd
-    stats_mat_prop["robust MAP Prior: log(hazard)","Median"]  <- rob_Prior_median
-    stats_mat_prop["robust MAP Prior: log(hazard)","95% CrI"] <- rob_Prior_95ci
-    stats_mat_prop["robust MAP Prior: log(hazard)","ESS"]     <- round(RBesT::ess(robust_map_object, method = ess_method, sigma = 1))
+    stats_mat_prop["robust MAP Prior: log(hazard)", "Mean"] <- rob_Prior_mean
+    stats_mat_prop["robust MAP Prior: log(hazard)", "SD"] <- rob_Prior_sd
+    stats_mat_prop["robust MAP Prior: log(hazard)", "Median"] <- rob_Prior_median
+    stats_mat_prop["robust MAP Prior: log(hazard)", "95% CrI"] <- rob_Prior_95ci
+    stats_mat_prop["robust MAP Prior: log(hazard)", "ESS"] <- round(RBesT::ess(robust_map_object, method = ess_method, sigma = 1))
 
 
-    stats_mat_prop["robust MAP Prior: hazard","Mean"]    <- round(exp(rob_Prior_mean),2)
-    stats_mat_prop["robust MAP Prior: hazard","SD"]      <- round(exp(rob_Prior_sd),2)
-    stats_mat_prop["robust MAP Prior: hazard","Median"]  <- round(exp(rob_Prior_median),2)
-    stats_mat_prop["robust MAP Prior: hazard","95% CrI"] <- paste0(
-      "[", formatC(exp(RBesT::qmix(robust_map_object, 0.025)), 
-                   digits = 2, format = "f"), " , ", 
-      formatC(exp(RBesT::qmix(robust_map_object, 0.975)), 
-              digits = 2, format = "f"), "]")
-    stats_mat_prop["robust MAP Prior: hazard","ESS"]     <- c("Not applicable.")
-    # 
+    stats_mat_prop["robust MAP Prior: hazard", "Mean"] <- round(exp(rob_Prior_mean), 2)
+    stats_mat_prop["robust MAP Prior: hazard", "SD"] <- round(exp(rob_Prior_sd), 2)
+    stats_mat_prop["robust MAP Prior: hazard", "Median"] <- round(exp(rob_Prior_median), 2)
+    stats_mat_prop["robust MAP Prior: hazard", "95% CrI"] <- paste0(
+      "[", formatC(exp(RBesT::qmix(robust_map_object, 0.025)),
+        digits = 2, format = "f"
+      ), " , ",
+      formatC(exp(RBesT::qmix(robust_map_object, 0.975)),
+        digits = 2, format = "f"
+      ), "]"
+    )
+    stats_mat_prop["robust MAP Prior: hazard", "ESS"] <- c("Not applicable.")
+    #
 
     # sum_stats <- data.frame(
     #   Mean = c(Prior_mean, rob_Prior_mean),
@@ -528,16 +537,16 @@ summary_stats_robust_map_prior_display <- function(map_object, select_analysis, 
     #   ExpConf_int = exp(c(Prior_95ci, rob_Prior_95ci)),
     #   ESS = c(Prior_ess, rob_Prior_ess)
     # )
-    
+
     sum_stats <- stats_mat_prop
 
     if (download == FALSE) {
       sum_stats
       sum_stats
-        # dplyr::rename("95% CrI" = Conf_int) %>%
-        # dplyr::rename("95% exp(CrI)" = ExpConf_int) %>%
-        # dplyr::rename("exp(SD)" = ExpSD) %>%
-        # dplyr::rename("exp(Median)" = ExpMedian) %>%        
+      # dplyr::rename("95% CrI" = Conf_int) %>%
+      # dplyr::rename("95% exp(CrI)" = ExpConf_int) %>%
+      # dplyr::rename("exp(SD)" = ExpSD) %>%
+      # dplyr::rename("exp(Median)" = ExpMedian) %>%
     } else {
       sum_stats
     }
@@ -571,36 +580,41 @@ model_summary_display <- function(map_object, select_analysis, param_approx, ess
       dplyr::rename(Mean = mean, SD = sd, Median = X50., "95% CrI" = conf_int) %>%
       dplyr::select(Mean, SD, Median, "95% CrI", ESS)
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    
     # Rbest gives the model alreday out for exp(theta_pred), but we need
     # theta_pred for further analysis
     theta_fit <- as.data.frame(map_object$fit)
     theta_pred <- theta_fit$theta_pred
     theta_resp <- theta_fit$theta_resp_pred
-    
-    stats_mat_prop <- array(data = NA, dim = c(2,5), dimnames = list(c("MAP Prior: log(hazard)", "MAP Prior: hazard"), 
-                                                                     c("Mean", "SD", "Median", "95% CrI", "ESS")))
+
+    stats_mat_prop <- array(data = NA, dim = c(2, 5), dimnames = list(
+      c("MAP Prior: log(hazard)", "MAP Prior: hazard"),
+      c("Mean", "SD", "Median", "95% CrI", "ESS")
+    ))
     stats_mat_prop <- as.data.frame(stats_mat_prop)
 
-    stats_mat_prop["MAP Prior: log(hazard)","Mean"]    <- round(mean(theta_pred),2)
-    stats_mat_prop["MAP Prior: log(hazard)","SD"]      <- round(sd(theta_pred),2)
-    stats_mat_prop["MAP Prior: log(hazard)","Median"]  <- round(median(theta_pred),2)
-    stats_mat_prop["MAP Prior: log(hazard)","95% CrI"] <- paste0("[", 
-                                                    round(quantile(theta_pred, 0.25),2), " , ",
-                                                    round(quantile(theta_pred, 0.75),2), "]")
-    stats_mat_prop["MAP Prior: log(hazard)","ESS"]     <-  round(RBesT::ess(param_approx, method = ess_method, sigma = 1))
-    
+    stats_mat_prop["MAP Prior: log(hazard)", "Mean"] <- round(mean(theta_pred), 2)
+    stats_mat_prop["MAP Prior: log(hazard)", "SD"] <- round(sd(theta_pred), 2)
+    stats_mat_prop["MAP Prior: log(hazard)", "Median"] <- round(median(theta_pred), 2)
+    stats_mat_prop["MAP Prior: log(hazard)", "95% CrI"] <- paste0(
+      "[",
+      round(quantile(theta_pred, 0.25), 2), " , ",
+      round(quantile(theta_pred, 0.75), 2), "]"
+    )
+    stats_mat_prop["MAP Prior: log(hazard)", "ESS"] <- round(RBesT::ess(param_approx, method = ess_method, sigma = 1))
 
-    stats_mat_prop["MAP Prior: hazard","Mean"]    <- round(mean(theta_resp),2)
-    stats_mat_prop["MAP Prior: hazard","SD"]      <- round(sd(theta_resp),2)
-    stats_mat_prop["MAP Prior: hazard","Median"]  <- round(median(theta_resp),2)
-    stats_mat_prop["MAP Prior: hazard","95% CrI"] <- paste0("[", 
-                                                         round(quantile(theta_resp, 0.25),2), " , ",
-                                                         round(quantile(theta_resp, 0.75),2), "]")
-    stats_mat_prop["MAP Prior: hazard","ESS"]     <- c("Not applicable.")
-    
-    
-    
+
+    stats_mat_prop["MAP Prior: hazard", "Mean"] <- round(mean(theta_resp), 2)
+    stats_mat_prop["MAP Prior: hazard", "SD"] <- round(sd(theta_resp), 2)
+    stats_mat_prop["MAP Prior: hazard", "Median"] <- round(median(theta_resp), 2)
+    stats_mat_prop["MAP Prior: hazard", "95% CrI"] <- paste0(
+      "[",
+      round(quantile(theta_resp, 0.25), 2), " , ",
+      round(quantile(theta_resp, 0.75), 2), "]"
+    )
+    stats_mat_prop["MAP Prior: hazard", "ESS"] <- c("Not applicable.")
+
+
+
     stats_mat_prop %>%
       dplyr::select(Mean, SD, Median, "95% CrI", ESS)
   }
@@ -633,18 +647,16 @@ input_data_display <- function(data, select_analysis, saf_topic) {
 #' @param download
 #' @export
 summary_stat_all_display <- function(select_analysis, robust_map_object, ess_method, current_trial_data, post_dist, download = FALSE) {
-
   # assign overall variables
-  if(select_analysis == "Incidence proportion"){
+  if (select_analysis == "Incidence proportion") {
     new_n <- current_trial_data[["new_v1"]]
     new_r <- current_trial_data[["new_v2"]]
-  }else if(select_analysis == "Exposure-adjusted AE rate"){
+  } else if (select_analysis == "Exposure-adjusted AE rate") {
     new_n_with_ae <- current_trial_data[["new_v1"]]
-    new_tot_exp   <- current_trial_data[["new_v2"]]
+    new_tot_exp <- current_trial_data[["new_v2"]]
   }
 
   if (select_analysis == "Incidence proportion") {
-
     # Summary statistics for robust MAP prior
     rob_mixture_mat <- data.frame(robust_map_object[, 1:ncol(robust_map_object)])
     rob_vec1 <- vector(length = ncol(rob_mixture_mat)) # Robust MAP prior mean
@@ -717,7 +729,7 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
     rownames(sum_stats) <- c("Robust MAP Prior", "Likelihood", "Posterior")
 
     if (download == FALSE) {
-      # Likelihood does not have an effective sample size - blank cell      
+      # Likelihood does not have an effective sample size - blank cell
 
       sum_stats %>%
         dplyr::rename("95% CrI" = conf_int)
@@ -725,27 +737,29 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
       sum_stats
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    
     # Summary statistics for robust MAP prior
-    
-    
+
+
     rob_Prior_mean <- round(mean(RBesT::rmix(robust_map_object, 1000)), digits = 2)
     rob_Prior_sd <- round(sd(RBesT::rmix(robust_map_object, 1000)), digits = 2)
     rob_Prior_median <- round(RBesT::qmix(robust_map_object, 0.5), digits = 2)
     rob_Prior_95ci <- paste0(
-      "[", formatC(RBesT::qmix(robust_map_object, 0.025), 
-                   digits = 2, format = "f"), " , ", 
-      formatC(RBesT::qmix(robust_map_object, 0.975), 
-              digits = 2, format = "f"), "]")
+      "[", formatC(RBesT::qmix(robust_map_object, 0.025),
+        digits = 2, format = "f"
+      ), " , ",
+      formatC(RBesT::qmix(robust_map_object, 0.975),
+        digits = 2, format = "f"
+      ), "]"
+    )
     rob_Prior_ess <- round(RBesT::ess(robust_map_object, method = ess_method, sigma = 1))
 
 
     # Summary statistics for likelihood
     new_n_with_ae <- current_trial_data[["new_v1"]]
-    new_tot_exp   <- current_trial_data[["new_v2"]]
+    new_tot_exp <- current_trial_data[["new_v2"]]
 
-    theta <- new_n_with_ae/new_tot_exp
-    like_sample <- rnorm(1000,mean = log(theta), sd = 1/new_n_with_ae)
+    theta <- new_n_with_ae / new_tot_exp
+    like_sample <- rnorm(1000, mean = log(theta), sd = 1 / new_n_with_ae)
     Likelihood <- RBesT::automixfit(like_sample, Nc = seq(3, 3), type = "norm")
     desc_stats <- summary(Likelihood)
 
@@ -753,9 +767,9 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
     Lik_sd <- formatC(desc_stats["sd"], digits = 2, format = "f")
     Lik_median <- formatC(desc_stats["50.0%"], digits = 2, format = "f")
     Lik_95ci <- paste0("[", formatC(RBesT::qmix(Likelihood, 0.025), digits = 2, format = "f"), " , ", formatC(RBesT::qmix(Likelihood, 0.975), digits = 2, format = "f"), "]")
-    Lik_ess <-  NA
+    Lik_ess <- NA
 
-    post_er <- 
+    post_er <-
       posterior_dist(
         select_analysis = "Exposure-adjusted AE rate",
         robust_map_prior = robust_map_object,
@@ -764,7 +778,7 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
         seed = seed
       )
 
-    desc_stats      <- summary(post_er)
+    desc_stats <- summary(post_er)
 
     Posterior_mean <- formatC(desc_stats["mean"], digits = 2, format = "f")
     Posterior_sd <- formatC(desc_stats["sd"], digits = 2, format = "f")
@@ -784,8 +798,7 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
 
     rownames(sum_stats) <- c("Robust MAP Prior", "Likelihood", "Posterior")
 
-    if (download == FALSE) {      
-
+    if (download == FALSE) {
       sum_stats %>%
         dplyr::rename("95% CrI" = conf_int)
     } else {
@@ -801,7 +814,6 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
 #' @param select_analysis
 #' @export
 preset_stat_table <- function(mix, saf_topic, select_analysis) {
-
   certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE))
   certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE))
   certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE))
@@ -810,22 +822,23 @@ preset_stat_table <- function(mix, saf_topic, select_analysis) {
   denominator <- 1
 
   if (select_analysis == "Incidence proportion") {
-    postfix     <- "%."
+    postfix <- "%."
     denominator <- 1
-    midfix      <- " proportion of patients with "
+    midfix <- " proportion of patients with "
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    postfix     <- "."
+    postfix <- "."
     denominator <- 100
-    midfix      <- " incidence rate of patients with "
+    midfix <- " incidence rate of patients with "
   }
 
   inf_mat <- as.data.frame(
-    matrix(c(
-      paste0("We are at least 90% certain that the", midfix, saf_topic, " is greater than ", certainty90 / denominator, postfix),
-      paste0("We are at least 95% certain that the", midfix, saf_topic, " is greater than ", certainty95 / denominator, postfix),
-      paste0("We are at least 99% certain that the", midfix, saf_topic, " is greater than ", certainty99 / denominator, postfix)
-    ),
-    nrow = 3, ncol = 1
+    matrix(
+      c(
+        paste0("We are at least 90% certain that the", midfix, saf_topic, " is greater than ", certainty90 / denominator, postfix),
+        paste0("We are at least 95% certain that the", midfix, saf_topic, " is greater than ", certainty95 / denominator, postfix),
+        paste0("We are at least 99% certain that the", midfix, saf_topic, " is greater than ", certainty99 / denominator, postfix)
+      ),
+      nrow = 3, ncol = 1
     )
   )
 
