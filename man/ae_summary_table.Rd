@@ -27,9 +27,9 @@ ae_summary_table(
 \item{seed}{a seed}
 }
 \value{
-kable table of posterior summary statistics for each event type for rates and proportions
+a table of posterior summary statistics for each event type for rates and proportions
 }
 \description{
-Creates a kable table of posterior summary statistics for each
+Creates a table of posterior summary statistics for each
 safety topic of interest. Creates the arrays fot thr pdf.
 }
