@@ -29,10 +29,9 @@ map_prior_function_display <- function(param_approx, select_analysis) {
         str_vec[ncol(mixture_mat)] <- paste0(mixture_mat[1, ncol(mixture_mat)], " \\cdot ", "Normal(", mixture_mat[2, ncol(mixture_mat)], ",", mixture_mat[3, ncol(mixture_mat)], ")", "$$")
       }
     }
-  }
-  shiny::withMathJax(
-    shiny::h4(paste(str_vec, collapse = ""))
-  )
+  }  
+    paste(str_vec, collapse = "")
+  
 }
 
 # Display robust MAP prior mixture density function in the robust MAP Prior Tab
@@ -59,9 +58,7 @@ robust_map_prior_mix_dens_display <- function(robust_map_object, select_analysis
   rob_str_vec <- gsub(" \\+ $", "", rob_str_vec) # replace last + sign with empty str
   rob_str_vec <- paste0("$$", rob_str_vec, "$$")
 
-  shiny::withMathJax(
-    shiny::h4(rob_str_vec)
-  )
+  rob_str_vec
 }
 # Interpret area under the curve
 #' Title
