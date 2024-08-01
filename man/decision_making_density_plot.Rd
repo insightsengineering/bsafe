@@ -13,6 +13,14 @@ decision_making_density_plot(
 )
 }
 \arguments{
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{stat_inf_dist}{Data frame with statistical information of the distribution}
+
+\item{ae_prop}{Vector of quantiles}
+
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+
 \item{select_btrt}{}
 }
 \description{

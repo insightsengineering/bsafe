@@ -11,6 +11,13 @@ nta_data_conflict_assassment_plot(
   select_analysis
 )
 }
+\arguments{
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+
+\item{select_btrt}{Selected backgroundtreatments}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+}
 \description{
 Title
 }

@@ -2,10 +2,15 @@
 % Please edit documentation in R/display.R
 \name{robust_map_prior_mix_dens_display}
 \alias{robust_map_prior_mix_dens_display}
-\title{Title}
+\title{Robust MAP density display}
 \usage{
 robust_map_prior_mix_dens_display(robust_map_object, select_analysis)
 }
+\arguments{
+\item{robust_map_object}{map prior; mixture distribution with a non-informative component from robust_map()}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+}
 \description{
-Title
+Display robust MAP prior mixture density function in the robust MAP Prior Tab
 }

@@ -9,7 +9,8 @@ tau_adjust(select_analysis, hist_borrow)
 \arguments{
 \item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 
-\item{hist_borrow}{the amount of historical borrowing (ranges from small to very large)}
+\item{hist_borrow}{the amount of historical borrowing
+("Small", "Moderate", "Substantial", "Large", "Very Large")}
 }
 \value{
 the numeric value of tau based on the selected amount of historical borrowing

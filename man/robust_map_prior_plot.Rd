@@ -2,10 +2,19 @@
 % Please edit documentation in R/plots.R
 \name{robust_map_prior_plot}
 \alias{robust_map_prior_plot}
-\title{Title}
+\title{Plot comparison MAP vs. robust MAP}
 \usage{
 robust_map_prior_plot(rob_comp, saf_topic, select_btrt, select_analysis)
 }
+\arguments{
+\item{rob_comp}{A dataframe containing values for the MAP and robust MAP prior}
+
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+
+\item{select_btrt}{selected backgroundtreatment}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+}
 \description{
-Title
+Compare robust MAP prior to MAP prior
 }

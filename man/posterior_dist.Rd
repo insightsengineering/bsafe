@@ -10,13 +10,11 @@ posterior_dist(
   new_v1,
   new_v2,
   input_data,
-  explore = FALSE,
   p_exch = NULL,
   nex_mean = NULL,
   nex_sd = NULL,
-  adj_tau,
-  seed = NULL,
-  testing = FALSE
+  adj_tau = NULL,
+  seed = NULL
 )
 }
 \arguments{
@@ -24,15 +22,13 @@ posterior_dist(
 
 \item{robust_map_prior}{mixture distribution output from robust_map()}
 
-\item{new_v1}{first new variable #n for porportion and #events for rates}
+\item{new_v1}{first new variable #n for proportion and #hazard rate for rates}
 
-\item{new_v2}{second new variable #r for proprotion and observed exposure time for rates}
+\item{new_v2}{second new variable #r for proportion and unit information sd for rates}
 
 \item{input_data}{dataframe from data_table_prep() including the new trial}
 
-\item{explore}{for exploring a prior data conflict set to TRUE, to combine the data}
-
-\item{p_exch}{probabilitiy of exchangeable compononent (use 1-robust_weight)}
+\item{p_exch}{probability of exchangeable component (use 1-robust_weight)}
 
 \item{nex_mean}{Mean for Nex part (use robust_mean)}
 
@@ -41,8 +37,6 @@ posterior_dist(
 \item{adj_tau}{numeric value of tau from tau_adjust()}
 
 \item{seed}{for reproduceability}
-
-\item{testing}{for faster MCMC}
 }
 \value{
 posterior mixture distribution for incidence proportion analysis and

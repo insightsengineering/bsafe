@@ -2,10 +2,17 @@
 % Please edit documentation in R/display.R
 \name{area_under_the_curve}
 \alias{area_under_the_curve}
-\title{Title}
+\title{Area under the curve}
 \usage{
 area_under_the_curve(ae_prop, mix, saf_topic)
 }
+\arguments{
+\item{ae_prop}{Vector of quantiles}
+
+\item{mix}{mixture distribution object}
+
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+}
 \description{
-Title
+Interpret area under the curve
 }

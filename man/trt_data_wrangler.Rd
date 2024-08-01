@@ -2,10 +2,13 @@
 % Please edit documentation in R/data_prep.R
 \name{trt_data_wrangler}
 \alias{trt_data_wrangler}
-\title{Title}
+\title{Arm Choices}
 \usage{
 trt_data_wrangler(input_data)
 }
+\arguments{
+\item{input_data}{the raw summary level data}
+}
 \description{
-Title
+A function choose the Arms
 }

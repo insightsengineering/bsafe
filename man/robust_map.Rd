@@ -18,7 +18,7 @@ robust_map(
 \arguments{
 \item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 
-\item{param_approx}{the best fitting mixture model from parametric_approx()}
+\item{param_approx}{map prior; best fitting mixture model from parametric_approx()}
 
 \item{input_data}{read in data}
 

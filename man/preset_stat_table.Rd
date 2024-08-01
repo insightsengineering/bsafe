@@ -2,10 +2,17 @@
 % Please edit documentation in R/tables.R
 \name{preset_stat_table}
 \alias{preset_stat_table}
-\title{Title}
+\title{preset table for inference}
 \usage{
 preset_stat_table(mix, saf_topic, select_analysis)
 }
+\arguments{
+\item{mix}{mixture distribution object}
+
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+}
 \description{
-Title
+Table of preset statistical inference statement
 }

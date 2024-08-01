@@ -18,9 +18,9 @@ data_table_prep(
 
 \item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 
-\item{saf_topic}{the adverse event of interest}
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
 
-\item{select_btrt}{selected treatment arms}
+\item{select_btrt}{selected background treatment}
 
 \item{current_trial}{information whether it is a historical (0) or current (1) trial}
 }

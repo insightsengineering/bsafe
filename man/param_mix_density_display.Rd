@@ -11,6 +11,13 @@ param_mix_density_display(
   select_btrt
 )
 }
+\arguments{
+\item{param_approx}{map prior; best fitting mixture model from parametric_approx()}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+}
 \description{
 Title
 }

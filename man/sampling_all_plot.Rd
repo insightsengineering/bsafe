@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_prep.R
 \name{sampling_all_plot}
 \alias{sampling_all_plot}
-\title{Title}
+\title{Dataframe with density quantiles}
 \usage{
 sampling_all_plot(
   select_analysis,
@@ -12,8 +12,14 @@ sampling_all_plot(
 )
 }
 \arguments{
-\item{new_trial_analysis}{}
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{select_dist}{Choice of which should be displayed Robust MAP/MAP/Likelihood/Post}
+
+\item{new_trial_analysis}{Objects of the new trial analysis input}
+
+\item{_approx}{map prior; best fitting mixture model from parametric_approx()}
 }
 \description{
-Title
+MAP Prior, Robust MAP Prior, Likelihood, or Posterior Distribution Samples in the Decision Making Tab
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{app_plots}
 \alias{app_plots}
-\title{app_plots}
+\title{App plots}
 \usage{
 app_plots(
   select_analysis,
@@ -15,19 +15,19 @@ app_plots(
 )
 }
 \arguments{
-\item{select_analysis}{event porpotions or rates}
+\item{select_analysis}{event propotions or rates}
 
-\item{map_object}{Prior}
+\item{map_object}{MAP Prior object}
 
-\item{saf_topic}{safety topic}
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
 
 \item{select_btrt}{selected treatment arm}
 
 \item{new_trial_analysis}{nta}
 
-\item{stat_inf_dist}{differences}
+\item{stat_inf_dist}{Data frame with statistical information of the distribution}
 
-\item{mix}{fitted mix}
+\item{mix}{mixture distribution object}
 }
 \description{
 Only includes plots generated in the app
