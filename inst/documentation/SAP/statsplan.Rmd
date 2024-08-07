@@ -203,19 +203,18 @@ For incidence proportion, option \texttt{family=binomial} is set to assume a log
 This results in the function call:
 
 ```{r eval=FALSE}
- map_prop <- RBesT::gMAP(
-      cbind(N_WITH_AE, N - N_WITH_AE) ~ 1 | STUDYID,
-      data = input_data,
-      tau.dist = tau_dist, #HalfNormal
-      tau.prior = tau,
-      beta.prior = 2,
-      iter = 6000,
-      warmup = 2000,
-      thin = 4,
-      chains = 4,
-      family = "binomial"
-    )
-
+map_prop <- RBesT::gMAP(
+  cbind(N_WITH_AE, N - N_WITH_AE) ~ 1 | STUDYID,
+  data = input_data,
+  tau.dist = tau_dist, # HalfNormal
+  tau.prior = tau,
+  beta.prior = 2,
+  iter = 6000,
+  warmup = 2000,
+  thin = 4,
+  chains = 4,
+  family = "binomial"
+)
 ```
 
 The default choice for $\sigma$ in the binomial case is 2 (as recommended in the \texttt{RBesT} documentation). This leads to a prior for beta N(0, $\sigma^2$) which is set in the gMAP function by specifying \texttt{beta.prior = 2}. This leads to the following choices for the between trial heterogeneity parameter $\tau$, which has a prior distribution $\tau$ HalfNormal(0, $\tau^2$) and is set within the \texttt{gMAP} function by specifying \texttt{tau.prior =} $\tau$. Values for $\tau$ are chosen according to the user-specified level of between-trial heterogeneity, shown in the table below.
@@ -247,15 +246,12 @@ The default choice for $\sigma$ in the binomial case is 2 (as recommended in the
 For calculating the summary statistics (mean, standard error, median and the credible interval) of the MCMC samples of MAP prior for proportions the following code is used:
 
 ```{r eval=FALSE}
-
 sample_prop <- rstan::extract(map_prop$fit)$theta_resp_pred
 mean(sample_prop)
 sd(sample_prop)
 median(sample_prop)
 quantile(sample_prop, probs = 0.025)
 quantile(sample_prop, probs = 0.975)
-
-
 ```
 
 Values for the proportion are multiplied by 100 and displayed as \%.
@@ -276,17 +272,17 @@ The response, \texttt{N\_WITH\_AE} is a vector of counts. The sum of total expos
 MCMC samples for the MAP prior for exposure adjusted adverse event rates are drawn using the following code:
 
 ```{r eval=FALSE}
-    map_rate <- RBesT::gMAP(N_WITH_AE ~ 1 + offset(log(TOT_EXP)) | STUDYID,
-                            data = input_data,
-                            tau.dist = tau_dist, #HalfNormal
-                            tau.prior = tau,
-                            beta.prior = 1,
-                            iter = 6000,
-                            warmup = 2000,
-                            thin = 4,
-                            chains = 4,
-                            family = "poisson")
-
+map_rate <- RBesT::gMAP(N_WITH_AE ~ 1 + offset(log(TOT_EXP)) | STUDYID,
+  data = input_data,
+  tau.dist = tau_dist, # HalfNormal
+  tau.prior = tau,
+  beta.prior = 1,
+  iter = 6000,
+  warmup = 2000,
+  thin = 4,
+  chains = 4,
+  family = "poisson"
+)
 ```
 
 
@@ -330,21 +326,20 @@ median(sample_rate_log)
 quantile(sample_rate_log, probs = crilb)
 quantile(sample_rate_log, probs = criub)
 
-#On the hazard rate scale:
+# On the hazard rate scale:
 mean(sample_rate_exp)
 sd(sample_rate_exp)
 median(sample_rate_exp)
 quantile(sample_rate_exp, probs = crilb)
 quantile(sample_rate_exp, probs = criub)
-
 ```
 
 An analytic approximation to the log hazard samples is then fitted:
 
 ```{r eval=FALSE}
 theta_fit <- as.data.frame(map_rate$fit)
-    theta_pred <- theta_fit$theta_pred
-    fit_rate <- RBesT::automixfit(theta_pred, Nc = seq(3, 3))
+theta_pred <- theta_fit$theta_pred
+fit_rate <- RBesT::automixfit(theta_pred, Nc = seq(3, 3))
 ```
 
 
@@ -481,16 +476,16 @@ be fixed to 1\% or respectively 99\% to avoid display errors. Those fixed values
 The x values for \texttt{ggplot()} are calculated by: 
 
 ```{r eval=FALSE}
-  length_disp <- 10000
+length_disp <- 10000
 
-  if(select_analysis == "Incidence proportion"){
-    x <- seq(0.009, 1, length = 10000)
-  }else if(select_analysis == "Exposure-adjusted AE rate"){
-    a <- RBesT::qmix(param_approx, 0.009)
-    b <- RBesT::qmix(param_approx, 0.991)
-    x <- seq(a, b, length = length_disp)
-    rm(a, b)
-  }
+if (select_analysis == "Incidence proportion") {
+  x <- seq(0.009, 1, length = 10000)
+} else if (select_analysis == "Exposure-adjusted AE rate") {
+  a <- RBesT::qmix(param_approx, 0.009)
+  b <- RBesT::qmix(param_approx, 0.991)
+  x <- seq(a, b, length = length_disp)
+  rm(a, b)
+}
 ```
 
 To calculate the y-values (probability and area under the curve), the fitted, robustified, updated posterior and "likelihood" distributions (expressed as \texttt{mix}) are used as argument in \texttt{RBesT::pmix(mix,...)}. 
@@ -522,48 +517,51 @@ When no historical information is available, a weak informative prior will be us
 library(knitr)
 
 default_values <- data.frame(
-  Default = c("family", 
-              "iter",
-              "warmup",
-              "thin",
-              "chains",
-              "gMAP: tau.dist",
-              "beta.prior",
-              "Large Heterogeneity",
-              "Robust Weight",
-              "Robust Mean",
-              "Reference standard deviation",
-              "No historical information",
-              "No current data"
-              ),
-  Proportions = c("binomial",
-                  6000,
-                  2000,
-                  4,
-                  4,
-                  "HalfNormal",
-                  2,
-                  1,
-                  0.2,
-                  0.5,
-                  NA,
-                  "Beta(1,1)",
-                  "Robustified MAP Prior as Posterior"
-                  ),
-  Rates = c("poisson",
-            6000,
-            2000,
-            4,
-            4,
-            "HalfNormal",
-            1,
-            0.5,
-            0.2,
-            "log(N WITH AE/TOT EXP)",
-            1,
-            "Normal(log(N WITH AE NEW/TOT EXP NEW, 1)",
-            "Robustified MAP Prior as Posterior"
-            )
+  Default = c(
+    "family",
+    "iter",
+    "warmup",
+    "thin",
+    "chains",
+    "gMAP: tau.dist",
+    "beta.prior",
+    "Large Heterogeneity",
+    "Robust Weight",
+    "Robust Mean",
+    "Reference standard deviation",
+    "No historical information",
+    "No current data"
+  ),
+  Proportions = c(
+    "binomial",
+    6000,
+    2000,
+    4,
+    4,
+    "HalfNormal",
+    2,
+    1,
+    0.2,
+    0.5,
+    NA,
+    "Beta(1,1)",
+    "Robustified MAP Prior as Posterior"
+  ),
+  Rates = c(
+    "poisson",
+    6000,
+    2000,
+    4,
+    4,
+    "HalfNormal",
+    1,
+    0.5,
+    0.2,
+    "log(N WITH AE/TOT EXP)",
+    1,
+    "Normal(log(N WITH AE NEW/TOT EXP NEW, 1)",
+    "Robustified MAP Prior as Posterior"
+  )
 )
 
 # Assuming df is your dataframe
