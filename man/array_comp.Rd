@@ -2,7 +2,7 @@
 % Please edit documentation in R/ae_summary_table_helpers.R
 \name{array_comp}
 \alias{array_comp}
-\title{Ary Comparison}
+\title{Array Comparison}
 \usage{
 array_comp(
   ana,
@@ -31,7 +31,7 @@ array_comp(
 
 \item{criub}{Cri upper bound}
 
-\item{array_ana}{Setup for analysed array}
+\item{array_ana}{Setup for analyzed array}
 
 \item{sample_size}{sample size}
 }

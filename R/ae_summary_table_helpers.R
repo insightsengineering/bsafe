@@ -90,7 +90,7 @@ add_row <- function(df, data_check, topic, group, analysis) {
 
 #' @title Naive incidence
 #'
-#' @description Gives the naiv estimation outputs for the whole data set
+#' @description Gives the naive estimation outputs for the whole data set
 #'
 #' @param data Historic and Current data
 #' @param array_inci The array setup for incidence proportions
@@ -115,7 +115,7 @@ inci_naiv <- function(data, array_inci, arm, topic, group) {
 #'
 #' @description Assigning values from a rmix object from RBesT to the array_inci
 #'
-#' @param rmix_obj A S3 class matrix from R BEsT with a mixture distribution
+#' @param rmix_obj A S3 class matrix from R RBesT with a mixture distribution
 #' @param array The array setup
 #' @param arm "Arm A" (treatment) or "Arm B" (control)
 #' @param topic Safety Topic
@@ -139,7 +139,7 @@ array_rmix <- function(rmix_obj, array, arm, topic, group, lb = lb, ub = ub) {
 }
 
 
-#' @title  Ary Comparison
+#' @title  Array Comparison
 #'
 #' @description Assigning values from a sample to array_inci_comp
 #'
@@ -151,7 +151,7 @@ array_rmix <- function(rmix_obj, array, arm, topic, group, lb = lb, ub = ub) {
 #' @param pr_sample posterior sample for difference or ratio
 #' @param crilb Cri lower bound
 #' @param criub Cri upper bound
-#' @param array_ana Setup for analysed array
+#' @param array_ana Setup for analyzed array
 #'
 #' @return
 #' @export

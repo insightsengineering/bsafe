@@ -186,7 +186,7 @@ decision_making_density_plot <- function(select_analysis, stat_inf_dist, ae_prop
 #'
 #' @description Only includes plots generated in the app
 #'
-#' @param select_analysis event propotions or rates
+#' @param select_analysis event proportions or rates
 #' @param map_object MAP Prior object
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
 #' @param select_btrt selected treatment arm
