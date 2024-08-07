@@ -1,7 +1,7 @@
 # Low censoring
 # Small Noise
 # Majority Events observed (for beta 0.9 we would need 93, but censor after 200)
-#Quite Homogenous DataQuantify the above conditions
+# Quite Homogenous DataQuantify the above conditions
 
 # Scen9
 scen9 <- SimTestData(
@@ -25,4 +25,4 @@ scen9 <- SimTestData(
 )
 
 
-write.csv(scen9, file = 'Scen09.csv')
+write.csv(scen9, file = "Scen09.csv")

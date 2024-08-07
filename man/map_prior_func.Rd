@@ -22,7 +22,7 @@ map_prior_func(
 
 \item{adj_tau}{numeric value from tau_adjust}
 
-\item{seed}{a seed as input for reproducability}
+\item{seed}{a seed as input for reproducibility}
 
 \item{testing}{for testing purposes faster MCMC}
 }
@@ -32,7 +32,6 @@ or a vector of the posterior MCMC samples for the exposure-adjusted analysis
 }
 \description{
 MAP prior calculation based on the selected analysis.
-RBesT is used for the incidence proportion analysis. Alexander Stemke's code
-is used for the exposure-adjusted analysis.
+RBesT is used for the incidence proportion analysis.
 MAP prior should be computed using only historical data
 }

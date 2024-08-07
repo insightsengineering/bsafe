@@ -14,15 +14,14 @@
 #'
 #' @examples
 mcmc_desc <- function(mcmc_obj = NA, crilb = 0.025, criub = 0.975,
-                      seed = NA, trans = FALSE){
-
-  if(is.na(seed)){
+                      seed = NA, trans = FALSE) {
+  if (is.na(seed)) {
     seed <- as.numeric(Sys.time())
   }
 
 
 
-  if(trans == TRUE){
+  if (trans == TRUE) {
     set.seed(seed)
     mcmc_obj <- exp(RBesT::rmix(mcmc_obj, 100000))
   }
@@ -37,7 +36,6 @@ mcmc_desc <- function(mcmc_obj = NA, crilb = 0.025, criub = 0.975,
   )
 
   return(res)
-
 }
 
 
@@ -46,7 +44,7 @@ mcmc_desc <- function(mcmc_obj = NA, crilb = 0.025, criub = 0.975,
 #' @description Helper for descriptive statistics of a matrix with mixture
 #' distribution, as object from RBesT
 #'
-#' @param rmix_obj A dataframe containgin a mixture distribution
+#' @param rmix_obj A dataframe containing a mixture distribution
 #' @param crilb Lower Bound for the credible interval
 #' @param criub Upper Bound for the credible interval
 #' @param deci Number of decimals for rounding
@@ -55,11 +53,12 @@ mcmc_desc <- function(mcmc_obj = NA, crilb = 0.025, criub = 0.975,
 #' @export
 #'
 #' @examples
-rmix_desc <- function(rmix_obj = NA, crilb = 0.025, criub = 0.975, deci = 4){
-
-  ana_obj <- summary(rmix_obj, quantile.type = 7, digits = deci, na.rm = TRUE,
-                     names = TRUE, type = c("quartiles"),
-                     probs = c(crilb, 0.5, criub))
+rmix_desc <- function(rmix_obj = NA, crilb = 0.025, criub = 0.975, deci = 4) {
+  ana_obj <- summary(rmix_obj,
+    quantile.type = 7, digits = deci, na.rm = TRUE,
+    names = TRUE, type = c("quartiles"),
+    probs = c(crilb, 0.5, criub)
+  )
 
   res <- data.frame(
     mean   = ana_obj["mean"],
@@ -78,20 +77,21 @@ rmix_desc <- function(rmix_obj = NA, crilb = 0.025, criub = 0.975, deci = 4){
 #'
 #' @description  Data Frame to display proportions in %
 #'
-#' @param stats_mat_prop Matrix with statiscial information for the proportional case
+#' @param stats_mat_prop Matrix with statistical information for the proportional case
 #'
 #' @return Text for display
 #' @export
 #'
 #' @examples
-text_prop <- function(stats_mat_prop = NA){
-  text_mat_prop       <- round(stats_mat_prop*100, digits = 2)
-  text_mat_prop[]     <- lapply(text_mat_prop,
-                                function(x) paste0(as.character(x), "%"))
-  text_mat_prop       <- cri_char(text_mat_prop)
+text_prop <- function(stats_mat_prop = NA) {
+  text_mat_prop <- round(stats_mat_prop * 100, digits = 2)
+  text_mat_prop[] <- lapply(
+    text_mat_prop,
+    function(x) paste0(as.character(x), "%")
+  )
+  text_mat_prop <- cri_char(text_mat_prop)
 
   return(text_mat_prop)
-
 }
 
 
@@ -103,14 +103,13 @@ text_prop <- function(stats_mat_prop = NA){
 #'
 #' @return a data frame including the credible intervals
 #' @export
-cri_char <- function(df = NA){
-    df$cri <- mapply(function(x, y) paste0("(", x, ", ", y, ")"), df$crilb, df$criub)
+cri_char <- function(df = NA) {
+  df$cri <- mapply(function(x, y) paste0("(", x, ", ", y, ")"), df$crilb, df$criub)
 
   df$crilb <- NULL
   df$criub <- NULL
 
   return(df)
-
 }
 
 #' @title Beta Dist Update check
@@ -125,19 +124,18 @@ cri_char <- function(df = NA){
 #' @export
 #'
 #' @examples
-check_minmax <- function(r,n){
+check_minmax <- function(r, n) {
   # RBesT cannot handle a ratio of 0 or 1, therefor:
-  if(r  == 0){
+  if (r == 0) {
     alpha <- r + 1
-    beta <- n- (r + 1)
-  }else if(r  == n ){
-    alpha <- r  - 1
-    beta <- n  - (r  - 1)
-  }else{
+    beta <- n - (r + 1)
+  } else if (r == n) {
+    alpha <- r - 1
+    beta <- n - (r - 1)
+  } else {
     alpha <- r
     beta <- n - r
   }
 
-  return(c(alpha = alpha ,beta = beta))
-
+  return(c(alpha = alpha, beta = beta))
 }

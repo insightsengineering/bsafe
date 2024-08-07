@@ -1,4 +1,3 @@
-
 # Overview ----------------------------------------------------------------
 
 testing_list_prop <- list()
@@ -22,14 +21,14 @@ tp_prop_Any <- data.frame(
 )
 
 thresholds_prop_Any <- data.frame(
-  mean_min   = rep(0, 4),
-  mean_lb   = rep(0, 4),
-  mean_ub   = rep(1, 4),
-  mean_max   = rep(1, 4),
-  sd_min     = rep(0, 4),
-  sd_lb     = rep(0, 4),
-  sd_ub     = rep(Inf, 4),
-  sd_max     = rep(Inf, 4),
+  mean_min = rep(0, 4),
+  mean_lb = rep(0, 4),
+  mean_ub = rep(1, 4),
+  mean_max = rep(1, 4),
+  sd_min = rep(0, 4),
+  sd_lb = rep(0, 4),
+  sd_ub = rep(Inf, 4),
+  sd_max = rep(Inf, 4),
   median_min = rep(0, 4),
   median_lb = rep(0, 4),
   median_ub = rep(1, 4),
@@ -42,10 +41,10 @@ thresholds_prop_Any <- data.frame(
   cri_ub_lb = rep(0, 4),
   cri_ub_ub = rep(1, 4),
   cri_ub_max = rep(1, 4),
-  ess_min    = c(0, 4, NA, NA),
-  ess_lb    = c(0, 4, NA, NA),
-  ess_ub    = c(Inf, Inf, NA, NA),
-  ess_max    = c(Inf, Inf, NA, NA),
+  ess_min = c(0, 4, NA, NA),
+  ess_lb = c(0, 4, NA, NA),
+  ess_ub = c(Inf, Inf, NA, NA),
+  ess_max = c(Inf, Inf, NA, NA),
   row.names = c("MAP Prior", "Robustified", "Likelihood", "Posterior")
 )
 
@@ -53,16 +52,18 @@ thresholds_prop_Any <- data.frame(
 thresholds_prop_NA <- thresholds_prop_Any
 thresholds_prop_NA[] <- NA
 
-testing_list_prop[[1]] <- list(parameters = tp_prop_Any,
-                                      treshholds = thresholds_prop_Any)
+testing_list_prop[[1]] <- list(
+  parameters = tp_prop_Any,
+  treshholds = thresholds_prop_Any
+)
 
 # initializing all treshhold data frames
-for(i in 1:12){
-    if(i < 10){
-      i_chr <- paste0(0,i)
-    }else{
-      i_chr <- i
-    }
+for (i in 1:12) {
+  if (i < 10) {
+    i_chr <- paste0(0, i)
+  } else {
+    i_chr <- i
+  }
   assign(paste0("thresholds_prop_Scen", i_chr), thresholds_prop_NA)
 }
 
@@ -73,7 +74,7 @@ rm(tp_prop_Any, thresholds_prop_Any, thresholds_prop_NA)
 
 # Scen 1 ------------------------------------------------------------------
 
-tp_prop_Scen01 <-  data.frame(
+tp_prop_Scen01 <- data.frame(
   csv        = "Scen01.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -89,12 +90,14 @@ tp_prop_Scen01 <-  data.frame(
   row.names  = c("Best case scenario")
 )
 
-testing_list_prop[[2]] <- list(parameters = tp_prop_Scen01,
-                                      treshholds = thresholds_prop_Scen01)
+testing_list_prop[[2]] <- list(
+  parameters = tp_prop_Scen01,
+  treshholds = thresholds_prop_Scen01
+)
 
 # Scen 2 ------------------------------------------------------------------
 
-tp_prop_Scen02 <-  data.frame(
+tp_prop_Scen02 <- data.frame(
   csv        = "Scen02.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -111,12 +114,14 @@ tp_prop_Scen02 <-  data.frame(
 )
 
 
-testing_list_prop[[3]] <- list(parameters = tp_prop_Scen02,
-                                      treshholds = thresholds_prop_Scen02)
+testing_list_prop[[3]] <- list(
+  parameters = tp_prop_Scen02,
+  treshholds = thresholds_prop_Scen02
+)
 
 # Scen 3 ------------------------------------------------------------------
 
-tp_prop_Scen03 <-  data.frame(
+tp_prop_Scen03 <- data.frame(
   csv        = "Scen03.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -133,13 +138,15 @@ tp_prop_Scen03 <-  data.frame(
 )
 
 
-testing_list_prop[[4]] <- list(parameters = tp_prop_Scen03,
-                                      treshholds = thresholds_prop_Scen03)
+testing_list_prop[[4]] <- list(
+  parameters = tp_prop_Scen03,
+  treshholds = thresholds_prop_Scen03
+)
 
 
 # Scen 4 ------------------------------------------------------------------
 
-tp_prop_Scen04 <-  data.frame(
+tp_prop_Scen04 <- data.frame(
   csv        = "Scen04.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -155,13 +162,15 @@ tp_prop_Scen04 <-  data.frame(
   row.names  = c("Worst Case Scenario")
 )
 
-testing_list_prop[[5]] <- list(parameters = tp_prop_Scen04,
-                                      treshholds = thresholds_prop_Scen04)
+testing_list_prop[[5]] <- list(
+  parameters = tp_prop_Scen04,
+  treshholds = thresholds_prop_Scen04
+)
 
 
 # Scen 5 ------------------------------------------------------------------
 
-tp_prop_Scen05 <-  data.frame(
+tp_prop_Scen05 <- data.frame(
   csv        = "Scen05.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -177,12 +186,14 @@ tp_prop_Scen05 <-  data.frame(
   row.names  = c("Heterogenous Data ")
 )
 
-testing_list_prop[[6]] <- list(parameters = tp_prop_Scen05,
-                                      treshholds = thresholds_prop_Scen05)
+testing_list_prop[[6]] <- list(
+  parameters = tp_prop_Scen05,
+  treshholds = thresholds_prop_Scen05
+)
 
 # Scen 6 ------------------------------------------------------------------
 
-tp_prop_Scen06 <-  data.frame(
+tp_prop_Scen06 <- data.frame(
   csv        = "Scen06.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -198,12 +209,14 @@ tp_prop_Scen06 <-  data.frame(
   row.names  = c("High Dropout")
 )
 
-testing_list_prop[[7]] <- list(parameters = tp_prop_Scen06,
-                                      treshholds = thresholds_prop_Scen06)
+testing_list_prop[[7]] <- list(
+  parameters = tp_prop_Scen06,
+  treshholds = thresholds_prop_Scen06
+)
 
 # Scen 7 ------------------------------------------------------------------
 
-tp_prop_Scen07 <-  data.frame(
+tp_prop_Scen07 <- data.frame(
   csv        = "Scen07.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -219,12 +232,14 @@ tp_prop_Scen07 <-  data.frame(
   row.names  = c("High Heterogeneity")
 )
 
-testing_list_prop[[8]] <- list(parameters = tp_prop_Scen07,
-                                      treshholds = thresholds_prop_Scen07)
+testing_list_prop[[8]] <- list(
+  parameters = tp_prop_Scen07,
+  treshholds = thresholds_prop_Scen07
+)
 
 # Scen 8 ------------------------------------------------------------------
 
-tp_prop_Scen08 <-  data.frame(
+tp_prop_Scen08 <- data.frame(
   csv        = "Scen08.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -240,12 +255,14 @@ tp_prop_Scen08 <-  data.frame(
   row.names  = c("Bad Scenario")
 )
 
-testing_list_prop[[9]] <- list(parameters = tp_prop_Scen08,
-                                      treshholds = thresholds_prop_Scen08)
+testing_list_prop[[9]] <- list(
+  parameters = tp_prop_Scen08,
+  treshholds = thresholds_prop_Scen08
+)
 
 # Scen 9 ------------------------------------------------------------------
 
-tp_prop_Scen09 <-  data.frame(
+tp_prop_Scen09 <- data.frame(
   csv        = "Scen09.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -261,12 +278,14 @@ tp_prop_Scen09 <-  data.frame(
   row.names  = c("Good Scenario")
 )
 
-testing_list_prop[[10]] <- list(parameters = tp_prop_Scen09,
-                                      treshholds = thresholds_prop_Scen09)
+testing_list_prop[[10]] <- list(
+  parameters = tp_prop_Scen09,
+  treshholds = thresholds_prop_Scen09
+)
 
 # Scen 10 ------------------------------------------------------------------
 
-tp_prop_Scen10 <-  data.frame(
+tp_prop_Scen10 <- data.frame(
   csv        = "Scen10.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -282,12 +301,14 @@ tp_prop_Scen10 <-  data.frame(
   row.names  = c("Favored Control")
 )
 
-testing_list_prop[[11]] <- list(parameters = tp_prop_Scen10,
-                                      treshholds = thresholds_prop_Scen10)
+testing_list_prop[[11]] <- list(
+  parameters = tp_prop_Scen10,
+  treshholds = thresholds_prop_Scen10
+)
 
 # Scen 11 ------------------------------------------------------------------
 
-tp_prop_Scen11 <-  data.frame(
+tp_prop_Scen11 <- data.frame(
   csv        = "Scen11.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -303,12 +324,14 @@ tp_prop_Scen11 <-  data.frame(
   row.names  = c("Continued Study Duration with Realistic Setting")
 )
 
-testing_list_prop[[12]] <- list(parameters = tp_prop_Scen11,
-                                      treshholds = thresholds_prop_Scen11)
+testing_list_prop[[12]] <- list(
+  parameters = tp_prop_Scen11,
+  treshholds = thresholds_prop_Scen11
+)
 
 # Scen 12 ------------------------------------------------------------------
 
-tp_prop_Scen12 <-  data.frame(
+tp_prop_Scen12 <- data.frame(
   csv        = "Scen12.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -324,8 +347,10 @@ tp_prop_Scen12 <-  data.frame(
   row.names  = c("Continued Study Duration with Worst Setting")
 )
 
-testing_list_prop[[13]] <- list(parameters = tp_prop_Scen12,
-                                      treshholds = thresholds_prop_Scen12)
+testing_list_prop[[13]] <- list(
+  parameters = tp_prop_Scen12,
+  treshholds = thresholds_prop_Scen12
+)
 
 testing_list_props <- testing_list_prop
 
@@ -352,14 +377,14 @@ testing_list_props <- testing_list_prop
 
 # Deleting obsolote data frames -------------------------------------------
 
-for(i in 1:12){
-  if(i < 10){
-    i_chr <- paste0(0,i)
-  }else{
+for (i in 1:12) {
+  if (i < 10) {
+    i_chr <- paste0(0, i)
+  } else {
     i_chr <- i
   }
-  rm(list=paste0("tp_prop_Scen", i_chr))
-  rm(list=paste0("thresholds_prop_Scen", i_chr))
+  rm(list = paste0("tp_prop_Scen", i_chr))
+  rm(list = paste0("thresholds_prop_Scen", i_chr))
 }
 rm(i)
 rm(i_chr)

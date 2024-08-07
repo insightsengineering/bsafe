@@ -288,8 +288,8 @@ data <- data_table_prep(
 )
 
 adj_tau <- ifelse(tp_rates$heterog == "any",
-                  tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = sample(hist_borrow_choices, 1)),
-                  tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = tp_rates$heterog)
+  tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = sample(hist_borrow_choices, 1)),
+  tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = tp_rates$heterog)
 )
 
 current_trial_data <- list(

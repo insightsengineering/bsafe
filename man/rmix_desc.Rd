@@ -7,7 +7,7 @@
 rmix_desc(rmix_obj = NA, crilb = 0.025, criub = 0.975, deci = 4)
 }
 \arguments{
-\item{rmix_obj}{A dataframe containgin a mixture distribution}
+\item{rmix_obj}{A dataframe containing a mixture distribution}
 
 \item{crilb}{Lower Bound for the credible interval}
 

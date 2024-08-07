@@ -21,10 +21,10 @@ scen12 <- SimTestData(
   nStudy = 6,
   tau = 0.15,
   prior_data_conflict = TRUE,
-  pdc_hz =c(g1 = 0.05, g2 = 0.1),
+  pdc_hz = c(g1 = 0.05, g2 = 0.1),
   SAF_TOPIC = "Scen12",
   seed = 1701878308
 )
 
 
-write.csv(scen12, file = 'Scen12.csv')
+write.csv(scen12, file = "Scen12.csv")

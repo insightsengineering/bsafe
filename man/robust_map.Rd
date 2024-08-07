@@ -28,7 +28,7 @@ robust_map(
 
 \item{adj_tau}{in between heterogeneity}
 
-\item{seed}{seed for reprduceability}
+\item{seed}{seed for reproducibility}
 
 \item{testing}{faster mcmc for testing}
 }

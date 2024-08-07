@@ -34,8 +34,8 @@ test_that(
       }
 
       adj_tau <- ifelse(tp_rates$heterog == "any",
-                        tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = sample(hist_borrow_choices, 1)),
-                        tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = tp_rates$heterog)
+        tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = sample(hist_borrow_choices, 1)),
+        tau_adjust(select_analysis = tp_rates$analysis, hist_borrow = tp_rates$heterog)
       )
 
       current_trial_data <- list(
@@ -85,7 +85,7 @@ test_that(
       )
 
       rerun_counter <- 0
-      while(sum(data$N_WITH_AE) < result_map$ESS[1] && rerun_counter < 2) {
+      while (sum(data$N_WITH_AE) < result_map$ESS[1] && rerun_counter < 2) {
         rerun_counter <- rerun_counter + 1
 
         map_object <- map_prior_func(
@@ -175,7 +175,7 @@ test_that(
       test_that("MAP Prior row is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_map[,res_string_without_ess] >= (th_rates_lb[c(log_map_string, exp_map_string), th_string_without_ess_lb] - 8e-02),
+            result_map[, res_string_without_ess] >= (th_rates_lb[c(log_map_string, exp_map_string), th_string_without_ess_lb] - 8e-02),
             na.rm = TRUE
           )
         )
@@ -184,7 +184,7 @@ test_that(
       test_that("MAP Prior ESS is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_map[,c("ESS")] >= (thresholds_rates[log_map_string,c("ess_min")] * 0.9),
+            result_map[, c("ESS")] >= (thresholds_rates[log_map_string, c("ess_min")] * 0.9),
             na.rm = TRUE
           )
         )
@@ -195,7 +195,7 @@ test_that(
       test_that("MAP Prior row is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_map[,res_string_without_ess] <= (th_rates_ub[c(log_map_string, exp_map_string), th_string_without_ess_ub] + 8e-02), # gt/lt tolerance
+            result_map[, res_string_without_ess] <= (th_rates_ub[c(log_map_string, exp_map_string), th_string_without_ess_ub] + 8e-02), # gt/lt tolerance
             na.rm = TRUE
           )
         )
@@ -203,7 +203,7 @@ test_that(
       test_that("MAP Prior ESS is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_map[,c("ESS")] <= (th_rates_ub[log_map_string,c("ess_ub")] * 1.1),
+            result_map[, c("ESS")] <= (th_rates_ub[log_map_string, c("ess_ub")] * 1.1),
             na.rm = TRUE
           )
         )
@@ -221,14 +221,18 @@ test_that(
         )
       })
       test_that("NA values are in the same positions in both data frames", {
-        expect_equal(which(is.na(result_nta)), which(is.na(th_rates_lb[c(log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
-                                                                         exp_post_string), ])))
+        expect_equal(which(is.na(result_nta)), which(is.na(th_rates_lb[c(
+          log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
+          exp_post_string
+        ), ])))
       })
       test_that("NTA Table is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_nta[,res_string_without_ess] >= (th_rates_lb[c(log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
-                                                                  exp_post_string), th_string_without_ess_lb] - 8e-02),
+            result_nta[, res_string_without_ess] >= (th_rates_lb[c(
+              log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
+              exp_post_string
+            ), th_string_without_ess_lb] - 8e-02),
             na.rm = TRUE
           )
         )
@@ -236,22 +240,28 @@ test_that(
       test_that("NTA Table ESS is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_nta[,c("ESS")] >= (thresholds_rates[c(log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
-                                                         exp_post_string),c("ess_min")] * 0.9),
+            result_nta[, c("ESS")] >= (thresholds_rates[c(
+              log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
+              exp_post_string
+            ), c("ess_min")] * 0.9),
             na.rm = TRUE
           )
         )
       })
       test_that("NA values are in the same positions in both data frames", {
-        expect_equal(which(is.na(result_nta)), which(is.na(th_rates_lb[c(log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
-                                                                         exp_post_string), ])))
+        expect_equal(which(is.na(result_nta)), which(is.na(th_rates_lb[c(
+          log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
+          exp_post_string
+        ), ])))
       })
       # FALSE - replace with difference
       test_that("NTA Table is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_nta[,res_string_without_ess] <= (th_rates_ub[c(log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
-                                                                  exp_post_string), th_string_without_ess_ub] + 8e-02),
+            result_nta[, res_string_without_ess] <= (th_rates_ub[c(
+              log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
+              exp_post_string
+            ), th_string_without_ess_ub] + 8e-02),
             na.rm = TRUE
           )
         )
@@ -260,16 +270,20 @@ test_that(
       test_that("NTA Table ESS is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_nta[,c("ESS")] <= (th_rates_ub[c(log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
-                                                    exp_post_string),c("ess_ub")] * 1.1),
+            result_nta[, c("ESS")] <= (th_rates_ub[c(
+              log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
+              exp_post_string
+            ), c("ess_ub")] * 1.1),
             na.rm = TRUE
           )
         )
       })
 
       test_that("NA values are in the same positions in both data frames", {
-        expect_equal(which(is.na(result_nta)), which(is.na(th_rates_ub[c(log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
-                                                                         exp_post_string), ])))
+        expect_equal(which(is.na(result_nta)), which(is.na(th_rates_ub[c(
+          log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
+          exp_post_string
+        ), ])))
       })
       test_that("Robust MAP Prior Row is identical in both Robust MAP Prior as well as NTA Table", {
         expect_true(
@@ -280,8 +294,10 @@ test_that(
         )
       })
       test_that("NA values are in the same positions in both data frames", {
-        expect_equal(which(is.na(result_nta[c(log_rob_string_comp, exp_rob_string_comp), ])),
-                     which(is.na(result_rob[c(log_rob_string_comp, exp_rob_string_comp), ])))
+        expect_equal(
+          which(is.na(result_nta[c(log_rob_string_comp, exp_rob_string_comp), ])),
+          which(is.na(result_rob[c(log_rob_string_comp, exp_rob_string_comp), ]))
+        )
       })
     }
   }

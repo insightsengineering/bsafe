@@ -24,4 +24,4 @@ st1data <- SimTestData(
   seed = 1699874539
 )
 
-write.csv(st1data, file="Scen01.csv")
+write.csv(st1data, file = "Scen01.csv")

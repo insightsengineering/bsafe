@@ -19,11 +19,15 @@ robust_map_prior_plot <- function(rob_comp, saf_topic, select_btrt, select_analy
     ggplot2::theme(axis.text = ggplot2::element_text(size = AXES_LABEL_SIZE)) +
     ggplot2::theme(text = ggplot2::element_text(size = AXES_LABEL_SIZE))
   if (select_analysis == "Incidence proportion") {
-    p + ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt),
-                      y = "Probability Density", color = "Density", linetype = "Density")
+    p + ggplot2::labs(
+      x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt),
+      y = "Probability Density", color = "Density", linetype = "Density"
+    )
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    p + ggplot2::labs(x = paste0("Log Scale of Incidence Rates of Patients with ", saf_topic, " with treatment ", select_btrt),
-                      y = "Probability Density", color = "Density", linetype = "Density")
+    p + ggplot2::labs(
+      x = paste0("Log Scale of Incidence Rates of Patients with ", saf_topic, " with treatment ", select_btrt),
+      y = "Probability Density", color = "Density", linetype = "Density"
+    )
   }
 }
 
@@ -39,7 +43,7 @@ param_mix_density_display <- function(param_approx, select_analysis, saf_topic, 
   # MAP prior
   mixture_mat <- data.frame(param_approx[, 1:ncol(param_approx)])
   str_vec <- vector(length = ncol(mixture_mat))
-  
+
   # MAP Prior density function
   if (select_analysis == "Incidence proportion") {
     x <- seq(0.009, 1, length = 10000)
@@ -63,9 +67,9 @@ param_mix_density_display <- function(param_approx, select_analysis, saf_topic, 
       }
     }
   }
-  
+
   Prior <- eval(parse(text = paste(str_vec, collapse = "")))
-  
+
   # Create dataframe for ggplot
   df <- data.frame(
     Probability = x,
@@ -127,12 +131,14 @@ nta_data_conflict_assassment_plot <- function(new_trial_analysis, saf_topic, sel
     ggplot2::theme(text = ggplot2::element_text(size = AXES_LABEL_SIZE))
   if (select_analysis == "Incidence proportion") {
     p + ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density") +
-      ggplot2::scale_x_continuous(labels = function(x) paste0(formatC(x, digits = 1, format = "f"), "%"))+
+      ggplot2::scale_x_continuous(labels = function(x) paste0(formatC(x, digits = 1, format = "f"), "%")) +
       ggplot2::scale_x_continuous(labels = function(x) paste0(formatC(x * 100, digits = 1, format = "f"), "%"))
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    p + ggplot2::scale_x_continuous(labels = function(x) paste0(formatC(x, digits = 1, format = "f"), " "))+
-      ggplot2::labs(x = paste0("Log Scale of Incidence Rates of Patients with ", saf_topic, " with treatment ", select_btrt),
-                    y = "Probability Density")
+    p + ggplot2::scale_x_continuous(labels = function(x) paste0(formatC(x, digits = 1, format = "f"), " ")) +
+      ggplot2::labs(
+        x = paste0("Log Scale of Incidence Rates of Patients with ", saf_topic, " with treatment ", select_btrt),
+        y = "Probability Density"
+      )
   }
 }
 # Plot density
@@ -157,13 +163,12 @@ decision_making_density_plot <- function(select_analysis, stat_inf_dist, ae_prop
       ggplot2::scale_x_continuous(labels = function(x) paste0(formatC(x * 100, digits = 1, format = "f"), "%")) +
       ggplot2::theme(axis.text = ggplot2::element_text(size = AXES_LABEL_SIZE)) +
       ggplot2::theme(text = ggplot2::element_text(size = AXES_LABEL_SIZE))
-  }else if(select_analysis == "Exposure-adjusted AE rate"){
-    
-    ae_prop <- ae_prop*100 #for text display they are devided by 100 in the shiny package
+  } else if (select_analysis == "Exposure-adjusted AE rate") {
+    ae_prop <- ae_prop * 100 # for text display they are devided by 100 in the shiny package
     stat_inf_dist_shade <- stat_inf_dist %>% filter(Probability >= ae_prop[1] &
-                                                      Probability <= ae_prop[2])
-    
-    
+      Probability <= ae_prop[2])
+
+
     ggplot2::ggplot(stat_inf_dist, ggplot2::aes(x = Probability, y = Value)) +
       ggplot2::geom_line(size = 1.65) +
       ggplot2::xlim(min(stat_inf_dist %>% dplyr::select(Probability)), max(stat_inf_dist %>% dplyr::select(Probability))) +
@@ -174,7 +179,6 @@ decision_making_density_plot <- function(select_analysis, stat_inf_dist, ae_prop
       ggplot2::theme(axis.text = ggplot2::element_text(size = AXES_LABEL_SIZE)) +
       ggplot2::theme(text = ggplot2::element_text(size = AXES_LABEL_SIZE))
   }
-  
 }
 
 
@@ -191,42 +195,41 @@ decision_making_density_plot <- function(select_analysis, stat_inf_dist, ae_prop
 #' @param mix mixture distribution object
 #' @export
 app_plots <- function(select_analysis, map_object, saf_topic, select_btrt, new_trial_analysis, stat_inf_dist, mix) {
-  
   grDevices::pdf(file)
-  
+
   if (select_analysis == "Incidence proportion") {
     p <- plot(map_object$forest_model + bayesplot::legend_move("right"))
     print(p + ggplot2::ylab(paste0("Proportion of Patients with ", saf_topic)))
   }
   print(ggplot2::ggplot(new_trial_analysis, ggplot2::aes(x = Probability, y = Value, color = Density, linetype = Density)) +
-          ggplot2::geom_line(size = 1.65) +
-          ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density", color = "Density", linetype = "Density") +
-          ggplot2::scale_linetype_manual(values = c("dotted", "dashed", "solid")) +
-          ggplot2::theme_minimal())
-  
+    ggplot2::geom_line(size = 1.65) +
+    ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density", color = "Density", linetype = "Density") +
+    ggplot2::scale_linetype_manual(values = c("dotted", "dashed", "solid")) +
+    ggplot2::theme_minimal())
+
   print(ggplot2::ggplot(stat_inf_dist, ggplot2::aes(x = Probability, y = Value)) +
-          ggplot2::geom_line(size = 1.65) +
-          ggplot2::xlim(0, 1) +
-          ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
-          ggplot2::geom_area(mapping = ggplot2::aes(x = ifelse(Probability >= RBesT::qmix(mix, 0.10, lower.tail = TRUE), Probability, 0)), fill = "salmon") +
-          ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density") +
-          ggplot2::theme_minimal())
-  
+    ggplot2::geom_line(size = 1.65) +
+    ggplot2::xlim(0, 1) +
+    ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
+    ggplot2::geom_area(mapping = ggplot2::aes(x = ifelse(Probability >= RBesT::qmix(mix, 0.10, lower.tail = TRUE), Probability, 0)), fill = "salmon") +
+    ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density") +
+    ggplot2::theme_minimal())
+
   print(ggplot2::ggplot(stat_inf_dist, ggplot2::aes(x = Probability, y = Value)) +
-          ggplot2::geom_line(size = 1.65) +
-          ggplot2::xlim(0, 1) +
-          ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
-          ggplot2::geom_area(mapping = ggplot2::aes(x = ifelse(Probability >= RBesT::qmix(mix, 0.05, lower.tail = TRUE), Probability, 0)), fill = "salmon") +
-          ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density") +
-          ggplot2::theme_minimal())
-  
+    ggplot2::geom_line(size = 1.65) +
+    ggplot2::xlim(0, 1) +
+    ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
+    ggplot2::geom_area(mapping = ggplot2::aes(x = ifelse(Probability >= RBesT::qmix(mix, 0.05, lower.tail = TRUE), Probability, 0)), fill = "salmon") +
+    ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density") +
+    ggplot2::theme_minimal())
+
   print(ggplot2::ggplot(stat_inf_dist, ggplot2::aes(x = Probability, y = Value)) +
-          ggplot2::geom_line(size = 1.65) +
-          ggplot2::xlim(0, 1) +
-          ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
-          ggplot2::geom_area(mapping = ggplot2::aes(x = ifelse(Probability >= RBesT::qmix(mix, 0.01, lower.tail = TRUE), Probability, 0)), fill = "salmon") +
-          ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density") +
-          ggplot2::theme_minimal())
-  
+    ggplot2::geom_line(size = 1.65) +
+    ggplot2::xlim(0, 1) +
+    ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
+    ggplot2::geom_area(mapping = ggplot2::aes(x = ifelse(Probability >= RBesT::qmix(mix, 0.01, lower.tail = TRUE), Probability, 0)), fill = "salmon") +
+    ggplot2::labs(x = paste0("Proportion of Patients with ", saf_topic, " with treatment ", select_btrt), y = "Probability Density") +
+    ggplot2::theme_minimal())
+
   grDevices::dev.off()
 }

@@ -26,7 +26,7 @@ ae_summary_table <-
     # Number of comparisons
     n_group <- length(cb_list_ctrl)
 
-    #setting up overall variables
+    # setting up overall variables
     tau <- tau_adjust(
       select_analysis = "Incidence proportion",
       hist_borrow = "Large"
@@ -35,21 +35,23 @@ ae_summary_table <-
     # Weight for robustification
     robust_weight <- 0.2
 
-    if(is.null(seed)){
+    if (is.null(seed)) {
       seed <- as.numeric(Sys.time())
     }
 
     # Credible Interval boundaries
-    lb <-  0.025
-    ub <-  0.975
+    lb <- 0.025
+    ub <- 0.975
 
     # For later sampling of risk ratio and risk difference
-    sample_size = 10000
+    sample_size <- 10000
 
     # Warning texts for missing data
-    warn_txt <- data.frame(Issue=character(), Topic=character(),
-                           Analysis=character(),Message=character(),
-                           Group=character(), stringsAsFactors=FALSE)
+    warn_txt <- data.frame(
+      Issue = character(), Topic = character(),
+      Analysis = character(), Message = character(),
+      Group = character(), stringsAsFactors = FALSE
+    )
 
     # Initiating the arrays for the download tables ---------------------------
 
@@ -105,7 +107,6 @@ ae_summary_table <-
     ID_ctr_list <- list(grp1 = NULL, grp2 = NULL, grp3 = NULL, grp4 = NULL)
     ID_trt_list <- list(grp1 = NULL, grp2 = NULL, grp3 = NULL, grp4 = NULL)
     for (group in 1:n_group) {
-
       # for the log
       print(paste0("Comparison ", group, " started at ", Sys.time()))
 
@@ -114,13 +115,14 @@ ae_summary_table <-
       ctr_arm <- input_data %>% dplyr::filter(ARM == cb_list_ctrl[[group]])
       ID_ctr_list[[group]] <- unique(ctr_arm$STUDYID)
 
-# Proportions Prep -----------------------------------------------------------
+      # Proportions Prep -----------------------------------------------------------
 
       for (topic in saf_topic) {
-
         # for the log
-        print(paste0("Variable analysis ", topic,
-                     " in comparison ", group, " started at ", Sys.time()))
+        print(paste0(
+          "Variable analysis ", topic,
+          " in comparison ", group, " started at ", Sys.time()
+        ))
 
         trt_trials <- data_table_prep(
           input_data = input_data,
@@ -143,42 +145,50 @@ ae_summary_table <-
         trt_current_trial <- trt_trials %>% dplyr::filter(HIST == 0)
         ctr_current_trial <- ctr_trials %>% dplyr::filter(HIST == 0)
 
-        data_check_bin <- data_available(hist_trt = hist_trt_trials,
-                                                      hist_ctr = hist_ctr_trials,
-                                                      trt_current = trt_current_trial,
-                                                      ctr_current = ctr_current_trial)
+        data_check_bin <- data_available(
+          hist_trt = hist_trt_trials,
+          hist_ctr = hist_ctr_trials,
+          trt_current = trt_current_trial,
+          ctr_current = ctr_current_trial
+        )
         dc_bin <- sum(data_check_bin)
 
-        warn_txt <- add_row(df = warn_txt, analysis = "Incidence proportion",
-                            data_check = data_check_bin, group = group, topic = topic)
+        warn_txt <- add_row(
+          df = warn_txt, analysis = "Incidence proportion",
+          data_check = data_check_bin, group = group, topic = topic
+        )
 
         # If there is no prop information, there won't be rate info, jump to the next topic
-        if(dc_bin == 0) {
+        if (dc_bin == 0) {
           next
         }
 
-# Naive estimation --------------------------------------------------------
+        # Naive estimation --------------------------------------------------------
 
         array_inci <- inci_naiv(
           data = trt_trials, array_inci = array_inci, arm = "Arm A",
-          topic = topic, group = group)
+          topic = topic, group = group
+        )
 
         array_inci <- inci_naiv(
           data = ctr_trials, array_inci = array_inci, arm = "Arm B",
-          topic = topic, group = group)
+          topic = topic, group = group
+        )
 
         ### Binomial
         # weakly informative prior Be(1,1)
         weak_inf_bin <- RBesT::mixbeta(c(1, 1, 1))
         robust_mean_bin <- 0.5
 
-# Arm A Binomial ----------------------------------------------------------
+        # Arm A Binomial ----------------------------------------------------------
 
         # for the log
-        print(paste0("ARM A: Binomial analysis for ", topic,
-                     " in comparison ", group, " started at ", Sys.time()))
+        print(paste0(
+          "ARM A: Binomial analysis for ", topic,
+          " in comparison ", group, " started at ", Sys.time()
+        ))
 
-        if(data_check_bin["hist_trt"] == TRUE) {
+        if (data_check_bin["hist_trt"] == TRUE) {
           trt_map_prior <- map_prior_func(
             input_data      = hist_trt_trials,
             select_analysis = "Incidence proportion",
@@ -192,13 +202,13 @@ ae_summary_table <-
           trt_approx <- weak_inf_bin
         }
 
-        if(data_check_bin["hist_trt"] == TRUE){
+        if (data_check_bin["hist_trt"] == TRUE) {
           trt_rob_prior <- RBesT::robustify(trt_approx, weight = robust_weight, mean = robust_mean_bin)
-        }else{
+        } else {
           trt_rob_prior <- weak_inf_bin
         }
 
-        if(data_check_bin["trt_current"] == TRUE){
+        if (data_check_bin["trt_current"] == TRUE) {
           trt_new_n <- sum(trt_current_trial$N)
           trt_new_r <- sum(trt_current_trial$N_WITH_AE)
 
@@ -210,19 +220,22 @@ ae_summary_table <-
               new_v2 = trt_new_r,
               seed = seed
             )
-        }else{
+        } else {
           trt_post <- trt_rob_prior
         }
 
         array_inci <- array_rmix(
           rmix_obj = trt_post, array = array_inci, arm = "Arm A",
-          topic = topic, group = group, lb = lb, ub = ub)
+          topic = topic, group = group, lb = lb, ub = ub
+        )
 
-# Arm B Proportions -------------------------------------------------------
+        # Arm B Proportions -------------------------------------------------------
 
         # for the log
-        print(paste0("ARM B: Binomial analysis for ", topic,
-                     " in comparison ", group, " started at ", Sys.time()))
+        print(paste0(
+          "ARM B: Binomial analysis for ", topic,
+          " in comparison ", group, " started at ", Sys.time()
+        ))
 
         if (data_check_bin["hist_ctr"] == TRUE) {
           ctr_map_prior <- map_prior_func(
@@ -234,18 +247,18 @@ ae_summary_table <-
           )
           ctr_approx <- parametric_approx("Incidence proportion", ctr_map_prior)
         } else {
-          ctr_approx    <- weak_inf_bin
+          ctr_approx <- weak_inf_bin
         }
 
 
-        if(data_check_bin["hist_trt"] == TRUE){
+        if (data_check_bin["hist_trt"] == TRUE) {
           ctr_rob_prior <- RBesT::robustify(ctr_approx, weight = robust_weight, mean = robust_mean_bin)
-        }else{
+        } else {
           ctr_rob_prior <- weak_inf_bin
         }
 
 
-        if(data_check_bin["ctr_current"] == TRUE){
+        if (data_check_bin["ctr_current"] == TRUE) {
           ctr_new_n <- sum(ctr_current_trial$N)
           ctr_new_r <- sum(ctr_current_trial$N_WITH_AE)
 
@@ -257,13 +270,14 @@ ae_summary_table <-
               new_v2 = ctr_new_r,
               seed = seed
             )
-        }else{
+        } else {
           ctr_post <- ctr_rob_prior
         }
 
         array_inci <- array_rmix(
           rmix_obj = ctr_post, array = array_inci, arm = "Arm B",
-          topic = topic, group = group, lb = lb, ub = ub)
+          topic = topic, group = group, lb = lb, ub = ub
+        )
 
 
         # proportion posterior samples ---------------------------------------------
@@ -275,15 +289,19 @@ ae_summary_table <-
         pr_diffe_samp <- trt_pr_post_samp - ctr_pr_post_samp
         pr_ratio_samp <- trt_pr_post_samp / ctr_pr_post_samp
 
-        array_inci_comp <- array_comp(ana = "inci",
+        array_inci_comp <- array_comp(
+          ana = "inci",
           array_comp = array_inci_comp, comp = "Risk Diff", crilb = lb, criub = ub,
-          pr_sample = pr_diffe_samp, array_ana = array_inci)
+          pr_sample = pr_diffe_samp, array_ana = array_inci
+        )
 
-        array_inci_comp <- array_comp(ana = "inci",
+        array_inci_comp <- array_comp(
+          ana = "inci",
           array_comp = array_inci_comp, comp = "Risk Ratio", crilb = lb, criub = ub,
-          pr_sample = pr_ratio_samp, array_ana = array_inci)
+          pr_sample = pr_ratio_samp, array_ana = array_inci
+        )
 
-# Exposure adjusted event rates prep -------------------------------------------
+        # Exposure adjusted event rates prep -------------------------------------------
 
         trt_trials <- data_table_prep(
           input_data = input_data,
@@ -311,155 +329,168 @@ ae_summary_table <-
         trt_current_trial <- trt_trials %>% dplyr::filter(HIST == 0)
         ctr_current_trial <- ctr_trials %>% dplyr::filter(HIST == 0)
 
-        data_check_rate <- data_available(hist_trt = hist_trt_trials,
-                                                      hist_ctr = hist_ctr_trials,
-                                                      trt_current = trt_current_trial,
-                                                      ctr_current = ctr_current_trial)
+        data_check_rate <- data_available(
+          hist_trt = hist_trt_trials,
+          hist_ctr = hist_ctr_trials,
+          trt_current = trt_current_trial,
+          ctr_current = ctr_current_trial
+        )
         dc_rate <- sum(data_check_rate)
 
-        warn_txt <- add_row(df = warn_txt, analysis = "Exposure-adjusted AE rate",
-                            data_check = data_check_rate, group = group, topic = topic)
+        warn_txt <- add_row(
+          df = warn_txt, analysis = "Exposure-adjusted AE rate",
+          data_check = data_check_rate, group = group, topic = topic
+        )
 
         # If there is no rate information, there won't be rate info, jump to the next topic
-        if(dc_rate == 0) {
+        if (dc_rate == 0) {
           array_er[topic, , , group] <- "No info available"
           next
         }
 
 
-# Naive estimation --------------------------------------------------------
+        # Naive estimation --------------------------------------------------------
 
         array_er[topic, "naive", "Arm A", group] <- sum(trt_trials$N_WITH_AE) / sum(trt_trials$TOT_EXP)
         array_er[topic, "naive", "Arm B", group] <- sum(ctr_trials$N_WITH_AE) / sum(ctr_trials$TOT_EXP)
 
         # For a reasonable posterior historical information should be available,
         # as well as new data.
-         trt_post_check <- nrow(trt_current_trial) > 0 && nrow(hist_trt_trials) > 0
+        trt_post_check <- nrow(trt_current_trial) > 0 && nrow(hist_trt_trials) > 0
 
 
-# Rates Arm A -------------------------------------------------------------
+        # Rates Arm A -------------------------------------------------------------
 
-         # for the log
-         print(paste0("ARM A: Rate analysis for ", topic,
-                      " in comparison ", group, " started at ", Sys.time()))
+        # for the log
+        print(paste0(
+          "ARM A: Rate analysis for ", topic,
+          " in comparison ", group, " started at ", Sys.time()
+        ))
 
-         if(data_check_rate["hist_trt"] == TRUE) {
-           er_trt_prior <- map_prior_func(
-             input_data = hist_trt_trials,
-             select_analysis = "Exposure-adjusted AE rate",
-             tau_dist = "HalfNormal",
-             adj_tau = tau,
-             seed = seed
-           )
-           er_trt_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_trt_prior)
-         } else {
-           # If there is no historical information
-           er_trt_mean <- log(array_er[topic, "naive", "Arm A", group])
-           er_trt_prior_fit <- RBesT::mixnorm(inf1=c(1/3, er_trt_mean, 1),
-                                              inf2=c(1/3, er_trt_mean , 1),
-                                              inf3=c(1/3, er_trt_mean , 1), sigma=1)
-         }
+        if (data_check_rate["hist_trt"] == TRUE) {
+          er_trt_prior <- map_prior_func(
+            input_data = hist_trt_trials,
+            select_analysis = "Exposure-adjusted AE rate",
+            tau_dist = "HalfNormal",
+            adj_tau = tau,
+            seed = seed
+          )
+          er_trt_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_trt_prior)
+        } else {
+          # If there is no historical information
+          er_trt_mean <- log(array_er[topic, "naive", "Arm A", group])
+          er_trt_prior_fit <- RBesT::mixnorm(
+            inf1 = c(1 / 3, er_trt_mean, 1),
+            inf2 = c(1 / 3, er_trt_mean, 1),
+            inf3 = c(1 / 3, er_trt_mean, 1), sigma = 1
+          )
+        }
 
-         if(data_check_rate["hist_trt"] == TRUE){
-           robust_mean_er <- summary(er_trt_prior_fit)["mean"]
-           trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = robust_weight, mean = robust_mean_er, sigma = 1)
-         }else{
-           trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = er_trt_mean, mean = robust_mean_er, sigma = 1)
-         }
-
-
-         if(data_check_rate["trt_current"] == TRUE){
-
-           trt_new_nwae <- sum(trt_current_trial$N_WITH_AE)
-           trt_new_texp <- sum(trt_current_trial$TOT_EXP)
-
-           trt_post <-
-             posterior_dist(
-               select_analysis = "Exposure-adjusted AE rate",
-               robust_map_prior = trt_rob_prior,
-               new_v1 = trt_new_nwae,
-               new_v2 = trt_new_texp,
-               seed = seed
-             )
-
-         }else{
-           trt_post <- trt_rob_prior
-         }
-
-         array_er <- array_rmix(
-           rmix_obj = trt_post, array = array_er, arm = "Arm A",
-           topic = topic, group = group, lb = lb, ub = ub)
+        if (data_check_rate["hist_trt"] == TRUE) {
+          robust_mean_er <- summary(er_trt_prior_fit)["mean"]
+          trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = robust_weight, mean = robust_mean_er, sigma = 1)
+        } else {
+          trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = er_trt_mean, mean = robust_mean_er, sigma = 1)
+        }
 
 
-# Rates Arm B -------------------------------------------------------------
+        if (data_check_rate["trt_current"] == TRUE) {
+          trt_new_nwae <- sum(trt_current_trial$N_WITH_AE)
+          trt_new_texp <- sum(trt_current_trial$TOT_EXP)
 
-         # for the log
-         print(paste0("ARM B: Rate analysis for ", topic,
-                      " in comparison ", group, " started at ", Sys.time()))
+          trt_post <-
+            posterior_dist(
+              select_analysis = "Exposure-adjusted AE rate",
+              robust_map_prior = trt_rob_prior,
+              new_v1 = trt_new_nwae,
+              new_v2 = trt_new_texp,
+              seed = seed
+            )
+        } else {
+          trt_post <- trt_rob_prior
+        }
 
-         if(data_check_rate["hist_ctr"] == TRUE) {
-           er_ctr_prior <- map_prior_func(
-             input_data = hist_ctr_trials,
-             select_analysis = "Exposure-adjusted AE rate",
-             tau_dist = "HalfNormal",
-             adj_tau = tau,
-             seed = seed
-           )
-           er_ctr_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_ctr_prior)
-         } else {
-           # If there is no historical information
-           er_ctr_mean <- log(array_er[topic, "naive", "Arm B", group])
-           er_ctr_prior_fit <- RBesT::mixnorm(inf1=c(1/3, er_ctr_mean, 1),
-                                              inf2=c(1/3, er_ctr_mean , 1),
-                                              inf3=c(1/3, er_ctr_mean , 1), sigma=1)
-         }
-
-         if(data_check_rate["hist_ctr"] == TRUE){
-           robust_mean_er <- summary(er_ctr_prior_fit)["mean"]
-           ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = robust_weight, mean = robust_mean_er, sigma = 1)
-         }else{
-           ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = er_ctr_mean, mean = robust_mean_er, sigma = 1)
-         }
-
-         if(data_check_rate["ctr_current"] == TRUE){
-
-           ctr_new_nwae <- sum(ctr_current_trial$N_WITH_AE)
-           ctr_new_texp <- sum(ctr_current_trial$TOT_EXP)
-
-           ctr_post <-
-             posterior_dist(
-               select_analysis = "Exposure-adjusted AE rate",
-               robust_map_prior = ctr_rob_prior,
-               new_v1 = ctr_new_nwae,
-               new_v2 = ctr_new_texp,
-               seed = seed
-             )
-
-         }else{
-           ctr_post <- ctr_rob_prior
-         }
-
-         array_er <- array_rmix(
-           rmix_obj = ctr_post, array = array_er, arm = "Arm B",
-           topic = topic, group = group, lb = lb, ub = ub)
+        array_er <- array_rmix(
+          rmix_obj = trt_post, array = array_er, arm = "Arm A",
+          topic = topic, group = group, lb = lb, ub = ub
+        )
 
 
-# rates posterior samples ---------------------------------------------------------
+        # Rates Arm B -------------------------------------------------------------
 
-         set.seed(seed)
-         trt_pr_post_samp <- RBesT::rmix(trt_post, sample_size)
-         ctr_pr_post_samp <- RBesT::rmix(ctr_post, sample_size)
+        # for the log
+        print(paste0(
+          "ARM B: Rate analysis for ", topic,
+          " in comparison ", group, " started at ", Sys.time()
+        ))
 
-         pr_diffe_samp <- trt_pr_post_samp - ctr_pr_post_samp
-         pr_ratio_samp <- trt_pr_post_samp / ctr_pr_post_samp
+        if (data_check_rate["hist_ctr"] == TRUE) {
+          er_ctr_prior <- map_prior_func(
+            input_data = hist_ctr_trials,
+            select_analysis = "Exposure-adjusted AE rate",
+            tau_dist = "HalfNormal",
+            adj_tau = tau,
+            seed = seed
+          )
+          er_ctr_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_ctr_prior)
+        } else {
+          # If there is no historical information
+          er_ctr_mean <- log(array_er[topic, "naive", "Arm B", group])
+          er_ctr_prior_fit <- RBesT::mixnorm(
+            inf1 = c(1 / 3, er_ctr_mean, 1),
+            inf2 = c(1 / 3, er_ctr_mean, 1),
+            inf3 = c(1 / 3, er_ctr_mean, 1), sigma = 1
+          )
+        }
 
-         array_er_comp <- array_comp(ana = "rate",
-           array_comp = array_er_comp, comp = "Risk Diff", crilb = lb, criub = ub,
-           pr_sample = pr_diffe_samp, array_ana = array_er)
-         array_er_comp <- array_comp(ana = "rate",
-           array_comp = array_er_comp, comp = "Risk Ratio", crilb = lb, criub = ub,
-           pr_sample = pr_ratio_samp, array_ana = array_er)
+        if (data_check_rate["hist_ctr"] == TRUE) {
+          robust_mean_er <- summary(er_ctr_prior_fit)["mean"]
+          ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = robust_weight, mean = robust_mean_er, sigma = 1)
+        } else {
+          ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = er_ctr_mean, mean = robust_mean_er, sigma = 1)
+        }
 
+        if (data_check_rate["ctr_current"] == TRUE) {
+          ctr_new_nwae <- sum(ctr_current_trial$N_WITH_AE)
+          ctr_new_texp <- sum(ctr_current_trial$TOT_EXP)
+
+          ctr_post <-
+            posterior_dist(
+              select_analysis = "Exposure-adjusted AE rate",
+              robust_map_prior = ctr_rob_prior,
+              new_v1 = ctr_new_nwae,
+              new_v2 = ctr_new_texp,
+              seed = seed
+            )
+        } else {
+          ctr_post <- ctr_rob_prior
+        }
+
+        array_er <- array_rmix(
+          rmix_obj = ctr_post, array = array_er, arm = "Arm B",
+          topic = topic, group = group, lb = lb, ub = ub
+        )
+
+
+        # rates posterior samples ---------------------------------------------------------
+
+        set.seed(seed)
+        trt_pr_post_samp <- RBesT::rmix(trt_post, sample_size)
+        ctr_pr_post_samp <- RBesT::rmix(ctr_post, sample_size)
+
+        pr_diffe_samp <- trt_pr_post_samp - ctr_pr_post_samp
+        pr_ratio_samp <- trt_pr_post_samp / ctr_pr_post_samp
+
+        array_er_comp <- array_comp(
+          ana = "rate",
+          array_comp = array_er_comp, comp = "Risk Diff", crilb = lb, criub = ub,
+          pr_sample = pr_diffe_samp, array_ana = array_er
+        )
+        array_er_comp <- array_comp(
+          ana = "rate",
+          array_comp = array_er_comp, comp = "Risk Ratio", crilb = lb, criub = ub,
+          pr_sample = pr_ratio_samp, array_ana = array_er
+        )
       }
     }
 
@@ -471,4 +502,3 @@ ae_summary_table <-
       warn_txt
     ))
   }
-

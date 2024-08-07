@@ -1,6 +1,5 @@
 test_that("forest plot work as expected in proportions", {
-
-# props -------------------------------------------------------------------
+  # props -------------------------------------------------------------------
 
 
   # forest plot
@@ -65,7 +64,7 @@ test_that("decision making plots work as expected in proportions", {
   )
 
 
-# rates -------------------------------------------------------------------
+  # rates -------------------------------------------------------------------
 
   expect_true(
     compare_file_binary(

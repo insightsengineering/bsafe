@@ -33,5 +33,5 @@ summary_stats_robust_map_prior_display(
 \item{seed}{a seed to reproduce the results}
 }
 \description{
-Display summary stats of robust MAP prior and MAP prior in the Robust MAp tab
+Display summary stats of robust MAP prior and MAP prior in the Robust MAP tab
 }

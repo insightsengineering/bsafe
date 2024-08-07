@@ -14,7 +14,7 @@
 #' @param p_exch probability of exchangeable component (use 1-robust_weight)
 #' @param nex_mean Mean for Nex part (use robust_mean)
 #' @param nex_sd  Standard Deviation for Nex part
-#' @param seed   for reproduceability
+#' @param seed for reproducibility
 #'
 #' @return posterior mixture distribution for incidence proportion analysis and
 #' @export
@@ -28,13 +28,11 @@ posterior_dist <- function(select_analysis,
                            nex_sd = NULL,
                            adj_tau = NULL,
                            seed = NULL) {
-
   if (select_analysis == "Incidence proportion") {
     RBesT::postmix(robust_map_prior, n = new_v1, r = new_v2)
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    RBesT::postmix(robust_map_prior, m = log(new_v1/new_v2), se = sqrt(1/new_v1))
+    RBesT::postmix(robust_map_prior, m = log(new_v1 / new_v2), se = sqrt(1 / new_v1))
   }
-
 }
 #' @title Robustify Mixture Priors
 #'
@@ -46,7 +44,7 @@ posterior_dist <- function(select_analysis,
 #' @param robust_mean mean of the non-informative component
 #' @param input_data read in data
 #' @param adj_tau in between heterogeneity
-#' @param seed seed for reprduceability
+#' @param seed seed for reproducibility
 #' @param testing faster mcmc for testing
 #'
 #' @return new mixture distribution with an extra non-informative component
@@ -94,15 +92,14 @@ parametric_approx <- function(select_analysis, map_prior) {
 #' @title Meta-Analytic-Predictive Analysis for Generalized Linear Models
 #'
 #' @description MAP prior calculation based on the selected analysis.
-#' RBesT is used for the incidence proportion analysis. Alexander Stemke's code
-#' is used for the exposure-adjusted analysis.
+#' RBesT is used for the incidence proportion analysis.
 #' MAP prior should be computed using only historical data
 #'
 #' @param input_data dataframe from data_table_prep()
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #' @param tau_dist assumed distribution of tau
 #' @param adj_tau numeric value from tau_adjust
-#' @param seed a seed as input for reproducability
+#' @param seed a seed as input for reproducibility
 #' @param testing for testing purposes faster MCMC
 #'
 #' @return an S3 object (list) of type gMAP for the incidence proportion analysis
@@ -115,28 +112,26 @@ map_prior_func <-
            adj_tau,
            seed = NULL,
            testing = FALSE) {
-
     input_data <- input_data %>% dplyr::filter(HIST == 1)
 
-    if(testing == FALSE){
+    if (testing == FALSE) {
       # for exact method look stan/jags up, but if no rounding etc n_mcmc = (n_iter-n_warm)*n_chain/n_thin
-      n_iter   <- 6000
-      n_burn   <- 2000
+      n_iter <- 6000
+      n_burn <- 2000
       n_chains <- 4
-      n_thin   <- 4
-    }else{
-      n_iter   <- 400
-      n_burn   <- 100
+      n_thin <- 4
+    } else {
+      n_iter <- 400
+      n_burn <- 100
       n_chains <- 2
-      n_thin   <- 2
+      n_thin <- 2
     }
 
-    if(is.null(seed)){
+    if (is.null(seed)) {
       seed <- as.numeric(Sys.time())
     }
 
     if (select_analysis == "Incidence proportion") {
-
       set.seed(seed)
       RBesT::gMAP(
         cbind(N_WITH_AE, N - N_WITH_AE) ~ 1 | STUDYID,
@@ -153,15 +148,16 @@ map_prior_func <-
     } else if (select_analysis == "Exposure-adjusted AE rate") {
       set.seed(seed)
       RBesT::gMAP(N_WITH_AE ~ 1 + offset(log(TOT_EXP)) | STUDYID,
-                data = input_data,
-                tau.dist = tau_dist,
-                tau.prior = adj_tau,
-                beta.prior = 1,
-                iter = getOption("RBesT.MC.iter", n_iter),
-                warmup = getOption("RBesT.MC.warmup", n_burn),
-                thin = getOption("RBesT.MC.thin", n_thin),
-                chains = getOption("RBesT.MC.chains", n_chains),
-                family = "poisson")
+        data = input_data,
+        tau.dist = tau_dist,
+        tau.prior = adj_tau,
+        beta.prior = 1,
+        iter = getOption("RBesT.MC.iter", n_iter),
+        warmup = getOption("RBesT.MC.warmup", n_burn),
+        thin = getOption("RBesT.MC.thin", n_thin),
+        chains = getOption("RBesT.MC.chains", n_chains),
+        family = "poisson"
+      )
     }
   }
 #' @title Tau Adjustment for Amount of Historical Borrowing
