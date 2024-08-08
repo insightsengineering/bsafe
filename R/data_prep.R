@@ -24,15 +24,16 @@ ae_events_wrangler <- function(input_data, selected_trt) {
   choices_ae <- safety_topics[as.character(unlist(input_data[, "ARM"])) == selected_trt]
   return(choices_ae)
 }
-#
+
+
 #' @title Dataframe with density quantiles
 #'
 #' @description MAP Prior, Robust MAP Prior, Likelihood, or Posterior Distribution Samples in the Decision Making Tab
 #'
 #' @param select_dist Choice of which should be displayed Robust MAP/MAP/Likelihood/Post
-#' @param_approx map prior; best fitting mixture model from parametric_approx()
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #' @param new_trial_analysis Objects of the new trial analysis input
+#' @param param_approx parametric approximation
 #'
 #' @export
 sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_trial_analysis) {
@@ -128,11 +129,11 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
 #'
 #' @param current_trial_data information whether it is a historical (0) or current (1) trial
 #' @param select_dist Choice of which should be displayed Robust MAP/MAP/Likelihood/Post
-#' @param_approx map prior; best fitting mixture model from parametric_approx()
 #' @param robust_map_object map prior; mixture distribution with a non-informative component from robust_map()
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #' @param post_dist posterior mixture distribution or MCMC samples from posterior_dist()
 #' @param seed to reproduce same figures
+#' @param param_approx parametric approximation
 #'
 #' @export
 mix_distribution_all <- function(select_analysis, current_trial_data, select_dist, param_approx, robust_map_object, post_dist, seed) {
@@ -176,6 +177,7 @@ mix_distribution_all <- function(select_analysis, current_trial_data, select_dis
     }
   }
 }
+
 #' @title Dataframe preparation for plotting robust map prior, likelihood, and posterior distributions
 #'
 #' @description Creates a dataframe for plotting robust map prior, likelihood, and posterior distributions
@@ -565,6 +567,7 @@ robust_compare <- function(select_analysis,
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
 #' @param current_trial information whether it is a historical (0) or current (1) trial
 #' @param select_btrt selected background treatment
+#' @param bool_pooled Wether study data is pooled by study number
 #'
 #' @return a dataframe for the selected safety topic with the study ID,
 #' the number of patients in the selected arm, the number of patients in the arm with at

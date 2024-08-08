@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{nta_data_conflict_assassment_plot}
 \alias{nta_data_conflict_assassment_plot}
-\title{Title}
+\title{Graphic assessment of Prior Data conflict}
 \usage{
 nta_data_conflict_assassment_plot(
   new_trial_analysis,
@@ -12,6 +12,8 @@ nta_data_conflict_assassment_plot(
 )
 }
 \arguments{
+\item{new_trial_analysis}{Coordinates from the nta tab}
+
 \item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
 
 \item{select_btrt}{Selected backgroundtreatments}
@@ -19,5 +21,5 @@ nta_data_conflict_assassment_plot(
 \item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 }
 \description{
-Title
+Prior data conflict assessment - compare prior, likelihood, and posterior in the NTA Tab
 }

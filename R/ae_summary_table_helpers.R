@@ -7,10 +7,8 @@
 #' @param trt_current current treatment data
 #' @param ctr_current current control data
 #'
-#' @return
+#' @return A vector to inform where information is available
 #' @export
-#'
-#' @examples
 data_available <- function(hist_trt, hist_ctr, trt_current, ctr_current) {
   data_check <- c(
     hist_trt = nrow(hist_trt) > 0,
@@ -32,11 +30,10 @@ data_available <- function(hist_trt, hist_ctr, trt_current, ctr_current) {
 #' @param data_check Output from data_available()
 #' @param topic Safety topics
 #' @param group Comparison number
+#' @param analysis Type of analysis
 #'
-#' @return
+#' @return Another row for a dataframe returning warning texts about missing information and its consequence.
 #' @export
-#'
-#' @examples
 add_row <- function(df, data_check, topic, group, analysis) {
   dc <- sum(data_check)
 
@@ -98,10 +95,8 @@ add_row <- function(df, data_check, topic, group, analysis) {
 #' @param topic Safety Topic
 #' @param group Comparison number
 #'
-#' @return
+#' @return Returns an array with naive incidence rates
 #' @export
-#'
-#' @examples
 inci_naiv <- function(data, array_inci, arm, topic, group) {
   array_inci[topic, "r", arm, group] <- sum(data$N_WITH_AE)
   array_inci[topic, "n", arm, group] <- sum(data$N)
@@ -123,10 +118,7 @@ inci_naiv <- function(data, array_inci, arm, topic, group) {
 #' @param lb Lower bound for credible interval
 #' @param ub Upper bound for credible interval
 #'
-#' @return
 #' @export
-#'
-#' @examples
 array_rmix <- function(rmix_obj, array, arm, topic, group, lb = lb, ub = ub) {
   ana <- rmix_desc(rmix_obj = rmix_obj, crilb = lb, criub = ub)
 
@@ -145,18 +137,15 @@ array_rmix <- function(rmix_obj, array, arm, topic, group, lb = lb, ub = ub) {
 #'
 #' @param array_comp The array setup for comparisons
 #' @param comp "Risk Diff" or "Risk Ratio"
-#' @param sample_size sample size
 #' @param topic Variable to be analyzed
 #' @param group The current comparison group
 #' @param pr_sample posterior sample for difference or ratio
 #' @param crilb Cri lower bound
 #' @param criub Cri upper bound
 #' @param array_ana Setup for analyzed array
+#' @param ana Type of analysis incidence proportions or rates
 #'
-#' @return
 #' @export
-#'
-#' @examples
 array_comp <- function(ana, array_comp = NA, comp, pr_sample,
                        topic = topic, group, crilb = lb, criub = ub, array_ana = NA) {
   if (ana == "inci") {

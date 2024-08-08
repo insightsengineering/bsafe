@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{decision_making_density_plot}
 \alias{decision_making_density_plot}
-\title{Title}
+\title{Plot density}
 \usage{
 decision_making_density_plot(
   select_analysis,
@@ -21,8 +21,8 @@ decision_making_density_plot(
 
 \item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
 
-\item{select_btrt}{}
+\item{select_btrt}{selected background treatment}
 }
 \description{
-Title
+Plot density
 }

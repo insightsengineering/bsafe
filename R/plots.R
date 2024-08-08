@@ -31,13 +31,16 @@ robust_map_prior_plot <- function(rob_comp, saf_topic, select_btrt, select_analy
   }
 }
 
-# Display parametric mixture density in the MAP Prior Tab
-#' Title
+
+#' @title Parametric Mix Display
+#'
+#' @description  Display parametric mixture density in the MAP Prior Tab
 #'
 #' @param param_approx map prior; best fitting mixture model from parametric_approx()
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
-#' @param select_btrt
+#' @param select_btrt selected background treatment
+#'
 #' @export
 param_mix_density_display <- function(param_approx, select_analysis, saf_topic, select_btrt) {
   # MAP prior
@@ -89,13 +92,17 @@ param_mix_density_display <- function(param_approx, select_analysis, saf_topic, 
     p + ggplot2::labs(x = "Log Scale of Incidence Rates", y = "Probability Density")
   }
 }
-# Display Forestplot in the MAP Prior Tab
-#' Title
+
+
+#' @title Forest plot display
 #'
-#' @param map_object
+#' @description  Display Forestplot in the MAP Prior Tab
+#'
+#' @param map_object The gMAP element from RBesT
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
-#' @param select_btrt
+#' @param select_btrt Selected background treatment
+#'
 #' @export
 forest_plot_display <- function(map_object, select_analysis, saf_topic, select_btrt) {
   if (is.null(map_object)) {
@@ -113,13 +120,17 @@ forest_plot_display <- function(map_object, select_analysis, saf_topic, select_b
       ggplot2::theme(text = ggplot2::element_text(size = AXES_LABEL_SIZE))
   }
 }
-# Prior data conflict assessment - compare prior, likelihood, and posterior in the NTA Tab
-#' Title
+
+
+#' @title Graphic assessment of Prior Data conflict
 #'
-#' @param new_trial_analysis
+#' @description  Prior data conflict assessment - compare prior, likelihood, and posterior in the NTA Tab
+#'
+#' @param new_trial_analysis Coordinates from the nta tab
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
 #' @param select_btrt Selected backgroundtreatments
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
+#'
 #' @export
 nta_data_conflict_assassment_plot <- function(new_trial_analysis, saf_topic, select_btrt, select_analysis) {
   # Plot densities
@@ -141,14 +152,16 @@ nta_data_conflict_assassment_plot <- function(new_trial_analysis, saf_topic, sel
       )
   }
 }
-# Plot density
-#' Title
+
+#' @title Plot density
+#'
+#' @description  Plot density
 #'
 #' @param stat_inf_dist Data frame with statistical information of the distribution
 #' @param ae_prop Vector of quantiles
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
-#' @param select_btrt
+#' @param select_btrt selected background treatment
 #'
 #' @export
 decision_making_density_plot <- function(select_analysis, stat_inf_dist, ae_prop, saf_topic, select_btrt) {

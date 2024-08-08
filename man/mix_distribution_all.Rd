@@ -21,13 +21,13 @@ mix_distribution_all(
 
 \item{select_dist}{Choice of which should be displayed Robust MAP/MAP/Likelihood/Post}
 
+\item{param_approx}{parametric approximation}
+
 \item{robust_map_object}{map prior; mixture distribution with a non-informative component from robust_map()}
 
 \item{post_dist}{posterior mixture distribution or MCMC samples from posterior_dist()}
 
 \item{seed}{to reproduce same figures}
-
-\item{_approx}{map prior; best fitting mixture model from parametric_approx()}
 }
 \description{
 A function that produces samples which display the different distributions

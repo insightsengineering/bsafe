@@ -69,8 +69,8 @@ robust_map <-
 #' @title Automatic Fitting of Mixtures of Conjugate Distributions to a Sample
 #'
 #' @description Fitting a series of mixtures of conjugate distributions to a sample
-#' using Expectation-Maximization. First, a Nc[1] component mixture is fitted, then a
-#' Nc[2] component mixture, and so on. The mixture providing the best AIC value is selected.
+#' using Expectation-Maximization. First, a Nc 1 component mixture is fitted, then a
+#' Nc 2 component mixture, and so on. The mixture providing the best AIC value is selected.
 #'
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #' @param map_prior an S3 object (list) of type gMAP for the incidence proportion analysis

@@ -17,6 +17,8 @@ array_comp(
 )
 }
 \arguments{
+\item{ana}{Type of analysis incidence proportions or rates}
+
 \item{array_comp}{The array setup for comparisons}
 
 \item{comp}{"Risk Diff" or "Risk Ratio"}
@@ -32,8 +34,6 @@ array_comp(
 \item{criub}{Cri upper bound}
 
 \item{array_ana}{Setup for analyzed array}
-
-\item{sample_size}{sample size}
 }
 \description{
 Assigning values from a sample to array_inci_comp

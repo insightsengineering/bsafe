@@ -11,8 +11,6 @@
 #'
 #' @return A data frame including descriptive statistics
 #' @export
-#'
-#' @examples
 mcmc_desc <- function(mcmc_obj = NA, crilb = 0.025, criub = 0.975,
                       seed = NA, trans = FALSE) {
   if (is.na(seed)) {
@@ -52,7 +50,6 @@ mcmc_desc <- function(mcmc_obj = NA, crilb = 0.025, criub = 0.975,
 #' @return A data frame including descriptive statistics
 #' @export
 #'
-#' @examples
 rmix_desc <- function(rmix_obj = NA, crilb = 0.025, criub = 0.975, deci = 4) {
   ana_obj <- summary(rmix_obj,
     quantile.type = 7, digits = deci, na.rm = TRUE,
@@ -81,8 +78,6 @@ rmix_desc <- function(rmix_obj = NA, crilb = 0.025, criub = 0.975, deci = 4) {
 #'
 #' @return Text for display
 #' @export
-#'
-#' @examples
 text_prop <- function(stats_mat_prop = NA) {
   text_mat_prop <- round(stats_mat_prop * 100, digits = 2)
   text_mat_prop[] <- lapply(
@@ -123,7 +118,6 @@ cri_char <- function(df = NA) {
 #' @return A vector containing alpha and beta for the beta distribution
 #' @export
 #'
-#' @examples
 check_minmax <- function(r, n) {
   # RBesT cannot handle a ratio of 0 or 1, therefor:
   if (r == 0) {

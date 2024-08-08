@@ -14,6 +14,11 @@ add_row(df, data_check, topic, group, analysis)
 \item{topic}{Safety topics}
 
 \item{group}{Comparison number}
+
+\item{analysis}{Type of analysis}
+}
+\value{
+Another row for a dataframe returning warning texts about missing information and its consequence.
 }
 \description{
 Adds another row, if data is missing in a comparison

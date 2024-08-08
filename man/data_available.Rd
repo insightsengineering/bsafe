@@ -15,6 +15,9 @@ data_available(hist_trt, hist_ctr, trt_current, ctr_current)
 
 \item{ctr_current}{current control data}
 }
+\value{
+A vector to inform where information is available
+}
 \description{
 Gives as output 4 T/F values whether input data is available, ix stands for index
 }

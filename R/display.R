@@ -2,8 +2,9 @@
 #'
 #' @description Display parametric approximation mixture density function in the MAP Prior Tab
 #'
-#' @param map prior; best fitting mixture model from parametric_approx()
+#' @param param_approx parametric approximation
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
+#'
 #' @export
 map_prior_function_display <- function(param_approx, select_analysis) {
   mixture_mat <- round(data.frame(param_approx[, 1:ncol(param_approx)]), 2)

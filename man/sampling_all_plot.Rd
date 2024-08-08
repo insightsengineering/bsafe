@@ -16,9 +16,9 @@ sampling_all_plot(
 
 \item{select_dist}{Choice of which should be displayed Robust MAP/MAP/Likelihood/Post}
 
-\item{new_trial_analysis}{Objects of the new trial analysis input}
+\item{param_approx}{parametric approximation}
 
-\item{_approx}{map prior; best fitting mixture model from parametric_approx()}
+\item{new_trial_analysis}{Objects of the new trial analysis input}
 }
 \description{
 MAP Prior, Robust MAP Prior, Likelihood, or Posterior Distribution Samples in the Decision Making Tab

@@ -7,9 +7,9 @@
 map_prior_function_display(param_approx, select_analysis)
 }
 \arguments{
-\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+\item{param_approx}{parametric approximation}
 
-\item{map}{prior; best fitting mixture model from parametric_approx()}
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 }
 \description{
 Display parametric approximation mixture density function in the MAP Prior Tab

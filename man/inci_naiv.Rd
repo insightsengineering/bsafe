@@ -17,6 +17,9 @@ inci_naiv(data, array_inci, arm, topic, group)
 
 \item{group}{Comparison number}
 }
+\value{
+Returns an array with naive incidence rates
+}
 \description{
 Gives the naive estimation outputs for the whole data set
 }

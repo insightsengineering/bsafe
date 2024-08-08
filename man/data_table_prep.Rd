@@ -22,6 +22,8 @@ data_table_prep(
 
 \item{select_btrt}{selected background treatment}
 
+\item{bool_pooled}{Wether study data is pooled by study number}
+
 \item{current_trial}{information whether it is a historical (0) or current (1) trial}
 }
 \value{
