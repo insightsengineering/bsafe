@@ -1,21 +1,27 @@
 ---
-title: "B-Safe Testing and Validation"
-author: "Alexander Stemke, Lars Andersen, James Turay"
+title: |
+    | B-Safe Testing and Validation v. 0.0.3
+    | for B-Safe v. 0.0.5-03
+author: | 
+    | Alexander Stemke (1), Lars Andersen (1), James Turay (1), Louise Whitehead (1,2) 
+    | reviewed by Oliver Sailer (1) and Dunfu Yang (1)
+    | (1) Boehringer Ingelheim Pharma GmbH & Co. KG
+    | (2) Biostatistics Research Group, Newcastle University, UK
 date: "`r Sys.Date()`"
-output: 
-  pdf_document:
-   latex_engine: lualatex
-   fig_caption: true
-   number_sections: true
+output:
+  bookdown::pdf_document2:
+  latex_engine: lualatex
+fig_caption: true
+number_sections: true
 toc: yes
 bibliography : citations.bib
 csl : institute-of-mathematical-statistics.csl
 ---
 
- \newpage
- \listoftables
- \newpage
- 
+  \newpage
+\listoftables
+\newpage
+
 # **Background**
 The B-Safe r-shiny application is an interactive statistical software used to analyse several safety endpoints using the Bayesian (robust) Meta-Analytic Predictive (MAP) method. This approach was based on the works of @neuenschwander_summarizing_2010.
 
@@ -43,61 +49,69 @@ table <- cbind(
   (Version <- c("", "", "1.7.5.1", "1.7.2", "2.25", "0.7-1", "2.1.1", "1.8.1", "2.3.1", "3.2.1"))
 )
 
-knitr::kable(table, col.names = c("Program", "Version"), caption = "Softwares and Packages", booktabs = TRUE, longtable = TRUE, )
+knitr::kable(table, col.names = c("Program", "Version"), caption = "Softwares and Packages", booktabs = TRUE, longtable = TRUE)
 ```
  The testing strategy is based on Input Testing and Structural Testing.
  Input Testing is performed to investigate whether erroneous input by the user is handled as intended by the application.
- Structural Testing deals with the confirmation of the accuracy of the calculations done by the application. Different scenarios to cater for common cases will be simulated for the structural testing to be done.
- 
+ Structural Testing deals with the confirmation of the accuracy of the calculations done by the application. Different scenarios to cater for common cases will be simulated for the structural testing to be performed.
+
 # **Input Testing**
- This section describes the verification procedure of the functionality of the B-Safe application. 
- 
+ This section describes the verification procedure of the functionality of the B-Safe application.
+
  First, testing requirements and strategies are outlined. Then the handling of the testing failures and the processes for performing the testing are characterized.
- 
-The table below gives a brief overview about the parameters/variables the user is able to set as used within the document. 
+
+The table below gives a brief overview about the parameters/variables the user is able to set as used within the document.
 
 
 
 ```{r table2, echo = FALSE}
-table <- cbind(
+table2 <- cbind(
   (Variable <- c(
-    "STUDYID", "HIST", "ARM", "SAF_TOPIC", "N", "N_WITH_AE", "TOT_EXP", "Dose", "Freq",
-    "Length", "Treat", "MAP Prior", "CrI", "CrILB", "CrIUB", "ESS"
+    "STUDYID", "HIST", "ARM", "SAF_TOPIC", "N", "N_WITH_AE", " ", "TOT_EXP", " ",
+    " ", "Dose", "Freq",
+    "Length", "Treat", "MAP Prior", "CrI", "CrILB", "CrIUB", "ESS", "ENE"
   )),
   (Description <- c(
-    "Study number or name", "
-                                 0 for current trial and 1 for historical trial",
+    "Study number or name",
+    "0 for current trial and 1 for historical trial",
     "Defines the treatment arm of the analysis",
-    "Safety topics of interest", "Total number of patients in the respective study",
-    "Total number of patients for the respective safety topic who expereienced at least one adverse event",
-    "Total exposure time for the respective safety topic: sum of patients treatment exposure period until occurence of first event. If no event occurs, use complete observation time",
+    "Safety topics of interest",
+    "Total number of patients in the respective study",
+    "Total number of patients for the respective safety topic in that study",
+    "who expereienced at least one adverse event",
+    "Total exposure time for the respective safety topic in that study:",
+    "sum of patients treatment exposure period until occurence of first event.",
+    "If no event occurs, use complete observation time",
     "Amount/weight of the drug the patient took",
     "Number of times in a day the medicine/drug was taken by the patient",
-    "Number of days the patient was on the treatment", "The specific treatment the patient was on",
-    "Meta-Analytic Predictive Prior", "Credible Interval", "Credible Interval Lower Boundary",
-    "Credible Interval Upper Boundary", "Estimated Sample Size"
+    "Number of days the patient was on the treatment",
+    "The specific treatment the patient was on",
+    "Meta-Analytic Predictive Prior",
+    "Credible Interval", "Credible Interval Lower Boundary",
+    "Credible Interval Upper Boundary", "Expected Sample Size",
+    "Expected Number of Events"
   ))
 )
 
-knitr::kable(table,
+knitr::kable(table2, "pipe",
   col.names = c("Variable", "Description"),
-  caption = "Definitions of Variable", booktabs = TRUE, longtable = TRUE
+  caption = "Definitions of Variable", booktabs = TRUE
 )
 ```
 
- 
+
 In case the expected specifications are not met, the test is failed.
- 
-The conditions above are all implementations that needs to be tested before the actual testing of the full functionality of the Be-Safe application can be executed. Various test cases are grouped together and performed in a single action. For example, all test cases that contain checking the applications handling of input values/characters.
+
+The conditions above are all implementations that needs to be tested before the actual testing of the full functionality of the B-Safe application can be executed. Various test cases are grouped together and performed in a single action. For example, all test cases that contain checking the applications handling of input values/characters.
 
 All those requirements are testest via the *checkmate* R package, which allows for both warnings as well as errors to guide the user along the error and help fixing the problem. In addition the required variables are within the same approach not only tested for specific required typing, but also the *checkmate* R package allows to test certain boundaries of those variables as well as restricting inputs to certain formats, e.g., csv.
- 
+
 ## **Binary Endpoint**
   1. Uploaded file is a .csv file
-  
+
 Assumptions of the variables:
 
- 
+
 ```{r table4, echo = FALSE}
 table <- cbind(
   (Input <- c(
@@ -124,29 +138,29 @@ knitr::kable(table,
 )
 ```
 
- 
+
 Robust MAP Prior:
 
   2. Weakly-informative Prior weight is numeric between $0.01$ and $0.99$
-  
+
 New Trial Analysis:
 
   3. Number of Patients in selected ARM is an integer > $0$ but $\le$ 200
   4. Number of Patients with with AE is an integer $\ge$ $0$ but $\le$ number of patients in selected ARM
-    
-Decision Making: 
+
+Decision Making:
 
   5. Likelihood: Percentage of Patients with AE is an integer from $0$ to $100$
   6. MAP Prior: Percentage of Patients with AE is an integer from $0$ to $100$
   7. Robust MAP Prior: Percentage of Patients with AE is an integer from $0$ to $100$
   8. Posterior: Percentage of Patients with AE is an integer from $0$ to $100$
-  
+
 Download Results:
 
   9. Number of comparisons: integer from $1$ to $5$
 
-Test cases were performed as shown in the the table below. Different formats of the various input are violated in different test cases. For any false input, the user shall be informed about the error and the error will be displayed and. The test is passed if no error message is displayed. 
- 
+Test cases were performed as shown in the the table below. Different formats of the various input are violated in different test cases. For any false input, the user shall be informed about the error and the error will be displayed and. The test is passed if no error message is displayed.
+
 ```{r table5, echo =FALSE}
 table <- cbind(
   ("Test Case" <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")),
@@ -157,23 +171,23 @@ table <- cbind(
     "A file without SAF_Topic uploaded", "A file without Dose column uploaded",
     "A file without FREQ column uploaded", "A file without Length coumn uploaded",
     "A file with number of Patients less than zero",
-    "A file with number of patients with AE greater than number of patients"
+    "A file with more events patients"
   )),
   ("Expected Response" <- c("Error", "Error", "Error", "Error", "Error", "Error", "Error", "No Error", "No Error", "No Error", "Error", "Error")),
   "Observed response`" <- c("Error", "Error", "Error", "Error", "Error", "Error", "Error", "No Error", "No Error", "No Error", "Error", "Error")
 )
 
-knitr::kable(table, col.names = c("Test Case", "Description of violation", "Expected Response", "Observed Response"), booktabs = TRUE, longtable = TRUE)
+knitr::kable(table, col.names = c("Test Case", "Description of violation", "Expected Response", "Observed Response"), booktabs = TRUE)
 ```
 Some inputs including weakly-informative prior weight for the calculation of Robust MAP Prior, number of patients in selected arm and number of patients with AE in the new trial analysis, percentages for making statistical inferences about MAP Prior, Robust MAP Prior, Likelihood and Posterior are all imputed with a slider. Different values along the range on the sliders will be tested in the various scenarios.
- 
- 
+
+
 ## **Time To Event Endpoint**
   1. Uploaded file is a .csv file
-  
+
 Assumptions of the variables:
 
- 
+
 ```{r table6, echo = FALSE}
 table <- cbind(
   (Input <- c(
@@ -200,24 +214,24 @@ knitr::kable(table,
 )
 ```
 
- 
+
 Robust MAP Prior:
 
   2. Weakly-informative Prior weight is numeric between $0.01$ and $0.99$
   3. Weakly-informative Prior mean on the exp scale is numeric between $0.01$ and $3$
-  
+
 New Trial Analysis:
 
   4. Number of first occurrence of the event is numeric between $1$ and $200$
   5. Cumulative time to occurrence of the first events is numeric between $1$ and $1000$
-    
-Decision Making: 
 
-  6. Likelihood: area of log(hazard) for patients with AE is numeric from $0.51$ to $2.453$
-  7. MAP Prior: area of log(hazard) for patients with AE is numeric from from $0.51$ to $2.453$
-  8. Robust MAP Prior: area of log(hazard) for patients with AE is numeric from from $0.51$ to $2.453$
-  9. Posterior: area of log(hazard) for patients with AE is numeric from from $0.51$ to $2.453$
-  
+Decision Making:
+
+  6. Likelihood: area of log(hazard) for patients with AE is numeric within a 99% quantile.
+  7. MAP Prior: area of log(hazard) for patients with AE is numeric within a 99% quantile.
+  8. Robust MAP Prior: area of log(hazard) for patients with AE is within a 99% quantile.
+  9. Posterior: area of log(hazard) for patients with AE is numeric within a 99% quantile.
+
 Download Results:
 
   10. Number of comparisons: integer from $1$ to $5$
@@ -233,7 +247,7 @@ table <- cbind(
     "A file without TOT_Exp uploaded", "A file without SAF_Topic uploaded",
     "A file without Dose column uploaded", "A file without FREQ column uploaded",
     "A file without Length coumn uploaded", "A file with number of patients less than zero",
-    "A file with number of patients with AE greater than number of patients",
+    "A file with more events than patients",
     "A file with a negative TOT_Exp uploaded"
   )),
   ("Expected Response" <- c(
@@ -252,321 +266,39 @@ knitr::kable(table,
 )
 ```
 Some inputs including weakly-informative prior weight for the calculation of Robust MAP Prior, number of patients in selected arm and number of patients with AE in the new trial analysis, percentages for making statistical inferences about MAP Prior, Robust MAP Prior, Likelihood and Posterior are all imputed with a slider. Different values along the range on the sliders will be tested in the various scenarios.
- 
- 
+
+
 # **Testing Framework in testthat**
 To assure the testing of the thresholds for all the below defined scenarios as well as ensuring that the created plots do match saved up reference images for the same scenario, input parameters as well as seed.
 Therefore the *testthat* R package is being used to ensure a framework, that is commonly used and stable.
 
-Hereby, the testing setup replicates partially the workflow of the application with loading the respective data, parameters as well as thresholds. Then all functions that B-SAFE is running are run in the needed order to ensure the same workflow. Afterwards the outputs of the different plots as well as tables that are being displayed within the application are compared against the reference images, where the binaries of the images are compared and expected to be equal. Regarding the tables, there thresholds, both for the lower as well as the upper limits are being used to create threshold tables which then the corresponding tables/values of the replicated application workflow are compared against. The framework then either passes the comparison as the values are equal within a certain tolerance e.g., 1e-03, or the framework will throw an error where this assumption is not met.
-
- 
-# **Scenario Testing - Description of Scenarios**
- Scenario testing was used to verify the computations the B-Safe Shiny application performs.
- 
- For this purpose, various conditions were set to capture a wide array of possibilities to set different parameter values. Each simulated scenario is a representation of a probable occurrence in a clinical trial. There are scenarios to cover heterogeneous and homogeneous data, very large to small borrowing of historical information, high and less robustification of the MAP prior. These scenarios are tested for both the Adverse Event Incidence Proportion and the Exposure-Adjusted Adverse Event Rate.
- 
-## **Adverse Event Incidence Proportion - Binary Endpoint**
-### **Scenario 1 - Best case Scenario**
-Scenario 1 describes a binary endpoint for a best case scenario where there was no censoring in the current trial, all events were observed during the trial, no noise in the data and homogeneous historical data. Input parameters are displayed in the table below:
-```{r table ip1, echo =FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen1", "Half-Normal", "Small", "ELIR", "small", "0.05", "194", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, longtable = TRUE)
-```
+Hereby, the testing setup replicates partially the workflow of the application with loading the respective data, parameters as well as thresholds. Then all functions that B-SAFE is running are run in the needed order to ensure the same workflow. Afterwards the outputs of the different plots as well as tables that are being displayed within the application are compared against the reference images, where the binaries of the images are compared and expected to be equal. Regarding the tables, there thresholds, both for the lower as well as the upper limits are being used to create threshold tables which then the corresponding tables/values of the replicated application workflow are compared against. The framework then either 
+passes the comparison as the values are equal within a certain tolerance, or the framework will throw an error where this assumption is not met.
 
 
-### **Scenario 2 - Strong Prior Data Conflict**
-Scenario 2 describes a test case scenario for a binary endpoint with a strong prior data conflict between the historical and current trials. The characteristics of this scenario includes no censoring in the current trial, no noise, all events being observed, homogeneous historical data and hevay prior data conflict. Input parameters are displayed in the table below:
-```{r table ip2, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen2", "Half-Normal", "moderate", "ELIR", "moderate", "0.8", "199", "200"))
-)
+# **Scenario Testing**
+Scenario testing was used to verify the computations the B-Safe Shiny application performs.
 
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, longtable = TRUE)
-```
+For this purpose, various conditions were set to capture a wide array of possibilities to set different parameter values. Each simulated scenario is a representation of a probable occurrence in a clinical trial. There are scenarios to cover heterogeneous and homogeneous data, very large to small borrowing of historical information, high and less robustification of the MAP prior. These scenarios are tested for both the Adverse Event Incidence Proportion and the Exposure-Adjusted Adverse Event Rate.
 
-### **Scenario 3 - Realistic Scenario**
-Scenario 3 describes a binary endpoint for a realistic situation with a dropout rate of 5%, some with a 2% tau, events observed at a 90% power, homogenous historical data and with no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ip3, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen3", "Half-Normal", "substantial", "ELIR", "moderate", "0.25", "31", "200"))
-)
+Following each scenario is briefly described. The simulated data sets are displayed in section \@ref(simulation-and-testing-of-scenarios).
+For further information (e.g. the level of heterogeneity) please refer to the statistical analysis plan of B-Safe.
 
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-    
-    
-### **Scenario 4 - Worst Case scenario**
-Scenario 4 describes a binary endpoint for a worst case scenario with huge censoring during the trial, huge noise in the data, low number of events observed at 90% power, heterogeneous historical data and huge data conflict. Input parameters are displayed in the table below:
+## **Simulation and Testing of Scenarios**
+In this chapter, the scenarios that are described in section \@ref(binary-endpoint-results) for incidence proportions and in section \@ref(time-to-event-endpoint-results) for exposure adjusted incidence rates respectively, will be simulated and run through the B-SAFE app with the results being cross-checked for errors.
 
-```{r table ip4, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen4", "Half-Normal", "very large", "ELIR", "moderate", "0.99", "27", "50"))
-)
+The testing procedure is as follows. The fixed historical data for each scenario as shown in their respective sections above, were run through \texttt{RBesT} 1000 times to generate a set of 1000 different MAP / robust MAP priors. From this set of MAP / robust MAP priors, upper and lower thresholds for the following summary statistics were calculated by taking the 1% and 99% quantile of the summary statistics that were observed over the 1000 simulation replicates. Summary statistics for the MAP / robust MAP priors were: mean, SD, median, 95% Credible Intervals, ESS.
 
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
+Each of the 1000 MAP / robust MAP priors for each scenario was subsequently updated with the corresponding (fixed) new trial data for that scenario, where the new data is as shown in the tables. Summary statistics for the likelihoods and the posterior distributions were again calculated, and upper and lower thresholds determined as above.
 
-### **Scenario 5 - Heterogeneous Data(Medium)**
-Scenario 5 describes a binary endpoint for a medium heterogenous scenario between the historical data, moderate noise at a 5% tau, moderate censoring at 5%, all events observed at a 90%power and no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ip5, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen5", "Half-Normal", "large", "ELIR", "moderate", "0.2", "25", "200"))
-)
+Tests are then run using \texttt{testthat}. A test will pass if the summary statistics (for the MAP prior, robust MAP prior, likelihood, and posterior) lie within the upper and lower thresholds with a respective tolerance of, and fail otherwise.
+The tolerances were included  to adjust for the variability in  results. Due to the use of \texttt{stan} within \texttt{RBesT} on each machine a different MCMC is the result of the function calls. For good scenarios (e.g. 1,3) this threshold could be very small (e.g. $1 \cdot 10^{-4}$). For worse scenarios (e.g. 4,5), the variability is higher. We decided to use one tolerance for the binary (e.g. $3 \cdot 10^{-2}$) and another for the time to event endpoint (e.g. $8 \cdot 10^{-2}$). We used the therefor the highest rounded difference we encountered during a couple of test runs. 
 
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
+For the ESS/ENE we decided for a 10% tolerance. However, as seen by the observed minimum and maximum values of the 1.000 runs, in some cases a absurdly high ESS/ENE is reported. This is a known \texttt{RBesT} issue, and we have contacted the authors. For certain mixture components with especially low weights, the integration function malfunction. Therefor, if the ESS/ENE exceeds the number of patients/events, the MCMC sample will be drawn again, up to three times. After a third attempt the tesst will fail.
 
-### **Scenario 6 - High Dropout**
-Scenario 6 describes a binary endpoint scenario with huge dropout within the current trial, some noise at a 2% tau, some event being observed at a 90% power, homoenous data and no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ip6, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen6", "Half-Normal", "moderate", "ELIR", "moderate", "0.14", "31", "200"))
-)
+Moreover, for certain scenarios (2, 4, 12), this issue leads to the general exclusion to test these scenarios. In general those are scenarios in which borrowing historical information is strongly discouraged to perform.
 
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 7- High Heterogeneous**
-Scenario 7 describes a binary endpoint scenario with high heterogeneity between historical data, moderate censoring in current trial, moderate noise at a 2% tau, all events observed at a 90% power, with no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ip7, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen7", "Half-Normal", "very large", "ELIR", "very large", "0.2", "35", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 8 - Bad Scenario**
-Scenario 8 describes a binary endpoint for a bad scenario with huge censoring in the current trial, huge noise, little events observed in the current trial, heterogenous historical data and no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ip8, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen8", "Half-Normal", "large", "ELIR", "large", "0.2", "25", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 9 - Good Scenario**
-Scenario 9 describes a binary endpoint for a good scenario with low censoring in the current trial,small noise, majority of the events being observed and homogeneous historical data. Input parameters are displayed in the table below:
-```{r table ip9, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen9", "Half-Normal", "moderate", "ELIR", "large", "0.05", "175", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 10 - Favoured Control**
-Scenario 10 describes a binary endpoint for a favored control scenario with no censoring in the current trial, no noise, all events being observed, homogeneous historical data, heavy prior data conflict and the hazard ratio in favor of the control group. Input parameters are displayed in the table below:
-```{r table ip10, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen10", "Half-Normal", "small", "ELIR", "small", "0.05", "175", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 11 - Continued study duration with Realistic Setting**
-Scenario 11 describes a binary endpoint for a realistic situation where the study continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a droup out rate of 5%, noise at a 5% tau, homogenous historical data and no planned prior data conflict planned. Input parameters are displayed in the table below:
-```{r table ip11, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen11", "Half-Normal", "small", "ELIR", "small", "0.05", "170", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 12 - Continued study duration with Worst Setting**
-Scenario 12 describes a binary endpoint for a scenario with a worst case scenario (scenario 4) that continued till the end of the proposed study duration. The scenario characteristics includes huge censoring, huge noise, little events observed, heterogeneous historical and huge prior data conflict. Input parameters are displayed in the table below:
-```{r table ip12, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen12", "Half-Normal", "large", "ELIR", "large", "0.5", "30", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-
-### **Scenario 13 - High Dropout & too few people observed**
-Scenario 13 describes a binary endpoint for a situation with high dropout rate 0f 30%, small noise at a 2% tau, homogeneous historical data, few events being observed and no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ip13, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Analysis", "Safety Topic", "Between Trial Heterogeneity Prior Distribution", "Heterogeneity", "Effective Sample Size method", "tau/sigma", "Robust weight", "Number of patients with AE in Arm", "Number of patients in Arm")),
-  (Input <- c("Incidence Proportion", "Scen13", "Half-Normal", "small", "ELIR", "small", "0.05", "15", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-## **Exposure-Adjusted Adverse Event Rate - Time To Event Endpoint**
-
-### **Scenario 1 - Best case scenario**
-Scenario 1 depicts a best case scenario for a time to event endpoint where there was no censoring, all events were observed during the trial, no noise in the data and the data was homogeneous amongst all historical trial. Input parameters are displayed in the table below:
-```{r table ea1, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen1", "Half-normal", "small", "ELIR", "0.05", "0.1", "ELIR", "small", "0.01", "0.1", "100", "1000"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 2 - Strong Prior Data Conflict**
-Scenario 2 describes a time to event test case scenario with a strong prior data conflict between the historical trials and the current trial. The characteristic of this scenario includes no censoring, no noise, all events being observed, homogeneous historical data and heavy prior data conflict. Input parameters are displayed in the table below:
-```{r table ea2, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen2", "Half-normal", "moderate", "ELIR", "0.8", "0.3854", "ELIR", "small", "0.8", "0.39", "200", "518"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 3 - Realistic Scenario**
-Scenario 3 describes a time to event endpoint for a realistic situation with a dropout rate of 5%, some noise with a tau of 2%, a 90% power, homogeneous historical data with no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ea3, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen3", "Half-normal", "substantial", "ELIR", "0.25", "0.0944", "ELIR", "small", "0.25", "0.09", "31", "328"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 4 - Worst case Scenario**
-Scenario 4 describes a time to event endpoint for a worst case scenario with huge censoring during the trial, huge noise, low number of events observed at a 90% power, heterogeneous historical data, and huge data conflict. Input parameters are displayed in the table below:
-```{r table ea4, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen4", "Half-normal", "Very large", "ELIR", "0.99", "0.0944", "ELIR", "small", "0.25", "0.05", "31", "328"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 5 - Heterogeneous Data(Medium)**
-Scenario 5 describes a time to event endpoint situation with medium heterogeneity between the historical data, moderate censoring at 5%, moderate noise with tau at 5%, all events observed with a power of 90% and no panned prior data conflict. Input parameters are displayed in the table below:
-```{r table ea5, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen5", "Half-normal", "large", "ELIR", "0.2", "0.0865", "ELIR", "small", "0.2", "0.09", "25", "289"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 6 - High Dropout**
-Scenario 6 describes a time to event endpoint situation with huge dropout within the current trial, some noise at a tau of 2”, some events observed at a power of 90%, homogeneous data and no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ea6, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen6", "Half-normal", "moderate", "ELIR", "0.14", "0.1204", "ELIR", "small", "0.2", "0.12", "31", "257"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 7 - High heterogeneity**
-Scenario 7 describes a time to event endpoint situation with high heterogeneity between historical data, moderate censoring in current trial, moderate noise at tau of 2%, all events observed at a 90% power with no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ea7, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen7", "Half-normal", "Very large", "ELIR", "0.2", "0.186", "ELIR", "Very large", "0.2", "0.19", "35", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 8 - Bad Scenario**
-Scenario 8 describes a time to event endpoint for a bad scenario with huge censoring in the current trial, huge noise, little events observed in the current trial, heterogeneous historical data and no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ea8, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen8", "Half-normal", "large", "ELIR", "0.2", "0.0741", "ELIR", "large", "0.2", "0.07", "25", "338"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 9 - Good Scenario**
-Scenario 9 describes a time to event endpoint for a good scenario with low censoring in the current trial, small noise, majority of the events being observed and homogeneous historical data. Input parameters are displayed in the table below:
-```{r table ea9, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen9", "Half-normal", "small", "ELIR", "0.05", "0.0926", "ELIR", "small", "0.05", "0.09", "92", "1000"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 10 - Favoured Control**
-Scenario 10 describes a time to event endpoint for a favored control scenario with no censoring in the current trial, no noise, all events being observed, homogeneous historical data, heavy prior data conflict and the hazard ratio in favor of the control group. Input parameters are displayed in the table below:
-```{r table ea10, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen10", "Half-normal", "small", "ELIR", "0.6", "0.2472", "ELIR", "small", "0.6", "1.2", "150", "200"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 11 - Continued study duration with Realistic Setting**
-Scenario 11 describes a time to event endpoint for a realistic situation where the study was continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a dropout rate of 5%, noise at a tau of 25, homogeneous historical data and no planned prior data conflict. Input parameters are displayed in the table below:
-```{r table ea11, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen11", "Half-normal", "small", "ELIR", "0.05", "0.0952", "ELIR", "small", "0.05", "0.1", "95", "1000"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 12 - Continued study duration with Worst setting**
-Scenario 12 describes a binary endpoint for a scenario with a worst setting that continued till the end of the proposed study duration. The scenario characteristics includes huge censoring, huge noise, little events observed, heterogeneous historical and huge data conflict. Input parameters are displayed in the table below:
-```{r table ea12, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen12", "Half-normal", "large", "ELIR", "0.2", "0.2", "ELIR", "large", "0.5", "0.3", "200", "1000"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-### **Scenario 13 - High Dropout & too few people observed**
-Scenario 13 describes a time to event endpoint for a situation with high dropout rate of 30%, small noise of tau at 2%, homogeneous historical, no planned prior data conflict and few events being observed. Input parameters are displayed in the table below:
-```{r table ea13, echo=FALSE}
-table <- cbind(
-  (Parameter <- c("Safety Anlysis", "safety Topic", "Between trial heterogeneity distribution", "Heterogeneity", "ESS", "Robust weight", "Exp mean", "ESS method", "tau/sigma", "Weakly-informative Prior weight", "Weakly-informative Prior mean on the exp scale", "Number of first occurrence of the event", "Cummulative time to occurence of the first events")),
-  (Input <- c("Exposure-adjusted AE rate", "Scen13", "Half-normal", "small", "ELIR", "0.05", "1.2", "ELIR", "small", "0.05", "1.2", "71", "144"))
-)
-
-knitr::kable(table, col.names = c("Parameter", "Input"), booktabs = TRUE, ngtable = TRUE)
-```
-
-
-# **Simulation and Testing of Scenarios**
-In this chapter, the scenarios that were described in Chapter 3 will be simulated and run through the B-SAFE app with the results being cross-checked for errors.
-
-First we simulate data accordingly to  our specification. Then using the R-Script \texttt{ScriptThresholds.R} the lower and upper boundaries to be used for testing will be generated. This script does not use the functions of  this package  and calculates the values by using functions from \texttt{RBesT} and \texttt{base}. For this, each dataset of each scenario will go through 1.000 different analysis with different seeds. In consequence we take the minimum and the maximum of each parameter of interest.
-
-It might happen, that during the testing we come across values greater or smaller those thresholds. The treshholds are displayed afterwards. During testing we include therefore a tolerance of 1 \cdot $10^{-4}$.
-
+## **Code der Daten Simulation**
 The scripts generates synthetic data that mimics real-world studies.
 
 ```{r}
@@ -898,17 +630,16 @@ SimTestData <- function(
     "STUDYID", "HIST", "ARM", "N",
     "SAF_TOPIC", "N_WITH_AE", "TOT_EXP"
   )]
-  res_df$DOSE <- 999
-  res_df$FREQ <- 999
-  res_df$LENGTH <- 999
+
   res_df$TREAT <- SAF_TOPIC
 
   return(res_df)
 }
 ```
 
-## **Binary Endpoint** 
-### **Scenario 1 - Best Case Scenario**
+# **Binary Endpoint results**
+## **Scenario 1 - Best Case Scenario**
+In the best case scenario, almost all events are observed, a long follow up time and a large number of historical trials available.
 
 ```{r}
 # Scen1
@@ -935,31 +666,39 @@ SimTestData(
 
 The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb1, echo=FALSE}
+deci <- 4
+characteristic_labels_props <- c(
+  "Expected MAP Prior: mean",
+  "Expected MAP Prior: SD", "Expected MAP Prior: median",
+  "95% CrILB", "95% CrIUB", "ESS MAP Prior",
+  "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+  "Expected robustified MAP Prior: median",
+  "95% CrILB", "95% CrIUB", "ESS robustified MAP",
+  "Expected results for Likelihood: mean",
+  "Expected results for Likelihood: SD",
+  "Expected results for Likelihood: median",
+  "95% CrILB", "95% CrIUB", "ESS Likelihood",
+  "Expected results for Posterior: mean",
+  "Expected results for Posterior: SD",
+  "Expected results for Posterior: median",
+  "95% CrILB", "95% CrIUB", "ESS Posterior"
+)
+
+
 scenario <- 1
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -968,15 +707,15 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
 
-### **Scenario 2 - Strong Prior Data Conflict**
+## **Scenario 2 - Strong Prior Data Conflict**
 Scenario 2 describes a test case scenario for a binary endpoint with a strong prior data conflict between the historical and current trials. The characteristics of this scenario includes no censoring in the current trial, no noise, all events being observed, homogeneous historical data and heavy prior data conflict.
 ```{r}
 # Scen2
@@ -1006,29 +745,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb2, echo=FALSE}
 scenario <- 2
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1037,15 +764,15 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
 
-### **Scenario 3 - Realistic Scenario**
+## **Scenario 3 - Realistic Scenario**
 Scenario 3 describes a binary endpoint for a realistic situation with a dropout rate of 5%, some with a 2% tau, events observed at a 90% power, homogeneous historical data and with no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -1071,34 +798,22 @@ SimTestData(
 
 
 The characteristics and thresholds for the simulation is as in the table below:
-
 ```{r tabthresholdb3, echo=FALSE}
 scenario <- 3
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
+
 
 
 print("With those values our newly created MAP Prior has been updated:")
@@ -1106,14 +821,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 4 - Worst Case Scenario**
+## **Scenario 4 - Worst Case Scenario**
 Scenario 4 describes a binary endpoint for a worst case scenario with huge censoring during the trial, huge noise in the data, low number of events observed at 90% power, heterogeneous historical data and huge data conflict.
 ```{r}
 SimTestData(
@@ -1143,29 +858,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb4, echo=FALSE}
 scenario <- 4
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1174,14 +877,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 5 - Heterogeneous Data(Medium)**
+## **Scenario 5 - Heterogeneous Data(Medium)**
 Scenario 5 describes a binary endpoint for a medium heterogenous scenario between the historical data, moderate noise at a 5% tau, moderate censoring at 5%, all events observed at a 90%power and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -1209,31 +912,18 @@ SimTestData(
 The characteristics and thresholds for the simulation is as in the table below:
 
 ```{r tabthresholdb5, echo=FALSE}
-scenario <- 5
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1242,14 +932,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 6 - High Dropout**
+## **Scenario 6 - High Dropout**
 Scenario 6 describes a binary endpoint scenario with huge dropout within the current trial, some noise at a 2% tau, some event being observed at a 90% power, homogeneous data and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -1279,29 +969,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb6, echo=FALSE}
 scenario <- 6
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1310,14 +988,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 7 - High Heterogeneity**
+## **Scenario 7 - High Heterogeneity**
 Scenario 7 describes a binary endpoint scenario with high heterogeneity between historical data, moderate censoring in current trial, moderate noise at a 2% tau, all events observed at a 90% power, with no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -1347,29 +1025,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb7, echo=FALSE}
 scenario <- 7
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1378,14 +1044,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 8 - Bad Scenario**
+## **Scenario 8 - Bad Scenario**
 Scenario 8 describes a binary endpoint for a bad scenario with huge censoring in the current trial, huge noise, little events observed in the current trial, heterogeneous historical data and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -1415,30 +1081,19 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb8, echo=FALSE}
 scenario <- 8
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
+
 
 
 print("With those values our newly created MAP Prior has been updated:")
@@ -1446,15 +1101,15 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
 
-### **Scenario 9 - Good Scenario**
+## **Scenario 9 - Good Scenario**
 Scenario 9 describes a binary endpoint for a good scenario with low censoring in the current trial,small noise, majority of the events being observed and homogeneous historical data.
 ```{r}
 SimTestData(
@@ -1484,29 +1139,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb9, echo=FALSE}
 scenario <- 9
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1515,14 +1158,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 10 - Favoured Control**
+## **Scenario 10 - Favoured Control**
 Scenario 10 describes a binary endpoint for a favored control scenario with no censoring in the current trial, no noise, all events being observed, homogeneous historical data, heavy prior data conflict and the hazard ratio in favor of the control group.
 ```{r}
 SimTestData(
@@ -1552,30 +1195,19 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb10, echo=FALSE}
 scenario <- 10
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
+
 
 
 print("With those values our newly created MAP Prior has been updated:")
@@ -1583,15 +1215,15 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 11 - Continued study duration with Realistic Setting**
-Scenario 11 describes a binary endpoint for a realistic situation where the study continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a drop out rate of 5%, noise at a 5% tau, homogeneous historical data and no planned prior data conflict planned. 
+## **Scenario 11 - Continued study duration with Realistic Setting**
+Scenario 11 describes a binary endpoint for a realistic situation where the study continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a drop out rate of 5%, noise at a 5% tau, homogeneous historical data and no planned prior data conflict planned.
 ```{r}
 SimTestData(
   SimStudy_nPat = c(g1 = 200, g2 = 200),
@@ -1620,29 +1252,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb11, echo=FALSE}
 scenario <- 11
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1651,14 +1271,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 12 - Continued study duration with Worst Setting**
+## **Scenario 12 - Continued study duration with Worst Setting**
 Scenario 12 describes a binary endpoint for a scenario with a worst case scenario (scenario 4) that continued till the end of the proposed study duration. The scenario characteristics includes huge censoring, huge noise, little events observed, heterogeneous historical and huge prior data conflict.
 ```{r}
 SimTestData(
@@ -1688,29 +1308,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb12, echo=FALSE}
 scenario <- 12
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- c(
-    "Expected MAP Prior: mean",
-    "Expected MAP Prior: SD", "Expected MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected robustified MAP Prior: mean", "
-                                    Expected robustified MAP Prior: SD",
-    "Expected robustified MAP Prior: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Likelihood: mean",
-    "Expected results for Likelihood: SD",
-    "Expected results for Likelihood: median",
-    "95% CrILB", "95% CrIUB", "ESS",
-    "Expected results for Posterior: mean",
-    "Expected results for Posterior: SD",
-    "Expected results for Posterior: median",
-    "95% CrILB", "95% CrIUB", "ESS"
-  )),
+  (Characteristic <- characteristic_labels_props),
+  (Min_Threshold <- as.vector(t(th_prop_min))),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-  (Upper_Threshold <- as.vector(t(th_prop_ub)))
+  (Upper_Threshold <- as.vector(t(th_prop_ub))),
+  (Max_Threshold <- as.vector(t(th_prop_max)))
 )
 
 
@@ -1719,14 +1327,14 @@ print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 13 - High Dropout & too few people observed **
+## **Scenario 13 - High Dropout & too few people observed **
 Scenario 13 describes a binary endpoint for a situation with high dropout rate 0f 30%, small noise at a 2% tau, homogeneous historical data, few events being observed and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -1756,39 +1364,50 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb13, echo=FALSE}
 # scenario <- 13
 # thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-# th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-# th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+# th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")],deci)
+# th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")],deci)
+# th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")],deci)
+# th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")],deci)
 #
-# table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-#                                     'Expected MAP Prior: SD','Expected MAP Prior: median',
-#                                     '95% CrILB', '95% CrIUB', 'ESS',
-#                                     'Expected robustified MAP Prior: mean','
-#                                     Expected robustified MAP Prior: SD',
-#                                     'Expected robustified MAP Prior: median',
-#                                     '95% CrILB','95% CrIUB', 'ESS',
-#                                     'Expected results for Likelihood: mean',
-#                                     'Expected results for Likelihood: SD',
-#                                     'Expected results for Likelihood: median',
-#                                     '95% CrILB', '95% CrIUB', 'ESS',
-#                                     'Expected results for Posterior: mean',
-#                                     'Expected results for Posterior: SD',
-#                                     'Expected results for Posterior: median',
-#                                     '95% CrILB', '95% CrIUB','ESS')),
+# table <- cbind(
+#   (Characteristic <- c(
+#     "Expected MAP Prior: mean",
+#     "Expected MAP Prior: SD", "Expected MAP Prior: median",
+#     "95% CrILB", "95% CrIUB", "ESS",
+#     "Expected robustified MAP Prior: mean", "
+#                                     Expected robustified MAP Prior: SD",
+#     "Expected robustified MAP Prior: median",
+#     "95% CrILB", "95% CrIUB", "ESS",
+#     "Expected results for Likelihood: mean",
+#     "Expected results for Likelihood: SD",
+#     "Expected results for Likelihood: median",
+#     "95% CrILB", "95% CrIUB", "ESS",
+#     "Expected results for Posterior: mean",
+#     "Expected results for Posterior: SD",
+#     "Expected results for Posterior: median",
+#     "95% CrILB", "95% CrIUB", "ESS"
+#   )),
+#   (Min_Threshold <- as.vector(t(th_prop_min))),
 #   (Lower_Threshold <- as.vector(t(th_prop_lb))),
-#   (Upper_Threshold <- as.vector(t(th_prop_ub)))
+#   (Upper_Threshold <- as.vector(t(th_prop_ub))),
+#   (Max_Threshold <- as.vector(t(th_prop_max)))
 # )
 #
 #
 # print("With those values our newly created MAP Prior has been updated:")
 # print(thresholds_props[[scenario + 1]]$parameters)
 #
-# knitr::kable(table, col.names = c('Characteristic','Lower Threshold',
-#                                   'Upper Threshold'),
-#              booktabs = TRUE, ngtable = TRUE)
+# knitr::kable(table,
+#              col.names = c(
+#                "Characteristic", "Observed Min.", "Lower Threshold",
+#                "Upper Threshold", "Observed Max."
+#              ),
+#              booktabs = TRUE, ngtable = TRUE
+# )
 ```
 
-## **Time To Event Endpoint** 
-### **Scenario 1 - Best Case Scenario**
+# **Time To Event Endpoint results**
+## **Scenario 1 - Best Case Scenario**
 ```{r}
 # Scen1
 SimTestData(
@@ -1816,67 +1435,74 @@ SimTestData(
 The characteristics and thresholds for the simulation is as in the table below:
 
 ```{r tabthresholdrates1, echo=FALSE}
-characteristic_labels <- c(
+deci <- 4
+
+characteristic_labels_rate <- c(
   "log Expected MAP Prior: mean",
   "log Expected MAP Prior: SD",
   "log Expected MAP Prior: median",
-  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "log 95% CrILB", "log 95% CrIUB", "log ENE",
   "log Expected robustified MAP Prior: mean",
   "log Expected robustified MAP Prior: SD",
   "log Expected robustified MAP Prior: median",
-  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "log 95% CrILB", "log 95% CrIUB", "log ENE",
   "log Expected results for Likelihood: mean",
   "log Expected results for Likelihood: SD",
   "log Expected results for Likelihood: median",
-  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "log 95% CrILB", "log 95% CrIUB", "log ENE",
   "log Expected results for Posterior: mean",
   "log Expected results for Posterior: SD",
   "log Expected results for Posterior: median",
-  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "log 95% CrILB", "log 95% CrIUB", "log ENE",
   "exp Expected MAP Prior: mean",
   "exp Expected MAP Prior: SD",
   "exp Expected MAP Prior: median",
-  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS",
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ENE",
   "exp Expected robustified MAP Prior: mean",
   "exp Expected robustified MAP Prior: SD",
   "exp Expected robustified MAP Prior: median",
-  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS",
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ENE",
   "exp Expected results for Likelihood: mean",
   "exp Expected results for Likelihood: SD",
   "exp Expected results for Likelihood: median",
-  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS",
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ENE",
   "exp Expected results for Posterior: mean",
   "exp Expected results for Posterior: SD",
   "exp Expected results for Posterior: median",
-  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS"
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ENE"
 )
 
 
 scenario <- 1
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 2 - Strong Prior Data Conflict**
+## **Scenario 2 - Strong Prior Data Conflict**
 Scenario 2 describes a test case scenario for a binary endpoint with a strong prior data conflict between the historical and current trials. The characteristics of this scenario includes no censoring in the current trial, no noise, all events being observed, homogeneous historical data and heavy prior data conflict.
 ```{r}
 # Scen2
@@ -1906,29 +1532,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates2, echo=FALSE}
 scenario <- 2
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 3 - Realistic Scenario**
+## **Scenario 3 - Realistic Scenario**
 Scenario 3 describes a binary endpoint for a realistic situation with a dropout rate of 5%, some with a 2% tau, events observed at a 90% power, homogeneous historical data and with no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -1957,29 +1588,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates3, echo=FALSE}
 scenario <- 3
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 4 - Worst Case Scenario**
+## **Scenario 4 - Worst Case Scenario**
 Scenario 4 describes a binary endpoint for a worst case scenario with huge censoring during the trial, huge noise in the data, low number of events observed at 90% power, heterogeneous historical data and huge data conflict.
 ```{r}
 SimTestData(
@@ -2008,29 +1644,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates4, echo=FALSE}
 scenario <- 4
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 5 - Heterogeneous Data(Medium)**
+## **Scenario 5 - Heterogeneous Data(Medium)**
 Scenario 5 describes a binary endpoint for a medium heterogenous scenario between the historical data, moderate noise at a 5% tau, moderate censoring at 5%, all events observed at a 90%power and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -2059,29 +1700,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates5, echo=FALSE}
 scenario <- 5
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 6 - High Dropout**
+## **Scenario 6 - High Dropout**
 Scenario 6 describes a binary endpoint scenario with huge dropout within the current trial, some noise at a 2% tau, some event being observed at a 90% power, homogeneous data and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -2110,29 +1756,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates6, echo=FALSE}
 scenario <- 6
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 7 - High Heterogeneity**
+## **Scenario 7 - High Heterogeneity**
 Scenario 7 describes a binary endpoint scenario with high heterogeneity between historical data, moderate censoring in current trial, moderate noise at a 2% tau, all events observed at a 90% power, with no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -2161,29 +1812,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates7, echo=FALSE}
 scenario <- 7
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 8 - Bad Scenario**
+## **Scenario 8 - Bad Scenario**
 Scenario 8 describes a binary endpoint for a bad scenario with huge censoring in the current trial, huge noise, little events observed in the current trial, heterogeneous historical data and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -2212,29 +1868,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates8, echo=FALSE}
 scenario <- 8
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 9 - Good Scenario**
+## **Scenario 9 - Good Scenario**
 Scenario 9 describes a binary endpoint for a good scenario with low censoring in the current trial,small noise, majority of the events being observed and homogeneous historical data.
 ```{r}
 SimTestData(
@@ -2263,29 +1924,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates9, echo=FALSE}
 scenario <- 9
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 10 - Favoured Control**
+## **Scenario 10 - Favoured Control**
 Scenario 10 describes a binary endpoint for a favored control scenario with no censoring in the current trial, no noise, all events being observed, homogeneous historical data, heavy prior data conflict and the hazard ratio in favor of the control group.
 ```{r}
 SimTestData(
@@ -2314,30 +1980,35 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates10, echo=FALSE}
 scenario <- 10
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 11 - Continued study duration with Realistic Setting**
-Scenario 11 describes a binary endpoint for a realistic situation where the study continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a drop out rate of 5%, noise at a 5% tau, homogeneous historical data and no planned prior data conflict planned. 
+## **Scenario 11 - Continued study duration with Realistic Setting**
+Scenario 11 describes a binary endpoint for a realistic situation where the study continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a drop out rate of 5%, noise at a 5% tau, homogeneous historical data and no planned prior data conflict planned.
 ```{r}
 SimTestData(
   SimStudy_nPat = c(g1 = 200, g2 = 200),
@@ -2365,30 +2036,35 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates11, echo=FALSE}
 scenario <- 11
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
 
-### **Scenario 12 - Continued study duration with Worst Setting**
+## **Scenario 12 - Continued study duration with Worst Setting**
 Scenario 12 describes a binary endpoint for a scenario with a worst case scenario (scenario 4) that continued till the end of the proposed study duration. The scenario characteristics includes huge censoring, huge noise, little events observed, heterogeneous historical and huge prior data conflict.
 ```{r}
 SimTestData(
@@ -2417,29 +2093,34 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates12, echo=FALSE}
 scenario <- 12
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
+
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
-  (Characteristic <- characteristic_labels),
-  (Lower_Threshold <- as.vector(t(th_rates_lb))),
-  (Upper_Threshold <- as.vector(t(th_rates_ub)))
+  (Characteristic <- characteristic_labels_rate),
+  (Min_Threshold <- as.vector(t(th_rate_min))),
+  (Lower_Threshold <- as.vector(t(th_rate_lb))),
+  (Upper_Threshold <- as.vector(t(th_rate_ub))),
+  (Max_Threshold <- as.vector(t(th_rate_max)))
 )
 
 
 print("With those values our newly created MAP Prior has been updated:")
-print(thresholds_props[[scenario + 1]]$parameters)
+print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
   col.names = c(
-    "Characteristic", "Lower Threshold",
-    "Upper Threshold"
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
   ),
   booktabs = TRUE, ngtable = TRUE
 )
 ```
 
-### **Scenario 13 - High Dropout & too few people observed**
+## **Scenario 13 - High Dropout & too few people observed**
 Scenario 13 describes a binary endpoint for a situation with high dropout rate 0f 30%, small noise at a 2% tau, homogeneous historical data, few events being observed and no planned prior data conflict.
 ```{r}
 SimTestData(
@@ -2468,21 +2149,31 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdrates13, echo=FALSE}
 # scenario <- 13
 # thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
-# th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
-# th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 #
-# table <- cbind((Characteristic <- characteristic_labels),
-#   (Lower_Threshold <- as.vector(t(th_rates_lb))),
-#   (Upper_Threshold <- as.vector(t(th_rates_ub)))
+# th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")],deci)
+# th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")],deci)
+# th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")],deci)
+# th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")],deci)
+#
+# table <- cbind(
+#   (Characteristic <- characteristic_labels_rate),
+#   (Min_Threshold <- as.vector(t(th_rate_min))),
+#   (Lower_Threshold <- as.vector(t(th_rate_lb))),
+#   (Upper_Threshold <- as.vector(t(th_rate_ub))),
+#   (Max_Threshold <- as.vector(t(th_rate_max)))
 # )
 #
 #
 # print("With those values our newly created MAP Prior has been updated:")
-# print(thresholds_props[[scenario + 1]]$parameters)
+# print(thresholds_rates[[scenario + 1]]$parameters)
 #
-# knitr::kable(table, col.names = c('Characteristic','Lower Threshold',
-#                                   'Upper Threshold'),
-#              booktabs = TRUE, ngtable = TRUE)
+# knitr::kable(table,
+#              col.names = c(
+#                "Characteristic", "Observed Min.", "Lower Threshold",
+#                 "Upper Threshold", "Observed Max."
+#              ),
+#              booktabs = TRUE, ngtable = TRUE
+# )
 ```
 
 # **References**

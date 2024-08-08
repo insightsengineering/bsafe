@@ -1,6 +1,6 @@
 ---
 title: |
-    | Statistical Analysis Plan v. 0.1.3
+    | Statistical Analysis Plan v. 1
     | for B-Safe v. 0.0.5-03
 author: | 
     | Alexander Stemke (1), Dunfu Yang (1), Louise Whitehead (1,2) 
@@ -564,7 +564,6 @@ default_values <- data.frame(
   )
 )
 
-# Assuming df is your dataframe
 knitr::kable(default_values, "pipe", booktabs = TRUE)
 ```
 
