@@ -54,8 +54,8 @@ model_summary_display <- function(map_object, select_analysis,
       disp_mat_prop %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
       # %>%
-        # knitr::kable("html") %>%
-        # kableExtra::kable_styling("striped")
+      # knitr::kable("html") %>%
+      # kableExtra::kable_styling("striped")
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     sample_rate_log <- rstan::extract(map_object$fit)$theta_pred
@@ -86,8 +86,8 @@ model_summary_display <- function(map_object, select_analysis,
       disp_mat_rate %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
       # %>%
-        # knitr::kable("html") %>%
-        # kableExtra::kable_styling("striped")
+      # knitr::kable("html") %>%
+      # kableExtra::kable_styling("striped")
     }
   }
 }
