@@ -7,7 +7,7 @@
 robust_map_prior_mix_dens_display(robust_map_object, select_analysis)
 }
 \arguments{
-\item{robust_map_object}{map prior; mixture distribution with a non-informative component from robust_map()}
+\item{robust_map_object}{map prior; mixture distribution with a non-informative component from robust_map() # nolint}
 
 \item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 }

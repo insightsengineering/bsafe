@@ -14,12 +14,12 @@ nta_data_conflict_assassment_plot(
 \arguments{
 \item{new_trial_analysis}{Coordinates from the nta tab}
 
-\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest #nolint}
 
 \item{select_btrt}{Selected backgroundtreatments}
 
 \item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 }
 \description{
-Prior data conflict assessment - compare prior, likelihood, and posterior in the NTA Tab
+Prior data conflict assessment - compare prior, likelihood, and posterior in the NTA Tab #nolint
 }
