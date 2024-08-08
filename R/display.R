@@ -61,10 +61,13 @@ map_prior_function_display <- function(param_approx, select_analysis) {
 #'
 #' @description Display robust MAP prior mixture density function in the robust MAP Prior Tab
 #'
-#' @param robust_map_object map prior; mixture distribution with a non-informative component from robust_map() # nolint
+#' @param robust_map_object map prior; mixture distribution with a non-informative component from robust_map()
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #' @export
-robust_map_prior_mix_dens_display <- function(robust_map_object, select_analysis) { # nolint
+robust_map_prior_mix_dens_display <- function(
+    robust_map_object,
+    select_analysis
+) {
   rob_mixture_mat <- round(data.frame(robust_map_object[, seq_len(ncol(robust_map_object))]), 2)
   rob_str_vec <- vector(length = ncol(rob_mixture_mat))
 

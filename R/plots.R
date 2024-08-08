@@ -168,10 +168,10 @@ forest_plot_display <- function(
 
 #' @title Graphic assessment of Prior Data conflict
 #'
-#' @description  Prior data conflict assessment - compare prior, likelihood, and posterior in the NTA Tab #nolint
+#' @description  Prior data conflict assessment - compare prior, likelihood, and posterior in the NTA Tab
 #'
 #' @param new_trial_analysis Coordinates from the nta tab
-#' @param saf_topic Selected safety topic to analyze/the adverse event of interest #nolint
+#' @param saf_topic Selected safety topic to analyze/the adverse event of interest
 #' @param select_btrt Selected backgroundtreatments
 #' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #'
