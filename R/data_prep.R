@@ -59,12 +59,14 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
         if (j != ncol(mixture_mat)) {
           str_vec[j] <- paste0(
             mixture_mat[1, j], "*", "dbeta(x, shape1 = ", mixture_mat[2, j],
-            ", shape2 = ", mixture_mat[3, j], ")", " + ")
+            ", shape2 = ", mixture_mat[3, j], ")", " + "
+          )
         } else {
           str_vec[ncol(mixture_mat)] <- paste0(
             mixture_mat[1, ncol(mixture_mat)], "*", "dbeta(x, shape1 = ",
             mixture_mat[2, ncol(mixture_mat)], ", shape2 = ",
-            mixture_mat[3, ncol(mixture_mat)], ")")
+            mixture_mat[3, ncol(mixture_mat)], ")"
+          )
         }
       }
 
@@ -142,13 +144,12 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
 #'
 #' @export
 mix_distribution_all <- function(
-  select_analysis,
-  current_trial_data,
-  select_dist,
-  param_approx,
-  robust_map_object,
-  post_dist, seed
-) {
+    select_analysis,
+    current_trial_data,
+    select_dist,
+    param_approx,
+    robust_map_object,
+    post_dist, seed) {
   # assign overall variables
   if (select_analysis == "Incidence proportion") {
     new_n <- current_trial_data[["new_v1"]]
@@ -414,8 +415,7 @@ new_trial_compare <-
 robust_compare <- function(
     select_analysis,
     robust_map_prior,
-    param_approx
-) {
+    param_approx) {
   length_disp <- 3000
   rob_mixture_mat <-
     data.frame(robust_map_prior[, seq_len(ncol(robust_map_prior))])
