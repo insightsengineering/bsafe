@@ -66,8 +66,7 @@ map_prior_function_display <- function(param_approx, select_analysis) {
 #' @export
 robust_map_prior_mix_dens_display <- function(
     robust_map_object,
-    select_analysis
-) {
+    select_analysis) {
   rob_mixture_mat <- round(data.frame(robust_map_object[, seq_len(ncol(robust_map_object))]), 2)
   rob_str_vec <- vector(length = ncol(rob_mixture_mat))
 
