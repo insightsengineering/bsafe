@@ -12,12 +12,14 @@ input_data_display <- function(data, select_analysis, saf_topic) {
   if (select_analysis == "Incidence proportion") {
     colnames(tab) <- c(
       "STUDY ID", "Number of Patients in Arm",
-      paste0("Number of Patients with ", saf_topic, " in Arm"), "Historical")
+      paste0("Number of Patients with ", saf_topic, " in Arm"), "Historical"
+    )
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     colnames(tab) <- c(
       "STUDY ID", "Number of Patients in Arm",
       paste0("Number of Patients with ", saf_topic, " in Arm"),
-      "Total Exposure Time", "Historical")
+      "Total Exposure Time", "Historical"
+    )
   }
   tab
 }
@@ -111,8 +113,7 @@ summary_stats_robust_map_prior_display <- function(
     robust_map_object,
     rob_ess_method,
     numerical = FALSE,
-    seed
-) {
+    seed) {
   if (select_analysis == "Incidence proportion") {
     # Summary statistics for MAP prior
 
@@ -172,7 +173,8 @@ summary_stats_robust_map_prior_display <- function(
       disp_mat_rate <- cri_char(disp_mat_rate)
 
       disp_mat_rate$ESS <- c(
-        round(c(ESS_MAP, ESS_ROB), 1), "Not applicable.", "Not applicable.")
+        round(c(ESS_MAP, ESS_ROB), 1), "Not applicable.", "Not applicable."
+      )
 
       disp_mat_rate %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
@@ -202,8 +204,7 @@ summary_stat_all_display <- function(
     current_trial_data,
     post_dist,
     numerical = FALSE,
-    seed
-) {
+    seed) {
   if (is.na(seed)) {
     seed <- as.numeric(Sys.time())
   }
@@ -313,8 +314,7 @@ summary_stat_all_display <- function(
 preset_stat_table <- function(
     mix,
     saf_topic,
-    select_analysis
-) {
+    select_analysis) {
   certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE))
   certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE))
   certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE))
@@ -337,13 +337,16 @@ preset_stat_table <- function(
       c(
         paste0(
           "We are at least 90% certain that the", midfix, saf_topic,
-          " is greater than ", certainty90 / denominator, postfix),
+          " is greater than ", certainty90 / denominator, postfix
+        ),
         paste0(
           "We are at least 95% certain that the", midfix, saf_topic,
-          " is greater than ", certainty95 / denominator, postfix),
+          " is greater than ", certainty95 / denominator, postfix
+        ),
         paste0(
           "We are at least 99% certain that the", midfix, saf_topic,
-          " is greater than ", certainty99 / denominator, postfix)
+          " is greater than ", certainty99 / denominator, postfix
+        )
       ),
       nrow = 3, ncol = 1
     )
