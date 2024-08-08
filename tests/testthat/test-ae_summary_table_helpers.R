@@ -1,5 +1,4 @@
 test_that("test-ae_summary_table_helpers.R works as expected", {
-
   data <- read.csv("scenarios/Scen07.csv")
   cb_list_ctrl <- "g1"
   cb_list_trt <- "g2"
@@ -54,5 +53,4 @@ test_that("test-ae_summary_table_helpers.R works as expected", {
     topic = saf_topic
   )
   expect_no_error(warn_txt)
-
 })
