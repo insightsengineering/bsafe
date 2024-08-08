@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="plots" timestamp="2024-08-07T14:50:34Z" hostname="d75753907853" tests="16" skipped="0" failures="0" errors="0" time="0.086">
-    <testcase time="0.0129999999999999" classname="plots" name="forest_plot_work_as_expected_in_proportions"/>
-    <testcase time="0.0180000000000007" classname="plots" name="rob_map_plot_work_as_expected_in_proportions"/>
-    <testcase time="0.00999999999999979" classname="plots" name="param_mix_plot_work_as_expected_in_proportions"/>
-    <testcase time="0.00399999999999956" classname="plots" name="_unnamed_"/>
+  <testsuite name="plots" timestamp="2024-08-08T07:31:24Z" hostname="483c3664ae25" tests="16" skipped="0" failures="0" errors="0" time="0.093">
+    <testcase time="0.0139999999999993" classname="plots" name="forest_plot_work_as_expected_in_proportions"/>
+    <testcase time="0.0190000000000001" classname="plots" name="rob_map_plot_work_as_expected_in_proportions"/>
+    <testcase time="0.011000000000001" classname="plots" name="param_mix_plot_work_as_expected_in_proportions"/>
+    <testcase time="0.00499999999999901" classname="plots" name="_unnamed_"/>
     <testcase time="0.00300000000000011" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
     <testcase time="0.00300000000000011" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
-    <testcase time="0.00799999999999912" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
-    <testcase time="0.00200000000000067" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
+    <testcase time="0.0080000000000009" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
+    <testcase time="0.00300000000000011" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
     <testcase time="0.00300000000000011" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
     <testcase time="0.00399999999999956" classname="plots" name="rob_map_plot_work_as_expected_in_proportions"/>
-    <testcase time="0.00500000000000078" classname="plots" name="param_mix_plot_work_as_expected_in_proportions"/>
-    <testcase time="0.00399999999999956" classname="plots" name="_unnamed_"/>
-    <testcase time="0.00200000000000067" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
-    <testcase time="0.00200000000000067" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
+    <testcase time="0.00499999999999901" classname="plots" name="param_mix_plot_work_as_expected_in_proportions"/>
+    <testcase time="0.00400000000000134" classname="plots" name="_unnamed_"/>
+    <testcase time="0.00300000000000011" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
     <testcase time="0.00300000000000011" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
     <testcase time="0.00199999999999889" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
+    <testcase time="0.00300000000000011" classname="plots" name="decision_making_plots_work_as_expected_in_proportions"/>
   </testsuite>
-  <testsuite name="proportions" timestamp="2024-08-07T14:50:34Z" hostname="d75753907853" tests="140" skipped="1" failures="0" errors="0" time="38.004">
-    <testcase time="2.869" classname="proportions" name="proportions_work_as_expected"/>
+  <testsuite name="proportions" timestamp="2024-08-08T07:31:24Z" hostname="483c3664ae25" tests="140" skipped="1" failures="0" errors="0" time="38.185">
+    <testcase time="2.879" classname="proportions" name="proportions_work_as_expected"/>
     <testcase time="0.00500000000000078" classname="proportions" name="proportions_work_as_expected"/>
-    <testcase time="0.190999999999999" classname="proportions" name="proportions_work_as_expected"/>
-    <testcase time="0.507000000000001" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00399999999999956" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000078" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999956" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00399999999999956" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999956" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00399999999999956" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="3.294" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.195" classname="proportions" name="proportions_work_as_expected"/>
+    <testcase time="0.516999999999999" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000078" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000078" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00500000000000078" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000134" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00399999999999956" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00400000000000134" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="3.319" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00499999999999901" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
     <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
@@ -46,69 +46,45 @@
     <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="3.379" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00900000000000034" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="3.302" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="3.401" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00799999999999912" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000134" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000134" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="4.688" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="3.311" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000134" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="2.768" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000134" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="3.572" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="4.701" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000134" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000134" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999901" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="3.89700000000001" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="2.773" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
     <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
@@ -117,184 +93,176 @@
     <testcase time="0.00499999999999545" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="3.415" classname="proportions" name="proportions_work_as_expected"/>
-    <testcase time="0.0649999999999977" classname="proportions" name="proportions_work_as_expected"/>
-    <testcase time="0.044000000000004" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00599999999999312" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="3.576" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
     <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="3.919" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="3.419" classname="proportions" name="proportions_work_as_expected"/>
+    <testcase time="0.0659999999999954" classname="proportions" name="proportions_work_as_expected"/>
+    <testcase time="0.0459999999999994" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="2.658" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="2.704" classname="proportions" name="proportions_work_as_expected"/>
+    <testcase time="0.0609999999999999" classname="proportions" name="proportions_work_as_expected"/>
+    <testcase time="0.0429999999999993" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00599999999999312" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="2.647" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="2.685" classname="proportions" name="proportions_work_as_expected"/>
-    <testcase time="0.0590000000000046" classname="proportions" name="proportions_work_as_expected"/>
-    <testcase time="0.0409999999999968" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="RMAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="proportions" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="proportions" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="0.00399999999999778" classname="proportions" name="proportions_work_as_expected">
+    <testcase time="0.00300000000000011" classname="proportions" name="proportions_work_as_expected">
       <skipped message="Reason: empty test ('test-proportions.R:2:1')"/>
     </testcase>
   </testsuite>
-  <testsuite name="rates" timestamp="2024-08-07T14:51:12Z" hostname="d75753907853" tests="161" skipped="1" failures="0" errors="0" time="41.691">
-    <testcase time="4.953" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="4.186" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00400000000000489" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="3.386" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+  <testsuite name="rates" timestamp="2024-08-08T07:32:02Z" hostname="483c3664ae25" tests="161" skipped="1" failures="0" errors="0" time="41.857">
+    <testcase time="4.937" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00399999999999778" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00399999999999778" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
     <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000256" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="4.403" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="4.20500000000001" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00399999999999778" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="3.38" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00400000000000489" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000256" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000256" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00399999999999778" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="4.434" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000966" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
     <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="3.27799999999999" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
     <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00399999999999068" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="5.29599999999999" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="4.501" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="3.306" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
     <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="4.84599999999999" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00400000000000489" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="5.319" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000966" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
-    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="2.827" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.0100000000000051" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="4.523" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
@@ -302,12 +270,12 @@
     <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="3.33799999999999" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="4.86" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
@@ -315,13 +283,45 @@
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
-    <testcase time="0.00900000000000034" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
-    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000966" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="2.96600000000001" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00500000000000966" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.0109999999999957" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="3.227" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
-    <testcase time="0.00499999999999545" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
+    <testcase time="0.00499999999999545" classname="rates" name="MAP_Prior_row_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00300000000000011" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="rates" name="MAP_Prior_Row_is_identical_in_both_MAP_Prior_as_well_as_Robust_MAP_Prior_Table"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00600000000000023" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_lower_bound_thresholds"/>
+    <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00499999999999545" classname="rates" name="NTA_Table_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00500000000000966" classname="rates" name="NTA_Table_ESS_is_lower_or_equal_than_upper_bound_thresholds"/>
+    <testcase time="0.00399999999999068" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
+    <testcase time="0.00600000000000023" classname="rates" name="Robust_MAP_Prior_Row_is_identical_in_both_Robust_MAP_Prior_as_well_as_NTA_Table"/>
     <testcase time="0.00400000000000489" classname="rates" name="NA_values_are_in_the_same_positions_in_both_data_frames"/>
     <testcase time="0.00300000000000011" classname="rates" name="incidence_rates_work_as_expected">
       <skipped message="Reason: empty test ('test-rates.R:2:1')"/>
