@@ -51,21 +51,26 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
   if (select_dist == "MAP Prior") {
     # LS
     # MAP prior
-    mixture_mat <- data.frame(param_approx[, 1:ncol(param_approx)])
+    mixture_mat <- data.frame(param_approx[, seq_len(ncol(param_approx))])
     str_vec <- vector(length = ncol(mixture_mat))
 
     if (select_analysis == "Incidence proportion") {
-      for (j in 1:ncol(mixture_mat)) {
+      for (j in seq_len(ncol(mixture_mat))) {
         if (j != ncol(mixture_mat)) {
-          str_vec[j] <- paste0(mixture_mat[1, j], "*", "dbeta(x, shape1 = ", mixture_mat[2, j], ", shape2 = ", mixture_mat[3, j], ")", " + ")
+          str_vec[j] <- paste0(
+            mixture_mat[1, j], "*", "dbeta(x, shape1 = ", mixture_mat[2, j],
+            ", shape2 = ", mixture_mat[3, j], ")", " + ")
         } else {
-          str_vec[ncol(mixture_mat)] <- paste0(mixture_mat[1, ncol(mixture_mat)], "*", "dbeta(x, shape1 = ", mixture_mat[2, ncol(mixture_mat)], ", shape2 = ", mixture_mat[3, ncol(mixture_mat)], ")")
+          str_vec[ncol(mixture_mat)] <- paste0(
+            mixture_mat[1, ncol(mixture_mat)], "*", "dbeta(x, shape1 = ",
+            mixture_mat[2, ncol(mixture_mat)], ", shape2 = ",
+            mixture_mat[3, ncol(mixture_mat)], ")")
         }
       }
 
       # Prior density function
 
-      Prior <- eval(parse(text = paste(str_vec, collapse = "")))
+      Prior <- eval(parse(text = paste(str_vec, collapse = ""))) # nolint
 
       # Create dataframe for ggplot
       df <- data.frame(
@@ -74,7 +79,7 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
         Value = Prior
       )
     } else if (select_analysis == "Exposure-adjusted AE rate") {
-      for (j in 1:ncol(mixture_mat)) {
+      for (j in seq_len(ncol(mixture_mat))) {
         if (j != ncol(mixture_mat)) {
           str_vec[j] <-
             paste0(
@@ -103,7 +108,7 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
 
       # Prior density function
 
-      Prior <- eval(parse(text = paste(str_vec, collapse = "")))
+      Prior <- eval(parse(text = paste(str_vec, collapse = ""))) # nolint
 
       # Create dataframe for ggplot
       df <- data.frame(
@@ -136,7 +141,14 @@ sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_tr
 #' @param param_approx parametric approximation
 #'
 #' @export
-mix_distribution_all <- function(select_analysis, current_trial_data, select_dist, param_approx, robust_map_object, post_dist, seed) {
+mix_distribution_all <- function(
+  select_analysis,
+  current_trial_data,
+  select_dist,
+  param_approx,
+  robust_map_object,
+  post_dist, seed
+) {
   # assign overall variables
   if (select_analysis == "Incidence proportion") {
     new_n <- current_trial_data[["new_v1"]]
@@ -173,7 +185,7 @@ mix_distribution_all <- function(select_analysis, current_trial_data, select_dis
       like_sample <- rnorm(1000, mean = log(theta), sd = sqrt(1 / new_n_with_ae))
       RBesT::automixfit(like_sample, Nc = seq(3, 3))
 
-      # RBesT::mixnorm(inf = c(1, log(new_n_with_ae/new_tot_exp), sqrt(1/new_n_with_ae)))
+      # RBesT::mixnorm(inf = c(1, log(new_n_with_ae/new_tot_exp), sqrt(1/new_n_with_ae))) # nolint
     }
   }
 }
@@ -207,6 +219,7 @@ new_trial_compare <-
       new_theta <- new_v1 / new_v2
       new_unit_sd <- sqrt(1 / new_v1)
 
+      # nolint start
       # Distribution of log lambda
       # http://www.math.wm.edu/~leemis/chart/UDR/PDFs/GammaLoggamma.pdf
       # theta <- new_n_with_ae/new_tot_exp
@@ -225,16 +238,16 @@ new_trial_compare <-
       x <- seq(a, b, length = length_disp)
       rm(a, b, widthOfGraph)
     }
-
+    # nolint end
     # Robust MAP prior
     rob_mixture_mat <-
-      data.frame(robust_map_prior[, 1:ncol(robust_map_prior)])
+      data.frame(robust_map_prior[, seq_len(ncol(robust_map_prior))])
     rob_str_vec <- vector(length = ncol(rob_mixture_mat))
 
 
     # Robust MAP Prior density function
     if (select_analysis == "Incidence proportion") {
-      for (j in 1:ncol(rob_mixture_mat)) {
+      for (j in seq_len(ncol(rob_mixture_mat))) {
         if (j != ncol(rob_mixture_mat)) {
           rob_str_vec[j] <-
             paste0(
@@ -261,7 +274,7 @@ new_trial_compare <-
         }
       }
     } else if (select_analysis == "Exposure-adjusted AE rate") {
-      for (j in 1:ncol(rob_mixture_mat)) {
+      for (j in seq_len(ncol(rob_mixture_mat))) {
         if (j != ncol(rob_mixture_mat)) {
           rob_str_vec[j] <-
             paste0(
@@ -310,13 +323,13 @@ new_trial_compare <-
     # Update prior distribution - compute the conditional distribution given the data and the prior
     # Compute the posterior distribution
 
-    post_mat <- data.frame(post_dist[, 1:ncol(post_dist)])
+    post_mat <- data.frame(post_dist[, seq_len(ncol(post_dist))])
     post_str_vec <- vector(length = ncol(post_mat))
 
 
     # Posterior density function
     if (select_analysis == "Incidence proportion") {
-      for (j in 1:ncol(post_mat)) {
+      for (j in seq_len(ncol(post_mat))) {
         if (j != ncol(post_mat)) {
           post_str_vec[j] <-
             paste0(
@@ -343,7 +356,7 @@ new_trial_compare <-
         }
       }
     } else if (select_analysis == "Exposure-adjusted AE rate") {
-      for (j in 1:ncol(post_mat)) {
+      for (j in seq_len(ncol(post_mat))) {
         if (j != ncol(post_mat)) {
           post_str_vec[j] <-
             paste0(
@@ -398,18 +411,20 @@ new_trial_compare <-
 #'
 #' @return dataframe of comparison of map prior and robust map prior for ggplot
 #' @export
-robust_compare <- function(select_analysis,
-                           robust_map_prior,
-                           param_approx) {
+robust_compare <- function(
+    select_analysis,
+    robust_map_prior,
+    param_approx
+) {
   length_disp <- 3000
   rob_mixture_mat <-
-    data.frame(robust_map_prior[, 1:ncol(robust_map_prior)])
+    data.frame(robust_map_prior[, seq_len(ncol(robust_map_prior))])
   rob_str_vec <- vector(length = ncol(rob_mixture_mat))
 
   # Robust MAP Prior density function
   if (select_analysis == "Incidence proportion") {
     x <- seq(0.0001, 1, length = length_disp)
-    for (j in 1:ncol(rob_mixture_mat)) {
+    for (j in seq_len(ncol(rob_mixture_mat))) {
       if (j != ncol(rob_mixture_mat)) {
         rob_str_vec[j] <-
           paste0(
@@ -450,7 +465,7 @@ robust_compare <- function(select_analysis,
     rm(a, b, widthOfGraph)
 
 
-    for (j in 1:ncol(rob_mixture_mat)) {
+    for (j in seq_len(ncol(rob_mixture_mat))) {
       if (j != ncol(rob_mixture_mat)) {
         rob_str_vec[j] <-
           paste0(
@@ -478,16 +493,15 @@ robust_compare <- function(select_analysis,
     }
   }
 
-  rob_Prior <-
-    eval(parse(text = paste(rob_str_vec, collapse = "")))
+  rob_Prior <- eval(parse(text = paste(rob_str_vec, collapse = "")))
 
   # MAP prior
-  mixture_mat <- data.frame(param_approx[, 1:ncol(param_approx)])
+  mixture_mat <- data.frame(param_approx[, seq_len(ncol(param_approx))])
   str_vec <- vector(length = ncol(mixture_mat))
 
   # MAP Prior density function
   if (select_analysis == "Incidence proportion") {
-    for (j in 1:ncol(mixture_mat)) {
+    for (j in seq_len(ncol(mixture_mat))) {
       if (j != ncol(mixture_mat)) {
         str_vec[j] <-
           paste0(
@@ -514,7 +528,7 @@ robust_compare <- function(select_analysis,
       }
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    for (j in 1:ncol(mixture_mat)) {
+    for (j in seq_len(ncol(mixture_mat))) {
       if (j != ncol(mixture_mat)) {
         str_vec[j] <-
           paste0(
@@ -584,10 +598,12 @@ data_table_prep <-
     # Rename columns
     dat <- input_data
     dat <- dat[order(dat$STUDYID), ]
+    # nolint start
     # colnames(dat) <- c("STUDYID", "N", "N_WITH_AE", "TOT_EXP", "SAF_TOPIC", "ARM", "HIST")
 
     # Filter for the selected background treatment and safety topic
     # Return total exposure as well for exposure-adjusted analysis
+    # nolint end
     if (select_analysis == "Incidence proportion") {
       dat <- dat %>%
         dplyr::filter(ARM %in% select_btrt &

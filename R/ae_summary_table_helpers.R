@@ -76,7 +76,14 @@ add_row <- function(df, data_check, topic, group, analysis) {
   }
 
   if (sum(data_check) < 4) {
-    new_row <- data.frame(Issue = issue, Analysis = analysis, Comparison = group, Topic = topic, Message = message, stringsAsFactors = FALSE)
+    new_row <- data.frame(
+      Issue = issue,
+      Analysis = analysis,
+      Comparison = group,
+      Topic = topic,
+      Message = message,
+      stringsAsFactors = FALSE
+    )
     df <- rbind(df, new_row)
   }
 

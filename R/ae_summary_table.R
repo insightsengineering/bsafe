@@ -104,6 +104,7 @@ ae_summary_table <-
 
     # Filtering for respective group ------------------------------------------
 
+    # nolint start
     ID_ctr_list <- list(grp1 = NULL, grp2 = NULL, grp3 = NULL, grp4 = NULL)
     ID_trt_list <- list(grp1 = NULL, grp2 = NULL, grp3 = NULL, grp4 = NULL)
     for (group in 1:n_group) {
@@ -114,6 +115,8 @@ ae_summary_table <-
       ID_trt_list[[group]] <- unique(trt_arm$STUDYID)
       ctr_arm <- input_data %>% dplyr::filter(ARM == cb_list_ctrl[[group]])
       ID_ctr_list[[group]] <- unique(ctr_arm$STUDYID)
+
+      # nolint end
 
       # Proportions Prep -----------------------------------------------------------
 
