@@ -499,6 +499,6 @@ ae_summary_table <-
       EventRates = array_er, EvenRatesComp = array_er_comp,
       ID_ctr_list = ID_ctr_list, ID_trt_list = ID_trt_list,
       cb_list_ctrl = cb_list_ctrl, cb_list_trt = cb_list_trt,
-      warn_txt
+      warn_txt = warn_txt
     ))
   }

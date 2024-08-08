@@ -14,9 +14,10 @@ input_data_display <- function(data, select_analysis, saf_topic) {
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     colnames(tab) <- c("STUDY ID", "Number of Patients in Arm", paste0("Number of Patients with ", saf_topic, " in Arm"), "Total Exposure Time", "Historical")
   }
-  tab %>%
-    knitr::kable("html") %>%
-    kableExtra::kable_styling("striped")
+  tab
+  # %>%
+  #   knitr::kable("html") %>%
+  #   kableExtra::kable_styling("striped")
 }
 
 
@@ -51,9 +52,10 @@ model_summary_display <- function(map_object, select_analysis,
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
       disp_mat_prop$ESS <- round(ESS, 1)
       disp_mat_prop %>%
-        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
+      # %>%
+        # knitr::kable("html") %>%
+        # kableExtra::kable_styling("striped")
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     sample_rate_log <- rstan::extract(map_object$fit)$theta_pred
@@ -82,9 +84,10 @@ model_summary_display <- function(map_object, select_analysis,
       disp_mat_rate$ESS <- c(round(ESS, 1), "Not applicable.")
 
       disp_mat_rate %>%
-        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
+      # %>%
+        # knitr::kable("html") %>%
+        # kableExtra::kable_styling("striped")
     }
   }
 }
@@ -127,9 +130,7 @@ summary_stats_robust_map_prior_display <- function(map_object, select_analysis, 
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
       disp_mat_prop$ESS <- round(c(ESS_MAP, ESS_ROB), 1)
       disp_mat_prop %>%
-        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     # Rbest gives the model alreday out for exp(theta_pred), but we need
@@ -168,9 +169,7 @@ summary_stats_robust_map_prior_display <- function(map_object, select_analysis, 
       disp_mat_rate$ESS <- c(round(c(ESS_MAP, ESS_ROB), 1), "Not applicable.", "Not applicable.")
 
       disp_mat_rate %>%
-        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
   }
 }
@@ -233,9 +232,7 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
       disp_mat_prop$ESS <- c(round(ESS_ROB, 1), "Not applicable.", "Not applicable.")
       disp_mat_prop %>%
-        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     lik <- RBesT::mixnorm(lik = c(1, log(new_hzrate), new_unit_sd))
@@ -286,9 +283,7 @@ summary_stat_all_display <- function(select_analysis, robust_map_object, ess_met
       )
 
       disp_mat_rate %>%
-        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri) %>%
-        knitr::kable("html") %>%
-        kableExtra::kable_styling("striped")
+        dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
   }
 }
@@ -332,9 +327,7 @@ preset_stat_table <- function(mix, saf_topic, select_analysis) {
 
   colnames(inf_mat) <- ""
 
-  inf_mat %>%
-    knitr::kable("html") %>%
-    kableExtra::kable_styling("striped")
+  inf_mat
 }
 
 
