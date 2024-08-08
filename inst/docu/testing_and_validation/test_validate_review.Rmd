@@ -940,21 +940,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -963,9 +966,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 
@@ -1002,21 +1009,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1025,9 +1035,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 
@@ -1064,21 +1078,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1087,9 +1104,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 4 - Worst Case Scenario**
@@ -1125,21 +1146,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1148,9 +1172,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 5 - Heterogeneous Data(Medium)**
@@ -1186,21 +1214,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1209,9 +1240,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 6 - High Dropout**
@@ -1247,21 +1282,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1270,9 +1308,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 7 - High Heterogeneity**
@@ -1308,21 +1350,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1331,9 +1376,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 8 - Bad Scenario**
@@ -1369,21 +1418,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1392,9 +1444,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 
@@ -1431,21 +1487,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1454,9 +1513,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 10 - Favoured Control**
@@ -1492,21 +1555,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1515,9 +1581,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 11 - Continued study duration with Realistic Setting**
@@ -1553,21 +1623,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1576,10 +1649,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
-
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 12 - Continued study duration with Worst Setting**
@@ -1615,21 +1691,24 @@ thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
-                                    'Expected MAP Prior: SD','Expected MAP Prior: median',
-                                    '95% CrILB', '95% CrIUB', 'ESS',
-                                    'Expected robustified MAP Prior: mean','
-                                    Expected robustified MAP Prior: SD',
-                                    'Expected robustified MAP Prior: median',
-                                    '95% CrILB','95% CrIUB', 'ESS',
-                                    'Expected results for Likelihood: mean',
-                                    'Expected results for Likelihood: SD',
-                                    'Expected results for Likelihood: median', 
-                                    '95% CrILB', '95% CrIUB', 'ESS', 
-                                    'Expected results for Posterior: mean',
-                                    'Expected results for Posterior: SD',
-                                    'Expected results for Posterior: median', 
-                                    '95% CrILB', '95% CrIUB','ESS')),
+table <- cbind(
+  (Characteristic <- c(
+    "Expected MAP Prior: mean",
+    "Expected MAP Prior: SD", "Expected MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected robustified MAP Prior: mean", "
+                                    Expected robustified MAP Prior: SD",
+    "Expected robustified MAP Prior: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Likelihood: mean",
+    "Expected results for Likelihood: SD",
+    "Expected results for Likelihood: median",
+    "95% CrILB", "95% CrIUB", "ESS",
+    "Expected results for Posterior: mean",
+    "Expected results for Posterior: SD",
+    "Expected results for Posterior: median",
+    "95% CrILB", "95% CrIUB", "ESS"
+  )),
   (Lower_Threshold <- as.vector(t(th_prop_lb))),
   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 )
@@ -1638,9 +1717,13 @@ table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 13 - High Dropout & too few people observed **
@@ -1675,7 +1758,7 @@ The characteristics and thresholds for the simulation is as in the table below:
 # thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
 # th_prop_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 # th_prop_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
-# 
+#
 # table <- cbind((Characteristic <- c('Expected MAP Prior: mean',
 #                                     'Expected MAP Prior: SD','Expected MAP Prior: median',
 #                                     '95% CrILB', '95% CrIUB', 'ESS',
@@ -1685,21 +1768,21 @@ The characteristics and thresholds for the simulation is as in the table below:
 #                                     '95% CrILB','95% CrIUB', 'ESS',
 #                                     'Expected results for Likelihood: mean',
 #                                     'Expected results for Likelihood: SD',
-#                                     'Expected results for Likelihood: median', 
-#                                     '95% CrILB', '95% CrIUB', 'ESS', 
+#                                     'Expected results for Likelihood: median',
+#                                     '95% CrILB', '95% CrIUB', 'ESS',
 #                                     'Expected results for Posterior: mean',
 #                                     'Expected results for Posterior: SD',
-#                                     'Expected results for Posterior: median', 
+#                                     'Expected results for Posterior: median',
 #                                     '95% CrILB', '95% CrIUB','ESS')),
 #   (Lower_Threshold <- as.vector(t(th_prop_lb))),
 #   (Upper_Threshold <- as.vector(t(th_prop_ub)))
 # )
-# 
-# 
+#
+#
 # print("With those values our newly created MAP Prior has been updated:")
 # print(thresholds_props[[scenario + 1]]$parameters)
-# 
-# knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
+#
+# knitr::kable(table, col.names = c('Characteristic','Lower Threshold',
 #                                   'Upper Threshold'),
 #              booktabs = TRUE, ngtable = TRUE)
 ```
@@ -1733,40 +1816,40 @@ SimTestData(
 The characteristics and thresholds for the simulation is as in the table below:
 
 ```{r tabthresholdrates1, echo=FALSE}
-
-characteristic_labels <- c('log Expected MAP Prior: mean',
-                                    'log Expected MAP Prior: SD',
-                                    'log Expected MAP Prior: median',
-                                    'log 95% CrILB', 'log 95% CrIUB', 'log ESS',
-                                    'log Expected robustified MAP Prior: mean',
-                                    'log Expected robustified MAP Prior: SD',
-                                    'log Expected robustified MAP Prior: median',
-                                    'log 95% CrILB','log 95% CrIUB', 'log ESS',
-                                    'log Expected results for Likelihood: mean',
-                                    'log Expected results for Likelihood: SD',
-                                    'log Expected results for Likelihood: median', 
-                                    'log 95% CrILB', 'log 95% CrIUB', 'log ESS', 
-                                    'log Expected results for Posterior: mean',
-                                    'log Expected results for Posterior: SD',
-                                    'log Expected results for Posterior: median', 
-                                    'log 95% CrILB', 'log 95% CrIUB','log ESS',
-                                    
-                                    'exp Expected MAP Prior: mean',
-                                    'exp Expected MAP Prior: SD',
-                                    'exp Expected MAP Prior: median',
-                                    'exp 95% CrILB', 'exp 95% CrIUB', 'exp ESS',
-                                    'exp Expected robustified MAP Prior: mean',
-                                    'exp Expected robustified MAP Prior: SD',
-                                    'exp Expected robustified MAP Prior: median',
-                                    'exp 95% CrILB','exp 95% CrIUB', 'exp ESS',
-                                    'exp Expected results for Likelihood: mean',
-                                    'exp Expected results for Likelihood: SD',
-                                    'exp Expected results for Likelihood: median', 
-                                    'exp 95% CrILB', 'exp 95% CrIUB', 'exp ESS', 
-                                    'exp Expected results for Posterior: mean',
-                                    'exp Expected results for Posterior: SD',
-                                    'exp Expected results for Posterior: median', 
-                                    'exp 95% CrILB', 'exp 95% CrIUB','exp ESS')
+characteristic_labels <- c(
+  "log Expected MAP Prior: mean",
+  "log Expected MAP Prior: SD",
+  "log Expected MAP Prior: median",
+  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "log Expected robustified MAP Prior: mean",
+  "log Expected robustified MAP Prior: SD",
+  "log Expected robustified MAP Prior: median",
+  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "log Expected results for Likelihood: mean",
+  "log Expected results for Likelihood: SD",
+  "log Expected results for Likelihood: median",
+  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "log Expected results for Posterior: mean",
+  "log Expected results for Posterior: SD",
+  "log Expected results for Posterior: median",
+  "log 95% CrILB", "log 95% CrIUB", "log ESS",
+  "exp Expected MAP Prior: mean",
+  "exp Expected MAP Prior: SD",
+  "exp Expected MAP Prior: median",
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS",
+  "exp Expected robustified MAP Prior: mean",
+  "exp Expected robustified MAP Prior: SD",
+  "exp Expected robustified MAP Prior: median",
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS",
+  "exp Expected results for Likelihood: mean",
+  "exp Expected results for Likelihood: SD",
+  "exp Expected results for Likelihood: median",
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS",
+  "exp Expected results for Posterior: mean",
+  "exp Expected results for Posterior: SD",
+  "exp Expected results for Posterior: median",
+  "exp 95% CrILB", "exp 95% CrIUB", "exp ESS"
+)
 
 
 scenario <- 1
@@ -1774,7 +1857,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -1783,9 +1867,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 2 - Strong Prior Data Conflict**
@@ -1821,7 +1909,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -1830,9 +1919,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 3 - Realistic Scenario**
@@ -1867,7 +1960,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -1876,9 +1970,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 4 - Worst Case Scenario**
@@ -1913,7 +2011,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -1922,9 +2021,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 5 - Heterogeneous Data(Medium)**
@@ -1959,7 +2062,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -1968,9 +2072,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 6 - High Dropout**
@@ -2005,7 +2113,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -2014,9 +2123,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 7 - High Heterogeneity**
@@ -2051,7 +2164,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -2060,9 +2174,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 8 - Bad Scenario**
@@ -2097,7 +2215,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -2106,9 +2225,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 9 - Good Scenario**
@@ -2143,7 +2266,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -2152,9 +2276,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 10 - Favoured Control**
@@ -2189,7 +2317,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -2198,9 +2327,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 11 - Continued study duration with Realistic Setting**
@@ -2235,7 +2368,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -2244,9 +2378,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 
@@ -2282,7 +2420,8 @@ thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
 
-table <- cbind((Characteristic <- characteristic_labels),
+table <- cbind(
+  (Characteristic <- characteristic_labels),
   (Lower_Threshold <- as.vector(t(th_rates_lb))),
   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 )
@@ -2291,9 +2430,13 @@ table <- cbind((Characteristic <- characteristic_labels),
 print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
-knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
-                                  'Upper Threshold'),
-             booktabs = TRUE, ngtable = TRUE)
+knitr::kable(table,
+  col.names = c(
+    "Characteristic", "Lower Threshold",
+    "Upper Threshold"
+  ),
+  booktabs = TRUE, ngtable = TRUE
+)
 ```
 
 ### **Scenario 13 - High Dropout & too few people observed**
@@ -2327,17 +2470,17 @@ The characteristics and thresholds for the simulation is as in the table below:
 # thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 # th_rates_lb <- thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
 # th_rates_ub <- thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
-# 
+#
 # table <- cbind((Characteristic <- characteristic_labels),
 #   (Lower_Threshold <- as.vector(t(th_rates_lb))),
 #   (Upper_Threshold <- as.vector(t(th_rates_ub)))
 # )
-# 
-# 
+#
+#
 # print("With those values our newly created MAP Prior has been updated:")
 # print(thresholds_props[[scenario + 1]]$parameters)
-# 
-# knitr::kable(table, col.names = c('Characteristic','Lower Threshold', 
+#
+# knitr::kable(table, col.names = c('Characteristic','Lower Threshold',
 #                                   'Upper Threshold'),
 #              booktabs = TRUE, ngtable = TRUE)
 ```
