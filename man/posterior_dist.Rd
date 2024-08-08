@@ -36,7 +36,7 @@ posterior_dist(
 
 \item{adj_tau}{numeric value of tau from tau_adjust()}
 
-\item{seed}{for reproduceability}
+\item{seed}{for reproducibility}
 }
 \value{
 posterior mixture distribution for incidence proportion analysis and

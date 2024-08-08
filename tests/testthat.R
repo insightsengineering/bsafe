@@ -1,4 +1,3 @@
-
 pkg_name <- "bsafe"
 
 library(testthat)

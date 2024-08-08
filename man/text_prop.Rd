@@ -7,7 +7,7 @@
 text_prop(stats_mat_prop = NA)
 }
 \arguments{
-\item{stats_mat_prop}{Matrix with statiscial information for the proportional case}
+\item{stats_mat_prop}{Matrix with statistical information for the proportional case}
 }
 \value{
 Text for display

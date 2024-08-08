@@ -85,7 +85,7 @@ test_that(
       )
 
       rerun_counter <- 0
-      while(sum(data$N) < result_map$ESS && rerun_counter < 2) {
+      while (sum(data$N) < result_map$ESS && rerun_counter < 2) {
         rerun_counter <- rerun_counter + 1
 
         map_object <- map_prior_func(
@@ -175,7 +175,7 @@ test_that(
       test_that("MAP Prior row is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_map[,res_string_without_ess] >= (th_prop_lb[map_string, th_string_without_ess_lb] - 3e-02)
+            result_map[, res_string_without_ess] >= (th_prop_lb[map_string, th_string_without_ess_lb] - 3e-02)
           )
         )
       })
@@ -183,21 +183,21 @@ test_that(
       test_that("MAP Prior ESS is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_map[,c("ESS")] >= (thresholds_prop[map_string,c("ess_min")] * 0.9)
+            result_map[, c("ESS")] >= (thresholds_prop[map_string, c("ess_min")] * 0.9)
           )
         )
       })
       test_that("MAP Prior row is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_map[,res_string_without_ess] <= (th_prop_ub[map_string, th_string_without_ess_ub] + 3e-02)
+            result_map[, res_string_without_ess] <= (th_prop_ub[map_string, th_string_without_ess_ub] + 3e-02)
           )
         )
       })
       test_that("MAP Prior ESS is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_map[,c("ESS")] <= (th_prop_ub[map_string,c("ess_ub")] * 1.1)
+            result_map[, c("ESS")] <= (th_prop_ub[map_string, c("ess_ub")] * 1.1)
           )
         )
       })
@@ -219,7 +219,7 @@ test_that(
       test_that("NTA Table is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_nta[,res_string_without_ess] >= (th_prop_lb[c(rob_string, likeli_string, post_string), th_string_without_ess_lb] - 3e-02),
+            result_nta[, res_string_without_ess] >= (th_prop_lb[c(rob_string, likeli_string, post_string), th_string_without_ess_lb] - 3e-02),
             na.rm = TRUE
           )
         )
@@ -227,7 +227,7 @@ test_that(
       test_that("NTA Table ESS is lower or equal than lower bound thresholds", {
         expect_true(
           all(
-            result_nta[,c("ESS")] >= (thresholds_prop[c(rob_string, likeli_string, post_string),c("ess_min")] * 0.9),
+            result_nta[, c("ESS")] >= (thresholds_prop[c(rob_string, likeli_string, post_string), c("ess_min")] * 0.9),
             na.rm = TRUE
           )
         )
@@ -239,7 +239,7 @@ test_that(
       test_that("NTA Table is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_nta[,res_string_without_ess] <= (th_prop_ub[c(rob_string, likeli_string, post_string), th_string_without_ess_ub] + 3e-02),
+            result_nta[, res_string_without_ess] <= (th_prop_ub[c(rob_string, likeli_string, post_string), th_string_without_ess_ub] + 3e-02),
             na.rm = TRUE
           )
         )
@@ -247,7 +247,7 @@ test_that(
       test_that("NTA Table ESS is lower or equal than upper bound thresholds", {
         expect_true(
           all(
-            result_nta[,c("ESS")] <= (th_prop_ub[c(rob_string, likeli_string, post_string),c("ess_ub")] * 1.1),
+            result_nta[, c("ESS")] <= (th_prop_ub[c(rob_string, likeli_string, post_string), c("ess_ub")] * 1.1),
             na.rm = TRUE
           )
         )

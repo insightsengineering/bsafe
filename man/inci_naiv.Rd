@@ -18,5 +18,5 @@ inci_naiv(data, array_inci, arm, topic, group)
 \item{group}{Comparison number}
 }
 \description{
-Gives the naiv estimation outputs for the whole data set
+Gives the naive estimation outputs for the whole data set
 }

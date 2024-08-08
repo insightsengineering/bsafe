@@ -21,45 +21,47 @@ tp_rate_Any <- data.frame(
 )
 
 thresholds_rate_Any <- data.frame(
-  mean_min   = c(rep(-Inf, 4),rep(0,4)),
-  mean_lb   = c(rep(-Inf, 4),rep(0,4)),
-  mean_ub   = c(rep(Inf, 4),rep(Inf,4)),
-  mean_max   = c(rep(Inf, 4),rep(Inf,4)),
-  sd_min     = c(rep(0, 4),rep(0,4)),
-  sd_lb     = c(rep(0, 4),rep(0,4)),
-  sd_ub     = c(rep(Inf, 4),rep(Inf,4)),
-  sd_max     = c(rep(Inf, 4),rep(Inf,4)),
-  median_min = c(rep(-Inf, 4),rep(0,4)),
-  median_lb = c(rep(-Inf, 4),rep(0,4)),
-  median_ub = c(rep(Inf, 4),rep(Inf,4)),
-  median_max = c(rep(Inf, 4),rep(Inf,4)),
-  cri_lb_min = c(rep(-Inf, 4),rep(0,4)),
-  cri_lb_lb = c(rep(-Inf, 4),rep(0,4)),
-  cri_lb_ub = c(rep(Inf, 4),rep(Inf,4)),
-  cri_lb_max = c(rep(Inf, 4),rep(Inf,4)),
-  cri_ub_min = c(rep(-Inf, 4),rep(0,4)),
-  cri_ub_lb = c(rep(-Inf, 4),rep(0,4)),
-  cri_ub_ub = c(rep(Inf, 4),rep(Inf,4)),
-  cri_ub_max = c(rep(Inf, 4),rep(Inf,4)),
-  ess_min    = c(rep(0, 2),rep(NA,6)),
-  ess_lb    = c(rep(0, 2),rep(NA,6)),
-  ess_ub    = c(rep(Inf, 2),rep(NA,6)),
-  ess_max    = c(rep(Inf, 2),rep(NA,6)),
+  mean_min = c(rep(-Inf, 4), rep(0, 4)),
+  mean_lb = c(rep(-Inf, 4), rep(0, 4)),
+  mean_ub = c(rep(Inf, 4), rep(Inf, 4)),
+  mean_max = c(rep(Inf, 4), rep(Inf, 4)),
+  sd_min = c(rep(0, 4), rep(0, 4)),
+  sd_lb = c(rep(0, 4), rep(0, 4)),
+  sd_ub = c(rep(Inf, 4), rep(Inf, 4)),
+  sd_max = c(rep(Inf, 4), rep(Inf, 4)),
+  median_min = c(rep(-Inf, 4), rep(0, 4)),
+  median_lb = c(rep(-Inf, 4), rep(0, 4)),
+  median_ub = c(rep(Inf, 4), rep(Inf, 4)),
+  median_max = c(rep(Inf, 4), rep(Inf, 4)),
+  cri_lb_min = c(rep(-Inf, 4), rep(0, 4)),
+  cri_lb_lb = c(rep(-Inf, 4), rep(0, 4)),
+  cri_lb_ub = c(rep(Inf, 4), rep(Inf, 4)),
+  cri_lb_max = c(rep(Inf, 4), rep(Inf, 4)),
+  cri_ub_min = c(rep(-Inf, 4), rep(0, 4)),
+  cri_ub_lb = c(rep(-Inf, 4), rep(0, 4)),
+  cri_ub_ub = c(rep(Inf, 4), rep(Inf, 4)),
+  cri_ub_max = c(rep(Inf, 4), rep(Inf, 4)),
+  ess_min = c(rep(0, 2), rep(NA, 6)),
+  ess_lb = c(rep(0, 2), rep(NA, 6)),
+  ess_ub = c(rep(Inf, 2), rep(NA, 6)),
+  ess_max = c(rep(Inf, 2), rep(NA, 6)),
   row.names = c("log MAP Prior", "log Robustified", "log Likelihood", "log Posterior", "exp MAP Prior", "exp Robustified", "exp Likelihood", "exp Posterior")
 )
 
 thresholds_rate_NA <- thresholds_rate_Any
 thresholds_rate_NA[] <- NA
 
-testing_list_rates[[1]] <- list(parameters = tp_rate_Any,
-                                treshholds = thresholds_rate_Any)
+testing_list_rates[[1]] <- list(
+  parameters = tp_rate_Any,
+  treshholds = thresholds_rate_Any
+)
 
 
 # initializing all treshhold data frames
-for(i in 1:12){
-  if(i < 10){
-    i_chr <- paste0(0,i)
-  }else{
+for (i in 1:12) {
+  if (i < 10) {
+    i_chr <- paste0(0, i)
+  } else {
     i_chr <- i
   }
   assign(paste0("thresholds_rate_Scen", i_chr), thresholds_rate_NA)
@@ -88,8 +90,10 @@ tp_rate_Scen01 <- data.frame(
   row.names  = c("Best Case Scenario")
 )
 
-testing_list_rates[[2]] <- list(parameters = tp_rate_Scen01,
-                                treshholds = thresholds_rate_Scen01)
+testing_list_rates[[2]] <- list(
+  parameters = tp_rate_Scen01,
+  treshholds = thresholds_rate_Scen01
+)
 
 # Scen 2 ------------------------------------------------------------------
 
@@ -110,8 +114,10 @@ tp_rate_Scen02 <- data.frame(
   row.names  = c("Strong Prior Data Conflict")
 )
 
-testing_list_rates[[3]] <- list(parameters = tp_rate_Scen02,
-                                treshholds = thresholds_rate_Scen02)
+testing_list_rates[[3]] <- list(
+  parameters = tp_rate_Scen02,
+  treshholds = thresholds_rate_Scen02
+)
 
 # Scen 3 ------------------------------------------------------------------
 
@@ -132,8 +138,10 @@ tp_rate_Scen03 <- data.frame(
   row.names  = c("Realistic scenario")
 )
 
-testing_list_rates[[4]] <- list(parameters = tp_rate_Scen03,
-                                treshholds = thresholds_rate_Scen03)
+testing_list_rates[[4]] <- list(
+  parameters = tp_rate_Scen03,
+  treshholds = thresholds_rate_Scen03
+)
 
 
 # Scen 4 ------------------------------------------------------------------
@@ -156,8 +164,10 @@ tp_rate_Scen04 <- data.frame(
 )
 
 
-testing_list_rates[[5]] <- list(parameters = tp_rate_Scen04,
-                                treshholds = thresholds_rate_Scen04)
+testing_list_rates[[5]] <- list(
+  parameters = tp_rate_Scen04,
+  treshholds = thresholds_rate_Scen04
+)
 
 
 # Scen 5 ------------------------------------------------------------------
@@ -179,8 +189,10 @@ tp_rate_Scen05 <- data.frame(
   row.names  = c("Heterogeneity Data (Medium)")
 )
 
-testing_list_rates[[6]] <- list(parameters = tp_rate_Scen05,
-                                treshholds = thresholds_rate_Scen05)
+testing_list_rates[[6]] <- list(
+  parameters = tp_rate_Scen05,
+  treshholds = thresholds_rate_Scen05
+)
 
 
 # Scen 6 ------------------------------------------------------------------
@@ -202,8 +214,10 @@ tp_rate_Scen06 <- data.frame(
   row.names  = c("High Dropout")
 )
 
-testing_list_rates[[7]] <- list(parameters = tp_rate_Scen06,
-                                treshholds = thresholds_rate_Scen06)
+testing_list_rates[[7]] <- list(
+  parameters = tp_rate_Scen06,
+  treshholds = thresholds_rate_Scen06
+)
 
 
 # Scen 7 ------------------------------------------------------------------
@@ -226,8 +240,10 @@ tp_rate_Scen07 <- data.frame(
 )
 
 
-testing_list_rates[[8]] <- list(parameters = tp_rate_Scen07,
-                                treshholds = thresholds_rate_Scen07)
+testing_list_rates[[8]] <- list(
+  parameters = tp_rate_Scen07,
+  treshholds = thresholds_rate_Scen07
+)
 
 # Scen 8 ------------------------------------------------------------------
 
@@ -248,8 +264,10 @@ tp_rate_Scen08 <- data.frame(
   row.names  = c("Bad Scenario")
 )
 
-testing_list_rates[[9]] <- list(parameters = tp_rate_Scen08,
-                                treshholds = thresholds_rate_Scen08)
+testing_list_rates[[9]] <- list(
+  parameters = tp_rate_Scen08,
+  treshholds = thresholds_rate_Scen08
+)
 
 # Scen 9 ------------------------------------------------------------------
 
@@ -270,8 +288,10 @@ tp_rate_Scen09 <- data.frame(
   row.names  = c("Good Scenario")
 )
 
-testing_list_rates[[10]] <- list(parameters = tp_rate_Scen09,
-                                treshholds = thresholds_rate_Scen09)
+testing_list_rates[[10]] <- list(
+  parameters = tp_rate_Scen09,
+  treshholds = thresholds_rate_Scen09
+)
 
 # Scen 10 ------------------------------------------------------------------
 
@@ -292,8 +312,10 @@ tp_rate_Scen10 <- data.frame(
   row.names  = c("Favored Control")
 )
 
-testing_list_rates[[11]] <- list(parameters = tp_rate_Scen10,
-                                 treshholds = thresholds_rate_Scen10)
+testing_list_rates[[11]] <- list(
+  parameters = tp_rate_Scen10,
+  treshholds = thresholds_rate_Scen10
+)
 
 # Scen 11 ------------------------------------------------------------------
 
@@ -314,8 +336,10 @@ tp_rate_Scen11 <- data.frame(
   row.names  = c("Continued study duration with Realistic Setting")
 )
 
-testing_list_rates[[12]] <- list(parameters = tp_rate_Scen11,
-                                 treshholds = thresholds_rate_Scen11)
+testing_list_rates[[12]] <- list(
+  parameters = tp_rate_Scen11,
+  treshholds = thresholds_rate_Scen11
+)
 
 
 # Scen 12 ------------------------------------------------------------------
@@ -337,22 +361,24 @@ tp_rate_Scen12 <- data.frame(
   row.names  = c("Continued study duration with Worst Setting")
 )
 
-testing_list_rates[[13]] <- list(parameters = tp_rate_Scen12,
-                                 treshholds = thresholds_rate_Scen12)
+testing_list_rates[[13]] <- list(
+  parameters = tp_rate_Scen12,
+  treshholds = thresholds_rate_Scen12
+)
 
 # Scen 13 ------------------------------------------------------------------
 # disregarded
 
 # Deleting obsolete data frames -------------------------------------------
 
-for(i in 1:12){
-  if(i < 10){
-    i_chr <- paste0(0,i)
-  }else{
+for (i in 1:12) {
+  if (i < 10) {
+    i_chr <- paste0(0, i)
+  } else {
     i_chr <- i
   }
-  rm(list=paste0("tp_rate_Scen", i_chr))
-  rm(list=paste0("thresholds_rate_Scen", i_chr))
+  rm(list = paste0("tp_rate_Scen", i_chr))
+  rm(list = paste0("thresholds_rate_Scen", i_chr))
 }
 rm(i)
 rm(i_chr)

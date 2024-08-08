@@ -15,7 +15,7 @@ app_plots(
 )
 }
 \arguments{
-\item{select_analysis}{event propotions or rates}
+\item{select_analysis}{event proportions or rates}
 
 \item{map_object}{MAP Prior object}
 

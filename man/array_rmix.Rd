@@ -7,7 +7,7 @@
 array_rmix(rmix_obj, array, arm, topic, group, lb = lb, ub = ub)
 }
 \arguments{
-\item{rmix_obj}{A S3 class matrix from R BEsT with a mixture distribution}
+\item{rmix_obj}{A S3 class matrix from R RBesT with a mixture distribution}
 
 \item{array}{The array setup}
 
