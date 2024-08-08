@@ -54,7 +54,7 @@ test_that("display.R works as expected", {
   rmp_mix_dens_display_prop <- robust_map_prior_mix_dens_display(
     robust_map_object = robust_map_prop,
     select_analysis = "Incidence proportion"
-    )
+  )
   rmp_mix_dens_display_rates <- robust_map_prior_mix_dens_display(
     robust_map_object = robust_map_rates,
     select_analysis = "Exposure-adjusted AE rate"
@@ -95,7 +95,7 @@ test_that("display.R works as expected", {
   )
 
 
-# MP ----------------------------------------------------------------------
+  # MP ----------------------------------------------------------------------
 
   dist <- "MAP Prior"
 
@@ -138,7 +138,7 @@ test_that("display.R works as expected", {
   expect_type(auc_rates, "character")
 
 
-# RMP ---------------------------------------------------------------------
+  # RMP ---------------------------------------------------------------------
 
   dist <- "Robust MAP Prior"
 
@@ -181,7 +181,7 @@ test_that("display.R works as expected", {
   expect_type(auc_rates, "character")
 
 
-# Likelihood --------------------------------------------------------------
+  # Likelihood --------------------------------------------------------------
 
   dist <- "Likelihood"
 
@@ -224,7 +224,7 @@ test_that("display.R works as expected", {
   expect_type(auc_rates, "character")
 
 
-# Posterior ---------------------------------------------------------------
+  # Posterior ---------------------------------------------------------------
 
   dist <- "Posterior"
 
