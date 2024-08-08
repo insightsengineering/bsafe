@@ -567,7 +567,7 @@ robust_compare <- function(select_analysis,
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
 #' @param current_trial information whether it is a historical (0) or current (1) trial
 #' @param select_btrt selected background treatment
-#' @param bool_pooled Wether study data is pooled by study number
+#' @param bool_pooled Whether study data is pooled by study number
 #'
 #' @return a dataframe for the selected safety topic with the study ID,
 #' the number of patients in the selected arm, the number of patients in the arm with at
