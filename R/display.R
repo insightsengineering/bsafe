@@ -104,7 +104,8 @@ robust_map_prior_mix_dens_display <- function(
 area_under_the_curve <- function(ae_prop, mix, saf_topic) {
   # Interpret area under the curve
   certainty <- round(
-    100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)), digits = 4
+    100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)),
+    digits = 4
   ) # nolint
 
   # Bound certainty from 1% to 99%

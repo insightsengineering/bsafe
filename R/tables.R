@@ -315,9 +315,9 @@ preset_stat_table <- function(
     mix,
     saf_topic,
     select_analysis) {
-  certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE),4)
-  certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE),4)
-  certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE),4)
+  certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE), 4)
+  certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE), 4)
+  certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE), 4)
 
   postfix <- ""
   denominator <- 1
