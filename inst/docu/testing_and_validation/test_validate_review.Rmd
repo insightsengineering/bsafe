@@ -107,7 +107,7 @@ The conditions above are all implementations that needs to be tested before the 
 All those requirements are testest via the *checkmate* R package, which allows for both warnings as well as errors to guide the user along the error and help fixing the problem. In addition the required variables are within the same approach not only tested for specific required typing, but also the *checkmate* R package allows to test certain boundaries of those variables as well as restricting inputs to certain formats, e.g., csv.
 
 ## **Binary Endpoint**
-  1. Uploaded file is a .csv file
+  1. Setup a .csv file
 
 Assumptions of the variables:
 
@@ -183,7 +183,7 @@ Some inputs including weakly-informative prior weight for the calculation of Rob
 
 
 ## **Time To Event Endpoint**
-  1. Uploaded file is a .csv file
+  1. Setup a .csv file
 
 Assumptions of the variables:
 
@@ -294,9 +294,11 @@ Each of the 1000 MAP / robust MAP priors for each scenario was subsequently upda
 Tests are then run using \texttt{testthat}. A test will pass if the summary statistics (for the MAP prior, robust MAP prior, likelihood, and posterior) lie within the upper and lower thresholds with a respective tolerance of, and fail otherwise.
 The tolerances were included  to adjust for the variability in  results. Due to the use of \texttt{stan} within \texttt{RBesT} on each machine a different MCMC is the result of the function calls. For good scenarios (e.g. 1,3) this threshold could be very small (e.g. $1 \cdot 10^{-4}$). For worse scenarios (e.g. 4,5), the variability is higher. We decided to use one tolerance for the binary (e.g. $3 \cdot 10^{-2}$) and another for the time to event endpoint (e.g. $8 \cdot 10^{-2}$). We used the therefor the highest rounded difference we encountered during a couple of test runs. 
 
-For the ESS/ENE we decided for a 10% tolerance. However, as seen by the observed minimum and maximum values of the 1.000 runs, in some cases a absurdly high ESS/ENE is reported. This is a known \texttt{RBesT} issue, and we have contacted the authors. For certain mixture components with especially low weights, the integration function malfunction. Therefor, if the ESS/ENE exceeds the number of patients/events, the MCMC sample will be drawn again, up to three times. After a third attempt the tesst will fail.
+For the ESS/ENE we decided for a 10% tolerance. However, as seen by the observed minimum and maximum values of the 1.000 runs, in some cases a absurdly high ESS/ENE is reported. This is a known \texttt{RBesT} issue, and we have contacted the authors. For certain mixture components with especially low weights, the integration function malfunction. Therefor, if the ESS/ENE exceeds the number of patients/events, the MCMC sample will be drawn again, up to three times. After a third attempt the test will fail.
 
 Moreover, for certain scenarios (2, 4, 12), this issue leads to the general exclusion to test these scenarios. In general those are scenarios in which borrowing historical information is strongly discouraged to perform.
+
+Some values are not displayed, neither in the exploratory nor the reporting feature of B-SAFE. Nevertheless, for coding reasons, they are still part of the array structure and will be mentioned here as not available (NA).
 
 ## **Code der Daten Simulation**
 The scripts generates synthetic data that mimics real-world studies.
