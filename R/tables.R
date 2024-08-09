@@ -54,7 +54,7 @@ model_summary_display <- function(map_object, select_analysis,
       return(stats_mat_prop)
     } else {
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
-      disp_mat_prop$ESS <- round(ESS, 1)
+      disp_mat_prop$ESS <- round(ESS, 4)
       disp_mat_prop %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
@@ -82,7 +82,7 @@ model_summary_display <- function(map_object, select_analysis,
       disp_mat_rate <- round(stats_mat_rate, 4)
       disp_mat_rate <- cri_char(disp_mat_rate)
 
-      disp_mat_rate$ESS <- c(round(ESS, 1), "Not applicable.")
+      disp_mat_rate$ESS <- c(round(ESS, 4), "Not applicable.")
 
       disp_mat_rate %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
@@ -134,7 +134,7 @@ summary_stats_robust_map_prior_display <- function(
       return(stats_mat_prop)
     } else {
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
-      disp_mat_prop$ESS <- round(c(ESS_MAP, ESS_ROB), 1)
+      disp_mat_prop$ESS <- round(c(ESS_MAP, ESS_ROB), 4)
       disp_mat_prop %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
@@ -173,7 +173,7 @@ summary_stats_robust_map_prior_display <- function(
       disp_mat_rate <- cri_char(disp_mat_rate)
 
       disp_mat_rate$ESS <- c(
-        round(c(ESS_MAP, ESS_ROB), 1), "Not applicable.", "Not applicable."
+        round(c(ESS_MAP, ESS_ROB), 4), "Not applicable.", "Not applicable."
       )
 
       disp_mat_rate %>%
@@ -245,7 +245,7 @@ summary_stat_all_display <- function(
       return(stats_mat_prop)
     } else {
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
-      disp_mat_prop$ESS <- c(round(ESS_ROB, 1), "Not applicable.", "Not applicable.")
+      disp_mat_prop$ESS <- c(round(ESS_ROB, 4), "Not applicable.", "Not applicable.")
       disp_mat_prop %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
@@ -293,7 +293,7 @@ summary_stat_all_display <- function(
       disp_mat_rate <- cri_char(disp_mat_rate)
 
       disp_mat_rate$ESS <- c(
-        "Not applicable.", round((ESS_ROB), 1),
+        "Not applicable.", round((ESS_ROB), 4),
         "Not applicable.", "Not applicable.", "Not applicable."
       )
 
@@ -315,9 +315,9 @@ preset_stat_table <- function(
     mix,
     saf_topic,
     select_analysis) {
-  certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE))
-  certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE))
-  certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE))
+  certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE),4)
+  certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE),4)
+  certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE),4)
 
   postfix <- ""
   denominator <- 1

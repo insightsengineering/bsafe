@@ -79,7 +79,7 @@ rmix_desc <- function(rmix_obj = NA, crilb = 0.025, criub = 0.975, deci = 4) {
 #' @return Text for display
 #' @export
 text_prop <- function(stats_mat_prop = NA) {
-  text_mat_prop <- round(stats_mat_prop * 100, digits = 2)
+  text_mat_prop <- round(stats_mat_prop * 100, digits = 4)
   text_mat_prop[] <- lapply(
     text_mat_prop,
     function(x) paste0(as.character(x), "%")
