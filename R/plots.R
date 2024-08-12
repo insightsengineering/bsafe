@@ -49,7 +49,7 @@ param_mix_density_display <- function(param_approx, select_analysis, saf_topic, 
 
   # MAP Prior density function
   if (select_analysis == "Incidence proportion") {
-    x <- seq(0.009, 1, length = 10000)
+    x <- seq(0.001, 0.999, length = 10000)
     for (j in seq_len(ncol(mixture_mat))) {
       if (j != ncol(mixture_mat)) {
         str_vec[j] <- paste0(
@@ -65,8 +65,8 @@ param_mix_density_display <- function(param_approx, select_analysis, saf_topic, 
       }
     }
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    a <- RBesT::qmix(param_approx, 0.009)
-    b <- RBesT::qmix(param_approx, 0.991)
+    a <- RBesT::qmix(param_approx, 0.001)
+    b <- RBesT::qmix(param_approx, 0.999)
     x <- seq(a, b, length = 10000)
     rm(a, b)
     for (j in seq_len(ncol(mixture_mat))) {
@@ -90,7 +90,7 @@ param_mix_density_display <- function(param_approx, select_analysis, saf_topic, 
   # Create dataframe for ggplot
   df <- data.frame(
     Probability = x,
-    Density = rep("MAP Prior", each = 500),
+    Density = rep("MAP Prior", each = 1000),
     Value = Prior
   )
   # Plot density
@@ -241,14 +241,16 @@ decision_making_density_plot <- function(
     saf_topic,
     select_btrt) {
   if (select_analysis == "Incidence proportion") {
+    stat_inf_dist_shade <- stat_inf_dist %>% dplyr::filter(Probability >= ae_prop[1] &
+      Probability <= ae_prop[2])
+
     ggplot2::ggplot(stat_inf_dist, ggplot2::aes(x = Probability, y = Value)) +
       ggplot2::geom_line(size = 1.65) +
       ggplot2::xlim(0, 1) +
       ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
       ggplot2::geom_area(
-        mapping = ggplot2::aes(x = ifelse(
-          Probability >= ae_prop[1] & Probability <= ae_prop[2], Probability, 0
-        )), fill = "salmon"
+        data = stat_inf_dist_shade,
+        ggplot2::aes(x = Probability, y = Value), fill = "salmon"
       ) + # nolint
       ggplot2::labs(
         x = paste0(
@@ -266,7 +268,7 @@ decision_making_density_plot <- function(
       ggplot2::theme(text = ggplot2::element_text(size = AXES_LABEL_SIZE))
   } else if (select_analysis == "Exposure-adjusted AE rate") {
     ae_prop <- ae_prop * 100 # for text display they are devided by 100 in the shiny package #nolint
-    stat_inf_dist_shade <- stat_inf_dist %>% filter(Probability >= ae_prop[1] &
+    stat_inf_dist_shade <- stat_inf_dist %>% dplyr::filter(Probability >= ae_prop[1] &
       Probability <= ae_prop[2])
 
 
@@ -279,7 +281,7 @@ decision_making_density_plot <- function(
       ggplot2::ylim(0, max(stat_inf_dist %>% dplyr::select(Value))) +
       ggplot2::geom_area(
         data = stat_inf_dist_shade,
-        aes(x = Probability, y = Value), fill = "salmon"
+        ggplot2::aes(x = Probability, y = Value), fill = "salmon"
       ) +
       ggplot2::labs(x = paste0(
         "log(incidence rate) for Patients with ", saf_topic, " with treatment ",

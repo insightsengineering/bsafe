@@ -37,13 +37,13 @@ ae_events_wrangler <- function(input_data, selected_trt) {
 #'
 #' @export
 sampling_all_plot <- function(select_analysis, select_dist, param_approx, new_trial_analysis) {
-  length_disp <- 3000
+  length_disp <- 10000
 
   if (select_analysis == "Incidence proportion") {
-    x <- seq(0.0001, 1, length = length_disp)
+    x <- seq(0.001, 0.999, length = length_disp)
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    a <- RBesT::qmix(param_approx, 0.02)
-    b <- RBesT::qmix(param_approx, 0.98)
+    a <- RBesT::qmix(param_approx, 0.001)
+    b <- RBesT::qmix(param_approx, 0.999)
     x <- seq(a, b, length = length_disp)
     rm(a, b)
   }

@@ -7,7 +7,7 @@
 #'
 #' @export
 map_prior_function_display <- function(param_approx, select_analysis) {
-  mixture_mat <- round(data.frame(param_approx[, seq_len(ncol(param_approx))]), 4)
+  mixture_mat <- round(data.frame(param_approx[, seq_len(ncol(param_approx))]), 2)
 
   str_vec <- vector(length = ncol(mixture_mat))
 
@@ -67,7 +67,7 @@ map_prior_function_display <- function(param_approx, select_analysis) {
 robust_map_prior_mix_dens_display <- function(
     robust_map_object,
     select_analysis) {
-  rob_mixture_mat <- round(data.frame(robust_map_object[, seq_len(ncol(robust_map_object))]), 4)
+  rob_mixture_mat <- round(data.frame(robust_map_object[, seq_len(ncol(robust_map_object))]), 2)
   rob_str_vec <- vector(length = ncol(rob_mixture_mat))
 
   if (select_analysis == "Incidence proportion") {
@@ -100,42 +100,44 @@ robust_map_prior_mix_dens_display <- function(
 #' @param ae_prop Vector of quantiles
 #' @param mix mixture distribution object
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
+#'
 #' @export
 area_under_the_curve <- function(ae_prop, mix, saf_topic) {
   # Interpret area under the curve
   certainty <- round(
     100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)),
-    digits = 4
+    digits = 2
   ) # nolint
 
   # Bound certainty from 1% to 99%
-  if (certainty >= 99) {
-    certainty <- 99
-  } else if (certainty <= 1) {
-    certainty <- 1
+  if (certainty >= 99.99) {
+    certainty <- 99.99
+  } else if (certainty <= 0.01) {
+    certainty <- 0.01
   } else {
     certainty <- certainty
   }
   # Statistical inference based on certainty and quantile of incidence proportion
+
   if ((ae_prop[1] > 0) & (ae_prop[2] == 1)) {
     paste0(
       "We are at least ", certainty,
       "% certain that the proportion of patients with ", saf_topic,
-      " is greater than ", round(100 * ae_prop[1], 4), "%."
+      " is greater than ", round(100 * ae_prop[1], 2), "%."
     )
   } else if (
     ((ae_prop[1] > 0) & (ae_prop[2] < 1)) | ((ae_prop[1] == 0) & (ae_prop[2] == 1))) { # nolint
     paste0(
       "We are at least ", certainty,
       "% certain that the proportion of patients with ", saf_topic,
-      " is between ", round(100 * ae_prop[1], 4), "% and ",
-      round(100 * ae_prop[2], 4), "%."
+      " is between ", round(100 * ae_prop[1], 2), "% and ",
+      round(100 * ae_prop[2], 2), "%."
     )
   } else if ((ae_prop[1] == 0) & (ae_prop[2] < 1)) {
     paste0(
       "We are at least ", certainty,
       "% certain that the proportion of patients with ", saf_topic,
-      " is less than ", round(100 * ae_prop[2], 4), "%."
+      " is less than ", round(100 * ae_prop[2], 2), "%."
     )
   } else if (ae_prop[1] == ae_prop[2]) {
     paste0("Please ensure that the slider represents an interval.")

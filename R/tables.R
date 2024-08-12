@@ -54,7 +54,7 @@ model_summary_display <- function(map_object, select_analysis,
       return(stats_mat_prop)
     } else {
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
-      disp_mat_prop$ESS <- round(ESS, 4)
+      disp_mat_prop$ESS <- round(ESS, 2)
       disp_mat_prop %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
@@ -82,7 +82,7 @@ model_summary_display <- function(map_object, select_analysis,
       disp_mat_rate <- round(stats_mat_rate, 4)
       disp_mat_rate <- cri_char(disp_mat_rate)
 
-      disp_mat_rate$ESS <- c(round(ESS, 4), "Not applicable.")
+      disp_mat_rate$ESS <- c(round(ESS, 2), "Not applicable.")
 
       disp_mat_rate %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
@@ -134,7 +134,7 @@ summary_stats_robust_map_prior_display <- function(
       return(stats_mat_prop)
     } else {
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
-      disp_mat_prop$ESS <- round(c(ESS_MAP, ESS_ROB), 4)
+      disp_mat_prop$ESS <- round(c(ESS_MAP, ESS_ROB), 2)
       disp_mat_prop %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
@@ -173,7 +173,7 @@ summary_stats_robust_map_prior_display <- function(
       disp_mat_rate <- cri_char(disp_mat_rate)
 
       disp_mat_rate$ESS <- c(
-        round(c(ESS_MAP, ESS_ROB), 4), "Not applicable.", "Not applicable."
+        round(c(ESS_MAP, ESS_ROB), 2), "Not applicable.", "Not applicable."
       )
 
       disp_mat_rate %>%
@@ -245,7 +245,7 @@ summary_stat_all_display <- function(
       return(stats_mat_prop)
     } else {
       disp_mat_prop <- text_prop(stats_mat_prop = stats_mat_prop)
-      disp_mat_prop$ESS <- c(round(ESS_ROB, 4), "Not applicable.", "Not applicable.")
+      disp_mat_prop$ESS <- c(round(ESS_ROB, 2), "Not applicable.", "Not applicable.")
       disp_mat_prop %>%
         dplyr::rename(Mean = mean, SD = sd, Median = median, "95% CrI" = cri)
     }
@@ -293,7 +293,7 @@ summary_stat_all_display <- function(
       disp_mat_rate <- cri_char(disp_mat_rate)
 
       disp_mat_rate$ESS <- c(
-        "Not applicable.", round((ESS_ROB), 4),
+        "Not applicable.", round((ESS_ROB), 2),
         "Not applicable.", "Not applicable.", "Not applicable."
       )
 
@@ -315,9 +315,9 @@ preset_stat_table <- function(
     mix,
     saf_topic,
     select_analysis) {
-  certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE), 4)
-  certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE), 4)
-  certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE), 4)
+  certainty90 <- round(100 * RBesT::qmix(mix, 0.10, lower.tail = TRUE), 2)
+  certainty95 <- round(100 * RBesT::qmix(mix, 0.05, lower.tail = TRUE), 2)
+  certainty99 <- round(100 * RBesT::qmix(mix, 0.01, lower.tail = TRUE), 2)
 
   postfix <- ""
   denominator <- 1
@@ -326,31 +326,53 @@ preset_stat_table <- function(
     postfix <- "%."
     denominator <- 1
     midfix <- " proportion of patients with "
+
+
+    inf_mat <- as.data.frame(
+      matrix(
+        c(
+          paste0(
+            "We are at least 90% certain that the", midfix, saf_topic,
+            " is greater than ", certainty90 / denominator, postfix
+          ),
+          paste0(
+            "We are at least 95% certain that the", midfix, saf_topic,
+            " is greater than ", certainty95 / denominator, postfix
+          ),
+          paste0(
+            "We are at least 99% certain that the", midfix, saf_topic,
+            " is greater than ", certainty99 / denominator, postfix
+          )
+        ),
+        nrow = 3, ncol = 1
+      )
+    )
   } else if (select_analysis == "Exposure-adjusted AE rate") {
-    postfix <- "."
+    postfix <- ")."
     denominator <- 100
     midfix <- " incidence rate of patients with "
-  }
 
-  inf_mat <- as.data.frame(
-    matrix(
-      c(
-        paste0(
-          "We are at least 90% certain that the", midfix, saf_topic,
-          " is greater than ", certainty90 / denominator, postfix
+
+    inf_mat <- as.data.frame(
+      matrix(
+        c(
+          paste0(
+            "We are at least 90% certain that the", midfix, saf_topic,
+            " is greater than ", round(certainty90 / denominator, 2), " log(", round(exp(certainty90 / denominator), 4), postfix
+          ),
+          paste0(
+            "We are at least 95% certain that the", midfix, saf_topic,
+            " is greater than ", round(certainty95 / denominator, 2), " log(", round(exp(certainty95 / denominator), 4), postfix
+          ),
+          paste0(
+            "We are at least 99% certain that the", midfix, saf_topic,
+            " is greater than ", round(certainty99 / denominator, 2), " log(", round(exp(certainty99 / denominator), 4), postfix
+          )
         ),
-        paste0(
-          "We are at least 95% certain that the", midfix, saf_topic,
-          " is greater than ", certainty95 / denominator, postfix
-        ),
-        paste0(
-          "We are at least 99% certain that the", midfix, saf_topic,
-          " is greater than ", certainty99 / denominator, postfix
-        )
-      ),
-      nrow = 3, ncol = 1
+        nrow = 3, ncol = 1
+      )
     )
-  )
+  }
 
   colnames(inf_mat) <- ""
 
