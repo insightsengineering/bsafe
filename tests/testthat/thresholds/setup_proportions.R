@@ -354,7 +354,7 @@ testing_list_prop[[13]] <- list(
 
 # Scen 13 ------------------------------------------------------------------
 
-tp_prop_Scen13 <-  data.frame(
+tp_prop_Scen13 <- data.frame(
   csv        = "Scen13.csv",
   group      = "g1",
   analysis   = "Incidence proportion",
@@ -370,8 +370,10 @@ tp_prop_Scen13 <-  data.frame(
   row.names  = c("Different treatment length")
 )
 
-testing_list_prop[[14]] <- list(parameters = tp_prop_Scen13,
-                                      treshholds = thresholds_prop_Scen13)
+testing_list_prop[[14]] <- list(
+  parameters = tp_prop_Scen13,
+  treshholds = thresholds_prop_Scen13
+)
 
 testing_list_props <- testing_list_prop
 # Deleting obsolote data frames -------------------------------------------
