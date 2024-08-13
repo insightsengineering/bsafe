@@ -58,7 +58,7 @@ testing_list_prop[[1]] <- list(
 )
 
 # initializing all treshhold data frames
-for (i in 1:12) {
+for (i in 1:13) {
   if (i < 10) {
     i_chr <- paste0(0, i)
   } else {
@@ -352,32 +352,31 @@ testing_list_prop[[13]] <- list(
   treshholds = thresholds_prop_Scen12
 )
 
-testing_list_props <- testing_list_prop
-
 # Scen 13 ------------------------------------------------------------------
-# disregarded
-# tp_prop_Scen13 <-  data.frame(
-#   csv        = "Scen13.csv",
-#   group      = "g1",
-#   analysis   = "Incidence proportion",
-#   saf_topic  = "Scen13",
-#   seed       = 1701879909,
-#   pool       = TRUE,
-#   tau        = "HalfNormal",
-#   heterog    = "Small",
-#   ESS        = "elir",
-#   rob_weight = 0.05,
-#   nta_event  = 15,
-#   nta_npat   = 200,
-#   row.names  = c("High Dropout rate with Few Patients Observed")
-# )
-#
-# testing_list_prop[[14]] <- list(parameters = tp_prop_Scen13,
-#                                       treshholds = thresholds_prop_Scen13)
 
+tp_prop_Scen13 <-  data.frame(
+  csv        = "Scen13.csv",
+  group      = "g1",
+  analysis   = "Incidence proportion",
+  saf_topic  = "Scen13",
+  seed       = 1718356066,
+  pool       = TRUE,
+  tau        = "HalfNormal",
+  heterog    = "Large",
+  ESS        = "elir",
+  rob_weight = 0.1,
+  nta_event  = 186,
+  nta_npat   = 200,
+  row.names  = c("Different treatment length")
+)
+
+testing_list_prop[[14]] <- list(parameters = tp_prop_Scen13,
+                                      treshholds = thresholds_prop_Scen13)
+
+testing_list_props <- testing_list_prop
 # Deleting obsolote data frames -------------------------------------------
 
-for (i in 1:12) {
+for (i in 1:13) {
   if (i < 10) {
     i_chr <- paste0(0, i)
   } else {

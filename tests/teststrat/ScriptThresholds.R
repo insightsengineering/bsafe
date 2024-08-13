@@ -7,7 +7,7 @@
 
 
 # Set your work directory to your file location, all other path go out from there
-setwd("~/bsafe/tests")
+setwd("~/teal/bsafe/tests")
 source("testthat/thresholds/setup_proportions.R")
 source("testthat/thresholds/setup_rates.R")
 
@@ -91,7 +91,8 @@ dimnames(array_rate_th) <- list(
 # each scenario the values will now be calculated:
 # For loop scen ----------------------------------------------------------------
 # still issue with scen 4
-for (scen in c(1:11)[-4]) {
+# for (scen in c(1:11)[-4]) {
+for (scen in c(12,13)) {
   print(paste0("Scenario: ", scen, " begun at ", Sys.time()))
 
   if (scen == 1) {
@@ -160,11 +161,16 @@ for (scen in c(1:11)[-4]) {
     array_prop_th["MAP Prior", "cri025", run] <- quantile(sample_prop, probs = crilb)
     array_prop_th["MAP Prior", "cri975", run] <- quantile(sample_prop, probs = criub)
 
-    fit_prop <- RBesT::automixfit(map_prop, Nc = seq(3, 3))
 
-    # FIXME: Scen 4 fix me, infinite size, with testing everything is fine, with proper we get bad results
+    # Scen 4 and 12 infinite size, with testing everything is fine, with proper we get bad results
 
-    array_prop_th["MAP Prior", "ess", run] <- RBesT::ess(fit_prop, method = "elir")
+    if(scen == 4 || scen == 12){
+      fit_prop <- RBesT::automixfit(map_prop, Nc = seq(2, 2))
+      array_prop_th["MAP Prior", "ess", run] <- RBesT::ess(fit_prop, method = "elir")
+    }else{
+      fit_prop <- RBesT::automixfit(map_prop, Nc = seq(3, 3))
+      array_prop_th["MAP Prior", "ess", run] <- RBesT::ess(fit_prop, method = "elir")
+    }
 
 
     # Robust MAP proportions --------------------------------------------------
@@ -286,11 +292,22 @@ for (scen in c(1:11)[-4]) {
     array_rate_th["exp MAP Prior", "cri975", run] <- quantile(sample_rate_exp, probs = criub)
 
 
-    theta_fit <- as.data.frame(map_rate$fit)
-    theta_pred <- theta_fit$theta_pred
-    fit_rate <- RBesT::automixfit(theta_pred, Nc = seq(3, 3))
 
-    array_rate_th["log MAP Prior", "ess", run] <- RBesT::ess(fit_rate, method = "elir", sigma = 1)
+    if(scen == 4 || scen == 12){
+      theta_fit <- as.data.frame(map_rate$fit)
+      theta_pred <- theta_fit$theta_pred
+      fit_rate <- RBesT::automixfit(theta_pred, Nc = seq(2, 2))
+
+      array_rate_th["log MAP Prior", "ess", run] <- RBesT::ess(fit_rate, method = "elir", sigma = 1)
+
+    }else{
+      theta_fit <- as.data.frame(map_rate$fit)
+      theta_pred <- theta_fit$theta_pred
+      fit_rate <- RBesT::automixfit(theta_pred, Nc = seq(3, 3))
+
+      array_rate_th["log MAP Prior", "ess", run] <- RBesT::ess(fit_rate, method = "elir", sigma = 1)
+
+    }
 
 
     # Robust MAP rates -------------------------------------------------------------
@@ -425,9 +442,9 @@ for (scen in c(1:11)[-4]) {
 }
 
 # Be careful not to override
-# setwd("~/bsafe/tests/testthat/thresholds")
-# saveRDS(testing_list_rates, "testing_list_rates.rds")
-# saveRDS(testing_list_props, "testing_list_props.rds")
+setwd("~/teal/bsafe/tests/testthat/thresholds")
+saveRDS(testing_list_rates, "testing_list_rates.rds")
+saveRDS(testing_list_props, "testing_list_props.rds")
 
 # [1] "Scenario: 1 begun at 2024-07-29 15:10:59.723102"
 # [1] "Iteration: 400 Time: 2024-07-30 07:00:58.302488 Scenario: 10"

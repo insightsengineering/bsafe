@@ -58,7 +58,7 @@ testing_list_rates[[1]] <- list(
 
 
 # initializing all treshhold data frames
-for (i in 1:12) {
+for (i in 1:13) {
   if (i < 10) {
     i_chr <- paste0(0, i)
   } else {
@@ -367,11 +367,33 @@ testing_list_rates[[13]] <- list(
 )
 
 # Scen 13 ------------------------------------------------------------------
-# disregarded
+
+tp_rate_Scen13 <- data.frame(
+  csv        = "Scen13.csv",
+  group      = "g1",
+  analysis   = "Exposure-adjusted AE rate",
+  saf_topic  = "Scen13",
+  seed       = 1718356066,
+  pool       = TRUE,
+  tau        = "HalfNormal",
+  heterog    = "Large",
+  ESS        = "elir",
+  rob_weight = 0.1,
+  rob_mean   = 0.2,
+  nta_event  = 186,
+  nta_time   = 1681,
+  row.names  = c("Different Study length")
+)
+
+testing_list_rates[[14]] <- list(
+  parameters = tp_rate_Scen13,
+  treshholds = thresholds_rate_Scen13
+)
+
 
 # Deleting obsolete data frames -------------------------------------------
 
-for (i in 1:12) {
+for (i in 1:13) {
   if (i < 10) {
     i_chr <- paste0(0, i)
   } else {
