@@ -92,7 +92,7 @@ dimnames(array_rate_th) <- list(
 # For loop scen ----------------------------------------------------------------
 # still issue with scen 4
 # for (scen in c(1:11)[-4]) {
-for (scen in c(12,13)) {
+for (scen in c(12, 13)) {
   print(paste0("Scenario: ", scen, " begun at ", Sys.time()))
 
   if (scen == 1) {
@@ -164,10 +164,10 @@ for (scen in c(12,13)) {
 
     # Scen 4 and 12 infinite size, with testing everything is fine, with proper we get bad results
 
-    if(scen == 4 || scen == 12){
+    if (scen == 4 || scen == 12) {
       fit_prop <- RBesT::automixfit(map_prop, Nc = seq(2, 2))
       array_prop_th["MAP Prior", "ess", run] <- RBesT::ess(fit_prop, method = "elir")
-    }else{
+    } else {
       fit_prop <- RBesT::automixfit(map_prop, Nc = seq(3, 3))
       array_prop_th["MAP Prior", "ess", run] <- RBesT::ess(fit_prop, method = "elir")
     }
@@ -293,20 +293,18 @@ for (scen in c(12,13)) {
 
 
 
-    if(scen == 4 || scen == 12){
+    if (scen == 4 || scen == 12) {
       theta_fit <- as.data.frame(map_rate$fit)
       theta_pred <- theta_fit$theta_pred
       fit_rate <- RBesT::automixfit(theta_pred, Nc = seq(2, 2))
 
       array_rate_th["log MAP Prior", "ess", run] <- RBesT::ess(fit_rate, method = "elir", sigma = 1)
-
-    }else{
+    } else {
       theta_fit <- as.data.frame(map_rate$fit)
       theta_pred <- theta_fit$theta_pred
       fit_rate <- RBesT::automixfit(theta_pred, Nc = seq(3, 3))
 
       array_rate_th["log MAP Prior", "ess", run] <- RBesT::ess(fit_rate, method = "elir", sigma = 1)
-
     }
 
 
