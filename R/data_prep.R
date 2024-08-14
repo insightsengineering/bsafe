@@ -625,14 +625,14 @@ data_table_prep <-
         dat <- dat %>%
           dplyr::group_by(STUDYID) %>%
           dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), .groups = "drop")
-          dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE)
+        dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE)
       }
 
       if (select_analysis == "Exposure-adjusted AE rate") {
         dat <- dat %>%
           dplyr::group_by(STUDYID) %>%
           dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), TOT_EXP = sum(TOT_EXP), .groups = "drop")
-          dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP)
+        dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP)
       }
     }
 
