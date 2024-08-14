@@ -112,7 +112,7 @@ map_prior_func <-
            adj_tau,
            seed = NULL,
            testing = FALSE) {
-    input_data <- input_data %>% dplyr::filter(HIST == 1)
+
 
     if (testing == FALSE) {
       # for exact method look stan/jags up, but if no rounding etc n_mcmc = (n_iter-n_warm)*n_chain/n_thin
@@ -138,7 +138,7 @@ map_prior_func <-
         data = input_data,
         tau.dist = tau_dist,
         tau.prior = adj_tau,
-        beta.prior = 2,
+        beta.prior = matrix(c(0,2), nrow = 1),
         iter = getOption("RBesT.MC.iter", n_iter),
         warmup = getOption("RBesT.MC.warmup", n_burn),
         thin = getOption("RBesT.MC.thin", n_thin),
@@ -151,7 +151,7 @@ map_prior_func <-
         data = input_data,
         tau.dist = tau_dist,
         tau.prior = adj_tau,
-        beta.prior = 1,
+        beta.prior = matrix(c(0,1), nrow = 1),
         iter = getOption("RBesT.MC.iter", n_iter),
         warmup = getOption("RBesT.MC.warmup", n_burn),
         thin = getOption("RBesT.MC.thin", n_thin),

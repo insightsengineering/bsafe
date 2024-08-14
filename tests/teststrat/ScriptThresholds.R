@@ -125,7 +125,7 @@ for (scen in c(12,13)) {
     tau <- 2
   }
 
-  # in between heterogeneity distirbution
+  # in between heterogeneity distirbution same in both
   tau_dist <- as.character(testing_list_props[[scen + 1]]$parameters["tau"])
 
   # define seeds
@@ -442,9 +442,9 @@ for (scen in c(12,13)) {
 }
 
 # Be careful not to override
-setwd("~/teal/bsafe/tests/testthat/thresholds")
-saveRDS(testing_list_rates, "testing_list_rates.rds")
-saveRDS(testing_list_props, "testing_list_props.rds")
+# setwd("~/teal/bsafe/tests/testthat/thresholds")
+# saveRDS(testing_list_rates, "testing_list_rates.rds")
+# saveRDS(testing_list_props, "testing_list_props.rds")
 
 # [1] "Scenario: 1 begun at 2024-07-29 15:10:59.723102"
 # [1] "Iteration: 400 Time: 2024-07-30 07:00:58.302488 Scenario: 10"

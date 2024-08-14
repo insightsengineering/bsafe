@@ -1,6 +1,6 @@
 ---
 title: |
-    | B-Safe Testing and Validation v. 0.0.3
+    | B-Safe Testing and Validation v. 0.0.4
     | for B-Safe v. 0.0.5-03
 author: | 
     | Alexander Stemke (1), Lars Andersen (1), James Turay (1), Louise Whitehead (1,2) 
@@ -18,7 +18,6 @@ bibliography : citations.bib
 csl : institute-of-mathematical-statistics.csl
 ---
 
-  \newpage
 \listoftables
 \newpage
 
@@ -26,9 +25,9 @@ csl : institute-of-mathematical-statistics.csl
 The B-Safe r-shiny application is an interactive statistical software used to analyse several safety endpoints using the Bayesian (robust) Meta-Analytic Predictive (MAP) method. This approach was based on the works of @neuenschwander_summarizing_2010.
 
 ## **Requirement Specification**
-The application will present it's results via graphs, tables and figures. The application will calculate the meta-analytic predictive (MAP) prior and the robust MAP priors, assesses prior data conflict and produces and effective sample size of the historical data.
+The application will present its results via graphs, tables and figures. The application will calculate the meta-analytic predictive (MAP) prior and the robust MAP priors, assesses prior data conflict and reports the effective sample size / effective number of events of the historical data.
 
-The user will then be able to download output data/simulated results in a tabular form.
+The user will then be able to download output data / simulated results in a tabular form.
 
 An error message is expected when the input table does not contain the required columns and when the input parameters does not match the intended analysis.
 
@@ -83,8 +82,8 @@ table2 <- cbind(
     "sum of patients treatment exposure period until occurence of first event.",
     "If no event occurs, use complete observation time",
     "Amount/weight of the drug the patient took",
-    "Number of times in a day the medicine/drug was taken by the patient",
-    "Number of days the patient was on the treatment",
+    "Number of times the medicine/drug was taken by the patient",
+    "Time the patient was on the treatment",
     "The specific treatment the patient was on",
     "Meta-Analytic Predictive Prior",
     "Credible Interval", "Credible Interval Lower Boundary",
@@ -150,16 +149,16 @@ New Trial Analysis:
 
 Decision Making:
 
-  5. Likelihood: Percentage of Patients with AE is an integer from $0$ to $100$
-  6. MAP Prior: Percentage of Patients with AE is an integer from $0$ to $100$
-  7. Robust MAP Prior: Percentage of Patients with AE is an integer from $0$ to $100$
-  8. Posterior: Percentage of Patients with AE is an integer from $0$ to $100$
+  5. Likelihood: Percentage of Patients with AE two integers specifying lower bound and upper bound from 0 to 100.
+  6. MAP Prior: Percentage of Patients with AE two integers specifying lower bound and upper bound from 0 to 100.
+  7. Robust MAP Prior: Percentage of Patients with AE two integers specifying lower bound and upper bound from 0 to 100.
+  8. Posterior: Percentage of Patients with AE two integers specifying lower bound and upper bound from 0 to 100.
 
 Download Results:
 
   9. Number of comparisons: integer from $1$ to $5$
 
-Test cases were performed as shown in the the table below. Different formats of the various input are violated in different test cases. For any false input, the user shall be informed about the error and the error will be displayed and. The test is passed if no error message is displayed.
+Test cases were performed as shown in the the table below. Different formats of the various input are violated in different test cases. For any false input, the user shall be informed about the error and the error will be displayed. The test is passed if no error message is displayed.
 
 ```{r table5, echo =FALSE}
 table <- cbind(
@@ -227,10 +226,10 @@ New Trial Analysis:
 
 Decision Making:
 
-  6. Likelihood: area of log(hazard) for patients with AE is numeric within a 99% quantile.
-  7. MAP Prior: area of log(hazard) for patients with AE is numeric within a 99% quantile.
-  8. Robust MAP Prior: area of log(hazard) for patients with AE is within a 99% quantile.
-  9. Posterior: area of log(hazard) for patients with AE is numeric within a 99% quantile.
+  6. Likelihood: area of log(hazard) for patients with AE is numeric within a 99.8% (0.01% to 99.9%) quantile.
+  7. MAP Prior: area of log(hazard) for patients with AE is numeric within a 99.8% (0.01% to 99.9%) quantile.
+  8. Robust MAP Prior: area of log(hazard) for patients with AE is within a 99.8% (0.01% to 99.9%) quantile.
+  9. Posterior: area of log(hazard) for patients with AE is numeric within a 99.8% (0.01% to 99.9%) quantile.
 
 Download Results:
 
@@ -269,17 +268,27 @@ Some inputs including weakly-informative prior weight for the calculation of Rob
 
 
 # **Testing Framework in testthat**
-To assure the testing of the thresholds for all the below defined scenarios as well as ensuring that the created plots do match saved up reference images for the same scenario, input parameters as well as seed.
-Therefore the *testthat* R package is being used to ensure a framework, that is commonly used and stable.
 
-Hereby, the testing setup replicates partially the workflow of the application with loading the respective data, parameters as well as thresholds. Then all functions that B-SAFE is running are run in the needed order to ensure the same workflow. Afterwards the outputs of the different plots as well as tables that are being displayed within the application are compared against the reference images, where the binaries of the images are compared and expected to be equal. Regarding the tables, there thresholds, both for the lower as well as the upper limits are being used to create threshold tables which then the corresponding tables/values of the replicated application workflow are compared against. The framework then either 
-passes the comparison as the values are equal within a certain tolerance, or the framework will throw an error where this assumption is not met.
+For testing purpose with testthat, the values for the defined scenarios, were created beforehand and saved as a separate file. As well were reference images for scenario 03 created and saved for comparison. Moreover, due to the use of Stan, also for image comparison the \texttt{RBesT gMAP} element was saved. Moreover, the parameter, used in testing, were also defined upfront and are saved in the same file \texttt{tests/testthat/thresholds}. 
+
+
+Therefore the \texttt{testthat R} package is being used to ensure a framework, that is commonly used and stable.
+
+Hereby, the testing setup replicates partially the workflow of the application with loading the respective data, parameters as well as thresholds. Then all functions that B-SAFE is running are run in the needed order to ensure the same workflow. Afterwards the outputs of the different plots as well as tables that are being displayed within the application are compared against the reference images, where the binaries of the images are compared and expected to be equal. Regarding the tables, there thresholds, both for the lower as well as the upper limits are being used to create threshold tables which then the corresponding tables / values of the replicated application workflow are compared against. The framework then either passes the comparison as the values are within a certain tolerance, or the framework will throw an error when the values are not within the threshold respective their tolerance.
+
+In the setup file (\texttt{tests/testthat/setup.R}), all plots will be created and saved in (\texttt{tests/testthat/test\_img}). This will be executed, prior to the pixel wise comparison. Here all plots will be created. Then in (\texttt{tests/testthat/tests-plots.R}) all the different just created plot images will be binary tested against the reference images (\texttt{tests/testthat/img}) to ensure reproducibility.
+
+ESS and summary statistics are tested independent from each other, for reason see section \@ref(simulation-and-testing-of-scenarios).
+
+Moreover the displayed tables are checked, that the values and NA's are at their correct position.If a row (e.g. MAP prior summary statistics) appears in two different displayed tables, we check that they are identical.
+
+Further unit tests have been created to ensure the correct functionality for the helper functions. The overall test coverage is greater than 80%.
 
 
 # **Scenario Testing**
 Scenario testing was used to verify the computations the B-Safe Shiny application performs.
 
-For this purpose, various conditions were set to capture a wide array of possibilities to set different parameter values. Each simulated scenario is a representation of a probable occurrence in a clinical trial. There are scenarios to cover heterogeneous and homogeneous data, very large to small borrowing of historical information, high and less robustification of the MAP prior. These scenarios are tested for both the Adverse Event Incidence Proportion and the Exposure-Adjusted Adverse Event Rate.
+For this purpose, various conditions were set to capture a wide array of possibilities to set different parameter values. Each simulated scenario is a representation of a probable occurrence in a clinical trial. There are scenarios to cover heterogeneous and homogeneous data, very large to small borrowing of historical information, high and low robustification of the MAP prior. These scenarios are tested for both the Adverse Event Incidence Proportion and the Exposure-Adjusted Adverse Event Rate.
 
 Following each scenario is briefly described. The simulated data sets are displayed in section \@ref(simulation-and-testing-of-scenarios).
 For further information (e.g. the level of heterogeneity) please refer to the statistical analysis plan of B-Safe.

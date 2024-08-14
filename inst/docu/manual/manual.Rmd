@@ -1,0 +1,807 @@
+---
+title: |
+    | B-Safe User Manual v. 0.0.4
+    | for B-Safe v. 0.0.5-03
+author: | 
+    | Alexander Stemke (1), Lars Andersen (1), Oliver Sailer (1), Dunfu Yang (1)
+    | reviewed by Oliver Sailer (1) and Louise Whitehead (1,2) 
+    | (1) Boehringer Ingelheim Pharma GmbH & Co. KG
+    | (2) Biostatistics Research Group, Newcastle University, UK
+date: "`r Sys.Date()`"
+output: 
+  pdf_document:
+  fig_caption: true
+number_sections: true
+extra_dependencies: ["float", "subfigure"]
+toc: yes
+bibliography : citations.bib
+csl : institute-of-mathematical-statistics.csl
+editor_options: 
+  markdown: 
+  wrap: 72
+---
+  
+```{=tex}
+\newpage
+\listoffigures
+\listoftables
+```
+
+# **Introduction**
+
+B-SAFE is an R-Shiny app. The app is an innovate software tool for
+statistical analysis of adverse event summary data. The app can enhance
+the descriptive analysis for a current trial with historical information
+on one or more treatment arms for increased precision. It features a
+Bayesian Meta-Analytic Predictive (MAP) Prior approach
+@neuenschwander_summarizing_2010 and a robust extension
+@schmidli_robust_2014, which incorporates historical information for
+safety analyses on adverse events into safety analyses for a new trial.
+The use of historical information has been used for efficacy analyses in
+the past and now being extended to safety analyses.
+
+This user manual details how to use the app. The user manual documents
+and specifies the input parameters with their expected outputs. Refer to
+the Statistical Analysis Plan for the methodology used.
+
+-   Coding : Alexander Stemke, Lars Andersen
+-   Statistical Analysis: Oliver Sailer, Alexander Stemke
+-   Testing : Lars Andersen, Dunfu Yang
+-   Support by Steven Brooks, Kevin Kunzmann, Dooti Roy, Christina
+Schlecker, James O. Turay, Louise Whitehead, Lin Feng Zou
+
+\newpage
+
+# **Using the App**
+
+This section introduces the user to the app and how to prepare the
+data set for analysis. From this section on, we will use example data (see section \ref(data-example)) to demonstrate the usage of the entire application.
+This simple data example is further specified in section \ref{tab:data_example}.
+
+\begin{figure}
+\label{fig:land}
+\includegraphics{img/using_the_app/landing.png}
+\end{figure}
+
+You will land on a page similar to this. It es recommended to go trough the app from top to bottom. The left and middle panel in fig. \ref{fig:land} correspond to each other. Each bullet point has a section within this manual.
+
+
+## **Getting Started**
+
+The **Getting Started** page is the first bullet point from the top.
+Each of the tabs will be explained in detail in the following sections. It provides an overview of the usage of the app. The
+app has two main uses:
+
+  -   A deep dive into a Bayesian MAP Prior analysis of a selected adverse
+endpoint
+-   A Posterior Probability analysis to compare a set of adverse events
+between two treatment arms
+
+Analyses for Incidence Proportions and Exposure-Adjusted Adverse
+Event Rates (i.e., Incidence Rates) are available.
+
+As you are a user of the app, the first step has already been taken and the app was set up successfully. Therefor, you had to specifiy a dataset as \texttt{.csv} as described in \ref{tab:mustvar}.
+
+
+You can then jump directly to **Default comparisons** \ref{default-comparisons} for a summary
+table with a default analysis.
+
+
+\begin{table}[!ht]
+\caption{Variable Columns}
+\label{tab:mustvar}
+\begin{tabular}{|p{2.5cm}|p{2.7cm}|p{10cm}|}
+\hline
+Variable & Data Type & Description \\
+\hline
+STUDYID & character/numeric  & Study number or name \\
+\hline
+HIST & boolean & 0 for current trial and 1 for historical trial\\
+\hline
+ARM & character/numeric & Defines the various treatment arms in the respective study \\
+\hline
+N & numeric & Total number of patients in the respective study \\
+\hline
+N WITH AE & numeric & Total number of patients for the respective study safety topic who experienced at least one adverse event\\
+\hline
+SAF TOPIC  & character & Describes the type of adverse event. Safety topic will be read in by your dataset, max 30 characters\\
+\hline
+TOT EXP & numeric & Total exposure time for the respective safety topic: sum of patients treatment exposure period until occurrence of first event.\\
+\hline
+\end{tabular}
+\end{table}
+
+Note that \texttt{TOT EXP} (total exposure time) is only needed for analysis of the
+Exposure Adjusted Incidence Rate.
+
+Additionally, other variables including Dose, Freq (Frequency), Length
+(Length of treatment), Treat (Treatment) can be included, as shown in Table
+\ref{add_var_desc}. With these additional variables, subgroup analysis can be
+done. Note that in Table \ref{add_var}, for variables Freq and Length, the unit does not have to be "day". The time scale depends on the input and should be consistent throughout the entire dataset. Moreover, further variables could be included (see therefor also the data example \ref{tab:add_data}).
+
+
+\begin{table}[!ht]
+\caption{Additional Variables}
+\label{tab:add_var}
+\begin{tabular}{|p{2.5cm}|p{2.7cm}|p{10cm}|}
+\hline
+Variable & Data Type & Description \\
+\hline
+Dose & numeric & Amount/weight of the medication the patient took\\
+\hline
+Freq(Frequency) & integer & Number of times in a day the medication was taken by the patient\\
+\hline
+Length & integer & Total number of days the patient was on the treatment \\
+\hline
+Treat & character & The specific treatment the patient was on\\
+\hline
+\end{tabular}
+\end{table}
+
+
+# **Data Preparation**
+
+Once you have set up the app, under data preparation the available data is displayed.
+In the following section \ref{data-example} the data set will be introduced.
+Afterwards in section \ref{adding-an-arm}, the \texttt{teal} functionality of data filtration will briefly introduced, before we prepare 
+
+## **Data example**
+
+The following data set example was generated for this introduction.
+
+
+<!-- data <- read.csv(file = "manual_dataset.csv") -->
+<!-- library(xtable) -->
+<!-- simpdata <- xtable(data[,c(2:8)]) -->
+<!-- adddata <- xtable(data[,c(2,9:13)]) -->
+<!-- print(simpdata) -->
+<!-- print(adddata) -->
+
+
+\begin{table}[ht]
+\caption{Data example}
+\label{tab:data_example}
+\centering
+\begin{tabular}{rlrlrlrr}
+  \hline
+ & STUDYID & HIST & ARM & N & SAF\_TOPIC & N\_WITH\_AE & TOT\_EXP \\ 
+ \hline
+1 & Study\#1 &   1 & g1 & 143 & vomitting &  34 & 257.98 \\ 
+  2 & Study\#1 &   1 & g1 & 120 & vomitting &  26 & 338.18 \\ 
+  3 & Study\#1 &   1 & g1 & 198 & vomitting &  27 & 318.65 \\ 
+  4 & Study\#1 &   1 & g1 & 179 & insomnia &  36 & 316.20 \\ 
+  5 & Study\#1 &   1 & g1 & 200 & insomnia &  33 & 334.95 \\ 
+  6 & Study\#1 &   1 & g1 & 156 & insomnia &  32 & 262.24 \\ 
+  7 & Study\#1 &   0 & g1 & 200 & insomnia &  34 & 193.03 \\ 
+  8 & Study\#2 &   0 & g2 & 109 & vomitting &  65 & 334.73 \\ 
+  9 & Study\#2 &   0 & g2 & 190 & vomitting &  57 & 263.33 \\ 
+  10 & Study\#2 &   0 & g2 & 119 & insomnia &  55 & 203.99 \\ 
+  11 & Study\#2 &   0 & g2 & 124 & insomnia &  59 & 273.15 \\ 
+  12 & Study\#2 &   0 & g2 & 187 & vomitting &  58 & 226.69 \\ 
+  13 & Study\#3 &   1 & g3 & 138 & vomitting &  58 & 226.69 \\ 
+  14 & Study\#3 &   1 & g3 & 114 & vomitting &  65 & 334.73 \\ 
+  15 & Study\#3 &   1 & g3 & 121 & vomitting &  55 & 203.99 \\ 
+  16 & Study\#3 &   1 & g3 & 200 & insomnia &  59 & 213.91 \\ 
+  17 & Study\#3 &   1 & g3 & 183 & insomnia &  57 & 263.33 \\ 
+  18 & Study\#3 &   1 & g3 & 163 & insomnia &  36 & 316.20 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+In brief those three studies are presented. Each study has a \texttt{STUDYID} which coresponds in this case with its \texttt{ARM}. \texttt{Study\#1} includes historical (\texttt{HIST = 1}) and non historical (\texttt{HIST = 0}) information. And has only for the Placebo treatment both available. \texttt{Study\#2} includes only current data and \texttt{Study\#3} only. historical (\texttt{HIST = 1}).
+
+All additional information, that are not per se releveant for the \texttt{B-SAFE} module, are displayed in \ref{tab:add_data}
+In addition to the predefined additional variables (section \ref{tab:add_var}), this dataset also includes information on the region of the study. 
+
+
+\begin{table}[ht]
+\caption{Data example: Additionl Variables}
+\label{tab:add_data}
+\centering
+\begin{tabular}{rlrrrll}
+\hline
+& STUDYID & DOSE & FREQ & LENGTH & TREAT & REGION \\
+  \hline
+1 & Study\#1 & 150 &   2 & 120 & AgentA & Africa \\ 
+  2 & Study\#1 & 250 &   3 & 240 & AgentB & America \\ 
+  3 & Study\#1 & 500 &   1 & 365 & Placebo & Eurasia \\ 
+  4 & Study\#1 & 150 &   3 & 365 & AgentA & Eurasia \\ 
+  5 & Study\#1 & 250 &   1 & 120 & AgentB & Africa \\ 
+  6 & Study\#1 & 500 &   2 & 240 & Placebo & America \\ 
+  7 & Study\#1 & 500 &   2 & 240 & Placebo & Eurasia \\ 
+  8 & Study\#2 & 250 &   1 & 240 & AgentB & America \\ 
+  9 & Study\#2 & 500 &   2 & 365 & Placebo & Africa \\ 
+  10 & Study\#2 & 150 &   3 & 120 & AgentA & Eurasia \\ 
+  11 & Study\#2 & 250 &   1 & 365 & AgentB & America \\ 
+  12 & Study\#2 & 150 &   3 & 240 & AgentA & Eurasia \\ 
+  13 & Study\#3 & 150 &   3 & 240 & AgentA & Africa \\ 
+  14 & Study\#3 & 250 &   1 & 365 & AgentB & America \\ 
+  15 & Study\#3 & 500 &   2 & 120 & Placebo & Africa \\ 
+  16 & Study\#3 & 150 &   2 & 240 & AgentA & Eurasia \\ 
+  17 & Study\#3 & 250 &   3 & 365 & AgentB & America \\ 
+  18 & Study\#3 & 500 &   1 & 120 & Placebo & Africa \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+It is important to understand, that for the meta-analysis, the data subset which will be used is defined by the variable \texttt{ARM}. Accordingly the creation of a arm will be explained next. 
+
+
+## **Adding an Arm**
+
+Each analysis is performed for the data defined by the variable \texttt{ARM}. 
+Before we use the predefined arms, or add a new arm, it is crucial to note, that the filtering via \texttt{TEAL} \ref{fig:teal_filter1}, has to be done, before any arm is created.
+
+By collapsing 1. in \ref{fig:teal_filter1} you can view your data and by 2. in \ref{fig:teal_filter1} you can collapse the \texttt{TEAL} filtration.
+
+\begin{figure}[ht]
+\includegraphics{img/using_the_app/teal_filter1.png}
+\caption{TEAL filtration}
+\label{fig:teal_filter1}
+\end{figure}
+
+It is possible to filter for each variable of the dataset. 1. (see \ref{fig:teal_filter2}) select the variable you would like to filter. In this example we choose the total exposure time and the region. 2. we chose an exposure under 500 and America and Eurasia as a region.
+Any further arm creation or analysis would be performed on this subset. 
+
+For now, we don't need further filtration, this feature is very useful, if you would like to investigate certain subgroup characteristics or see directly a potential arm creation. Under 3. it is displate how many observations remain in this subset. For any further information, please refer to \texttt{TEALs} documentation.
+
+
+\begin{figure}[ht]
+\includegraphics{img/using_the_app/teal_filter2.png}
+\caption{TEAL filtration selection}
+\label{fig:teal_filter2}
+\end{figure}
+
+Starting with our original data set we will now create a data subset called an arm, which we will investigate further. 
+
+
+\begin{figure}[ht]
+\includegraphics{img/using_the_app/add_arm.png}
+\caption{Add Arm}
+\label{fig:add_arm}
+\end{figure}
+
+Starting with 1. (see fig. \ref{fig:add_arm}) select the variables we are interested in. In this case we chose \texttt{DOSE} and \texttt{TREAT}. 2. choose the variables characteristics. In this case, we are interested to borrow information from the Placebo treatments. In general it is discouraged to borrow information from treatment arms that are not Placebo or standard of care. 3. you add the arm, by doing so a pop up will open and requests naming your arm and to 4. accept your naming.
+
+In this case the subset of dose 500 and Placebo treatment is identical, but especially with an increasing number of studies to borrow from, it is better to ensure your correct choices.
+On our example \texttt{ARM: Placebo500} we will now perform any further analysis.
+
+
+# **Analysis selection**
+
+The filtered data is then displayed on the right hand
+side of the screen when 1. in figure \ref{fig:analysis_selection} is collapsed.
+If there are different treatment options in the uploaded dataset file, ar you have created different \texttt{ARMS} you can 2. choose a specific \texttt{ARM} from the drop-down menu in figure \ref{fig:analysis_selection}. The data for which the analysis will be performed is displayed under 3 on the right hand side of the screen. 
+
+
+\begin{figure}[ht]
+\includegraphics{img/using_the_app/analysis_selection.png}
+\caption{Analysis Selection}
+\label{fig:analysis_selection}
+\end{figure}
+
+Under 2. we have several options, we will explain each of them next. 
+
+## Select patients with the respective treatment
+
+If there are different treatment options in the uploaded dataset file, ar you have created different \texttt{ARMS} you can 2. choose a specific \texttt{ARM} from the drop-down menu in figure \ref{fig:analysis_selection}. In this case we choose our created \texttt{ARM} Placebo500. g1 would not be a wise choice, it includes different treatments.
+
+
+## Select Safety Analysis
+
+The drop-down menu in figure \ref{fig:analysis_selection} provides two analyses
+options to choose from:
+
+-   Incidence Proportion: sometimes known as Adverse Event Rate which
+    describes the proportion of patients with at least one of the
+    Adverse Event of interest in our trial, i.e.,
+    $Incidence \ Proportion = \frac{\sum{N \_WITH \_ AE}}{\sum N}$ where
+    $\sum{N \_WITH \_ AE}$ = total number of patients with AE and
+    ${\sum N}$ = total number of patients.
+
+    Incidence proportion can also be described as the estimated
+    probability of a patient having one or more AEs during the specific
+    period.
+
+-   Exposure Adjusted Adverse Event Rate: sometimes referred to as Incident
+    rate, which describes the incident rate of AEs per patient per unit
+    time assuming a constant hazard rate. This could be interpreted as
+    the number of patients having one or more adverse events per unit
+    time under assumption of constant risk over the observational
+    period.
+    $Exposure \ Adjusted\  Event \ Rate = \frac{\sum{N \_ WITH \_AE}}{\sum{t_{i}}}$
+    where $\sum{N \_ WITH \_AE}$ = number of subjects who had at least
+    one AE, $t_{i}$ = subject $i$'s total exposure time to first AE or
+    censoring.
+
+The choice of Safety Analysis option is based on the need of the user.
+Later section will be divided into subsection to give a proper insight to the use of the app.
+
+## Select Safety Topic
+
+The user should select a safety topic (AE endpoint) that a (robust) MAP
+Prior will explore from the drop-down menu in Figure \ref{fig:analysis_selection}. The
+filtered data will be displayed on the right hand side of the screen.
+
+By default, the first AE endpoint (ordered alphabetically) will be
+selected and displayed. In our example we choose also vomitting. 
+
+## Used Seed
+
+The user can manually set the seed for reproducibility of results of the
+Markov Chain Monte Carlo simulations and other random draws (see figure \ref{fig:analysis_selection}). Be aware that reproducibility is only guaranteed,
+while you are in the same session. For more information, please refer to the statistical analysis plan. For more information how to save your analysis please see section TODO 
+
+By default, a seed is given, but you can always overwrite the seed.
+
+
+## Pool by Study
+
+If the defined treatment arm includes subsets within the trial, e.g.,
+several different doses, the user can choose to pool these together or
+keep them separated for the purpose of MAP Prior analysis. The default
+option is to pool the studies together (see 1. figure \ref{fig:pool_study}).
+
+\begin{figure}[ht]
+\includegraphics{img/using_the_app/pool_study.png}
+\caption{Pool by study}
+\label{fig:pool_study}
+\end{figure}
+
+As can be seen in 2. the sum over the study is taken, if the studies won't be pooled,
+each subgroup is treated as a own group within the hierarchical model. For the demonstration we changed the \texttt{ARM} to g1. If we 3. select no pooling we get the three different subgroups from different regions with different frequency.
+
+
+For the reminder of the demonstration using Placebo500, there is no difference whether we pool or not. 
+
+\newpage
+# **MAP Prior**
+
+\begin{figure}[ht]
+\caption{MAP Prior}
+\includegraphics{img/map_prior/map_prior.png}
+\label{fig:map_prior}
+\end{figure}
+
+The MAP Prior as proposed (see @neuenschwander_summarizing_2010) is
+estimated using a meta-analytic predictive model which accounts for the
+between-trial heterogeneity.
+
+First collapse the section under 1. in fig. \ref{fig:map_prior}. Under 2. you have different options. The \texttt{B-SAFE} module uses the Half-normal distribution as a prior distribution for the between trial heterogeneity parameter $\tau$ as seen in
+fig. \ref{fig:map_prior} which is a special case of the normal distribution
+that is truncated to values greater than or equal to zero. 
+
+To control the amount of information borrowed, the drop-down menu in
+fig. \ref{fig:map_prior} gives you control of how much historical
+information to borrow using the recommendation (see @weber_applying_2021)
+as shown in Table \ref{tab:hete}. Generally, with larger heterogeneity less information will be borrowed.
+
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+        Heterogeneity & $\tau /\sigma$ \\
+    \hline
+         small & 0.0625 \\
+    \hline
+        moderate & 0.125 \\
+    \hline
+         substantial & 0.25 \\
+    \hline
+         large & 0.5 \\
+    \hline
+         very large & 1 \\
+    \hline
+    \end{tabular}
+    \caption{Heterogeneity}
+    \label{tab:hete}
+\end{table}
+
+
+The amount of information to be borrowed depends
+on the confidence the user has on the similarity between the new and historical data. In the app, the (default) hyperparameter for $\tau$ representing between-trial heterogeneity has been set to Large @ghadessi_roadmap_2020.
+
+
+For the Expected Sample Size method, the Expected Local Information
+Ratio proposed in @neuenschwander_predictively_2020 is used . This is
+due to its predictive consistency. 
+
+In fig. \ref{fig:map_prior} the most important button is 3. For any relevant changes, the MCMC sample has to be calculated again. If no MAP prior was calculated, or any changes where done, then 4. is displayed. 
+
+For our example we use the default settings and continue with the incidence proportions and will investigate the exposure adjusted adverse event rate. 
+
+After 3. Updating the MAP prior, a small idle token (see fig. \ref{fig:idle})will appear on the bottem right corner and then the results instead of 3. 
+
+\begin{figure}[ht]
+\caption{MAP Prior}
+\includegraphics{img/using_the_app/idle.png}
+\label{fig:idle}
+\end{figure}
+
+## **MAP Prior - Incidence Proportion**
+
+On the top-right corner of Figure \ref{fig:forrest_bin}, is the Model Estimate of which a forest plot displays the frequentist estimates for the strata (dashed lines) and the
+lower part shows the mean distribution and the MAP prior of the mean.
+
+\begin{figure}[ht]
+\caption{Forrest Plot - Incidence Proportions}
+\includegraphics{img/map_prior/forrestplot.png}
+\label{fig:forrest_bin}
+\end{figure}
+
+On the bottom-right corner of figure \ref{fig:map_smry_bin}, a density curve and summary statistics is obtained for the MAP Prior. 
+
+\begin{figure}[ht]
+\caption{MAP Prior summary - Incidence Proportions}
+\includegraphics{img/map_prior/map_smry.png}
+\label{fig:map_smry_bin}
+\end{figure}
+
+
+The MAP prior for the incidence Proportion is generated by MCMC samples and then approximated by mixture of three Beta distributions (see figure \ref{fig:map_smry_bin}).
+
+
+## **MAP Prior: Exposure-Adjusted Adverse Event Rate**
+
+Exposure-Adjusted Event Rate is estimated as the log hazard rate using
+the asymptotic normal distribution. The MAP Prior for the log hazard is
+approximated by mixture of three normal distributions (see fig ).
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/mapea.png} -->
+<!-- \caption{MAP Prior for Exposure-Adjusted Adverse Event Rate} -->
+<!-- \label{fig:fig12} -->
+<!-- \end{figure} -->
+
+<!-- In Figure \ref{fig:fig12} the variable mean exp, SD exp, Median exp and 95% CrI exp refers to the -->
+<!-- mean, standard deviation, median and the 95% Credible Interval of the -->
+<!-- MAP Prior on the hazard rate scale. -->
+
+<!-- By default, the between trial heterogeneity was set to "Large" so that the amount of information borrowed would be "small". By -->
+<!-- clicking the "Update" button, a forest plot, density curve, and summary -->
+<!-- statistics were obtained for the MAP prior as shown in Figure -->
+<!-- \ref{fig:fig31} and Figure \ref{fig:fig32}. The parametric distribution -->
+<!-- of the MAP prior was approximated by a mixture of three Beta -->
+<!-- distributions. The effective sample size is 67. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/toy_forest.png} -->
+<!-- \caption{Forest Plot} -->
+<!-- \label{fig:fig31} -->
+<!-- \end{figure} -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/toy_map_table.png} -->
+<!-- \caption{MAP Prior} -->
+<!-- \label{fig:fig32} -->
+<!-- \end{figure} -->
+
+<!-- \newpage -->
+
+<!-- # **Robust MAP Prior** -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/maprobo.png} -->
+<!-- \end{figure} -->
+
+<!-- To protect against prior-data conflict, MAP priors should be robustified -->
+<!-- @schmidli_robust_2014-1. This adds a weakly informative component to the (informative) MAP prior distribution, such that the more the historical data differs from the observed data, the more robust MAP Prior will down-weight/discount the -->
+<!-- information from the historical data thus preventing prior data -->
+<!-- conflict. The default prior weight on the weakly informative component has been set to 0.2 (20%) discounting factor. -->
+
+<!-- Depending on the expected comparability between the historical data and -->
+<!-- the observed data, the user can choose the weight of the weakly -->
+<!-- informative robust prior component. The smaller the weakly-informative -->
+<!-- prior weight figure, the more confidence the user has in the historical -->
+<!-- data and the less discount in the historical data. -->
+
+<!-- The amount of robustification (i.e., the weakly-informative prior weight) can be manipulated using the the slider as -->
+<!-- shown in Figure \ref{fig:fig13}. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/robslider.png} -->
+<!-- \caption{Robustification} -->
+<!-- \label{fig:fig13} -->
+<!-- \end{figure} -->
+
+<!-- A graph depicting both the MAP Prior and Robust MAP Prior is the -->
+<!-- generated on the right hand side of the page, shown in Figure \ref{fig:fig14}. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/robustmap.png} -->
+<!-- \caption{Robust MAP Prior} -->
+<!-- \label{fig:fig14} -->
+<!-- \end{figure} -->
+
+<!-- For incidence proportion analysis, the uninformative mean is set to 50% and thus a Beta(1,1) distribution is chosen as the weakly-informative prior. For exposure-adjusted adverse event rate, a weakly-informative prior mean -->
+<!-- (hazard ratio) as in Figure \ref{fig:fig15} is also selected for the -->
+<!-- robust MAP prior to be calculated and the mean value is supposed to be chosen by the user. Note that if the SD for the robustified MAP prior is larger than 1, this means that the robustification turns to be informative so that we suggest not to borrow any information. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/robsliderea.png} -->
+<!-- \caption{Robust MAP Prior for Exposure-Adjusted Adverse Event} -->
+<!-- \label{fig:fig15} -->
+<!-- \end{figure} -->
+
+<!-- For the simple example, to protect against prior data conflict, the default weight 20% (i.e., 20% on weakly-informative part and 80% on informative part) was set -->
+<!-- as discounting factor. Figure \ref{fig:fig33} depicts both the MAP prior -->
+<!-- and robustified MAP prior. By adding the non-informative part, now the -->
+<!-- robustified MAP prior is approximated by four Beta distributions. The -->
+<!-- former three Beta component were down weighted so that the effective -->
+<!-- sample size reduces to 52. -->
+
+<!-- Here note that the mode/peak of the distribution you see in the plot might be different from the mean shown in the table underneath the plot in that both the prior and robustified prior are mixture of multiple densities. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/toy_robust.png} -->
+<!-- \caption{Robust MAP Prior} -->
+<!-- \label{fig:fig33} -->
+<!-- \end{figure} -->
+
+<!-- \newpage -->
+
+<!-- # **New Trial Analysis** -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/nta11.png} -->
+<!-- \end{figure} -->
+
+<!-- The new trial analysis portion of the application is mainly used for -->
+<!-- exploratory purposes. -->
+
+<!-- To input the results of the observed trial (for the arm for which the (robust) MAP prior was generated), manipulate the slider in -->
+<!-- Figure \ref{fig:fig16} which has a separate slider for both the total -->
+<!-- number of patients and the number of patients with the adverse events. The example shown is for incidence proportions. -->
+
+<!-- The maximum number of patients that can be entered is 200. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/nta2.png} -->
+<!-- \caption{Input for New Trial (using data from the same arm for which the (robust) MAP prior was generated)} -->
+<!-- \label{fig:fig16} -->
+<!-- \end{figure} -->
+
+<!-- The Robust MAP Prior obtained in Figure \ref{fig:fig14} is then updated -->
+<!-- with the observed data from the respective arm (data from the new trial). This provides a -->
+<!-- Bayesian Posterior Analysis of the observed data. This could be data -->
+<!-- from an actual current trial or a hypothetical trial. The summary of the -->
+<!-- Robust MAP Prior, Likelihood and Posterior is generated graphically as -->
+<!-- shown in Figure \ref{fig:fig17}. The generated graph allows the user to -->
+<!-- asses for potential prior data conflict. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/nta3.png} -->
+<!-- \caption{Trial Data Conflict Assessment} -->
+<!-- \label{fig:fig17} -->
+<!-- \end{figure} -->
+
+<!-- The Robust MAP Prior describes the historical data. -->
+
+<!-- The Likelihood describes the observed/current data. -->
+
+<!-- The Posterior distribution describes the synthesis of historical prior -->
+<!-- and the observed trial data from which decisions can then be made. -->
+
+<!-- For the simple example, after obtaining the robustified MAP prior for a particular arm, we now input concurrent trial -->
+<!-- data for the same arm. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/toy_current.png} -->
+<!-- \caption{Concurrent Trial Data} -->
+<!-- \label{fig:fig34} -->
+<!-- \end{figure} -->
+
+<!-- By clicking the "Update" button, the posterior distribution is obtained -->
+<!-- by combining the robustified MAP prior and the observed data. The -->
+<!-- summary of the robustified MAP prior, likelihood, and posterior is -->
+<!-- generated graphically as shown in Figure \ref{fig:fig35}. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/toy_post.png} -->
+<!-- \caption{Posterior Distribution} -->
+<!-- \label{fig:fig35} -->
+<!-- \end{figure} -->
+
+<!-- \newpage -->
+
+<!-- # **Decision Making** -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dm1.png} -->
+<!-- \end{figure} -->
+
+<!-- The Decision Making tab allows statistical inferences to be made -->
+<!-- based on the Likelihood, MAP Prior, Robust MAP Prior and the Posterior -->
+<!-- distribution. These options can be obtained by assessing the drop-down -->
+<!-- menu in Figure \ref{fig:fig18}. Note that the inference based on the likelihood is with respect to the observed data, in contrast to which based on the prior/posterior are with respect to the underlying parameter. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dm3.png} -->
+<!-- \caption{Statistical Inferences} -->
+<!-- \label{fig:fig18} -->
+<!-- \end{figure} -->
+
+<!-- Probabilities can be obtained for values exceeding/not-exceeding/between -->
+<!-- limits that can be specified using the slider as shown in Figure -->
+<!-- \ref{fig:fig19} on the left hand-side of the page. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dm2.png} -->
+<!-- \caption{Making Statistical Inferences} -->
+<!-- \label{fig:fig19} -->
+<!-- \end{figure} -->
+
+<!-- A graph is then generated on the right hand-side of the page. -->
+
+<!-- Additionally, inferences are made with 90%, 95% and 99% probabilities as -->
+<!-- shown in Figure \ref{fig:fig20}, e.g., from Figure \ref{fig:fig20} there -->
+<!-- is a 1% certainty that the proportion of patients with adverse_event is -->
+<!-- greater than 30%. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dm4.png} -->
+<!-- \caption{Inferences} -->
+<!-- \label{fig:fig20} -->
+<!-- \end{figure} -->
+
+<!-- For the simple example, given the posterior, we want to know the probability of percentage of -->
+<!-- patients with DILI greater than 3%. By moving the left endpoint of the -->
+<!-- slider to 3% and clicking the "Update" button, the cumulative -->
+<!-- probability right to 3% under the posterior density is shown in Figure -->
+<!-- \ref{fig:fig37}. The conclusion is that we are at least 12% certain that -->
+<!-- the proportion of patients with DILI is greater than 3%. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/toy_decision.png} -->
+<!-- \caption{Decision Making} -->
+<!-- \label{fig:fig36} -->
+<!-- \end{figure} -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/toy_final.png} -->
+<!-- \caption{Decision Making} -->
+<!-- \label{fig:fig37} -->
+<!-- \end{figure} -->
+
+<!-- \newpage -->
+
+<!-- # **Download Results** -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr1.png} -->
+<!-- \end{figure} -->
+
+<!-- Summary tables are produced that contain the posterior probability -->
+<!-- analysis for all the adverse events in the uploaded dataset. There are -->
+<!-- also tables for the Incidence Proportion and Exposure-adjusted Adverse -->
+<!-- Event Rates for all the adverse events in the dataset. -->
+
+<!-- The values that are used in exploring the uploaded dataset has no effect -->
+<!-- in generating the summary tables of the analysis as the default settings -->
+<!-- are used. -->
+
+<!-- Summary tables are generated for all adverse events in the dataset and -->
+<!-- not only those that were explored. -->
+
+<!-- On clicking the show/hide Comparison button in Figure \ref{fig:fig21}, -->
+<!-- the user selects the treatment and control arms that is to be compared -->
+<!-- as shown in Figure \ref{fig:fig22}. The user can make up to five -->
+<!-- different treatment arm comparisons. The slider in Figure -->
+<!-- \ref{fig:fig21} can be moved based on the number of comparisons the user -->
+<!-- wants to do. On increasing the number of comparisons needed as in Figure -->
+<!-- \ref{fig:fig21}, the number of show/hide comparison options also -->
+<!-- increases for which the respective treatment and control arms can be -->
+<!-- selected as in Figure \ref{fig:fig22}. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr2.png} -->
+<!-- \caption{Number of Comparisons} -->
+<!-- \label{fig:fig21} -->
+<!-- \end{figure} -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr4.png} -->
+<!-- \caption{Treatment Arms Comparison} -->
+<!-- \label{fig:fig22} -->
+<!-- \end{figure} -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr3.png} -->
+<!-- \caption{Treatment Arms Comparison} -->
+<!-- \label{fig:fig23} -->
+<!-- \end{figure} -->
+
+<!-- Once the Treatment and Control arms has been selected by the user, click -->
+<!-- the Submit button. The user then waits for the simulation/calculation to -->
+<!-- be completed. A progress bar Figure \ref{fig:fig24} is displayed on the -->
+<!-- bottom-right corner. Depending on the number of Adverse Event Endpoints -->
+<!-- and the number of comparisons done, this simulation process can take -->
+<!-- some time. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr5.png} -->
+<!-- \caption{Simulation Progress} -->
+<!-- \label{fig:fig24} -->
+<!-- \end{figure} -->
+
+<!-- Once the simulation is completed, the chosen comparisons are then -->
+<!-- displayed (from Figure \ref{fig:fig25} to Figure \ref{fig:fig26}) on the -->
+<!-- right-hand side on the page. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr6.png} -->
+<!-- \caption{Before Completing Simulation} -->
+<!-- \label{fig:fig25} -->
+<!-- \end{figure} -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr7.png} -->
+<!-- \caption{After Completing Simulation} -->
+<!-- \label{fig:fig26} -->
+<!-- \end{figure} -->
+
+<!-- On completion of the simulation, the results which is presented in a -->
+<!-- tabular form which can be downloaded as a .pdf file by clicking the -->
+<!-- Download All AE Summary Tables as shown in Figure \ref{fig:fig27}. -->
+
+<!-- \begin{figure}[H] -->
+<!-- \includegraphics{../bsafe_manual_pics_online/dr8.png} -->
+<!-- \caption{Download Button} -->
+<!-- \label{fig:fig27} -->
+<!-- \end{figure} -->
+
+<!-- For each comparison, five different tables are produced: -->
+
+<!-- -   Table 1 lists the different trials that makes up each arm (Treatment -->
+<!--     and Control) of the comparison. -->
+
+<!-- -   Table 2 indicates the number of patients that experienced each -->
+<!--     Adverse Event r, the total number of patients n, and the proportion -->
+<!--     (%) of patients with AE in the population. Posterior summary shows -->
+<!--     the Posterior Distribution mean, median and the 95% credible -->
+<!--     interval. -->
+
+<!-- -   Table 3 estimates the Risk Difference and the Risk Ratio calculated -->
+<!--     from the number of patients with the event r and the total number of -->
+<!--     patient n (Incidence Proportion). Posterior summary shows the -->
+<!--     Posterior Distribution mean, median and 95% credible interval. -->
+
+<!-- -   Table 4 shows the Exposure-Adjusted Adverse Event rate, the rate of -->
+<!--     patients with event per patient year at risk. Naive estimates shows -->
+<!--     the (pooled) number of patients with event r, divided by the -->
+<!--     (pooled) total exposure time. Posterior summary shows the Posterior -->
+<!--     Distribution mean, median and 95% credible interval. -->
+
+<!-- -   Table 5 estimates the Risk Difference and Risk Ratio calculated from -->
+<!--     (pooled) number of patients with event r and (pooled) number of -->
+<!--     patients (Exposure-Adjusted Adverse Event Rate). Posterior summary -->
+<!--     shows the Posterior Distribution mean, median and 95% credible -->
+<!--     interval. -->
+
+
+
+<!-- \newpage -->
+
+<!-- # **Troubleshooting, Issues and Remarks** -->
+
+<!-- This app is not yet validated. -->
+
+<!-- If the app does not open or does not work as intended, possible ways to -->
+<!-- troubleshoot are: -->
+
+<!-- -   Install the most recent version of R and RStudio -->
+<!-- -   Install the most recent version of the R Shiny Package -->
+
+\newpage
+
+# **Contact**
+
+For questions and feedback please contact:
+
+-   Alexander Stemke
+    [alexander.stemke\@boehringer-ingelheim.com](mailto:alexander.stemke@boehringer-ingelheim.com){.email}
+
+\newpage
+
+# **References**
