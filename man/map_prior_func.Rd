@@ -10,7 +10,8 @@ map_prior_func(
   tau_dist,
   adj_tau,
   seed = NULL,
-  testing = FALSE
+  testing = FALSE,
+  ae_summary = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ map_prior_func(
 \item{seed}{a seed as input for reproducibility}
 
 \item{testing}{for testing purposes faster MCMC}
+
+\item{ae_summary}{historical filtering for comparison, default FALSE}
 }
 \value{
 an S3 object (list) of type gMAP for the incidence proportion analysis

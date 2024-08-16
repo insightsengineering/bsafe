@@ -23,6 +23,8 @@ test_that(
       }
       print(tp_prop$saf_topic)
       if (i > 1) {
+        data <- data %>%
+          dplyr::filter(HIST == 1)
         data <- data_table_prep(
           input_data = data,
           select_analysis = tp_prop$analysis,
@@ -172,7 +174,7 @@ test_that(
 
       th_prop_lb <- thresholds_prop[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
       th_prop_ub <- thresholds_prop[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
-      test_that("MAP Prior row is lower or equal than lower bound thresholds", {
+      test_that("MAP Prior row is higher or equal than lower bound thresholds", {
         expect_true(
           all(
             result_map[, res_string_without_ess] >= (th_prop_lb[map_string, th_string_without_ess_lb] - 3e-02)
@@ -180,7 +182,7 @@ test_that(
         )
       })
 
-      test_that("MAP Prior ESS is lower or equal than lower bound thresholds", {
+      test_that("MAP Prior ESS is higher or equal than lower bound thresholds", {
         expect_true(
           all(
             result_map[, c("ESS")] >= (thresholds_prop[map_string, c("ess_min")] * 0.9)
@@ -216,7 +218,7 @@ test_that(
       #   )
       # })
 
-      test_that("NTA Table is lower or equal than lower bound thresholds", {
+      test_that("NTA Table is higher or equal than lower bound thresholds", {
         expect_true(
           all(
             result_nta[, res_string_without_ess] >= (th_prop_lb[c(rob_string, likeli_string, post_string), th_string_without_ess_lb] - 3e-02),
@@ -224,7 +226,7 @@ test_that(
           )
         )
       })
-      test_that("NTA Table ESS is lower or equal than lower bound thresholds", {
+      test_that("NTA Table ESS is higher or equal than lower bound thresholds", {
         expect_true(
           all(
             result_nta[, c("ESS")] >= (thresholds_prop[c(rob_string, likeli_string, post_string), c("ess_min")] * 0.9),

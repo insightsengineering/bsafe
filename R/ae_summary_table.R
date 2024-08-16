@@ -131,14 +131,16 @@ ae_summary_table <-
           input_data = input_data,
           select_analysis = "Incidence proportion",
           saf_topic = topic,
-          select_btrt = cb_list_trt[[group]]
+          select_btrt = cb_list_trt[[group]],
+          ae_summary = TRUE
         )
 
         ctr_trials <- data_table_prep(
           input_data = input_data,
           select_analysis = "Incidence proportion",
           saf_topic = topic,
-          select_btrt = cb_list_ctrl[[group]]
+          select_btrt = cb_list_ctrl[[group]],
+          ae_summary = TRUE
         )
 
         hist_trt_trials <- trt_trials %>% dplyr::filter(HIST == 1)
@@ -197,7 +199,8 @@ ae_summary_table <-
             select_analysis = "Incidence proportion",
             tau_dist        = "HalfNormal",
             adj_tau         = tau,
-            seed            = seed
+            seed            = seed,
+            ae_summary      = TRUE
           )
           trt_approx <- parametric_approx("Incidence proportion", trt_map_prior)
         } else {
@@ -246,7 +249,8 @@ ae_summary_table <-
             select_analysis = "Incidence proportion",
             tau_dist = "HalfNormal",
             adj_tau = tau,
-            seed = seed
+            seed = seed,
+            ae_summary = TRUE
           )
           ctr_approx <- parametric_approx("Incidence proportion", ctr_map_prior)
         } else {
@@ -310,14 +314,16 @@ ae_summary_table <-
           input_data = input_data,
           select_analysis = "Exposure-adjusted AE rate",
           saf_topic = topic,
-          select_btrt = cb_list_trt[[group]]
+          select_btrt = cb_list_trt[[group]],
+          ae_summary = TRUE
         )
 
         ctr_trials <- data_table_prep(
           input_data = input_data,
           select_analysis = "Exposure-adjusted AE rate",
           saf_topic = topic,
-          select_btrt = cb_list_ctrl[[group]]
+          select_btrt = cb_list_ctrl[[group]],
+          ae_summary = TRUE
         )
 
         tau_er <- tau_adjust(
@@ -376,7 +382,8 @@ ae_summary_table <-
             select_analysis = "Exposure-adjusted AE rate",
             tau_dist = "HalfNormal",
             adj_tau = tau,
-            seed = seed
+            seed = seed,
+            ae_summary = TRUE
           )
           er_trt_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_trt_prior)
         } else {
@@ -433,7 +440,8 @@ ae_summary_table <-
             select_analysis = "Exposure-adjusted AE rate",
             tau_dist = "HalfNormal",
             adj_tau = tau,
-            seed = seed
+            seed = seed,
+            ae_summary = TRUE
           )
           er_ctr_prior_fit <- parametric_approx("Exposure-adjusted AE rate", er_ctr_prior)
         } else {

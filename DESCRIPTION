@@ -1,7 +1,7 @@
 Package: bsafe
 Type: Package
 Title: This package provides utility functions for borrowing historical time-to-event data using MAP priors
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: c(person('Alexander', 'Stemke', role = c('aut', 'cre'),
                      email = 'alexander.stemke@boehringer-ingelheim.com'),
              person('Lars', 'Andersen', role = 'aut',

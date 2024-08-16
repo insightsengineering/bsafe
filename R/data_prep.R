@@ -582,6 +582,7 @@ robust_compare <- function(
 #' @param current_trial information whether it is a historical (0) or current (1) trial
 #' @param select_btrt selected background treatment
 #' @param bool_pooled Whether study data is pooled by study number
+#' @param ae_summary historical filtering for comparison, default FALSE
 #'
 #' @return a dataframe for the selected safety topic with the study ID,
 #' the number of patients in the selected arm, the number of patients in the arm with at
@@ -594,7 +595,8 @@ data_table_prep <-
            saf_topic,
            select_btrt,
            bool_pooled = FALSE,
-           current_trial = FALSE) {
+           current_trial = FALSE,
+           ae_summary = FALSE) {
     # Rename columns
     dat <- input_data
     dat <- dat[order(dat$STUDYID), ]
@@ -604,37 +606,75 @@ data_table_prep <-
     # Filter for the selected background treatment and safety topic
     # Return total exposure as well for exposure-adjusted analysis
     # nolint end
-    if (select_analysis == "Incidence proportion") {
-      dat <- dat %>%
-        dplyr::filter(ARM %in% select_btrt &
-          SAF_TOPIC == saf_topic) %>%
-        dplyr::select(STUDYID, N, N_WITH_AE) %>%
-        na.omit()
-    } else if (select_analysis == "Exposure-adjusted AE rate") {
-      dat <- dat %>%
-        dplyr::filter(ARM %in% select_btrt &
-          SAF_TOPIC == saf_topic) %>%
-        dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP) %>%
-        na.omit()
-    }
-
-    # test this
-
-    if (bool_pooled == TRUE) {
+    if(ae_summary){
       if (select_analysis == "Incidence proportion") {
         dat <- dat %>%
-          dplyr::group_by(STUDYID) %>%
-          dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), .groups = "drop")
-        dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE)
+          dplyr::filter(ARM %in% select_btrt &
+                          SAF_TOPIC == saf_topic) %>%
+          dplyr::select(STUDYID, N, N_WITH_AE, HIST) %>%
+          na.omit()
+      } else if (select_analysis == "Exposure-adjusted AE rate") {
+        dat <- dat %>%
+          dplyr::filter(ARM %in% select_btrt &
+                          SAF_TOPIC == saf_topic) %>%
+          dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP, HIST) %>%
+          na.omit()
       }
 
-      if (select_analysis == "Exposure-adjusted AE rate") {
+      # test this
+
+      if (bool_pooled == TRUE) {
+        if (select_analysis == "Incidence proportion") {
+          dat <- dat %>%
+            dplyr::group_by(STUDYID, HIST) %>%
+            dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), .groups = "drop")
+          dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, HIST)
+        }
+
+        if (select_analysis == "Exposure-adjusted AE rate") {
+          dat <- dat %>%
+            dplyr::group_by(STUDYID, HIST) %>%
+            dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), TOT_EXP = sum(TOT_EXP), .groups = "drop")
+          dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP, HIST)
+        }
+      }
+    } else{
+      if (select_analysis == "Incidence proportion") {
         dat <- dat %>%
-          dplyr::group_by(STUDYID) %>%
-          dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), TOT_EXP = sum(TOT_EXP), .groups = "drop")
-        dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP)
+          dplyr::filter(ARM %in% select_btrt &
+                          SAF_TOPIC == saf_topic) %>%
+          dplyr::select(STUDYID, N, N_WITH_AE) %>%
+          na.omit()
+      } else if (select_analysis == "Exposure-adjusted AE rate") {
+        dat <- dat %>%
+          dplyr::filter(ARM %in% select_btrt &
+                          SAF_TOPIC == saf_topic) %>%
+          dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP) %>%
+          na.omit()
+      }
+
+      # test this
+
+      if (bool_pooled == TRUE) {
+        if (select_analysis == "Incidence proportion") {
+          dat <- dat %>%
+            dplyr::group_by(STUDYID) %>%
+            dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), .groups = "drop")
+          dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE)
+        }
+
+        if (select_analysis == "Exposure-adjusted AE rate") {
+          dat <- dat %>%
+            dplyr::group_by(STUDYID) %>%
+            dplyr::summarise(N = sum(N), N_WITH_AE = sum(N_WITH_AE), TOT_EXP = sum(TOT_EXP), .groups = "drop")
+          dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP)
+        }
       }
     }
+
+
+
+
 
     return(dat)
   }

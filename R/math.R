@@ -101,6 +101,7 @@ parametric_approx <- function(select_analysis, map_prior) {
 #' @param adj_tau numeric value from tau_adjust
 #' @param seed a seed as input for reproducibility
 #' @param testing for testing purposes faster MCMC
+#' @param ae_summary historical filtering for comparison, default FALSE
 #'
 #' @return an S3 object (list) of type gMAP for the incidence proportion analysis
 #' or a vector of the posterior MCMC samples for the exposure-adjusted analysis
@@ -111,7 +112,12 @@ map_prior_func <-
            tau_dist,
            adj_tau,
            seed = NULL,
-           testing = FALSE) {
+           testing = FALSE,
+           ae_summary = FALSE) {
+    if(ae_summary) {
+      input_data <- input_data %>% dplyr::filter(HIST == 1)
+    }
+
     if (testing == FALSE) {
       # for exact method look stan/jags up, but if no rounding etc n_mcmc = (n_iter-n_warm)*n_chain/n_thin
       n_iter <- 6000

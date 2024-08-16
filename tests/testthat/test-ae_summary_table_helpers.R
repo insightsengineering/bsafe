@@ -5,6 +5,21 @@ test_that("test-ae_summary_table_helpers.R works as expected", {
   saf_topic <- "Scen07"
   seed <- 8888
 
+  hist_trt_trials <- data %>%
+    dplyr::filter(ARM == cb_list_trt) %>%
+    dplyr::filter(HIST == 1)
+  hist_ctr_trials <- data %>%
+    dplyr::filter(ARM == cb_list_ctrl) %>%
+    dplyr::filter(HIST == 0)
+
+
+  trt_current_trial <- data %>%
+    dplyr::filter(ARM == cb_list_trt) %>%
+    dplyr::filter(HIST == 1)
+  ctr_current_trial <- data %>%
+    dplyr::filter(ARM == cb_list_ctrl) %>%
+    dplyr::filter(HIST == 0)
+
   trt_trials <- data_table_prep(
     input_data = data,
     select_analysis = "Incidence proportion",
@@ -19,12 +34,6 @@ test_that("test-ae_summary_table_helpers.R works as expected", {
     select_btrt = "g1"
   )
 
-  hist_trt_trials <- trt_trials %>% dplyr::filter(HIST == 1)
-  hist_ctr_trials <- ctr_trials %>% dplyr::filter(HIST == 1)
-
-
-  trt_current_trial <- trt_trials %>% dplyr::filter(HIST == 0)
-  ctr_current_trial <- ctr_trials %>% dplyr::filter(HIST == 0)
 
   data_check_bin <- data_available(
     hist_trt = hist_trt_trials,
