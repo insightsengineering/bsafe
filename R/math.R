@@ -114,7 +114,7 @@ map_prior_func <-
            seed = NULL,
            testing = FALSE,
            ae_summary = FALSE) {
-    if(ae_summary) {
+    if (ae_summary) {
       input_data <- input_data %>% dplyr::filter(HIST == 1)
     }
 
