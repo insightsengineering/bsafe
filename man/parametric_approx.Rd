@@ -17,6 +17,6 @@ the best fitting mixture model, i.e., the model with the lowest AIC
 }
 \description{
 Fitting a series of mixtures of conjugate distributions to a sample
-using Expectation-Maximization. First, a Nc\link{1} component mixture is fitted, then a
-Nc\link{2} component mixture, and so on. The mixture providing the best AIC value is selected.
+using Expectation-Maximization. First, a Nc 1 component mixture is fitted, then a
+Nc 2 component mixture, and so on. The mixture providing the best AIC value is selected.
 }

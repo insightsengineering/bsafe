@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_prep.R
 \name{mix_distribution_all}
 \alias{mix_distribution_all}
-\title{Title}
+\title{Distributions for MAP Prior, Robust MAP Prior, Likelihood, or Posterior Distribution}
 \usage{
 mix_distribution_all(
   select_analysis,
@@ -10,12 +10,25 @@ mix_distribution_all(
   select_dist,
   param_approx,
   robust_map_object,
-  post_dist
+  post_dist,
+  seed
 )
 }
 \arguments{
-\item{post_dist}{}
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{current_trial_data}{information whether it is a historical (0) or current (1) trial}
+
+\item{select_dist}{Choice of which should be displayed Robust MAP/MAP/Likelihood/Post}
+
+\item{param_approx}{parametric approximation}
+
+\item{robust_map_object}{map prior; mixture distribution with a non-informative component from robust_map()}
+
+\item{post_dist}{posterior mixture distribution or MCMC samples from posterior_dist()}
+
+\item{seed}{to reproduce same figures}
 }
 \description{
-Title
+A function that produces samples which display the different distributions
 }

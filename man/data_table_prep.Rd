@@ -10,7 +10,8 @@ data_table_prep(
   saf_topic,
   select_btrt,
   bool_pooled = FALSE,
-  current_trial = FALSE
+  current_trial = FALSE,
+  ae_summary = FALSE
 )
 }
 \arguments{
@@ -18,11 +19,15 @@ data_table_prep(
 
 \item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 
-\item{saf_topic}{the adverse event of interest}
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
 
-\item{select_btrt}{selected treatment arms}
+\item{select_btrt}{selected background treatment}
+
+\item{bool_pooled}{Whether study data is pooled by study number}
 
 \item{current_trial}{information whether it is a historical (0) or current (1) trial}
+
+\item{ae_summary}{historical filtering for comparison, default FALSE}
 }
 \value{
 a dataframe for the selected safety topic with the study ID,

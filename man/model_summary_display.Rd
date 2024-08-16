@@ -2,10 +2,28 @@
 % Please edit documentation in R/tables.R
 \name{model_summary_display}
 \alias{model_summary_display}
-\title{Title}
+\title{MAP Prior table}
 \usage{
-model_summary_display(map_object, select_analysis, param_approx, ess_method)
+model_summary_display(
+  map_object,
+  select_analysis,
+  param_approx,
+  ess_method,
+  numerical = FALSE
+)
+}
+\arguments{
+\item{map_object}{MAP Prior object}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{param_approx}{map prior; best fitting mixture model from parametric_approx()}
+
+\item{ess_method}{ESS Method, currently only ELIR available}
+
+\item{numerical}{TRUE or FALSE, for return values in Dataframe or to be displayed}
 }
 \description{
-Title
+Function to display descriptive characteristics of the MAP prior,
+mainly in the MAP Prior tab
 }

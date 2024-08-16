@@ -2,10 +2,19 @@
 % Please edit documentation in R/plots.R
 \name{forest_plot_display}
 \alias{forest_plot_display}
-\title{Title}
+\title{Forest plot display}
 \usage{
 forest_plot_display(map_object, select_analysis, saf_topic, select_btrt)
 }
+\arguments{
+\item{map_object}{The gMAP element from RBesT}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+
+\item{select_btrt}{Selected background treatment}
+}
 \description{
-Title
+Display Forestplot in the MAP Prior Tab
 }

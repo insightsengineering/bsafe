@@ -2,10 +2,15 @@
 % Please edit documentation in R/data_prep.R
 \name{ae_events_wrangler}
 \alias{ae_events_wrangler}
-\title{Title}
+\title{Choices for treatment}
 \usage{
 ae_events_wrangler(input_data, selected_trt)
 }
+\arguments{
+\item{input_data}{the raw summary level data}
+
+\item{selected_trt}{selection of treatment}
+}
 \description{
-Title
+A function to choose the treatment
 }

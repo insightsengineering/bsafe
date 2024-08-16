@@ -2,7 +2,7 @@
 % Please edit documentation in R/tables.R
 \name{summary_stat_all_display}
 \alias{summary_stat_all_display}
-\title{Title}
+\title{Summary statistics for robust prior, likelihood, and posterior}
 \usage{
 summary_stat_all_display(
   select_analysis,
@@ -10,9 +10,25 @@ summary_stat_all_display(
   ess_method,
   current_trial_data,
   post_dist,
-  download = FALSE
+  numerical = FALSE,
+  seed
 )
 }
+\arguments{
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{robust_map_object}{map prior; mixture distribution with a non-informative component from robust_map()}
+
+\item{ess_method}{ESS Method, currently only ELIR available}
+
+\item{current_trial_data}{information whether it is a historical (0) or current (1) trial}
+
+\item{post_dist}{posterior mixture distribution or MCMC samples from posterior_dist()}
+
+\item{numerical}{TRUE or FALSE, for return values in Dataframe or to be displayed}
+
+\item{seed}{a seed}
+}
 \description{
-Title
+Summary statistics for robust prior, likelihood, and posterior in the New trial analysis tab
 }

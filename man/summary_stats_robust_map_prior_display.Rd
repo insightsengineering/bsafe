@@ -2,7 +2,7 @@
 % Please edit documentation in R/tables.R
 \name{summary_stats_robust_map_prior_display}
 \alias{summary_stats_robust_map_prior_display}
-\title{Title}
+\title{Display Summary Stats}
 \usage{
 summary_stats_robust_map_prior_display(
   map_object,
@@ -11,9 +11,27 @@ summary_stats_robust_map_prior_display(
   ess_method,
   robust_map_object,
   rob_ess_method,
-  download = FALSE
+  numerical = FALSE,
+  seed
 )
 }
+\arguments{
+\item{map_object}{MAP Prior object}
+
+\item{select_analysis}{Chosen Analysis proportion vs. rates}
+
+\item{param_approx}{map prior; best fitting mixture model from parametric_approx()}
+
+\item{ess_method}{Method to calculate ESS: Currently only 1 available ELIR}
+
+\item{robust_map_object}{map prior; mixture distribution with a non-informative component from robust_map()}
+
+\item{rob_ess_method}{Method to calculate ESS: Currently only 1 available ELIR}
+
+\item{numerical}{TRUE or FALSE, for return values in Dataframe or to be displayed}
+
+\item{seed}{a seed to reproduce the results}
+}
 \description{
-Title
+Display summary stats of robust MAP prior and MAP prior in the Robust MAP tab
 }

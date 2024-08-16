@@ -1,39 +1,45 @@
 Package: bsafe
 Type: Package
-Title: This package provides utility functions for borrowing historical piecewise exponential time-to-event data using MAP priors
-Version: 0.0.1
+Title: This package provides utility functions for borrowing historical time-to-event data using MAP priors
+Version: 0.1.0
 Authors@R: c(person('Alexander', 'Stemke', role = c('aut', 'cre'),
                      email = 'alexander.stemke@boehringer-ingelheim.com'),
              person('Lars', 'Andersen', role = 'aut',
                      email = 'lars.andersen@boehringer-ingelheim.com'),
              person('Steven', 'Brooks', role = 'aut',
                      email = 'steven.brooks@boehringer-ingelheim.com'),
+             person('Lin', 'Zou', role = 'ctb',
+                     email = 'lin.zou@boehringer-ingelheim.com'),
+             person('Lou', 'Whitehead', role = 'ctb',
+                     email = 'l.whitehead2@newcastle.ac.uk'),
+             person('Dunfu', 'Yang', role = 'ctb',
+                     email = 'dunfu.yang@boehringer-ingelheim.com'),             
              person('Kevin', 'Kunzmann', role = 'ctb',
                      email = 'kevin.kunzmann@boehringer-ingelheim.com'),
              person('Oliver', 'Sailer', role = 'ctb',
                      email = 'martin_oliver.sailer@boehringer-ingelheim.com'),
-                     person("Boehringer Ingelheim Pharma GmbH & Co. KG",
+             person("Boehringer Ingelheim Pharma GmbH & Co. KG",
                      role = c("cph", "fnd")))
-Description: This package provides utility functions for borrowing historical piecewise exponential time-to-event data using MAP priors.
-    PWE MAP Priors are used to model the time-to-event of a process.
-    The time-to-event data is modeled as a piecewise exponential function.
+Description: This package provides utility functions for borrowing historical time-to-event data using MAP priors.
+    MAP Priors are used to model the time-to-event of a process.
     The MAP prior is a function of the time-to-event data.
 License: Apache License 2.0 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.0)
 Imports:
     ggplot2 (>= 3.3.5),
-    rstantools,
+    rstantools (>= 2.3),
     dplyr (>= 1.0.7),
-    knitr,
+    knitr (>= 1.45),
     magrittr (>= 2.0.1),
     shiny (>= 1.6.0),
     kableExtra (>= 1.3.4),
     bayesplot (>= 1.8.1),
-    RBesT
+    RBesT (>= 1.7-3),
+    rstan (>= 2.32)
 Suggests: 
     testthat

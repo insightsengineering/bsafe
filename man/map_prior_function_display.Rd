@@ -2,10 +2,15 @@
 % Please edit documentation in R/display.R
 \name{map_prior_function_display}
 \alias{map_prior_function_display}
-\title{Title}
+\title{Parametric Approximation density display}
 \usage{
 map_prior_function_display(param_approx, select_analysis)
 }
+\arguments{
+\item{param_approx}{parametric approximation}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+}
 \description{
-Title
+Display parametric approximation mixture density function in the MAP Prior Tab
 }

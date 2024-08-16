@@ -2,7 +2,7 @@
 % Please edit documentation in R/plots.R
 \name{param_mix_density_display}
 \alias{param_mix_density_display}
-\title{Title}
+\title{Parametric Mix Display}
 \usage{
 param_mix_density_display(
   param_approx,
@@ -11,6 +11,15 @@ param_mix_density_display(
   select_btrt
 )
 }
+\arguments{
+\item{param_approx}{map prior; best fitting mixture model from parametric_approx()}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
+
+\item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+
+\item{select_btrt}{selected background treatment}
+}
 \description{
-Title
+Display parametric mixture density in the MAP Prior Tab
 }
