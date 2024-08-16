@@ -105,7 +105,7 @@ robust_map_prior_mix_dens_display <- function(
 area_under_the_curve <- function(ae_prop, mix, saf_topic, select_analysis) {
   # Interpret area under the curve
 
-  if(select_analysis == "Incidence proportion"){
+  if (select_analysis == "Incidence proportion") {
     certainty <- round(
       100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)),
       digits = 2
@@ -144,10 +144,9 @@ area_under_the_curve <- function(ae_prop, mix, saf_topic, select_analysis) {
     } else if (ae_prop[1] == ae_prop[2]) {
       out <- paste0("Please ensure that the slider represents an interval.")
     }
-    #hotfix
-  }else if(select_analysis == "Exposure-adjusted AE rate"){
-
-    ae_prop <- ae_prop*100
+    # hotfix
+  } else if (select_analysis == "Exposure-adjusted AE rate") {
+    ae_prop <- ae_prop * 100
 
     certainty <- round(
       100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)),
@@ -160,12 +159,11 @@ area_under_the_curve <- function(ae_prop, mix, saf_topic, select_analysis) {
       out <- paste0(
         "We are at least ", certainty,
         "% certain that the exposure adjusted density rate of patients with ", saf_topic,
-        " is between ", round(exp(ae_prop[1]), 2), " exp(", round(ae_prop[1], 2),") and ",
-        round(exp(ae_prop[2]), 2), " exp(", round( ae_prop[2], 2), ")."
+        " is between ", round(exp(ae_prop[1]), 2), " exp(", round(ae_prop[1], 2), ") and ",
+        round(exp(ae_prop[2]), 2), " exp(", round(ae_prop[2], 2), ")."
       )
     }
   }
 
   return(out)
-
 }
