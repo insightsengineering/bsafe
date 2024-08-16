@@ -174,7 +174,7 @@ test_that(
 
       th_rates_lb <- thresholds_rates[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
       th_rates_ub <- thresholds_rates[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
-      test_that(paste0("MAP Prior row is higher or equal than lower bound thresholds in ",tp_rates$saf_topic), {
+      test_that(paste0("MAP Prior row is higher or equal than lower bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_map[, res_string_without_ess] >= (th_rates_lb[c(log_map_string, exp_map_string), th_string_without_ess_lb] - 8e-02),
