@@ -490,7 +490,6 @@ SimStudy <- function(nPat = c(g1 = 100, g2 = 100),
   res <- as.data.frame(res)
   return(res)
 }
-
 ```
 
 
@@ -664,7 +663,6 @@ SimTestData <- function(
 
   return(res_df)
 }
-
 ```
 
 # **Binary Endpoint results**
@@ -1395,10 +1393,10 @@ The characteristics and thresholds for the simulation is as in the table below:
 ```{r tabthresholdb13, echo=FALSE}
 scenario <- 13
 thresholds_scenario <- thresholds_props[[scenario + 1]]$treshholds
-th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")],deci)
-th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")],deci)
-th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")],deci)
-th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")],deci)
+th_prop_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_prop_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_prop_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_prop_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
   (Characteristic <- c(
@@ -1429,11 +1427,11 @@ print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_props[[scenario + 1]]$parameters)
 
 knitr::kable(table,
-             col.names = c(
-               "Characteristic", "Observed Min.", "Lower Threshold",
-               "Upper Threshold", "Observed Max."
-             ),
-             booktabs = TRUE, ngtable = TRUE
+  col.names = c(
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
+  ),
+  booktabs = TRUE, ngtable = TRUE
 )
 ```
 
@@ -2182,10 +2180,10 @@ The characteristics and thresholds for the simulation is as in the table below:
 scenario <- 13
 thresholds_scenario <- thresholds_rates[[scenario + 1]]$treshholds
 
-th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")],deci)
-th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")],deci)
-th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")],deci)
-th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")],deci)
+th_rate_min <- round(thresholds_scenario[, c("mean_min", "sd_min", "median_min", "cri_lb_min", "cri_ub_min", "ess_min")], deci)
+th_rate_lb <- round(thresholds_scenario[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")], deci)
+th_rate_ub <- round(thresholds_scenario[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")], deci)
+th_rate_max <- round(thresholds_scenario[, c("mean_max", "sd_max", "median_max", "cri_lb_max", "cri_ub_max", "ess_max")], deci)
 
 table <- cbind(
   (Characteristic <- characteristic_labels_rate),
@@ -2200,11 +2198,11 @@ print("With those values our newly created MAP Prior has been updated:")
 print(thresholds_rates[[scenario + 1]]$parameters)
 
 knitr::kable(table,
-             col.names = c(
-               "Characteristic", "Observed Min.", "Lower Threshold",
-                "Upper Threshold", "Observed Max."
-             ),
-             booktabs = TRUE, ngtable = TRUE
+  col.names = c(
+    "Characteristic", "Observed Min.", "Lower Threshold",
+    "Upper Threshold", "Observed Max."
+  ),
+  booktabs = TRUE, ngtable = TRUE
 )
 ```
 
