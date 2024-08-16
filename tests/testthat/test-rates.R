@@ -174,7 +174,7 @@ test_that(
 
       th_rates_lb <- thresholds_rates[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
       th_rates_ub <- thresholds_rates[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
-      test_that("MAP Prior row is higher or equal than lower bound thresholds", {
+      test_that(paste0("MAP Prior row is higher or equal than lower bound thresholds in ",tp_rates$saf_topic), {
         expect_true(
           all(
             result_map[, res_string_without_ess] >= (th_rates_lb[c(log_map_string, exp_map_string), th_string_without_ess_lb] - 8e-02),
@@ -183,7 +183,7 @@ test_that(
         )
       })
 
-      test_that("MAP Prior ESS is higher or equal than lower bound thresholds", {
+      test_that(paste0("MAP Prior ESS is higher or equal than lower bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_map[, c("ESS")] >= (thresholds_rates[log_map_string, c("ess_min")] * 0.9),
@@ -191,10 +191,10 @@ test_that(
           )
         )
       })
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in ", tp_rates$saf_topic), {
         expect_equal(which(is.na(result_map)), which(is.na(th_rates_lb[c(log_map_string, exp_map_string), ])))
       })
-      test_that("MAP Prior row is lower or equal than upper bound thresholds", {
+      test_that(paste0("MAP Prior row is lower or equal than upper bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_map[, res_string_without_ess] <= (th_rates_ub[c(log_map_string, exp_map_string), th_string_without_ess_ub] + 8e-02), # gt/lt tolerance
@@ -202,7 +202,7 @@ test_that(
           )
         )
       })
-      test_that("MAP Prior ESS is lower or equal than upper bound thresholds", {
+      test_that(paste0("MAP Prior ESS is lower or equal than upper bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_map[, c("ESS")] <= (th_rates_ub[log_map_string, c("ess_ub")] * 1.1),
@@ -211,10 +211,10 @@ test_that(
         )
       })
 
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in ", tp_rates$saf_topic), {
         expect_equal(which(is.na(result_map)), which(is.na(th_rates_ub[c(log_map_string, exp_map_string), ])))
       })
-      test_that("MAP Prior Row is identical in both MAP Prior as well as Robust MAP Prior Table", {
+      test_that(paste0("MAP Prior Row is identical in both MAP Prior as well as Robust MAP Prior Table in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_map == result_rob[c(log_map_string, exp_map_string), ],
@@ -222,13 +222,13 @@ test_that(
           )
         )
       })
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in ", tp_rates$saf_topic), {
         expect_equal(which(is.na(result_nta)), which(is.na(th_rates_lb[c(
           log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
           exp_post_string
         ), ])))
       })
-      test_that("NTA Table is higher or equal than lower bound thresholds", {
+      test_that(paste0("NTA Table is higher or equal than lower bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_nta[, res_string_without_ess] >= (th_rates_lb[c(
@@ -239,7 +239,7 @@ test_that(
           )
         )
       })
-      test_that("NTA Table ESS is higher or equal than lower bound thresholds", {
+      test_that(paste0("NTA Table ESS is higher or equal than lower bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_nta[, c("ESS")] >= (thresholds_rates[c(
@@ -250,14 +250,14 @@ test_that(
           )
         )
       })
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in", tp_rates$saf_topic), {
         expect_equal(which(is.na(result_nta)), which(is.na(th_rates_lb[c(
           log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
           exp_post_string
         ), ])))
       })
       # FALSE - replace with difference
-      test_that("NTA Table is lower or equal than upper bound thresholds", {
+      test_that(paste0("NTA Table is lower or equal than upper bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_nta[, res_string_without_ess] <= (th_rates_ub[c(
@@ -269,7 +269,7 @@ test_that(
         )
       })
 
-      test_that("NTA Table ESS is lower or equal than upper bound thresholds", {
+      test_that(paste0("NTA Table ESS is lower or equal than upper bound thresholds in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_nta[, c("ESS")] <= (th_rates_ub[c(
@@ -281,13 +281,13 @@ test_that(
         )
       })
 
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in ", tp_rates$saf_topic), {
         expect_equal(which(is.na(result_nta)), which(is.na(th_rates_ub[c(
           log_likeli_string, log_rob_string, log_post_string, exp_rob_string,
           exp_post_string
         ), ])))
       })
-      test_that("Robust MAP Prior Row is identical in both Robust MAP Prior as well as NTA Table", {
+      test_that(paste0("Robust MAP Prior Row is identical in both Robust MAP Prior as well as NTA Table in ", tp_rates$saf_topic), {
         expect_true(
           all(
             result_nta[c(log_rob_string_comp, exp_rob_string_comp), ] == result_rob[c(log_rob_string_comp, exp_rob_string_comp), ],
@@ -295,7 +295,7 @@ test_that(
           )
         )
       })
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in", tp_rates$saf_topic), {
         expect_equal(
           which(is.na(result_nta[c(log_rob_string_comp, exp_rob_string_comp), ])),
           which(is.na(result_rob[c(log_rob_string_comp, exp_rob_string_comp), ]))

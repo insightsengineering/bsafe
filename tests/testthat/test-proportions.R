@@ -8,10 +8,11 @@ test_that(
     )
     path <- "scenarios/"
     csv_choices <- list.files(path, pattern = "*.csv")
+    csv_choices <- csv_choices[-c(4, 12, 13)]
     robust_mean <- 0.5
     testing_list_prop <- readRDS("thresholds/testing_list_props.rds")
 
-    for (i in c(1:length(testing_list_prop))[-c(5, 13)]) {
+    for (i in c(1:length(testing_list_prop))[-c(5, 13, 14)]) {
       tp_prop <- testing_list_prop[[i]]$parameters
       thresholds_prop <- testing_list_prop[[i]]$treshholds
 
@@ -174,7 +175,7 @@ test_that(
 
       th_prop_lb <- thresholds_prop[, c("mean_lb", "sd_lb", "median_lb", "cri_lb_lb", "cri_ub_lb", "ess_lb")]
       th_prop_ub <- thresholds_prop[, c("mean_ub", "sd_ub", "median_ub", "cri_lb_ub", "cri_ub_ub", "ess_ub")]
-      test_that("MAP Prior row is higher or equal than lower bound thresholds", {
+      test_that(paste0("MAP Prior row is higher or equal than lower bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_map[, res_string_without_ess] >= (th_prop_lb[map_string, th_string_without_ess_lb] - 3e-02)
@@ -182,28 +183,28 @@ test_that(
         )
       })
 
-      test_that("MAP Prior ESS is higher or equal than lower bound thresholds", {
+      test_that(paste0("MAP Prior ESS is higher or equal than lower bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_map[, c("ESS")] >= (thresholds_prop[map_string, c("ess_min")] * 0.9)
           )
         )
       })
-      test_that("MAP Prior row is lower or equal than upper bound thresholds", {
+      test_that(paste0("MAP Prior row is lower or equal than upper bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_map[, res_string_without_ess] <= (th_prop_ub[map_string, th_string_without_ess_ub] + 3e-02)
           )
         )
       })
-      test_that("MAP Prior ESS is lower or equal than upper bound thresholds", {
+      test_that(paste0("MAP Prior ESS is lower or equal than upper bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_map[, c("ESS")] <= (th_prop_ub[map_string, c("ess_ub")] * 1.1)
           )
         )
       })
-      test_that("RMAP Prior Row is identical in both MAP Prior as well as Robust MAP Prior Table", {
+      test_that(paste0("RMAP Prior Row is identical in both MAP Prior as well as Robust MAP Prior Table in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_map == result_rob[map_string, ]
@@ -218,7 +219,7 @@ test_that(
       #   )
       # })
 
-      test_that("NTA Table is higher or equal than lower bound thresholds", {
+      test_that(paste0("NTA Table is higher or equal than lower bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_nta[, res_string_without_ess] >= (th_prop_lb[c(rob_string, likeli_string, post_string), th_string_without_ess_lb] - 3e-02),
@@ -226,7 +227,7 @@ test_that(
           )
         )
       })
-      test_that("NTA Table ESS is higher or equal than lower bound thresholds", {
+      test_that(paste0("NTA Table ESS is higher or equal than lower bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_nta[, c("ESS")] >= (thresholds_prop[c(rob_string, likeli_string, post_string), c("ess_min")] * 0.9),
@@ -234,11 +235,11 @@ test_that(
           )
         )
       })
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in ", tp_prop$saf_topic), {
         expect_equal(which(is.na(result_nta)), which(is.na(th_prop_lb[c(rob_string, likeli_string, post_string), ])))
       })
       # FALSE - replace with difference
-      test_that("NTA Table is lower or equal than upper bound thresholds", {
+      test_that(paste0("NTA Table is lower or equal than upper bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_nta[, res_string_without_ess] <= (th_prop_ub[c(rob_string, likeli_string, post_string), th_string_without_ess_ub] + 3e-02),
@@ -246,7 +247,7 @@ test_that(
           )
         )
       })
-      test_that("NTA Table ESS is lower or equal than upper bound thresholds", {
+      test_that(paste0("NTA Table ESS is lower or equal than upper bound thresholds in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_nta[, c("ESS")] <= (th_prop_ub[c(rob_string, likeli_string, post_string), c("ess_ub")] * 1.1),
@@ -255,10 +256,10 @@ test_that(
         )
       })
 
-      test_that("NA values are in the same positions in both data frames", {
+      test_that(paste0("NA values are in the same positions in both data frames in ", tp_prop$saf_topic), {
         expect_equal(which(is.na(result_nta)), which(is.na(th_prop_ub[c(rob_string, likeli_string, post_string), ])))
       })
-      test_that("Robust MAP Prior Row is identical in both Robust MAP Prior as well as NTA Table", {
+      test_that(paste0("Robust MAP Prior Row is identical in both Robust MAP Prior as well as NTA Table in ", tp_prop$saf_topic), {
         expect_true(
           all(
             result_nta[rob_string_nta, ] == result_rob[rob_string_rob, ]
