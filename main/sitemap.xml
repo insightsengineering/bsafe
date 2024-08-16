@@ -1,36 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/404.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/articles/hello.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/index.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/reference/hello.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/reference/plumber_api.html</loc>
-  </url>
-  <url>
-    <loc>https://insightsengineering.github.io/bsafe/reference/shiny_app.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://insightsengineering.github.io/bsafe/404.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/LICENSE-text.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/authors.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/index.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/news/index.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/add_row.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/ae_events_wrangler.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/ae_summary_table.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/app_plots.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/area_under_the_curve.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/array_comp.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/array_rmix.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/check_minmax.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/cri_char.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/data_available.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/data_table_prep.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/decision_making_density_plot.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/forest_plot_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/inci_naiv.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/index.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/input_data_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/map_prior_func.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/map_prior_function_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/mcmc_desc.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/mix_distribution_all.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/model_summary_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/new_trial_compare.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/nta_data_conflict_assassment_plot.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/param_mix_density_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/parametric_approx.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/pipe.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/posterior_dist.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/preset_stat_table.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/rmix_desc.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/robust_compare.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/robust_map.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/robust_map_prior_mix_dens_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/robust_map_prior_plot.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/sampling_all_plot.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/summary_stat_all_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/summary_stats_robust_map_prior_display.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/tau_adjust.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/text_prop.html</loc></url>
+<url><loc>https://insightsengineering.github.io/bsafe/reference/trt_data_wrangler.html</loc></url>
 </urlset>
+
