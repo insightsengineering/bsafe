@@ -606,17 +606,17 @@ data_table_prep <-
     # Filter for the selected background treatment and safety topic
     # Return total exposure as well for exposure-adjusted analysis
     # nolint end
-    if(ae_summary){
+    if (ae_summary) {
       if (select_analysis == "Incidence proportion") {
         dat <- dat %>%
           dplyr::filter(ARM %in% select_btrt &
-                          SAF_TOPIC == saf_topic) %>%
+            SAF_TOPIC == saf_topic) %>%
           dplyr::select(STUDYID, N, N_WITH_AE, HIST) %>%
           na.omit()
       } else if (select_analysis == "Exposure-adjusted AE rate") {
         dat <- dat %>%
           dplyr::filter(ARM %in% select_btrt &
-                          SAF_TOPIC == saf_topic) %>%
+            SAF_TOPIC == saf_topic) %>%
           dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP, HIST) %>%
           na.omit()
       }
@@ -638,17 +638,17 @@ data_table_prep <-
           dat <- dat %>% dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP, HIST)
         }
       }
-    } else{
+    } else {
       if (select_analysis == "Incidence proportion") {
         dat <- dat %>%
           dplyr::filter(ARM %in% select_btrt &
-                          SAF_TOPIC == saf_topic) %>%
+            SAF_TOPIC == saf_topic) %>%
           dplyr::select(STUDYID, N, N_WITH_AE) %>%
           na.omit()
       } else if (select_analysis == "Exposure-adjusted AE rate") {
         dat <- dat %>%
           dplyr::filter(ARM %in% select_btrt &
-                          SAF_TOPIC == saf_topic) %>%
+            SAF_TOPIC == saf_topic) %>%
           dplyr::select(STUDYID, N, N_WITH_AE, TOT_EXP) %>%
           na.omit()
       }
