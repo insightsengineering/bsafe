@@ -1,7 +1,7 @@
 ---
 title: |
-    | B-Safe User Manual v. 0.0.4
-    | for B-Safe v. 0.0.5-03
+    | B-Safe User Manual v. 0.0.5
+    | for B-Safe v. 0.1
 author: | 
     | Alexander Stemke (1), Lars Andersen (1), Oliver Sailer (1), Dunfu Yang (1)
     | reviewed by Oliver Sailer (1) and Louise Whitehead (1,2) 
@@ -40,9 +40,8 @@ safety analyses on adverse events into safety analyses for a new trial.
 The use of historical information has been used for efficacy analyses in
 the past and now being extended to safety analyses.
 
-This user manual details how to use the app. The user manual documents
-and specifies the input parameters with their expected outputs. Refer to
-the Statistical Analysis Plan for the methodology used.
+This user manual details how to use the app. Refer to
+the Statistical Analysis Plan for the methodology and deefault values used.
 
 -   Coding : Alexander Stemke, Lars Andersen
 -   Statistical Analysis: Oliver Sailer, Alexander Stemke
@@ -52,18 +51,21 @@ Schlecker, James O. Turay, Louise Whitehead, Lin Feng Zou
 
 \newpage
 
-# **Using the App**
+# **Using the App** 
+
+CHECK TODO GOTFIX data example ref
 
 This section introduces the user to the app and how to prepare the
-data set for analysis. From this section on, we will use example data (see section \ref(data-example)) to demonstrate the usage of the entire application.
-This simple data example is further specified in section \ref{tab:data_example}.
+data set for analysis. From this section on, we will use example data (see section \ref{data-example}) to demonstrate the usage of the entire application.
+This simple data example is further specified in section \@ref(tab:data_example).
 
 \begin{figure}
 \label{fig:land}
+\caption{Landing Page}
 \includegraphics{img/using_the_app/landing.png}
 \end{figure}
 
-You will land on a page similar to this. It es recommended to go trough the app from top to bottom. The left and middle panel in fig. \ref{fig:land} correspond to each other. Each bullet point has a section within this manual.
+You will land on a page similar to this. It is recommended to go trough the app from top to bottom. The left and middle panel in fig. \ref{fig:land} correspond to each other. Each bullet point has a section within this manual.
 
 
 ## **Getting Started**
@@ -80,10 +82,10 @@ between two treatment arms
 Analyses for Incidence Proportions and Exposure-Adjusted Adverse
 Event Rates (i.e., Incidence Rates) are available.
 
-As you are a user of the app, the first step has already been taken and the app was set up successfully. Therefor, you had to specifiy a dataset as \texttt{.csv} as described in \ref{tab:mustvar}.
+As you are a user of the app, the first step has already been taken and the app was set up successfully. Therefore, you have to specify a dataset as \texttt{.csv} as described in table \ref{tab:mustvar}.
 
 
-You can then jump directly to **Default comparisons** \ref{default-comparisons} for a summary
+You can then jump directly to section Default comparisons \ref{default-comparisons} for a summary
 table with a default analysis.
 
 
@@ -115,9 +117,9 @@ Note that \texttt{TOT EXP} (total exposure time) is only needed for analysis of 
 Exposure Adjusted Incidence Rate.
 
 Additionally, other variables including Dose, Freq (Frequency), Length
-(Length of treatment), Treat (Treatment) can be included, as shown in Table
-\ref{add_var_desc}. With these additional variables, subgroup analysis can be
-done. Note that in Table \ref{add_var}, for variables Freq and Length, the unit does not have to be "day". The time scale depends on the input and should be consistent throughout the entire dataset. Moreover, further variables could be included (see therefor also the data example \ref{tab:add_data}).
+(Length of treatment), Treat (Treatment) can be included, as shown in table
+\ref{tab:add_var}. With these additional variables, subgroup analysis can be
+done. Note that in Table \ref{tab:add_var}, for variables Freq and Length, the time scale depends on the input and should be consistent throughout the entire dataset. Moreover, further variables could be included (see therefor also the data example \ref{tab:add_data}).
 
 
 \begin{table}[!ht]
@@ -129,9 +131,9 @@ Variable & Data Type & Description \\
 \hline
 Dose & numeric & Amount/weight of the medication the patient took\\
 \hline
-Freq(Frequency) & integer & Number of times in a day the medication was taken by the patient\\
+Freq(Frequency) & integer & Number of times in the medication was taken by the patient per time unit\\
 \hline
-Length & integer & Total number of days the patient was on the treatment \\
+Length & integer & Total number of time units the patient was on the treatment \\
 \hline
 Treat & character & The specific treatment the patient was on\\
 \hline
@@ -143,7 +145,7 @@ Treat & character & The specific treatment the patient was on\\
 
 Once you have set up the app, under data preparation the available data is displayed.
 In the following section \ref{data-example} the data set will be introduced.
-Afterwards in section \ref{adding-an-arm}, the \texttt{teal} functionality of data filtration will briefly introduced, before we prepare 
+Afterwards in section \ref{adding-an-arm}, the \texttt{teal} functionality of data filtration will briefly introduced, before we prepare an \texttt{ARM} to analyze.
 
 ## **Data example**
 
@@ -188,9 +190,9 @@ The following data set example was generated for this introduction.
 \end{tabular}
 \end{table}
 
-In brief those three studies are presented. Each study has a \texttt{STUDYID} which coresponds in this case with its \texttt{ARM}. \texttt{Study\#1} includes historical (\texttt{HIST = 1}) and non historical (\texttt{HIST = 0}) information. And has only for the Placebo treatment both available. \texttt{Study\#2} includes only current data and \texttt{Study\#3} only. historical (\texttt{HIST = 1}).
+In brief those three studies are presented. Each study has a \texttt{STUDYID} which corresponds in this case with its \texttt{ARM}. \texttt{Study\#1} includes historical (\texttt{HIST = 1}) and non historical (\texttt{HIST = 0}) information. And has only for the Placebo treatment historical and current information. \texttt{Study\#2} includes only current data (\texttt{HIST = 0}) and \texttt{Study\#3} only historical (\texttt{HIST = 1}).
 
-All additional information, that are not per se releveant for the \texttt{B-SAFE} module, are displayed in \ref{tab:add_data}
+All additional information, that are not releveant for the \texttt{B-SAFE} module, are displayed in table \ref{tab:add_data}.
 In addition to the predefined additional variables (section \ref{tab:add_var}), this dataset also includes information on the region of the study. 
 
 
@@ -230,9 +232,9 @@ It is important to understand, that for the meta-analysis, the data subset which
 ## **Adding an Arm**
 
 Each analysis is performed for the data defined by the variable \texttt{ARM}. 
-Before we use the predefined arms, or add a new arm, it is crucial to note, that the filtering via \texttt{TEAL} \ref{fig:teal_filter1}, has to be done, before any arm is created.
+Before we use the predefined arms, or add a new arm, it is crucial to note, that the filtering via \texttt{TEAL} in  fig. \ref{fig:teal_filter1}, has to be done, before any arm is created.
 
-By collapsing 1. in \ref{fig:teal_filter1} you can view your data and by 2. in \ref{fig:teal_filter1} you can collapse the \texttt{TEAL} filtration.
+By collapsing 1. in fig. \ref{fig:teal_filter1} you can view your data and by 2. in fig. \ref{fig:teal_filter1} you can collapse the \texttt{TEAL} filtration.
 
 \begin{figure}[ht]
 \includegraphics{img/using_the_app/teal_filter1.png}
@@ -240,10 +242,10 @@ By collapsing 1. in \ref{fig:teal_filter1} you can view your data and by 2. in \
 \label{fig:teal_filter1}
 \end{figure}
 
-It is possible to filter for each variable of the dataset. 1. (see \ref{fig:teal_filter2}) select the variable you would like to filter. In this example we choose the total exposure time and the region. 2. we chose an exposure under 500 and America and Eurasia as a region.
+It is possible to filter for each variable of the dataset. 1. (see fig. \ref{fig:teal_filter2}) select the variable you would like to filter. In this example we choose the total exposure time and the region. 2. we chose an exposure under 500 and America and Eurasia as a region.
 Any further arm creation or analysis would be performed on this subset. 
 
-For now, we don't need further filtration, this feature is very useful, if you would like to investigate certain subgroup characteristics or see directly a potential arm creation. Under 3. it is displate how many observations remain in this subset. For any further information, please refer to \texttt{TEALs} documentation.
+For now, we don't need further filtration, this feature is very useful, if you would like to investigate certain subgroup characteristics or see directly a potential arm creation; under 3. it is displayed how many observations remain in this subset. For any further information, please refer to \texttt{TEALs} documentation.
 
 
 \begin{figure}[ht]
@@ -271,7 +273,6 @@ On our example \texttt{ARM: Placebo500} we will now perform any further analysis
 
 The filtered data is then displayed on the right hand
 side of the screen when 1. in figure \ref{fig:analysis_selection} is collapsed.
-If there are different treatment options in the uploaded dataset file, ar you have created different \texttt{ARMS} you can 2. choose a specific \texttt{ARM} from the drop-down menu in figure \ref{fig:analysis_selection}. The data for which the analysis will be performed is displayed under 3 on the right hand side of the screen. 
 
 
 \begin{figure}[ht]
@@ -280,11 +281,11 @@ If there are different treatment options in the uploaded dataset file, ar you ha
 \label{fig:analysis_selection}
 \end{figure}
 
-Under 2. we have several options, we will explain each of them next. 
+Under 2. in fig. \ref{fig:analysis_selection} we have several options, we will explain each of them next. 
 
 ## Select patients with the respective treatment
 
-If there are different treatment options in the uploaded dataset file, ar you have created different \texttt{ARMS} you can 2. choose a specific \texttt{ARM} from the drop-down menu in figure \ref{fig:analysis_selection}. In this case we choose our created \texttt{ARM} Placebo500. g1 would not be a wise choice, it includes different treatments.
+If there are different treatment options in the uploaded dataset file, and you have created different \texttt{ARMS} you can 2. choose a specific \texttt{ARM} from the drop-down menu in figure \ref{fig:analysis_selection}. In this case we choose our created \texttt{ARM} Placebo500. g1 would not be a wise choice, it includes different treatments.
 
 
 ## Select Safety Analysis
@@ -411,10 +412,10 @@ In fig. \ref{fig:map_prior} the most important button is 3. For any relevant cha
 
 For our example we use the default settings and continue with the incidence proportions and will investigate the exposure adjusted adverse event rate. 
 
-After 3. Updating the MAP prior, a small idle token (see fig. \ref{fig:idle})will appear on the bottem right corner and then the results instead of 3. 
+After 3. Updating the MAP prior, a small idle token (see fig. \ref{fig:idle}) will appear on the bottem right corner and then the results instead of 3. 
 
 \begin{figure}[ht]
-\caption{MAP Prior}
+\caption{Idle Icon}
 \includegraphics{img/using_the_app/idle.png}
 \label{fig:idle}
 \end{figure}
@@ -801,6 +802,8 @@ For questions and feedback please contact:
 
 -   Alexander Stemke
     [alexander.stemke\@boehringer-ingelheim.com](mailto:alexander.stemke@boehringer-ingelheim.com){.email}
+-   Dunfu Yang
+    [dunfu.yang\@boehringer-ingelheim.com](mailto:dunfu.yang@boehringer-ingelheim.com){.email}
 
 \newpage
 

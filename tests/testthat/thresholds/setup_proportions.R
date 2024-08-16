@@ -58,7 +58,7 @@ testing_list_prop[[1]] <- list(
 )
 
 # initializing all treshhold data frames
-for (i in 1:13) {
+for (i in 1:14) {
   if (i < 10) {
     i_chr <- paste0(0, i)
   } else {

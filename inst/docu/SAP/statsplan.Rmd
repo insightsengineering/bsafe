@@ -1,7 +1,7 @@
 ---
 title: |
     | Statistical Analysis Plan v. 1
-    | for B-Safe v. 0.0.5-03
+    | for B-Safe v. 0.1
 author: | 
     | Alexander Stemke (1), Dunfu Yang (1), Louise Whitehead (1,2) 
     | reviewed by Oliver Sailer (1)
