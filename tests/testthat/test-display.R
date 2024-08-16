@@ -122,13 +122,15 @@ test_that("display.R works as expected", {
   auc_prop <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_prop,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Incidence proportion"
   )
 
   auc_rates <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_rates,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Exposure-adjusted AE rate"
   )
 
   expect_no_error(auc_prop)
@@ -165,13 +167,15 @@ test_that("display.R works as expected", {
   auc_prop <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_prop,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Incidence proportion"
   )
 
   auc_rates <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_rates,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Exposure-adjusted AE rate"
   )
 
   expect_no_error(auc_prop)
@@ -208,13 +212,15 @@ test_that("display.R works as expected", {
   auc_prop <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_prop,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Incidence proportion"
   )
 
   auc_rates <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_rates,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Exposure-adjusted AE rate"
   )
 
   expect_no_error(auc_prop)
@@ -251,13 +257,15 @@ test_that("display.R works as expected", {
   auc_prop <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_prop,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Incidence proportion"
   )
 
   auc_rates <- area_under_the_curve(
     ae_prop = c(30, 100) / 100,
     mix = mix_rates,
-    saf_topic = "Scen07"
+    saf_topic = "Scen07",
+    select_analysis = "Exposure-adjusted AE rate"
   )
 
   expect_no_error(auc_prop)

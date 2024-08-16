@@ -4,7 +4,7 @@
 \alias{area_under_the_curve}
 \title{Area under the curve}
 \usage{
-area_under_the_curve(ae_prop, mix, saf_topic)
+area_under_the_curve(ae_prop, mix, saf_topic, select_analysis)
 }
 \arguments{
 \item{ae_prop}{Vector of quantiles}
@@ -12,6 +12,8 @@ area_under_the_curve(ae_prop, mix, saf_topic)
 \item{mix}{mixture distribution object}
 
 \item{saf_topic}{Selected safety topic to analyze/the adverse event of interest}
+
+\item{select_analysis}{Incidence proportion or Exposure-adjusted AE rate}
 }
 \description{
 Interpret area under the curve

@@ -92,7 +92,6 @@ robust_map_prior_mix_dens_display <- function(
   )
 }
 
-
 #' @title Area under the curve
 #'
 #' @description Interpret area under the curve
@@ -100,46 +99,73 @@ robust_map_prior_mix_dens_display <- function(
 #' @param ae_prop Vector of quantiles
 #' @param mix mixture distribution object
 #' @param saf_topic Selected safety topic to analyze/the adverse event of interest
+#' @param select_analysis Incidence proportion or Exposure-adjusted AE rate
 #'
 #' @export
-area_under_the_curve <- function(ae_prop, mix, saf_topic) {
+area_under_the_curve <- function(ae_prop, mix, saf_topic, select_analysis) {
   # Interpret area under the curve
-  certainty <- round(
-    100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)),
-    digits = 2
-  ) # nolint
 
-  # Bound certainty from 1% to 99%
-  if (certainty >= 99.99) {
-    certainty <- 99.99
-  } else if (certainty <= 0.01) {
-    certainty <- 0.01
-  } else {
-    certainty <- certainty
-  }
-  # Statistical inference based on certainty and quantile of incidence proportion
+  if(select_analysis == "Incidence proportion"){
+    certainty <- round(
+      100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)),
+      digits = 2
+    ) # nolint
 
-  if ((ae_prop[1] > 0) & (ae_prop[2] == 1)) {
-    paste0(
-      "We are at least ", certainty,
-      "% certain that the proportion of patients with ", saf_topic,
-      " is greater than ", round(100 * ae_prop[1], 2), "%."
-    )
-  } else if (
-    ((ae_prop[1] > 0) & (ae_prop[2] < 1)) | ((ae_prop[1] == 0) & (ae_prop[2] == 1))) { # nolint
-    paste0(
-      "We are at least ", certainty,
-      "% certain that the proportion of patients with ", saf_topic,
-      " is between ", round(100 * ae_prop[1], 2), "% and ",
-      round(100 * ae_prop[2], 2), "%."
-    )
-  } else if ((ae_prop[1] == 0) & (ae_prop[2] < 1)) {
-    paste0(
-      "We are at least ", certainty,
-      "% certain that the proportion of patients with ", saf_topic,
-      " is less than ", round(100 * ae_prop[2], 2), "%."
-    )
-  } else if (ae_prop[1] == ae_prop[2]) {
-    paste0("Please ensure that the slider represents an interval.")
+    # Bound certainty from 1% to 99%
+    if (certainty >= 99.99) {
+      certainty <- 99.99
+    } else if (certainty <= 0.01) {
+      certainty <- 0.01
+    } else {
+      certainty <- certainty
+    }
+    # Statistical inference based on certainty and quantile of incidence proportion
+
+    if ((ae_prop[1] > 0) & (ae_prop[2] == 1)) {
+      out <- paste0(
+        "We are at least ", certainty,
+        "% certain that the proportion of patients with ", saf_topic,
+        " is greater than ", round(100 * ae_prop[1], 2), "%."
+      )
+    } else if (
+      ((ae_prop[1] > 0) & (ae_prop[2] < 1)) | ((ae_prop[1] == 0) & (ae_prop[2] == 1))) { # nolint
+      out <- paste0(
+        "We are at least ", certainty,
+        "% certain that the proportion of patients with ", saf_topic,
+        " is between ", round(100 * ae_prop[1], 2), "% and ",
+        round(100 * ae_prop[2], 2), "%."
+      )
+    } else if ((ae_prop[1] == 0) & (ae_prop[2] < 1)) {
+      out <- paste0(
+        "We are at least ", certainty,
+        "% certain that the proportion of patients with ", saf_topic,
+        " is less than ", round(100 * ae_prop[2], 2), "%."
+      )
+    } else if (ae_prop[1] == ae_prop[2]) {
+      out <- paste0("Please ensure that the slider represents an interval.")
+    }
+    #hotfix
+  }else if(select_analysis == "Exposure-adjusted AE rate"){
+
+    ae_prop <- ae_prop*100
+
+    certainty <- round(
+      100 * (RBesT::pmix(mix, ae_prop[2], lower.tail = TRUE) - RBesT::pmix(mix, ae_prop[1], lower.tail = TRUE)),
+      digits = 2
+    ) # nolint
+
+    if (ae_prop[1] == ae_prop[2]) {
+      out <- paste0("Please ensure that the slider represents an interval.")
+    } else {
+      out <- paste0(
+        "We are at least ", certainty,
+        "% certain that the exposure adjusted density rate of patients with ", saf_topic,
+        " is between ", round(exp(ae_prop[1]), 2), " exp(", round(ae_prop[1], 2),") and ",
+        round(exp(ae_prop[2]), 2), " exp(", round( ae_prop[2], 2), ")."
+      )
+    }
   }
+
+  return(out)
+
 }

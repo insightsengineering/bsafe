@@ -1,4 +1,4 @@
-# bsafe 0.0.1
+# bsafe 0.1.0
 
 ### New features
 
