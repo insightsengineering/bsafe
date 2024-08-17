@@ -1,6 +1,6 @@
 ---
 title: |
-    | B-Safe Testing and Validation v. 0.0.5
+    | B-Safe Testing and Validation v. 0.0.6
     | for B-Safe v. 0.1
 author: | 
     | Alexander Stemke (1), Lars Andersen (1), James Turay (1), Louise Whitehead (1,2) 
@@ -292,6 +292,8 @@ For this purpose, various conditions were set to capture a wide array of possibi
 
 Following each scenario is briefly described. The simulated data sets are displayed in section \@ref(simulation-and-testing-of-scenarios).
 For further information (e.g. the level of heterogeneity) please refer to the statistical analysis plan of B-Safe.
+
+All scenarios, except the worst scenarios (2, 4 and 12) pass without any failures. For Scenario 2, 4 and 12 the issues stem from problems with the integration within \texttt{RBesT}. The developers of \texttt{RBesT} are informed and will fix this in an upcoming  version.
 
 ## **Simulation and Testing of Scenarios**
 In this chapter, the scenarios that are described in section \@ref(binary-endpoint-results) for incidence proportions and in section \@ref(time-to-event-endpoint-results) for exposure adjusted incidence rates respectively, will be simulated and run through the B-SAFE app with the results being cross-checked for errors.
@@ -1252,7 +1254,7 @@ knitr::kable(table,
 
 ## **Scenario 11 - Continued study duration with Realistic Setting**
 Scenario 11 describes a binary endpoint for a realistic situation where the study continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a drop out rate of 5%, noise at a 5% tau, homogeneous historical data and no planned prior data conflict planned.
-```{r}
+```{r, warning = FALSE}
 SimTestData(
   SimStudy_nPat = c(g1 = 200, g2 = 200),
   SimStudy_hz = c(g1 = 0.1, g2 = 0.2),
@@ -2038,7 +2040,7 @@ knitr::kable(table,
 
 ## **Scenario 11 - Continued study duration with Realistic Setting**
 Scenario 11 describes a binary endpoint for a realistic situation where the study continued regardless of when the proposed number of events has been observed. Characteristics of this scenario includes a drop out rate of 5%, noise at a 5% tau, homogeneous historical data and no planned prior data conflict planned.
-```{r}
+```{r, warning = FALSE}
 SimTestData(
   SimStudy_nPat = c(g1 = 200, g2 = 200),
   SimStudy_hz = c(g1 = 0.1, g2 = 0.2),
