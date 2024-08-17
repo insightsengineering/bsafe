@@ -32,7 +32,7 @@ n_scenarios <- length(scenarios_list)
 deci <- 4
 
 # For testing purpsoe and to set to the same settings as in B-Safe
-testing <- TRUE
+testing <- FALSE
 if (testing == FALSE) {
   # for exact method look stan/jags up, but if no rounding etc n_mcmc = (n_iter-n_warm)*n_chain/n_thin
   n_iter <- 6000
@@ -92,7 +92,7 @@ dimnames(array_rate_th) <- list(
 # For loop scen ----------------------------------------------------------------
 # still issue with bad scens 4,12
 
-for (scen in c(1, 13)) {
+for (scen in c(1:13)) {
   print(paste0("Scenario: ", scen, " begun at ", Sys.time()))
 
   if (scen == 1) {
@@ -432,8 +432,8 @@ for (scen in c(1, 13)) {
     scen_chr <- scen
   }
 
-  saveRDS(array_rate_th, paste0("~/teal/th_rate_scen", scen_chr, ".rds"))
-  saveRDS(array_prop_th, paste0("~/teal/th_prop_scen", scen_chr, ".rds"))
+  saveRDS(array_rate_th, paste0("th_rate_scen", scen_chr, ".rds"))
+  saveRDS(array_prop_th, paste0("th_prop_scen", scen_chr, ".rds"))
 
   testing_list_props[[scen + 1]]$treshholds <- th_prop_final
   testing_list_rates[[scen + 1]]$treshholds <- th_rate_final
