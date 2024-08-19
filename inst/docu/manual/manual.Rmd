@@ -1,6 +1,6 @@
 ---
 title: |
-    | B-Safe User Manual v. 0.0.5
+    | B-Safe User Manual v. 0.0.8
     | for B-Safe v. 0.1
 author: | 
     | Alexander Stemke (1), Lars Andersen (1), Oliver Sailer (1), Dunfu Yang (1)
@@ -58,7 +58,7 @@ Schlecker, James O. Turay, Louise Whitehead, Lin Feng Zou
 # **Using the App** 
 
 This section introduces the user to the app and how to prepare the
-data set for analysis. From this section on, we will use example data (see table \ref{tab:data_example}) to demonstrate the usage of the entire application.
+dataset for analysis. From this section on, we will use example data (see table \ref{tab:data_example}) to demonstrate the usage of the entire application.
 This simple data example is further specified in section \@ref(data-example).
 
 \begin{figure}[H]
@@ -69,13 +69,20 @@ This simple data example is further specified in section \@ref(data-example).
 
 You will land on a page similar to this. It is recommended to go trough the app from top to bottom. The left and middle panel in fig. \ref{fig:land} correspond to each other. Each bullet point has a section within this manual.
 
-When calculations where performed, you can add a card at the top left corner via \texttt{TEAL} and save your results or to continue with your settings at a later stage, or to log the whole R code used.
+When calculations were performed, you can add a card at the top left corner via \texttt{TEAL} and save your results or continue with your settings at a later stage, or log the whole R code used. Click therefor on the + (1.) in figure \ref{fig:save} and name your card.
+
+
+\begin{figure}[H]
+\label{fig:save}
+\caption{Creating a Card}
+\includegraphics{img/using_the_app/teal_save.png}
+\end{figure}
 
 
 ## **Getting Started**
 
 The "Getting Started" page is the first bullet point from the top.
-Each of the tabs will be explained in detail in the following sections. It provides an overview of the usage of the app. The
+It provides an overview of the usage of the app. The
 app has two main uses:
 
   -   A deep dive into a Bayesian MAP Prior analysis of a selected adverse
@@ -89,7 +96,7 @@ Event Rates (i.e., Incidence Rates) are available.
 As you are a user of the app, the first step has already been taken and the app was set up successfully. Therefore, you have to specify a dataset as \texttt{.csv} as described in table \ref{tab:mustvar}.
 
 
-You can then jump directly to section Default comparisons \@ref(default-comparisons) for a summary
+You can then jump directly to section Default comparisons section \@ref(default-comparisons) for a summary
 table with a default analysis.
 
 
@@ -150,12 +157,12 @@ Treat & character & The specific treatment the patient was on\\
 # **Data Preparation**
 
 Once you have set up the app, under data preparation the available data is displayed.
-In the following section \@ref(data-example) the data set will be introduced.
-Afterwards in section \@ref(adding-an-arm), the \texttt{teal} functionality of data filtration will briefly introduced, before we prepare an \texttt{ARM} to analyze.
+In the following section \@ref(data-example) the dataset will be introduced.
+Afterwards in section \@ref(adding-an-arm), the \texttt{teal} functionality of data filtration will be briefly introduced, before we prepare an \texttt{ARM} to analyze.
 
 ## **Data example**
 
-The following data set example was generated for this introduction.
+The following dataset example was generated for this introduction.
 
 
 <!-- data <- read.csv(file = "manual_dataset.csv") -->
@@ -196,9 +203,9 @@ The following data set example was generated for this introduction.
 \end{tabular}
 \end{table}
 
-In brief those three studies are presented. Each study has a \texttt{STUDYID} which corresponds in this case with its \texttt{ARM}. \texttt{Study\#1} includes historical (\texttt{HIST = 1}) and non historical (\texttt{HIST = 0}) information. And has only for the Placebo treatment historical and current information. \texttt{Study\#2} includes only current data (\texttt{HIST = 0}) and \texttt{Study\#3} only historical (\texttt{HIST = 1}).
+In brief those three studies are presented. Each study has a \texttt{STUDYID} which corresponds in this case with its \texttt{ARM}. \texttt{Study\#1} includes historical (\texttt{HIST = 1}) and non historical (\texttt{HIST = 0}) information. It only has historical and current information for the Placebo treatment. \texttt{Study\#2} includes only current data (\texttt{HIST = 0}) and \texttt{Study\#3} only historical (\texttt{HIST = 1}).
 
-All additional information, that are not releveant for the \texttt{B-SAFE} module, are displayed in table \ref{tab:add_data}.
+All additional information, that are not relevant for the \texttt{B-SAFE} module, are displayed in table \ref{tab:add_data}.
 In addition to the predefined additional variables (see table \ref{tab:add_var}), this dataset also includes information on the region of the study. 
 
 
@@ -232,7 +239,7 @@ In addition to the predefined additional variables (see table \ref{tab:add_var})
 \end{tabular}
 \end{table}
 
-It is important to understand, that for the meta-analysis, the data subset which will be used is defined by the variable \texttt{ARM}. Accordingly the creation of a arm will be explained next. 
+It is important to understand, that for the meta-analysis, the data subset which will be used is defined by the variable \texttt{ARM}. Accordingly the creation of an arm will be explained next. 
 
 
 ## **Adding an Arm**
@@ -248,10 +255,10 @@ By collapsing 1. in fig. \ref{fig:teal_filter1} you can view your data and by 2.
 \label{fig:teal_filter1}
 \end{figure}
 
-It is possible to filter for each variable of the dataset. 1. (see fig. \ref{fig:teal_filter2}) select the variable you would like to filter. In this example we choose the total exposure time and the region. 2. we chose an exposure under 500 and America and Eurasia as a region.
+It is possible to filter for each variable of the dataset. 1. (see fig. \ref{fig:teal_filter2}) select the variable you would like to filter. In this example we choose the total exposure time and the region. 2. we choose an exposure under 500 and America and Eurasia as a region.
 Any further arm creation or analysis would be performed on this subset. 
 
-For now, we don't need further filtration, this feature is very useful, if you would like to investigate certain subgroup characteristics or see directly a potential arm creation; under 3. it is displayed how many observations remain in this subset. For any further information, please refer to \texttt{TEALs} documentation.
+For now, we don't need further filtration. This feature is very useful, if you would like to investigate certain subgroup characteristics or see directly a potential arm creation; under 3. it is displayed how many observations remain in this subset. For any further information, please refer to \texttt{TEALs} documentation.
 
 
 \begin{figure}[H]
@@ -260,7 +267,7 @@ For now, we don't need further filtration, this feature is very useful, if you w
 \label{fig:teal_filter2}
 \end{figure}
 
-Starting with our original data set we will now create a data subset called an arm, which we will investigate further. 
+Starting with our original dataset we will now create a data subset called an arm, which we will investigate further. 
 
 
 \begin{figure}[H]
@@ -269,8 +276,8 @@ Starting with our original data set we will now create a data subset called an a
 \label{fig:add_arm}
 \end{figure}
 
-Starting with 1. (see fig. \ref{fig:add_arm}) select the variables we are interested in. In this case we chose \texttt{DOSE} and \texttt{TREAT}. 2. and 3. choose the variables characteristics. In this case, we are interested to borrow information from the Placebo treatments. In general it is discouraged to borrow information from treatment arms that are not Placebo or standard of care. 4. you name the arm, by doing so a pop up will open and requests naming your arm and to 5. you add the arm.
-By 6. a created arm can also be deleted again. Any erros that might occur (trying to give 2 times the same name), an error will be displayed at the bottom right  of you screen.
+Starting with 1. (see fig. \ref{fig:add_arm}) select the variables you are interested in. In this example we choose \texttt{DOSE} and \texttt{TREAT}. 2. and 3. choose the variables characteristics. In this case, we are interested to borrow information from the Placebo treatments. In general it is discouraged to borrow information from treatment arms that are not Placebo or standard of care. 4. you name the arm, and to you add the arm.
+Using 6. a created arm can also be deleted again. Any errors that might occur (e.g. trying to give 2 times the same name), an error will be displayed at the bottom right  of your screen.
 
 In this case the subset of dose 500 and Placebo treatment is identical, but especially with an increasing number of studies to borrow from, it is better to ensure your correct choices.
 On our example \texttt{ARM: Placebo500} we will now perform any further analysis.
@@ -314,8 +321,8 @@ options to choose from:
     period.
 
 -   Exposure Adjusted Adverse Event Rate: sometimes referred to as Incident
-    rate, which describes the incident rate of AEs per patient per unit
-    time assuming a constant hazard rate. This could be interpreted as
+    rate, which describes the incident rate of AEs per patient per time unit 
+    assuming a constant hazard rate. This could be interpreted as
     the number of patients having one or more adverse events per unit
     time under assumption of constant risk over the observational
     period.
@@ -340,7 +347,7 @@ selected and displayed. In our example we choose also vomitting.
 
 The user can manually set the seed for reproducibility of results of the
 Markov Chain Monte Carlo simulations and other random draws (see figure \ref{fig:analysis_selection}). Be aware that reproducibility is only guaranteed,
-while you are in the same session. For more information, please refer to the statistical analysis plan. For more information how to save your analysis please and download results by creating a new card
+while you are in the same session. For more information, please refer to the statistical analysis plan. 
 
 By default, a seed is given, but you can always overwrite the seed.
 
@@ -488,7 +495,7 @@ approximated by mixture of three normal distributions (see fig \ref{fig:map_smry
 # **Robust MAP Prior**
 
 To protect against prior-data conflict, MAP priors should be robustified
-@schmidli_robust_2014-1. This adds a weakly informative component to the (informative) MAP prior distribution, such that the more the historical data differs from the observed data, the more robust MAP Prior will down-weight/discount the
+@schmidli_robust_2014-1. This adds a weakly informative component to the (informative) MAP prior distribution, such that the more the historical data differs from the observed data, the more robust MAP Prior will weigh down/discount the
 information from the historical data thus preventing prior data
 conflict. The default prior weight on the weakly informative component has been set to 0.2 (20%) discounting factor.
 
@@ -511,7 +518,7 @@ For incidence proportion analysis, the uninformative mean is set to 50% and thus
 By adding the non-informative part (1.), now the
 robustified MAP prior is approximated by four Beta distributions. The
 former three Beta component were down weighted so that the effective
-sample size is now reduced. The prior weight correspondents with the weight for the non-informative component (2.).
+sample size is now reduced. The prior weight corresponds with the weight for the non-informative component (2.).
 
 Here note that the mode/peak of the distribution you see in the plot might be different from the mean shown in the table underneath the plot in that both the prior and robustified prior are mixture of multiple densities.
 
@@ -543,14 +550,11 @@ In the summary table (4.) only on the log(hazard rates) the ESS (or rather ENE: 
 
 # **New Trial Analysis**
 
-This part serves as an exploratory option, where the robustified and borrowed information will be updated with current data.
-The non-historical information from the dataset is here not used. The robustified MAP prior will be updated by the input via the sliders.
-
 The Robust MAP Prior obtained (see section \@ref(robust-map-prior)) is then updated
-with be updated by the input via the sliders. The non-historical information from the dataset is here not used. 
+with by the input via the sliders. The non-historical information from the dataset is not used here. 
 This provides a Bayesian Posterior. The summary of the
-Robust MAP Prior, Likelihood and Posterior and thier densities are displayed. 
-The generated graph allows the to  asses a potential prior data conflict.
+Robust MAP Prior, Likelihood and Posterior and their densities are displayed. 
+The generated graph allows to asses a potential prior data conflict.
 
 
 
@@ -566,11 +570,11 @@ This number cannot exceed the number of patients.
 \label{fig:nta_prop}
 \end{figure}
 
-The Robust MAP Prior (red dotted) describes the historical.
+The Robust MAP Prior (red dotted) describes the density for the borrowed historical information.
 
-The Likelihood describes a density that would describe current data, using the maximum likelihood estimation for an one component Beta distribution.
+The Likelihood (green dashed) describes a density that would describe current data, using the maximum likelihood estimation for an one component Beta distribution.
 
-The Posterior distribution describes the synthesis of historical prior
+The Posterior distribution (blue dot dash) describes the synthesis of historical prior
 and the current data from which decisions can then be made.
 
 For our data example, no events observed would be a prior data conflict. In consequence,  the mean is only slightly drawn towards the MAP prior.
@@ -590,7 +594,7 @@ Also (1.) cumulative total exposure time of patients with at least  one event of
 \label{fig:nta_rate}
 \end{figure}
 
-The Robust MAP Prior (red dotted) describes the historical.
+The Robust MAP Prior (red dotted) describes the density for the borrowed historical information.
 
 The Likelihood (green dashed) describes a density that would describe current data, using the maximum likelihood estimation for an one component Beta distribution.
 
@@ -697,28 +701,26 @@ Therefore, we selected only current information of  Agent A. If you accidentally
 as seen on the left of figure \ref{fig:trt_arm} you get an error message on the bottom right.
 
 
-
 \begin{figure}[H]
 \includegraphics{img/comparison/comp_select.png}
 \caption{Comparison Selection}
 \label{fig:comp_select}
 \end{figure}
 
-You can choose up to 5 different comparison groups. By choosing Show comparison (see fig. \ref{fig:comp select}),
+You can choose up to 5 different comparison groups. By choosing Show comparison (see fig. \ref{fig:comp_select}),
 you have to select the arms, that shall build the groups from which you borrow. The slider can be moved based on the number of comparisons you
 would like to perform.
-For example could you also create an arm that includes Placebo dose 250, and add it to you selection for the control arm.
-
+For example you could also create an arm that includes Placebo dose 250, and add it to you selection for the control arm.
 
 
 Once the Treatment and Control arms has been selected, click
-the Submit button. You have then to wait for the simulation/calculation to
+the Submit button. You then have to wait for the simulation/calculation to
 be completed. Depending on the number of Adverse Event Endpoints
 and the number of comparisons done, this simulation process can take
 some time.
 
 
-Once the simulation is completed (see fig. \ref{fig:sumi_done}), the chosen comparisons are then
+Once the simulation is completed (see fig. \ref{fig:simu_done}), the chosen comparisons are then
 displayed by a pop-up and you can download the PDF on the
 right-hand side on the page.
 
@@ -731,7 +733,7 @@ right-hand side on the page.
 
 For each comparison, five different tables are produced:
 
--   Table 1 lists the different trials that makes up each arm (Treatment
+-   Table 1 lists the different trials that make up each arm (Treatment
     and Control) of the comparison.
 
 -   Table 2 indicates the number of patients that experienced each
@@ -746,7 +748,7 @@ For each comparison, five different tables are produced:
     Posterior Distribution mean, median and 95% credible interval.
 
 -   Table 4 shows the Exposure-Adjusted Adverse Event rate, the rate of
-    patients with event per patient year at risk. Naive estimates shows
+    patients with event per patient year at risk. Naive estimates show
     the (pooled) number of patients with event r, divided by the
     (pooled) total exposure time. Posterior summary shows the Posterior
     Distribution mean, median and 95% credible interval.

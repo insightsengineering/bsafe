@@ -1,6 +1,6 @@
 ---
 title: |
-    | B-Safe Testing and Validation v. 0.0.6
+    | B-Safe Testing and Validation v. 0.0.7
     | for B-Safe v. 0.1
 author: | 
     | Alexander Stemke (1), Lars Andersen (1), James Turay (1), Louise Whitehead (1,2) 
