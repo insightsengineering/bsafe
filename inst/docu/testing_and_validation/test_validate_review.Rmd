@@ -693,7 +693,6 @@ SimTestData <- function(
 
   return(res_df)
 }
-
 ```
 
 # **Binary Endpoint results**
