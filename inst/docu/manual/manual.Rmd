@@ -1,6 +1,6 @@
 ---
 title: |
-    | B-Safe User Manual v. 0.0.8
+    | B-Safe User Manual v. 0.1
     | for B-Safe v. 0.1
 author: | 
     | Alexander Stemke (1), Lars Andersen (1), Oliver Sailer (1), Dunfu Yang (1)
@@ -67,9 +67,9 @@ This simple data example is further specified in section \@ref(data-example).
 \includegraphics{img/using_the_app/landing.png}
 \end{figure}
 
-You will land on a page similar to this. It is recommended to go trough the app from top to bottom. The left and middle panel in fig. \ref{fig:land} correspond to each other. Each bullet point has a section within this manual.
+You will land on a page similar to this. It is recommended to go through the app from top to bottom. The left and middle panel in fig. \ref{fig:land} correspond to each other. Each bullet point has a section within this manual.
 
-When calculations were performed, you can add a card at the top left corner via \texttt{TEAL} and save your results or continue with your settings at a later stage, or log the whole R code used. Click therefor on the + (1.) in figure \ref{fig:save} and name your card.
+When calculations were performed, you can add a card at the top left corner via \texttt{TEAL} and save your results or continue with your settings at a later stage, or log the whole R code used. Click therefore on the + (1.) in figure \ref{fig:save} and name your card.
 
 
 \begin{figure}[H]
@@ -130,7 +130,7 @@ Exposure Adjusted Incidence Rate.
 Additionally, other variables including Dose, Freq (Frequency), Length
 (Length of treatment), Treat (Treatment) can be included, as shown in table
 \ref{tab:add_var}. With these additional variables, subgroup analysis can be
-done. Note that in Table \ref{tab:add_var}, for variables Freq and Length, the time scale depends on the input and should be consistent throughout the entire dataset. Moreover, further variables could be included (see therefor also the data example \ref{tab:add_data}).
+done. Note that in Table \ref{tab:add_var}, for variables Freq and Length, the time scale depends on the input and should be consistent throughout the entire dataset. Moreover, further variables could be included (see therefore also the data example \ref{tab:add_data}).
 
 
 \begin{table}[H]
@@ -203,7 +203,7 @@ The following dataset example was generated for this introduction.
 \end{tabular}
 \end{table}
 
-In brief those three studies are presented. Each study has a \texttt{STUDYID} which corresponds in this case with its \texttt{ARM}. \texttt{Study\#1} includes historical (\texttt{HIST = 1}) and non historical (\texttt{HIST = 0}) information. It only has historical and current information for the Placebo treatment. \texttt{Study\#2} includes only current data (\texttt{HIST = 0}) and \texttt{Study\#3} only historical (\texttt{HIST = 1}).
+In brief those three studies are presented. Each study has a \texttt{STUDYID} which corresponds in this case with its \texttt{ARM}. \texttt{Study\#1} includes historical (\texttt{HIST = 1}) and non historical (\texttt{HIST = 0}) information. It only has historical and current information for the Placebo treatment (see table \ref{tab:add_data}). \texttt{Study\#2} includes only current data (\texttt{HIST = 0}) and \texttt{Study\#3} only historical (\texttt{HIST = 1}).
 
 All additional information, that are not relevant for the \texttt{B-SAFE} module, are displayed in table \ref{tab:add_data}.
 In addition to the predefined additional variables (see table \ref{tab:add_var}), this dataset also includes information on the region of the study. 
@@ -245,7 +245,7 @@ It is important to understand, that for the meta-analysis, the data subset which
 ## **Adding an Arm**
 
 Each analysis is performed for the data defined by the variable \texttt{ARM}. 
-Before we use the predefined arms, or add a new arm, it is crucial to note, that the filtering via \texttt{TEAL} in  fig. \ref{fig:teal_filter1}, has to be done, before any arm is created.
+Before we use the predefined arms, or add a new arm, it is crucial to note, that the filtering via \texttt{TEAL} in  fig. \ref{fig:teal_filter1}, has to be done, before any arm is created. This filtration process will be introduced next.
 
 By collapsing 1. in fig. \ref{fig:teal_filter1} you can view your data and by 2. in fig. \ref{fig:teal_filter1} you can collapse the \texttt{TEAL} filtration.
 
@@ -255,10 +255,10 @@ By collapsing 1. in fig. \ref{fig:teal_filter1} you can view your data and by 2.
 \label{fig:teal_filter1}
 \end{figure}
 
-It is possible to filter for each variable of the dataset. 1. (see fig. \ref{fig:teal_filter2}) select the variable you would like to filter. In this example we choose the total exposure time and the region. 2. we choose an exposure under 500 and America and Eurasia as a region.
+It is possible to filter for each variable of the dataset. 1. Select the variable you would like to filter (see fig. \ref{fig:teal_filter2}). In this example we choose the total exposure time and the region. 2. we choose an exposure under 280 and America and Eurasia as a region.
 Any further arm creation or analysis would be performed on this subset. 
 
-For now, we don't need further filtration. This feature is very useful, if you would like to investigate certain subgroup characteristics or see directly a potential arm creation; under 3. it is displayed how many observations remain in this subset. For any further information, please refer to \texttt{TEALs} documentation.
+For now, we don't need further filtration. This feature is very useful when you would like to investigate certain subgroup characteristics or see directly a potential arm creation; under 3. it is displayed how many observations remain in this subset. For any further information, please refer to \texttt{TEALs} documentation.
 
 
 \begin{figure}[H]
@@ -276,7 +276,7 @@ Starting with our original dataset we will now create a data subset called an ar
 \label{fig:add_arm}
 \end{figure}
 
-Starting with 1. (see fig. \ref{fig:add_arm}) select the variables you are interested in. In this example we choose \texttt{DOSE} and \texttt{TREAT}. 2. and 3. choose the variables characteristics. In this case, we are interested to borrow information from the Placebo treatments. In general it is discouraged to borrow information from treatment arms that are not Placebo or standard of care. 4. you name the arm, and to you add the arm.
+Starting with 1. (see fig. \ref{fig:add_arm}) select the variables you are interested in. In this example we choose \texttt{DOSE} and \texttt{TREAT}. 2. and 3. choose the variables characteristics. In this case, we are interested to borrow information from the Placebo treatments. In general it is discouraged to borrow information from treatment arms that are not Placebo or standard of care. 4. you name the arm, and 5. you add the arm.
 Using 6. a created arm can also be deleted again. Any errors that might occur (e.g. trying to give 2 times the same name), an error will be displayed at the bottom right  of your screen.
 
 In this case the subset of dose 500 and Placebo treatment is identical, but especially with an increasing number of studies to borrow from, it is better to ensure your correct choices.
@@ -301,7 +301,7 @@ Under 2. in fig. \ref{fig:analysis_selection} we have several options, we will e
 
 ## Select patients with the respective treatment
 
-If there are different treatment options in the uploaded dataset file, and you have created different \texttt{ARMS} you can 2. choose a specific \texttt{ARM} from the drop-down menu in figure \ref{fig:analysis_selection}. In this case we choose our created \texttt{ARM} Placebo500. g1 would not be a wise choice, it includes different treatments.
+If there are different treatment options in the uploaded dataset file, and you have created different \texttt{ARMS} you can 2. choose a specific \texttt{ARM} from the drop-down menu in figure \ref{fig:analysis_selection}. In this case we choose our created \texttt{ARM} Placebo500. g1 would not be a wise choice, it includes different treatments. For the demonstration we changed the \texttt{ARM} to g1.
 
 
 ## Select Safety Analysis
@@ -320,8 +320,8 @@ options to choose from:
     probability of a patient having one or more AEs during the specific
     period.
 
--   Exposure Adjusted Adverse Event Rate: sometimes referred to as Incident
-    rate, which describes the incident rate of AEs per patient per time unit 
+-   Exposure Adjusted Adverse Event Rate: sometimes referred to as incidence
+    rate, which describes the incidence rate of AEs per patient per time unit 
     assuming a constant hazard rate. This could be interpreted as
     the number of patients having one or more adverse events per unit
     time under assumption of constant risk over the observational
@@ -341,7 +341,8 @@ Prior will explore from the drop-down menu in Figure \ref{fig:analysis_selection
 filtered data will be displayed on the right hand side of the screen.
 
 By default, the first AE endpoint (ordered alphabetically) will be
-selected and displayed. In our example we choose also vomitting. 
+selected and displayed. In our example we choose also vomitting.
+
 
 ## Used Seed
 
@@ -419,7 +420,7 @@ as shown in Table \ref{tab:hete}. Generally, with larger heterogeneity less info
 
 
 The amount of information to be borrowed depends
-on the confidence the user has on the similarity between the new and historical data. In the app, the (default) hyperparameter for $\tau$ representing between-trial heterogeneity has been set to Large @ghadessi_roadmap_2020.
+the assessment the user makes on the similarity between the new and historical data. In the app, the (default) hyperparameter for $\tau$ representing between-trial heterogeneity has been set to Large @ghadessi_roadmap_2020.
 
 
 For the Expected Sample Size method, the Expected Local Information
@@ -506,14 +507,14 @@ prior weight figure, the more confidence the user has in the historical
 data and the less discount in the historical data.
 
 
-A graph depicting both the MAP Prior (dotted in red) and Robust MAP Prior (dashed in blue) is the
+A graph depicting both the MAP Prior (dotted in red) and Robust MAP Prior (dashed in blue) is then
 generated on the right hand side of the page.
 
 
 <div style="page-break-after: always;"></div>
 ## Robust MAP Prior: Incidence Proportion
 
-For incidence proportion analysis, the uninformative mean is set to 50% and thus a Beta(1,1) distribution is chosen as the weakly-informative prior. 
+For incidence proportion analysis, the uninformative component mean is set to 50% and thus a Beta(1,1) distribution is chosen as the weakly-informative prior. 
 
 By adding the non-informative part (1.), now the
 robustified MAP prior is approximated by four Beta distributions. The
@@ -531,9 +532,9 @@ Here note that the mode/peak of the distribution you see in the plot might be di
 <div style="page-break-after: always;"></div>
 ## Robust MAP Prior: Exposure-Adjusted Adverse Event Rate
 
-For exposure-adjusted adverse event rate, a weakly-informative prior mean
+For exposure-adjusted adverse event rate, a weakly-informative prior component mean
 (hazard ratio) as in figure \ref{fig:rob_rate} is also selected for the
-robust MAP prior to be calculated and the mean value is supposed to be chosen by the user. Note that if the SD for the robustified MAP prior is larger than 1, this means that the robustification turns to be informative so that we suggest not to borrow any information.
+robust MAP prior to be calculated and the mean value is supposed to be chosen by the user. If the prior adds less then 1 ENE, we suggest not to borrow any information.
 
 \begin{figure}[H]
 \includegraphics{img/robust_map_prior/rob_rate.png}
@@ -541,7 +542,7 @@ robust MAP prior to be calculated and the mean value is supposed to be chosen by
 \label{fig:rob_rate}
 \end{figure}
 
-For the robustification of the Exposure-Adjusted Adverse Event Rate, you need to choose a  prior weight  (1.) as well as a prior mean (2.). It is recommended to select an non-informative mean. In this case, we just used the default value 0.5, which corresponds to 3. (log(0.5) = -0.69).
+For the robustification of the Exposure-Adjusted Adverse Event Rate, you need to choose a  prior weight  (1.) as well as a prior mean (2.). It is recommended to select a mean for the non-informative component. In this case, we just used the default value 0.5, which corresponds to 3. (log(0.5) = -0.69).
 In the summary table (4.) only on the log(hazard rates) the ESS (or rather ENE: Effective Number of Events) is displayed.
 
 
@@ -561,7 +562,7 @@ The generated graph allows to asses a potential prior data conflict.
 ## New Trial Analysis: Incidence Proportions
 
 For the new trial analysis you need to select (1.) the  number of new patients (max. 200).
-Also (2.) the number of patients with at least  one event of interest observed has to be specified.
+Also select (2.) the number of patients with at least  one event of interest observed.
 This number cannot exceed the number of patients.
 
 \begin{figure}[H]
@@ -577,7 +578,7 @@ The Likelihood (green dashed) describes a density that would describe current da
 The Posterior distribution (blue dot dash) describes the synthesis of historical prior
 and the current data from which decisions can then be made.
 
-For our data example, no events observed would be a prior data conflict. In consequence,  the mean is only slightly drawn towards the MAP prior.
+In consequence, the mean is only slightly drawn towards the MAP prior.
 In this case you could consider to increase the robustification (see section \@ref(robust-map-prior)).
 
 
@@ -601,8 +602,7 @@ The Likelihood (green dashed) describes a density that would describe current da
 The Posterior distribution (blue dot dash) describes the synthesis of historical prior
 and the current data from which decisions can then be made.
 
-For our data example, no events observed would be a prior data conflict. In consequence,  the mean is only slightly drawn towards the MAP prior.
-In this case you could consider to increase the robustification (see section \@ref(robust-map-prior)).
+In this case you could consider to increase the robustification and adapt the robustification mean (see section \@ref(robust-map-prior)).
 
 For the ESS only the value for the robustified MAP prior is displayed.
 
@@ -616,7 +616,7 @@ For the ESS only the value for the robustified MAP prior is displayed.
 The Decision Making section allows statistical inferences to be made
 based on the Likelihood, MAP Prior, Robust MAP Prior and the Posterior
 distribution. These options can be obtained by assessing the drop-down
-menu (1.) in figure \ref{fig:dm_post_prop} and \ref{fig:dm_map_rate} respectively. Note that the inference based on the likelihood is with respect to the data from you new trial analysis input (see  section \@ref(new-trial-analysis)), in contrast to which based on the prior/posterior are with respect to the underlying parameter.
+menu (1.) in figure \ref{fig:dm_post_prop} and \ref{fig:dm_map_rate} respectively. Note that the inference based on the likelihood is with respect to the data from your new trial analysis input (see  section \@ref(new-trial-analysis)), in contrast to which based on the prior/posterior are with respect to the underlying parameter.
 
 The colored area under the curve describes the probability for the value to be within the defined boundaries. 
 

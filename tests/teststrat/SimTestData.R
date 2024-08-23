@@ -75,7 +75,7 @@ SimTestData <- function(
 
   # Simulate sutdies
 
-  if (prior_data_conflict == TRUE) {
+  if (diff_trt_length == TRUE) {
     SimStudy_time_cutoff_set <- (c(0.5, 0.5, 1, 1, 1.5, 1.5) + 1) * 12
   } else {
     SimStudy_time_cutoff_set <- SimStudy_time_cutoff
