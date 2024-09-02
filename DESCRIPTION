@@ -43,3 +43,4 @@ Imports:
     rstan (>= 2.32)
 Suggests: 
     testthat
+Config/testthat/edition: 3
