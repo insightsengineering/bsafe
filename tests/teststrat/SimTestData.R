@@ -74,7 +74,15 @@ SimTestData <- function(
   }
 
   # Simulate sutdies
-  SimStudy_time_cutoff_set <- (c(0.5, 0.5, 1, 1, 1.5, 1.5) + 1) * 12
+
+  if (diff_trt_length == TRUE) {
+    SimStudy_time_cutoff_set <- (c(0.5, 0.5, 1, 1, 1.5, 1.5) + 1) * 12
+  } else {
+    SimStudy_time_cutoff_set <- SimStudy_time_cutoff
+  }
+
+
+
   for (i in 1:nStudy) {
     if (tau > 0) {
       SimStudy_hz <- exp(log(SimStudy_hz) + rnorm(2, mean = 0, sd = tau))

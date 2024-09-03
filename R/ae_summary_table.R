@@ -120,6 +120,7 @@ ae_summary_table <-
 
       # Proportions Prep -----------------------------------------------------------
 
+
       for (topic in saf_topic) {
         # for the log
         print(paste0(
@@ -344,6 +345,7 @@ ae_summary_table <-
           trt_current = trt_current_trial,
           ctr_current = ctr_current_trial
         )
+
         dc_rate <- sum(data_check_rate)
 
         warn_txt <- add_row(
@@ -400,7 +402,11 @@ ae_summary_table <-
           robust_mean_er <- summary(er_trt_prior_fit)["mean"]
           trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = robust_weight, mean = robust_mean_er, sigma = 1)
         } else {
-          trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = er_trt_mean, mean = robust_mean_er, sigma = 1)
+          # if no historical information is available, currentt data is avaialaable, otherwiese it would skip
+          ctr_new_nwae <- sum(trt_current_trial$N_WITH_AE)
+          ctr_new_texp <- sum(trt_current_trial$TOT_EXP)
+          robust_new_mean <- log(ctr_new_nwae / ctr_new_texp)
+          trt_rob_prior <- RBesT::robustify(er_trt_prior_fit, weight = robust_weight, mean = robust_new_mean, sigma = 1)
         }
 
 
@@ -458,7 +464,11 @@ ae_summary_table <-
           robust_mean_er <- summary(er_ctr_prior_fit)["mean"]
           ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = robust_weight, mean = robust_mean_er, sigma = 1)
         } else {
-          ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = er_ctr_mean, mean = robust_mean_er, sigma = 1)
+          # if no hostorical information is available, currentt data is avaialaable, otherwiese it would skip
+          ctr_new_nwae <- sum(ctr_current_trial$N_WITH_AE)
+          ctr_new_texp <- sum(ctr_current_trial$TOT_EXP)
+          robust_new_mean <- log(ctr_new_nwae / ctr_new_texp)
+          ctr_rob_prior <- RBesT::robustify(er_ctr_prior_fit, weight = robust_weight, mean = robust_new_mean, sigma = 1)
         }
 
         if (data_check_rate["ctr_current"] == TRUE) {

@@ -2,8 +2,8 @@
 #
 # Quantify the above conditions
 # Scen13
-# st14 <- Sys.time()
-seed_scen14 <- as.numeric(st14)
+# st13 <- Sys.time()
+seed_scen13 <- as.numeric(1718356066)
 # 1718356066
 
 st14data <- SimTestData(

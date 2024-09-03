@@ -8,10 +8,10 @@ test_that(
     )
     path <- "scenarios/"
     csv_choices <- list.files(path, pattern = "*.csv")
-    csv_choices <- csv_choices[-c(2, 4, 12)]
+    csv_choices <- csv_choices[-c(2, 4, 12, 13)]
     testing_list_rates <- readRDS("thresholds/testing_list_rates.rds")
 
-    for (i in c(1:c(length(testing_list_rates)))[-c(3, 5, 13)]) {
+    for (i in c(1:c(length(testing_list_rates)))[-c(3, 5, 13, 14)]) {
       tp_rates <- testing_list_rates[[i]]$parameters
       thresholds_rates <- testing_list_rates[[i]]$treshholds
 

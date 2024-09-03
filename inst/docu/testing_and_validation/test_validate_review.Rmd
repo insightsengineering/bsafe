@@ -1,6 +1,6 @@
 ---
 title: |
-    | B-Safe Testing and Validation v. 0.0.5
+    | B-Safe Testing and Validation v. 0.1
     | for B-Safe v. 0.1
 author: | 
     | Alexander Stemke (1), Lars Andersen (1), James Turay (1), Louise Whitehead (1,2) 
@@ -34,7 +34,7 @@ An error message is expected when the input table does not contain the required 
 ## **Purpose and Scope**
 The aim of this testing and validation plan is to test whether the application is working as specified and that all described functionality are working as intended.
 
-Test cases will cover common use cases of the application with the aim of ensuring that calculations done by the application are implemented properly. If there are any computations that cannot be performed by the application, additional changes or modifications to the application will be done in the future. That is beyond the scope of this document.
+Test cases will cover common use cases of the application with the aim of ensuring that calculations done by the application are implemented properly. All tests are designed for \texttt{bsafe} version 0.1 in combination with the \texttt{teal.modules.bsafe} version 0.1.
 
 
 # **Testing and Requirement Strategy**
@@ -44,8 +44,8 @@ Software and packages used by the application to perform the validation includes
 thresholds_props <- readRDS("../../../tests/testthat/thresholds/testing_list_props.rds")
 thresholds_rates <- readRDS("../../../tests/testthat/thresholds/testing_list_rates.rds")
 table <- cbind(
-  (Program <- c("R", "RStudio", "shiny", "RBesT", "Rmarkdown", "R2jags", "rstantools", "bayesplot", "checkmate", "testthat")),
-  (Version <- c("", "", "1.7.5.1", "1.7.2", "2.25", "0.7-1", "2.1.1", "1.8.1", "2.3.1", "3.2.1"))
+  (Program <- c("R", "shiny", "RBesT", "Rmarkdown", "R2jags", "rstantools", "bayesplot", "checkmate", "testthat")),
+  (Version <- c("4", "1.7.5.1", "1.7.2", "2.25", "0.7-1", "2.1.1", "1.8.1", "2.3.1", "3.2.1"))
 )
 
 knitr::kable(table, col.names = c("Program", "Version"), caption = "Softwares and Packages", booktabs = TRUE, longtable = TRUE)
@@ -53,6 +53,8 @@ knitr::kable(table, col.names = c("Program", "Version"), caption = "Softwares an
  The testing strategy is based on Input Testing and Structural Testing.
  Input Testing is performed to investigate whether erroneous input by the user is handled as intended by the application.
  Structural Testing deals with the confirmation of the accuracy of the calculations done by the application. Different scenarios to cater for common cases will be simulated for the structural testing to be performed.
+ 
+The code for the thresholds for structural testing, as well as the code to simulate scenarios are dependent from package itself and were  reviewed by to statisticians independently.
 
 # **Input Testing**
  This section describes the verification procedure of the functionality of the B-Safe application.
@@ -101,9 +103,9 @@ knitr::kable(table2, "pipe",
 
 In case the expected specifications are not met, the test is failed.
 
-The conditions above are all implementations that needs to be tested before the actual testing of the full functionality of the B-Safe application can be executed. Various test cases are grouped together and performed in a single action. For example, all test cases that contain checking the applications handling of input values/characters.
+The conditions in table 3 are all implementations that needs to be tested before the actual testing of the full functionality of the B-Safe application can be executed. Various test cases are grouped together and performed in a single action. For example, all test cases that contain checking the applications handling of input values/characters.
 
-All those requirements are testest via the *checkmate* R package, which allows for both warnings as well as errors to guide the user along the error and help fixing the problem. In addition the required variables are within the same approach not only tested for specific required typing, but also the *checkmate* R package allows to test certain boundaries of those variables as well as restricting inputs to certain formats, e.g., csv.
+All those requirements are tested via the *checkmate* R package, which allows for both warnings as well as errors to guide the user along the error and help fixing the problem. In addition the required variables are within the same approach not only tested for specific required typing, but also the *checkmate* R package allows to test certain boundaries of those variables as well as restricting inputs to certain formats, e.g., csv.
 
 ## **Binary Endpoint**
   1. Setup a .csv file
@@ -269,14 +271,21 @@ Some inputs including weakly-informative prior weight for the calculation of Rob
 
 # **Testing Framework in testthat**
 
-For testing purpose with testthat, the values for the defined scenarios, were created beforehand and saved as a separate file. As well were reference images for scenario 03 created and saved for comparison. Moreover, due to the use of Stan, also for image comparison the \texttt{RBesT gMAP} element was saved. Moreover, the parameter, used in testing, were also defined upfront and are saved in the same file \texttt{tests/testthat/thresholds}. 
+For testing purpose with testthat, the thresholds for the defined scenarios, were created beforehand and saved as a separate file. As well were reference images for scenario 03 created and saved for comparison. Moreover, due to the use of Stan, also for image comparison the \texttt{RBesT gMAP} element was saved. Moreover, the parameter, used in testing, were also defined upfront and are saved in the same file \texttt{tests/testthat/thresholds}. 
 
 
 Therefore the \texttt{testthat R} package is being used to ensure a framework, that is commonly used and stable.
+Hereby, the testing setup replicates the workflow of the application with loading the respective data, parameters as well as thresholds.
 
-Hereby, the testing setup replicates partially the workflow of the application with loading the respective data, parameters as well as thresholds. Then all functions that B-SAFE is running are run in the needed order to ensure the same workflow. Afterwards the outputs of the different plots as well as tables that are being displayed within the application are compared against the reference images, where the binaries of the images are compared and expected to be equal. Regarding the tables, the thresholds, both for the lower as well as the upper limits are being used to create threshold tables which then the corresponding tables / values of the replicated application workflow are compared against. The framework then either passes the comparison as the values are within a certain tolerance, or the framework will throw an error when the values are not within the threshold respective their tolerance.
 
-In the setup file (\texttt{tests/testthat/setup.R}), all plots will be created and saved in (\texttt{tests/testthat/test\_img}). This will be executed, prior to the pixel wise comparison. Here all plots will be created. Then in (\texttt{tests/testthat/tests-plots.R}) all the different created plot images will be binary tested against the reference images (\texttt{tests/testthat/img}) to ensure reproducibility.
+First all functions that B-SAFE is running are run in the needed order to ensure the same workflow. Therefore, all calculations are performed with \texttt{bsafe}. Afterwards the outputs of the different plots as well as tables that are being displayed within the application are compared against the reference images, where the binaries of the images are compared and expected to be equal. 
+
+In the setup file (\texttt{tests/testthat/setup.R}), all plots will be created and saved in (\texttt{tests/testthat/test\_img}). This will be executed, prior to the pixel wise comparison. Here all plots will be created. Then in (\texttt{tests/testthat/tests-plots.R}) all the different created plot images will be binary tested (pixelwise ccomparison) against the reference images (\texttt{tests/testthat/img}) to ensure reproducibility.
+This graphics  check is only performed  for all graphics of scenario 3. 
+
+Regarding the tables and displayed values, all predefiend scenarios will be loaded and then tested. For each scenarios the output from the app will be tested, whether the values are within the predefined boundaries and whether they are displayed at the correct place. Therefore, the tables are double coded and checked. The displayed tables are checked, that the values and NA's are at their correct position. If a row (e.g. MAP prior summary statistics) appears in two different displayed tables, we check that they are identical.
+
+The framework then either passes the comparison as the values are within a certain tolerance, or the framework will throw an error when the values are not within the threshold respective their tolerance. For more details regarding the thresholds and tolerance see section \@ref(simulation-and-testing-of-scenarios).
 
 ESS and summary statistics are tested independently from each other, for reason see section \@ref(simulation-and-testing-of-scenarios).
 
@@ -293,6 +302,11 @@ For this purpose, various conditions were set to capture a wide array of possibi
 Following each scenario is briefly described. The simulated data sets are displayed in section \@ref(simulation-and-testing-of-scenarios).
 For further information (e.g. the level of heterogeneity) please refer to the statistical analysis plan of B-Safe.
 
+All scenarios, except the worst scenarios (2, 4, 12 and 13) pass without any failures. For Scenario 2, 4 and 12 the issues stem from problems with the integration within \texttt{RBesT}. The developers of \texttt{RBesT} are informed and will fix this in an upcoming  version.
+Scenario 13 describes with different treatment length. This is in violation with the exchange ability assumption for proportions and tests fail for this analysis on a regular basis, therefore, it was excluded from testing for the proportions. For rates it passed the tests. 
+
+Those scenarios are tested to be withing a certain threshold. The code to produce the thresholds was not double coded. Instead a thorough code review toke place. It can be found under \texttt{tests/teststrat/ScriptThresholds.R}. This script does not use any function from \texttt{bsafe}. Instead it performs the same analysis using \texttt{RBesT}. The independent source code review by two statisticians, ensured  its validity. 
+
 ## **Simulation and Testing of Scenarios**
 In this chapter, the scenarios that are described in section \@ref(binary-endpoint-results) for incidence proportions and in section \@ref(time-to-event-endpoint-results) for exposure adjusted incidence rates respectively, will be simulated and run through the B-SAFE app with the results being cross-checked for errors.
 
@@ -301,7 +315,8 @@ The testing procedure is as follows. The fixed historical data for each scenario
 Each of the 1000 MAP / robust MAP priors for each scenario was subsequently updated with the corresponding (fixed) new trial data for that scenario, where the new data is as shown in the tables. Summary statistics for the likelihoods and the posterior distributions were again calculated, and upper and lower thresholds determined as above. The code can be found under \texttt{tests/teststrat/ScriptThresholds.R}.
 
 Tests are then run using \texttt{testthat}. A test will pass if the summary statistics (for the MAP prior, robust MAP prior, likelihood, and posterior) lie within the upper and lower thresholds with a respective tolerance, and fail otherwise.
-The tolerances were included  to adjust for the variability in  results. Due to the use of \texttt{stan} within \texttt{RBesT} on each machine a different MCMC is the result of the function calls. For good scenarios (e.g. 1,3) this threshold could be very small (e.g. $1 \cdot 10^{-4}$). For worse scenarios (e.g. 4,5), the variability is higher. We decided to use one tolerance for the binary (e.g. $3 \cdot 10^{-2}$) and another for the time to event endpoint (e.g. $8 \cdot 10^{-2}$). We used the highest rounded difference we encountered during a couple of test runs. 
+The tolerances were included  to adjust for the variability in  results. Due to the use of \texttt{stan} within \texttt{RBesT} on each machine a different MCMC is the result of the function calls. For good scenarios (e.g. 1,3) this threshold could be very small (e.g. $1 \cdot 10^{-4}$). For worse scenarios (e.g. 4,5), the variability is higher. We decided to use one tolerance for the binary ($3 \cdot 10^{-2}$) and another for the time to event endpoint ($8 \cdot 10^{-2}$). We used the highest rounded difference we encountered during a couple of test runs.
+Those tolerances are used for all values except the ESS.
 
 For the ESS/ENE we decided for a 10% tolerance. However, as seen by the observed minimum and maximum values of the 1000 runs, in some cases a absurdly high ESS/ENE is reported. This is a known \texttt{RBesT} issue, and we have contacted the authors. For certain mixture components with especially low weights, the integration function malfunctions. Therefore, if the ESS/ENE exceeds the number of patients/events, the MCMC sample will be drawn again, up to three times. After a third attempt the test will fail.
 
@@ -309,7 +324,14 @@ Moreover, for certain scenarios (2, 4, 12), this issue leads to the general excl
 
 Some values are not displayed, neither in the exploratory nor the reporting feature of B-SAFE. Nevertheless, for coding reasons, they are still part of the array structure and will be mentioned here as not available (NA).
 
+All scenario thresholds were reviewed and represent reasonable results regarding their input data.
+For section \@ref(binary-endpoint-results) and \@ref(time-to-event-endpoint-results) the scenarios and their thresholds are displayed. 
+Tested were within the 98\% quantiles +/- the respective tolerance. The minimum and maximum of the 1000 iterations are also displayed, to show the possible range, the same analysis with the same dataset can result. 
+
 ## **Code der Daten Simulation**
+All three scripts in \texttt{tests/teststrat} are not part of the \texttt{bsafe} package itself.
+They are designed specifically for this testing strategy and were reviewed independently.  
+
 The scripts generates synthetic data that mimics real-world studies.
 The code can also be found under \texttt{tests/teststrat/SimStudy.R}
 
@@ -572,7 +594,15 @@ SimTestData <- function(
   }
 
   # Simulate sutdies
-  SimStudy_time_cutoff_set <- (c(0.5, 0.5, 1, 1, 1.5, 1.5) + 1) * 12
+
+  if (diff_trt_length == TRUE) {
+    SimStudy_time_cutoff_set <- (c(0.5, 0.5, 1, 1, 1.5, 1.5) + 1) * 12
+  } else {
+    SimStudy_time_cutoff_set <- SimStudy_time_cutoff
+  }
+
+
+
   for (i in 1:nStudy) {
     if (tau > 0) {
       SimStudy_hz <- exp(log(SimStudy_hz) + rnorm(2, mean = 0, sd = tau))
@@ -1364,6 +1394,8 @@ knitr::kable(table,
 
 ## **Scenario 13 - Different treatment length**
 Scenario 13 describes a good scenario with different treatment length.
+This is in violation with the exchange ability assumption for proportions and tests fail for this analysis on a regular basis, therefore, it was excluded from testing. 
+
 ```{r}
 SimTestData(
   SimStudy_nPat = c(g1 = 200, g2 = 200),
@@ -2205,5 +2237,18 @@ knitr::kable(table,
   booktabs = TRUE, ngtable = TRUE
 )
 ```
+
+
+# **Summary**
+
+In summary, all input checks are in place and work for encountered errors during development and user tests.
+All graphics and tables are displayed correctly. Defined thresholds underwent an independent source code review. 
+The method implementation in the source code was reviewed against the statistical analysis plan (see \texttt{inst/docu/SAP/statsplan.pdf}) and showed no errors. 
+
+The structural tests were all passed except for scenario 2, 4, 12 and proportions for scenario 13. For Scenario 2, 4 and 12  (the  worst scenarios) the issues stem from problems with the integration within \texttt{RBesT}. Scenario 13 describes with different treatment length.
+For two reasons the testing for proportions were therefor excluded. First, the estimator is incorrect for that estimand. Because incidence proportions have to be estimated for equal treatment length. Second, by doing so, the results have a very high variability over  the simulations  and the testing tolerance would be irresponsibly high. 
+In the case of different treatment duration, we recommend using incidence rates.
+
+None of the source code showed any discrepancy between the independent reviewed testing scripts and the functions of the app. 
 
 # **References**

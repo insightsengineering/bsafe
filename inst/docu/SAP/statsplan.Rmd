@@ -559,7 +559,7 @@ default_values <- data.frame(
     0.2,
     "log(N WITH AE/TOT EXP)",
     1,
-    "Normal(log(N WITH AE NEW/TOT EXP NEW, 1)",
+    "Normal(log(N WITH AE NEW/TOT EXP NEW), 1)",
     "Robustified MAP Prior as Posterior"
   )
 )
