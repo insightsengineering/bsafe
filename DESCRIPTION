@@ -42,5 +42,7 @@ Imports:
     RBesT (>= 1.7-3),
     rstan (>= 2.32)
 Suggests: 
+    rmarkdown,
     testthat
 Config/testthat/edition: 3
+VignetteBuilder: knitr

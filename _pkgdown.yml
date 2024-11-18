@@ -18,3 +18,9 @@ navbar:
   right:
     - icon: fa-github
       href: https://github.com/insightsengineering/bsafe
+
+articles:
+- title: Get started
+  navbar: ~
+  contents:
+  - B-Safe Testing Strategy
