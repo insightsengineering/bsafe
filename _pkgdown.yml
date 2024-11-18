@@ -1,13 +1,36 @@
+---
 url: https://insightsengineering.github.io/bsafe
+
 template:
-  bootstrap: 5
+  package: nesttemplate
 
 navbar:
-   - icon: fa-github
-      href: https://github.com/insightsengineering/bsafe
+  structure:
+    left:
+      [get-started, reference, articles, tutorials, news, reports]
+    right: [search, github]
+  components:
+    get-started:
+      text: Get started
+      href: articles/Testing_Strategy.html
+    reports:
+      text: Reports
+      menu:
+        - text: Coverage report
+          href: coverage-report/
+        - text: Unit test report
+          href: unit-test-report/
+        - text: Non-CRAN unit test report
+          href: unit-test-report-non-cran/
+
+    github:
+      icon: fa-github
+      aria-label: View on Github
+      href: https://github.com/insightsengineering/teal
 
 articles:
-- title: Get started
-  navbar: ~
-  contents:
-  - Testing_Strategy
+  - title: Testing Strategy
+    navbar: Testing Strategy
+    contents:
+      - Testing_Strategy
+
