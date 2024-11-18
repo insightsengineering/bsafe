@@ -1,9 +1,6 @@
 ---
 url: https://insightsengineering.github.io/bsafe
 
-template:
-  package: nesttemplate
-
 navbar:
   structure:
     left:
