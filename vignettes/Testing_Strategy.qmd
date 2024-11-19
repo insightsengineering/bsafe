@@ -1,7 +1,5 @@
 ---
-title: |
-    | B-Safe Testing and Validation v. 0.1
-    | for B-Safe v. 0.1
+title: "B-Safe Testing and Validation v. 0.1 for B-Safe v. 0.1"
 author:
   - name: Alexander Stemke
     affiliations:
