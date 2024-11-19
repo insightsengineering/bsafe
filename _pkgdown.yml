@@ -1,10 +1,13 @@
 ---
-url: https://insightsengineering.github.io/bsafe
+url: https://insightsengineering.github.io/bsafe/
+
+template:
+  bootstrap: 5
 
 navbar:
   structure:
     left:
-      [get-started, reference, articles, tutorials, news, reports]
+      [get-started, reference, articles, reports]
     right: [search, github]
   components:
     get-started:
@@ -23,11 +26,11 @@ navbar:
     github:
       icon: fa-github
       aria-label: View on Github
-      href: https://github.com/insightsengineering/teal
+      href: https://github.com/insightsengineering/bsafe
 
-articles:
-  - title: Testing Strategy
-    navbar: Testing Strategy
-    contents:
-      - Testing_Strategy
+  articles:
+      - title: Testing Strategy
+        navbar: Testing Strategy
+        contents:
+          - Testing_Strategy
 
