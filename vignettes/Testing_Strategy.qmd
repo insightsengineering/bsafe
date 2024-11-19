@@ -58,7 +58,6 @@ Test cases will cover common use cases of the application with the aim of ensuri
 Software and packages used by the application to perform the validation includes:
 
 ```{r table1, echo = FALSE}
-message(getwd())
 thresholds_props <- readRDS("../tests/testthat/thresholds/testing_list_props.rds")
 thresholds_rates <- readRDS("../tests/testthat/thresholds/testing_list_rates.rds")
 table <- cbind(
