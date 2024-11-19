@@ -44,6 +44,7 @@ jobs:
       - name: Install Package from Dev Branch
         run: |
           install.packages("remotes")
+          install.packages("quarto")
           remotes::install_github("quarto-dev/quarto-r")
         shell: Rscript {0}
 
