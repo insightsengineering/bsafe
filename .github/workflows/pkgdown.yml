@@ -251,7 +251,6 @@ jobs:
         run: |
           install.packages("remotes")
           install.packages("quarto")
-          remotes::install_github("quarto-dev/quarto-r")
         shell: Rscript {0}
 
       - name: Build docs 🏗
