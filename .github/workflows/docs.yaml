@@ -47,6 +47,6 @@ jobs:
           options(quarto.quiet = FALSE)
         shell: Rscript {0}
       - name: Pkgdown Docs 📚
-      - uses: ./.github/workflows/pkgdown.yaml
+        uses: ./.github/workflows/pkgdown.yaml
         secrets:
           REPO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
