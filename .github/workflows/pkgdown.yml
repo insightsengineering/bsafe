@@ -265,12 +265,11 @@ jobs:
             echo -e "${{ inputs.additional-env-vars }}" > /tmp/dotenv.env
             export $(tr '\n' ' ' < /tmp/dotenv.env)
           }
-          R CMD INSTALL --preclean
           fi
           Rscript - <<EOF 2>&1 | tee pkgdown_${repo}.log
           if (file.exists("renv.lock")) renv::restore()
           options(quarto.quiet = FALSE)
-          pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+          pkgdown::build_site(devel = TRUE)
           EOF
           if [ "${{ inputs.fail-pkgdown-on-warnings }}" == "true" ]; then {
             grep "Warning message" pkgdown_${repo}.log > pkgdown_warnings_${repo}.log
