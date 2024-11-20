@@ -273,7 +273,7 @@ jobs:
           remotes::install_github("quarto-dev/quarto-r")
           remotes::install_github("https://github.com/insightsengineering/bsafe")
           options(quarto.quiet = FALSE)
-          pkgdown::build_site(devel = TRUE)
+          pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
           EOF
           if [ "${{ inputs.fail-pkgdown-on-warnings }}" == "true" ]; then {
             grep "Warning message" pkgdown_${repo}.log > pkgdown_warnings_${repo}.log
