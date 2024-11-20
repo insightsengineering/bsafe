@@ -6,5 +6,6 @@ linters: linters_with_defaults(
 exclusions: list(
     "inst",
     "tests",
-    "R"
+    "R",
+    "vignettes"
   )

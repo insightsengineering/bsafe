@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - "inst/templates/**"
-      - "_pkgdown.y[a]ml"
+      - "_pkgdown.*"
       - DESCRIPTION
       - "**.md"
       - "**.Rmd"
@@ -24,7 +24,7 @@ on:
       - main
     paths:
       - "inst/templates/**"
-      - "_pkgdown.y[a]ml"
+      - "_pkgdown.*"
       - DESCRIPTION
       - "**.md"
       - "**.Rmd"
@@ -35,7 +35,21 @@ on:
 
 jobs:
   docs:
-    name: Pkgdown Docs 📚
-    uses: insightsengineering/r.pkg.template/.github/workflows/pkgdown.yaml@main
-    secrets:
-      REPO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: quarto-dev/quarto-actions/setup@v2
+      - name: Check Quarto installation
+        run: quarto --version
+      - name: Testing
+        run: |
+          options(quarto.quiet = FALSE)
+          shell: Rscript {0}
+      - name: Install Package from Dev Branch
+        run: |
+          install.packages("remotes")
+          install.packages("quarto")
+          remotes::install_github("quarto-dev/quarto-r")
+        shell: Rscript {0}
+      - name: Pkgdown Docs 📚
+      - uses: insightsengineering/r.pkg.template/.github/workflows/pkgdown.yaml@main
+      - secrets:
+        REPO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

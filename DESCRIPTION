@@ -24,6 +24,9 @@ Description: This package provides utility functions for borrowing historical ti
     MAP Priors are used to model the time-to-event of a process.
     The MAP prior is a function of the time-to-event data.
 License: Apache License 2.0 | file LICENSE
+URL: https://insightsengineering.github.io/bsafe/,
+    https://github.com/insightsengineering/bsafe/
+BugReports: https://github.com/insightsengineering/bsafe/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -42,5 +45,9 @@ Imports:
     RBesT (>= 1.7-3),
     rstan (>= 2.32)
 Suggests: 
-    testthat
+    rmarkdown,
+    testthat,
+    quarto
 Config/testthat/edition: 3
+VignetteBuilder: quarto
+
