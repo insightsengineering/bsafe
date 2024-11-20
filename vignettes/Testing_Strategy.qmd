@@ -1,16 +1,16 @@
 ---
 title: "B-Safe Testing Strategy"
 author:
-  - name: Alexander Stemke
+  - name: Alexander Stemke, 
     affiliations:
       - Boehringer Ingelheim Pharma GmbH & Co. KG
-  - name: Lars Andersen
+  - name: Lars Andersen, 
     affiliations:
       - Boehringer Ingelheim Pharma GmbH & Co. KG
-  - name: James Turay
+  - name: James Turay, 
     affiliations:
       - Boehringer Ingelheim Pharma GmbH & Co. KG      
-  - name: Louise Whitehead
+  - name: Louise Whitehead, 
     affiliations:
       - Boehringer Ingelheim Pharma GmbH & Co. KG
       - Biostatistics Research Group, Newcastle University, UK
