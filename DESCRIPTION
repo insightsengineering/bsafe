@@ -2,22 +2,24 @@ Package: bsafe
 Type: Package
 Title: This package provides utility functions for borrowing historical time-to-event data using MAP priors
 Version: 0.1.0
-Authors@R: c(person('Alexander', 'Stemke', role = c('aut', 'cre'),
-                     email = 'alexander.stemke@boehringer-ingelheim.com'),
-             person('Lars', 'Andersen', role = 'aut',
+Authors@R: c(person('Lars', 'Andersen', role = c('aut', 'cre'),
                      email = 'lars.andersen@boehringer-ingelheim.com'),
-             person('Steven', 'Brooks', role = 'aut',
-                     email = 'steven.brooks@boehringer-ingelheim.com'),
+             person('Alexander', 'Stemke', role = 'aut',
+                     email = 'alexander.stemke@boehringer-ingelheim.com'),
              person('Lin', 'Zou', role = 'ctb',
                      email = 'lin.zou@boehringer-ingelheim.com'),
              person('Lou', 'Whitehead', role = 'ctb',
                      email = 'l.whitehead2@newcastle.ac.uk'),
-             person('Dunfu', 'Yang', role = 'ctb',
-                     email = 'dunfu.yang@boehringer-ingelheim.com'),             
-             person('Kevin', 'Kunzmann', role = 'ctb',
-                     email = 'kevin.kunzmann@boehringer-ingelheim.com'),
              person('Oliver', 'Sailer', role = 'ctb',
                      email = 'martin_oliver.sailer@boehringer-ingelheim.com'),
+             person('Dunfu', 'Yang', role = 'ctb',
+                     email = 'dunfu.yang@boehringer-ingelheim.com'),
+             person('Luis', 'Morís Fernández', role = 'ctb',
+                     email = 'luis.moris.fernandez@gmail.com'),
+             person('Steven', 'Brooks', role = 'ctb',
+                     email = 'steven.brooks@boehringer-ingelheim.com'),
+             person('Kevin', 'Kunzmann', role = 'ctb',
+                     email = 'kevin.kunzmann@boehringer-ingelheim.com'),
              person("Boehringer Ingelheim Pharma GmbH & Co. KG",
                      role = c("cph", "fnd")))
 Description: This package provides utility functions for borrowing historical time-to-event data using MAP priors.
