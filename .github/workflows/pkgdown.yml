@@ -247,10 +247,6 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y jags
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::pkgdown, local::.
-          needs: website
       - name: Install Package from Dev Branch
         run: |
           install.packages("remotes")
