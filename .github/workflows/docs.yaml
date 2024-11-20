@@ -35,6 +35,14 @@ on:
 
 jobs:
   docs:
+    name: install deps
+    run: |
+      install.packages("remotes")
+      install.packages("quarto")
+      remotes::install_github("quarto-dev/quarto-r")
+      remotes::install_github("https://github.com/insightsengineering/bsafe")
+      options(quarto.quiet = FALSE)
+    shell: Rscript {0}
     name: Pkgdown Docs 📚
     uses:  ./.github/workflows/pkgdown.yaml
     secrets:
