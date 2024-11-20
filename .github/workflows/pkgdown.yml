@@ -243,6 +243,7 @@ jobs:
           install.packages(".", repos=NULL, type="source")
         shell: Rscript {0}
         working-directory: ${{ github.event.repository.name }}/${{ inputs.package-subdirectory }}
+        # install JAGS for vignettes
       - name: Install JAGS
         run: |
           sudo apt-get update -y
