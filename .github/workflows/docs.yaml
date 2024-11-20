@@ -35,6 +35,7 @@ on:
 
 jobs:
   docs:
+    uses: quarto-dev/quarto-actions/setup@v2
     name: install deps
     run: |
       install.packages("remotes")
