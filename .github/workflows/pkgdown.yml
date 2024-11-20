@@ -265,6 +265,7 @@ jobs:
             echo -e "${{ inputs.additional-env-vars }}" > /tmp/dotenv.env
             export $(tr '\n' ' ' < /tmp/dotenv.env)
           }
+          R CMD INSTALL --preclean
           fi
           Rscript - <<EOF 2>&1 | tee pkgdown_${repo}.log
           if (file.exists("renv.lock")) renv::restore()
