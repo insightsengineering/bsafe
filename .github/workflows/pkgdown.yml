@@ -247,10 +247,10 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo apt-get install -y jags
-      - name: Install Package from Dev Branch
+      - name: Install Quarto
         run: |
-          install.packages("remotes")
           install.packages("quarto")
+          install.packages("RBesT")
         shell: Rscript {0}
 
       - name: Build docs 🏗
