@@ -267,8 +267,8 @@ jobs:
           }
           fi
           Rscript - <<EOF 2>&1 | tee pkgdown_${repo}.log
-          options(quarto.quiet = FALSE)
           if (file.exists("renv.lock")) renv::restore()
+          options(quarto.quiet = FALSE)
           pkgdown::build_site(devel = TRUE)
           EOF
           if [ "${{ inputs.fail-pkgdown-on-warnings }}" == "true" ]; then {
