@@ -41,15 +41,12 @@ jobs:
         run: quarto --version
       - name: Testing
         run: |
-          options(quarto.quiet = FALSE)
-          shell: Rscript {0}
-      - name: Install Package from Dev Branch
-        run: |
           install.packages("remotes")
           install.packages("quarto")
           remotes::install_github("quarto-dev/quarto-r")
+          options(quarto.quiet = FALSE)
         shell: Rscript {0}
       - name: Pkgdown Docs 📚
-      - uses: insightsengineering/r.pkg.template/.github/workflows/pkgdown.yaml@main
+      - uses: pkgdown.yaml
       - secrets:
         REPO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
