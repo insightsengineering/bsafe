@@ -251,6 +251,7 @@ jobs:
         run: |
           install.packages("quarto")
           install.packages("RBesT")
+          options(quarto.quiet = TRUE)
         shell: Rscript {0}
 
       - name: Build docs 🏗
