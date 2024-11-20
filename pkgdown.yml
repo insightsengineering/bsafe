@@ -1,9 +1,8 @@
-pandoc: 3.1.11
-pkgdown: 2.1.1
+pandoc: '3.2'
+pkgdown: 2.1.0
 pkgdown_sha: ~
-articles:
-  Testing_Strategy: Testing_Strategy.html
-last_built: 2024-11-20T07:08Z
+articles: {}
+last_built: 2024-09-03T06:03Z
 urls:
-  reference: https://insightsengineering.github.io/bsafe/reference
-  article: https://insightsengineering.github.io/bsafe/articles
+  reference: https://insightsengineering.github.io/bsafe/main/reference
+  article: https://insightsengineering.github.io/bsafe/main/articles
