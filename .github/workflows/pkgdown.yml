@@ -259,6 +259,8 @@ jobs:
         if: >
           github.event_name == 'pull_request' || startsWith(github.ref, 'refs/tags/v')
             || github.event_name == 'push'
+        env:
+          GITHUB_PAT: ${{ steps.github-token.outputs.token }}
         run: |
           repo="${{ github.event.repository.name }}"
           if [ "${{ inputs.additional-env-vars }}" != "" ]
@@ -288,8 +290,6 @@ jobs:
           fi
         shell: bash
         working-directory: ${{ github.event.repository.name }}/${{ inputs.package-subdirectory }}
-        secrets:
-          REPO_GITHUB_TOKEN: ${{ secrets.REPO_GITHUB_TOKEN }}
 
       - name: Checkout gh-pages 🛎
         if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'push'
