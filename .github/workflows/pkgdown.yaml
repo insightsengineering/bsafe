@@ -271,6 +271,7 @@ jobs:
           install.packages("remotes")
           install.packages("quarto")
           remotes::install_github("quarto-dev/quarto-r")
+          remotes::install_github("https://github.com/insightsengineering/bsafe")
           options(quarto.quiet = FALSE)
           pkgdown::build_site(devel = TRUE)
           EOF
