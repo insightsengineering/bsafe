@@ -7,5 +7,6 @@ exclusions: list(
     "inst",
     "tests",
     "R",
-    "vignettes"
+    "vignettes",
+    ".github"
   )

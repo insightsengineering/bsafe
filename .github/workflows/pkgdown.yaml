@@ -271,8 +271,11 @@ jobs:
           install.packages("remotes")
           install.packages("quarto")
           remotes::install_github("quarto-dev/quarto-r")
+          remotes::install_github("https://github.com/insightsengineering/bsafe")
           options(quarto.quiet = FALSE)
-          pkgdown::build_site(devel = TRUE)
+          Sys.setenv(TMPDIR = file.path(getwd(), "tmp"))
+          dir.create(Sys.getenv("TMPDIR"), recursive = TRUE, showWarnings = FALSE)
+          pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
           EOF
           if [ "${{ inputs.fail-pkgdown-on-warnings }}" == "true" ]; then {
             grep "Warning message" pkgdown_${repo}.log > pkgdown_warnings_${repo}.log
@@ -286,9 +289,9 @@ jobs:
           }
           fi
         shell: bash
+        env:
+          GITHUB_PAT: ${{ steps.github-token.outputs.token }}
         working-directory: ${{ github.event.repository.name }}/${{ inputs.package-subdirectory }}
-        secrets:
-          REPO_GITHUB_TOKEN: ${{ secrets.REPO_GITHUB_TOKEN }}
 
       - name: Checkout gh-pages 🛎
         if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'push'
