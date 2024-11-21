@@ -51,4 +51,5 @@ jobs:
         REPO_GITHUB_TOKEN: ${{ secrets.REPO_GITHUB_TOKEN }}
       with:
         default-landing-page: latest-tag
+        additional-unit-test-report-directories: unit-test-report-as-cran
         deps-installation-method: setup-r-dependencies
