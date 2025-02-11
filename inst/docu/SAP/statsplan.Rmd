@@ -266,7 +266,7 @@ The forrest plot is included as property of the \texttt{RBesT::gMAP()} object \t
 ## **MAP Prior: Exposure Adjusted Rate**
 
 For exposure-adjusted AE rate, the option \texttt{family=poisson} is set to assume a log link function.
-The hazard rate \texttt{TOT\_EXP/N\_WITH\_AE} serves as parameter for the Poisson distribution.
+The hazard rate \texttt{N\_WITH\_AE/TOT\_EXP} serves as parameter for the Poisson distribution.
 The response, \texttt{N\_WITH\_AE} is a vector of counts. The sum of total exposure times, \texttt{TOT\_EXP}, can be specified by an offset, which will be linearly added to the linear predictor.
 
 MCMC samples for the MAP prior for exposure adjusted adverse event rates are drawn using the following code:
@@ -286,7 +286,7 @@ map_rate <- RBesT::gMAP(N_WITH_AE ~ 1 + offset(log(TOT_EXP)) | STUDYID,
 ```
 
 
-The distribution of the log transformed hazard rates converge to a Normal distribution. The log hazards have a standard deviation of 1 (s. @aalen p. 215). 
+The distribution of the log transformed hazard rates converge to a Normal distribution. The log hazards have a standard deviation of 1 (s. @aalen p. 215 and @roychoudhury_bayesian_2020). 
 Therefore, $\sigma$ is chosen to be 1 and \texttt{beta.prior = 1} which leads to the following default choices for $\tau$, which has a prior distribution $\tau$ HalfNormal(0, $\tau^2$) and is set within the \texttt{gMAP} function by specifying \texttt{tau.prior =} $\tau$. Values for $\tau$ are chosen according to the user-specified level of between-trial heterogeneity, shown in the table below.
 
 ```{=tex}
